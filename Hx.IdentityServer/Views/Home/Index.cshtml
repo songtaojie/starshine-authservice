@@ -1,8 +1,6 @@
 
-@section styles{
-    <link href="~/lib/element-ui/lib/theme-chalk/index.css" rel="stylesheet" />
-}
-<div class="welcome-page" id="app">
+
+<div class="welcome-page" >
     <h1>
         <img src="~/icon.jpg">
         Welcome to IdentityServer4
@@ -31,22 +29,13 @@
     </ul>
 </div>
 @section scripts{
-    <script src="~/lib/vue/dist/vue.js"></script>
-    <script src="~/lib/element-ui/lib/index.js"></script>
     <script>
-        var app = new Vue({
-            data: {
-                clientDto: {
-                    name: '',
-                    displayName: '',
-                    description: '',
-                    userClaims: '',
-                },
-                title: '添加',
-                editedTodo: null,
-                visibility: 'all',
-                radio: '1'
-            },
-        }).$mount('#app')
+        window.hxVue = new HxVue({
+            data() {
+                return {
+                    radio: '1'
+                }
+            }
+        });
     </script>
 }

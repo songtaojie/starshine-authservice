@@ -1,0 +1,35 @@
+﻿@{
+    bool isLoginPage = ViewBag.IsLoginPage == true;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - 海·星の博客</title>
+    <partial name="_Styles" />
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    @if (isLoginPage)
+    {
+        @RenderBody()
+    }
+    else
+    {
+        <div id="app">
+            <el-container>
+                <partial name="~/Views/Layout/VHeader.cshtml" />
+                <el-container>
+                    <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
+                    <el-main> @RenderBody()</el-main>
+                </el-container>
+            </el-container>
+        </div>
+    }
+    <partial name="_Scripts" />
+    <script src="~/hxvue/index.js"></script>
+    @RenderSection("scripts", required: false)
+    <script src="~/hxvue/main.js"></script>
+</body>
+</html>

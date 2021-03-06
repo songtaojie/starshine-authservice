@@ -345,7 +345,7 @@ namespace Hx.IdentityServer.Controllers
 
         #region 用户相关的操作
         [HttpGet]
-        [Route("account/list")]
+        [Route("account/users")]
         [Authorize]
         public ActionResult Users(string returnUrl = null)
         {

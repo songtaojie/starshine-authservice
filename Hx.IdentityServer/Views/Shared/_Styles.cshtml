@@ -1,0 +1,35 @@
+﻿@{
+    bool useElement = ViewBag.UseElement == true;
+    bool useBootstrap = ViewBag.UseBootstrap == true;
+}
+<environment include="Development">
+    @if (useBootstrap)
+    {
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    }
+    @if (useElement)
+    {
+        <link rel="stylesheet" href="~/lib/element-ui/lib/theme-chalk/index.css" />
+    }
+</environment>
+<environment exclude="Development">
+    @if (useBootstrap)
+    {
+        <link rel="stylesheet"
+              href="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only"
+              asp-fallback-test-property="position"
+              asp-fallback-test-value="absolute" />
+    }
+    @if (useElement)
+    {
+        <link rel="stylesheet"
+              href="https://cdn.staticfile.org/element-ui/2.15.1/theme-chalk/index.min.css"
+              asp-fallback-href="~/lib/element-ui/lib/theme-chalk/index.css"
+              asp-fallback-test-class="el-table--hidden"
+              asp-fallback-test-property="visibility"
+              asp-fallback-test-value="hidden" />
+    }
+</environment>
+<link rel="stylesheet" href="~/hx/css/hx.base.css"  />

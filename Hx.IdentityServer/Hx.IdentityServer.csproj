@@ -18,4 +18,9 @@
     <ProjectReference Include="..\Hx.IdentityServer.Extensions\Hx.IdentityServer.Extensions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\hxlayout\" />
+    <Folder Include="wwwroot\css\hxvue\" />
+  </ItemGroup>
+
 </Project>

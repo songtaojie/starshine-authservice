@@ -3,10 +3,6 @@
     ViewBag.Active = "account";
     bool isSuperAdmin = (ViewData["IsSuperAdmin"] as bool?) == true;
 }
-@section styles{ 
-    <link rel="stylesheet" href="~/lib/dataTables/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="~/css/dataTables.extension.css" />
-}
 <div class="bg-white pt-4 container hx-table">
     @if (isSuperAdmin)
     {
@@ -37,6 +33,5 @@
 </div>
 
 @section scripts{
-    <script src="~/lib/dataTables/js/jquery.dataTables.js"></script>
     <script src="~/js/users.js"></script>
 }

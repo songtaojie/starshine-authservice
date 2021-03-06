@@ -5,12 +5,6 @@
 <aside class="d-flex flex-column hx-aside hx-aside-dark" >
     <div class="hx-aside-menu flex-fill hx-bg-light hx-aside-text">
         <ul class="navbar-nav flex-column pt-4">
-            @*<li class="hx-aside-menu-item @( string.IsNullOrEmpty(active) || active == "setting"?"active":"")">
-                <a class="hx-aside-link" href="#">
-                    <i class="fa fa-cog"></i>
-                    <span class="hx-aside-link-text">系统设置</span>
-                </a>
-            </li>*@
             <li class="hx-aside-menu-item @(string.IsNullOrEmpty(active) || active == "account"?"active":"")">
                 <a class="hx-aside-link" href="/account/list">
                     <i class="fa fa-file-text"></i>

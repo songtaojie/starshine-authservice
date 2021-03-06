@@ -1,0 +1,42 @@
+﻿@{
+    bool useElement = ViewBag.UseElement == true;
+    bool useBootstrap = ViewBag.UseBootstrap == true;
+}
+
+<environment include="Development">
+    @if (useElement)
+    {
+        <script src="~/lib/vue/dist/vue.js"></script>
+        <script src="~/lib/element-ui/lib/index.js"></script>
+    }
+    @if (useBootstrap)
+    {
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    }
+</environment>
+<environment exclude="Development">
+    @if (useElement)
+    {
+        <script src="https://cdn.staticfile.org/vue/2.6.12/vue.min.js"
+                asp-fallback-src="~/lib/vue/dist/vue.min.js"
+                asp-fallback-test="window.Vue">
+        </script>
+        <script src="https://cdn.staticfile.org/element-ui/2.15.1/index.min.js"
+                asp-fallback-src="~/lib/element-ui/lib/index.js"
+                asp-fallback-test="window.Element">
+        </script>
+    }
+    @if (useBootstrap)
+    {
+        <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.Element">
+        </script>
+    }
+</environment>
+
