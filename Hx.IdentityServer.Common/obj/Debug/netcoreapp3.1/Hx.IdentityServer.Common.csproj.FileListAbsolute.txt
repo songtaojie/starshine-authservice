@@ -1,9 +1,0 @@
-E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Common\bin\Debug\netcoreapp3.1\Hx.IdentityServer.Common.deps.json
-E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Common\bin\Debug\netcoreapp3.1\Hx.IdentityServer.Common.dll
-E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Common\bin\Debug\netcoreapp3.1\Hx.IdentityServer.Common.pdb
-E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Common\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Common.AssemblyInfoInputs.cache
-E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Common\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Common.AssemblyInfo.cs
-E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Common\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Common.csproj.CoreCompileInputs.cache
-E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Common\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Common.dll
-E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Common\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Common.pdb
-E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Common\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Common.csprojAssemblyReference.cache
