@@ -1,0 +1,26 @@
+﻿@model LoginViewModel
+<partial name="_ValidationSummary" />
+@if (Model.EnableLocalLogin)
+{
+    <form asp-route="authorize" asp-route-returnUrl="@Model.ReturnUrl" class="form hx-login-form">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <input class="hx-login-name" value="alice" placeholder="Username" asp-for="Username">
+        <input class="hx-login-pass" type="password" value="Pass123$" placeholder="Password" asp-for="Password" autocomplete="off">
+
+        @if (Model.AllowRememberLogin)
+        {
+            <div class="form-group hx-login-remember">
+                <label asp-for="RememberLogin">
+                    <input asp-for="RememberLogin">
+                    <strong>记住我</strong>
+                </label>
+            </div>
+        }
+        <button type="submit" class="hx-login" name="button" value="login">登录</button>
+        <button name="button" value="cancel">取消</button>
+        <p class="hx-to-register">
+            <a href="/account/register" class="register">没有账号? 去注册</a>
+            <a href="/account/forgot-password" class="reset">忘记密码？重置</a>
+        </p>
+    </form>
+}

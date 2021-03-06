@@ -1,0 +1,12 @@
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\bin\Debug\netcoreapp3.1\Hx.IdentityServer.Model.deps.json
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\bin\Debug\netcoreapp3.1\Hx.IdentityServer.Model.dll
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\bin\Debug\netcoreapp3.1\Hx.IdentityServer.Model.pdb
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\bin\Debug\netcoreapp3.1\Hx.IdentityServer.Common.dll
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\bin\Debug\netcoreapp3.1\Hx.IdentityServer.Common.pdb
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Model.csprojAssemblyReference.cache
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Model.AssemblyInfoInputs.cache
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Model.AssemblyInfo.cs
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Model.csproj.CoreCompileInputs.cache
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Model.csproj.CopyComplete
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Model.dll
+E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer.Model\obj\Debug\netcoreapp3.1\Hx.IdentityServer.Model.pdb

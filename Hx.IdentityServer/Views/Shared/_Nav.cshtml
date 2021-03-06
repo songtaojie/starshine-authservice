@@ -1,0 +1,37 @@
+@using IdentityServer4.Extensions
+
+@{
+    string name = null;
+    if (!true.Equals(ViewData["signed-out"]))
+    {
+        name = Context.User?.GetDisplayName();
+    }
+}
+
+
+@if (!string.IsNullOrWhiteSpace(name))
+{
+    <header class="fixed-top bg-dark border-bottom box-shadow">
+        <nav class="mx-auto navbar py-0 justify-content-center">
+            <h3 class="menu-logo my-0 mr-md-auto font-weight-normal"><a class="logo" href="/">海·星の博客</a></h3>
+            <div class="menu-item mr-md-3 dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    设置 - @name
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/account/list">用户</a>
+                    <a class="dropdown-item" href="/ClientsManager/index">客户端</a>
+                    <a class="dropdown-item" href="/ApiResourcesManager/index">资源api</a>
+                    <a class="dropdown-item" href="/Account/forgot-password">更改密码</a>
+                    <a class="dropdown-item" href="/Grants">授权</a>
+                </div>
+            </div>
+            <a class="menu-item my-1 btn btn-outline-primary" href="/oauth2/logout">注销</a>
+
+            <!--Menu button - show in < MD -->
+            <a class="btn btn-outline-primary menu-button" href="#">
+                <span class="oi oi-menu" title="menu" aria-hidden="true"></span> 菜单
+            </a>
+        </nav>
+    </header>
+}

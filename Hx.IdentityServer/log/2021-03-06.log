@@ -1,0 +1,25 @@
+2021-03-06 09:42:38.651 +08:00 [INF] Starting host...
+2021-03-06 09:42:38.743 +08:00 [INF] Starting IdentityServer4 version 4.1.1+cebd52f5bc61bdefc262fd20739d4d087c6f961f
+2021-03-06 09:42:38.824 +08:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2021-03-06 09:42:38.825 +08:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2021-03-06 09:42:38.825 +08:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2021-03-06 09:42:38.825 +08:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2021-03-06 09:42:38.826 +08:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2021-03-06 09:42:38.826 +08:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2021-03-06 09:42:39.034 +08:00 [INF] Now listening on: https://[::]:5002
+2021-03-06 09:42:39.034 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-03-06 09:42:39.035 +08:00 [INF] Hosting environment: Development
+2021-03-06 09:42:39.035 +08:00 [INF] Content root path: E:\MyProject\git\Hx.IdentityServer\Hx.IdentityServer
+2021-03-06 09:42:39.681 +08:00 [DBG] Login Url: /oauth2/authorize
+2021-03-06 09:42:39.683 +08:00 [DBG] Login Return Url Parameter: ReturnUrl
+2021-03-06 09:42:39.683 +08:00 [DBG] Logout Url: /oauth2/logout
+2021-03-06 09:42:39.685 +08:00 [DBG] ConsentUrl Url: /consent
+2021-03-06 09:42:39.686 +08:00 [DBG] Consent Return Url Parameter: returnUrl
+2021-03-06 09:42:39.687 +08:00 [DBG] Error Url: /home/error
+2021-03-06 09:42:39.688 +08:00 [DBG] Error Id Parameter: errorId
+2021-03-06 09:42:46.300 +08:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2021-03-06 09:42:49.775 +08:00 [DBG] Augmenting SignInContext
+2021-03-06 09:42:49.777 +08:00 [DBG] Adding idp claim with value: local
+2021-03-06 09:42:49.778 +08:00 [DBG] Adding auth_time claim with value: 1614994969
+2021-03-06 09:42:49.785 +08:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2021-03-06 09:42:49.796 +08:00 [INF] {"Username":"alice","Provider":null,"ProviderUserId":null,"SubjectId":"666661fb-f47c-4d92-8d4f-160efd4ffa2c","DisplayName":"alice","Endpoint":"UI","ClientId":null,"Category":"Authentication","Name":"User Login Success","EventType":"Success","Id":1000,"Message":null,"ActivityId":"0HM7084G5B7FA:0000001B","TimeStamp":"2021-03-06T01:42:49.0000000Z","ProcessId":19684,"LocalIpAddress":"::1:5002","RemoteIpAddress":"::1","$type":"UserLoginSuccessEvent"}

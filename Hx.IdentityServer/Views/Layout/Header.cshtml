@@ -1,0 +1,43 @@
+﻿@using IdentityServer4.Extensions
+
+@{
+    string name = null;
+    if (!true.Equals(ViewData["signed-out"]))
+    {
+        name = Context.User?.GetDisplayName();
+    }
+}
+
+<header class="d-flex fixed-top box-shadow">
+    <div class="d-flex hx-brand justify-content-center">
+        <div class="d-flex align-items-center hx-brand-logo">
+            <a class="d-flex text-white" href="/">
+                @*海·星の博客*@
+                <img alt="" src="~/lib/metronic/demo/default/media/img/logo/logo_default_dark.png" />
+            </a>
+        </div>
+        <button class="ml-auto navbar-toggler thin-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="hx-navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <nav class="navbar hx-navbar flex-fill justify-content-end ml-auto  py-0  bg-light">
+        <div class="menu-item mr-md-3 dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                设置 - @name
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/account/list">用户</a>
+                <a class="dropdown-item" href="/ClientsManager/index">客户端</a>
+                <a class="dropdown-item" href="/ApiResourcesManager/index">资源api</a>
+                <a class="dropdown-item" href="/Account/forgot-password">更改密码</a>
+                <a class="dropdown-item" href="/Grants">授权</a>
+            </div>
+        </div>
+        <a class="menu-item my-1 btn btn-outline-primary" href="/oauth2/logout">注销</a>
+
+        <!--Menu button - show in < MD -->
+        <a class="btn btn-outline-primary menu-button" href="#">
+            <span class="oi oi-menu" title="menu" aria-hidden="true"></span> 菜单
+        </a>
+    </nav>
+</header>
