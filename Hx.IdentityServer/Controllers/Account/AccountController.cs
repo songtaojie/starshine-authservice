@@ -6,7 +6,7 @@ using Hx.IdentityServer.Common;
 using Hx.IdentityServer.Controllers;
 using Hx.IdentityServer.Entity;
 using Hx.IdentityServer.Model;
-using Hx.IdentityServer.ViewModel;
+using Hx.IdentityServer.Model.Account;
 using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -26,7 +26,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Hx.IdentityServer.Controllers
 {
     /// <summary>
     /// 账户控制器
@@ -85,7 +85,7 @@ namespace IdentityServerHost.Quickstart.UI
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("oauth2/authorize", Name = "authorize")]
-        public async Task<IActionResult> Login(LoginInputModel model, string button)
+        public async Task<IActionResult> Login(LoginCreateModel model, string button)
         {
             // check if we are in the context of an authorization request
             var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
@@ -215,7 +215,7 @@ namespace IdentityServerHost.Quickstart.UI
             };
         }
 
-        private async Task<LoginViewModel> BuildLoginViewModelAsync(LoginInputModel model)
+        private async Task<LoginViewModel> BuildLoginViewModelAsync(LoginCreateModel model)
         {
             var vm = await BuildLoginViewModelAsync(model.ReturnUrl);
             vm.Username = model.Username;
@@ -251,7 +251,7 @@ namespace IdentityServerHost.Quickstart.UI
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("oauth2/logout", Name = "authlogout")]
-        public async Task<IActionResult> Logout(LogoutInputModel model)
+        public async Task<IActionResult> Logout(LogoutreateModel model)
         {
             var vm = await BuildLoggedOutViewModelAsync(model.LogoutId);
 
@@ -414,7 +414,7 @@ namespace IdentityServerHost.Quickstart.UI
         [Route("account/register")]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "SuperAdmin")]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterCreateModel model)
         {
             ViewData["ReturnUrl"] = model.ReturnUrl;
             IdentityResult result = new IdentityResult();

@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hx.IdentityServer.Model.Consent;
+using Hx.IdentityServer.Model.Device;
 using IdentityServer4.Configuration;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -17,7 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Hx.IdentityServer.Controllers
 {
     [Authorize]
     [SecurityHeaders]
@@ -66,7 +68,7 @@ namespace IdentityServerHost.Quickstart.UI
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Callback(DeviceAuthorizationInputModel model)
+        public async Task<IActionResult> Callback(DeviceAuthorizationCreateModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
 
@@ -76,7 +78,7 @@ namespace IdentityServerHost.Quickstart.UI
             return View("Success");
         }
 
-        private async Task<ProcessConsentResult> ProcessConsent(DeviceAuthorizationInputModel model)
+        private async Task<ProcessConsentResult> ProcessConsent(DeviceAuthorizationCreateModel model)
         {
             var result = new ProcessConsentResult();
 
@@ -143,7 +145,7 @@ namespace IdentityServerHost.Quickstart.UI
             return result;
         }
 
-        private async Task<DeviceAuthorizationViewModel> BuildViewModelAsync(string userCode, DeviceAuthorizationInputModel model = null)
+        private async Task<DeviceAuthorizationViewModel> BuildViewModelAsync(string userCode, DeviceAuthorizationCreateModel model = null)
         {
             var request = await _interaction.GetAuthorizationContextAsync(userCode);
             if (request != null)
@@ -154,7 +156,7 @@ namespace IdentityServerHost.Quickstart.UI
             return null;
         }
 
-        private DeviceAuthorizationViewModel CreateConsentViewModel(string userCode, DeviceAuthorizationInputModel model, DeviceFlowAuthorizationRequest request)
+        private DeviceAuthorizationViewModel CreateConsentViewModel(string userCode, DeviceAuthorizationCreateModel model, DeviceFlowAuthorizationRequest request)
         {
             var vm = new DeviceAuthorizationViewModel
             {

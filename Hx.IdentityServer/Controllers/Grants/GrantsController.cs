@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
+using Hx.IdentityServer.Model.Grants;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Hx.IdentityServer.Controllers
 {
     /// <summary>
     /// This sample controller allows a user to revoke grants given to clients

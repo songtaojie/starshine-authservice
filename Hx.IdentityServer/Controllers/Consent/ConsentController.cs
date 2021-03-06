@@ -14,8 +14,9 @@ using System.Threading.Tasks;
 using IdentityServer4.Validation;
 using System.Collections.Generic;
 using System;
+using Hx.IdentityServer.Model.Consent;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Hx.IdentityServer.Controllers
 {
     /// <summary>
     /// This controller processes the consent UI
@@ -60,7 +61,7 @@ namespace IdentityServerHost.Quickstart.UI
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(ConsentInputModel model)
+        public async Task<IActionResult> Index(ConsentCreateModel model)
         {
             var result = await ProcessConsent(model);
 
@@ -93,7 +94,7 @@ namespace IdentityServerHost.Quickstart.UI
         /*****************************************/
         /* helper APIs for the ConsentController */
         /*****************************************/
-        private async Task<ProcessConsentResult> ProcessConsent(ConsentInputModel model)
+        private async Task<ProcessConsentResult> ProcessConsent(ConsentCreateModel model)
         {
             var result = new ProcessConsentResult();
 
@@ -161,7 +162,7 @@ namespace IdentityServerHost.Quickstart.UI
             return result;
         }
 
-        private async Task<ConsentViewModel> BuildViewModelAsync(string returnUrl, ConsentInputModel model = null)
+        private async Task<ConsentViewModel> BuildViewModelAsync(string returnUrl, ConsentCreateModel model = null)
         {
             var request = await _interaction.GetAuthorizationContextAsync(returnUrl);
             if (request != null)
@@ -177,7 +178,7 @@ namespace IdentityServerHost.Quickstart.UI
         }
 
         private ConsentViewModel CreateConsentViewModel(
-            ConsentInputModel model, string returnUrl,
+            ConsentCreateModel model, string returnUrl,
             AuthorizationRequest request)
         {
             var vm = new ConsentViewModel

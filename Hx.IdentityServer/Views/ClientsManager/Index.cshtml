@@ -69,8 +69,8 @@
                         @Html.Raw(string.Join("<hr>", clientModel.PostLogoutRedirectUris))
                     </td>
                     <td>
-                        <a asp-action="CreateOrEdit" asp-route-id="@item.Id" title="Edit" class="btn btn-warning">
-                            <span class="glyphicon glyphicon-pencil">Edit</span>
+                        <a asp-action="addorupdate" asp-route-clientId="@item.Id" title="Edit" class="btn btn-warning">
+                            <span class="glyphicon glyphicon-pencil">编辑</span>
                         </a>
 
                     </td>

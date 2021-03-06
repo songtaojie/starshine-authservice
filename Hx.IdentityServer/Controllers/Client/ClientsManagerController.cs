@@ -26,13 +26,30 @@ namespace Hx.IdentityServer.Controllers.Client
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _configurationDbContext.Clients
+            var list = await _configurationDbContext.Clients
                 .Include(d => d.AllowedGrantTypes)
                 .Include(d => d.AllowedScopes)
                 .Include(d => d.AllowedCorsOrigins)
                 .Include(d => d.RedirectUris)
                 .Include(d => d.PostLogoutRedirectUris)
-                .ToListAsync());
+                .ToListAsync();
+            return View(list);
         }
+
+
+        /// <summary>
+        /// 数据修改页
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Authorize(Policy = "SuperAdmin")]
+        public IActionResult AddOrUpdate(int clientId)
+        {
+            ViewBag.ClientId = clientId;
+            return View();
+        }
+
+
     }
 }

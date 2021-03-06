@@ -1,5 +1,4 @@
 ﻿using Hx.IdentityServer.Common;
-using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

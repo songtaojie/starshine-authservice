@@ -1,8 +1,9 @@
 using System;
+using Hx.IdentityServer.Model.Account;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Hx.IdentityServer.Controllers
 {
     public static class Extensions
     {
