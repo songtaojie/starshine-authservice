@@ -1,24 +1,11 @@
-﻿<el-header class="hx-header" style="text-align: right; height:3.5rem;">
-    <div class="d-flex hx-brand justify-content-center">
-        <div class="d-flex align-items-center hx-brand-logo">
-            <a class="d-flex text-white" href="/">
-                海·星の博客
-                @*<img alt="" src="~/lib/metronic/demo/default/media/img/logo/logo_default_dark.png" />*@
-            </a>
-        </div>
-        <button class="ml-auto navbar-toggler thin-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="hx-navbar-toggler-icon"></span>
-        </button>
-    </div>
-    <div>
-        <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
-            <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>查看</el-dropdown-item>
-                <el-dropdown-item>新增</el-dropdown-item>
-                <el-dropdown-item>删除</el-dropdown-item>
-            </el-dropdown-menu>
-        </el-dropdown>
-        <span>王小虎</span>
-    </div>
+﻿<el-header style="height:3.5rem;">
+    <el-dropdown>
+        <i class="el-icon-setting" style="margin-right: 15px"></i>
+        <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>查看</el-dropdown-item>
+            <el-dropdown-item>新增</el-dropdown-item>
+            <el-dropdown-item>删除</el-dropdown-item>
+        </el-dropdown-menu>
+    </el-dropdown>
+    <span>王小虎</span>
 </el-header>

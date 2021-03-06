@@ -8,6 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title - 海·星の博客</title>
     <partial name="_Styles" />
+    <style>
+        .el-scrollbar__wrap {
+            overflow-x: hidden;
+        }
+        .el-scrollbar,
+        .el-scrollbar__view {
+            height:100%;
+        }
+    </style>
     @RenderSection("styles", required: false)
 </head>
 <body>
@@ -19,10 +28,10 @@
     {
         <div id="app">
             <el-container>
-                <partial name="~/Views/Layout/VHeader.cshtml" />
+                <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
                 <el-container>
-                    <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
-                    <el-main> @RenderBody()</el-main>
+                    @*<partial name="~/Views/Layout/VHeader.cshtml" />*@
+                    @*<el-main> @RenderBody()</el-main>*@
                 </el-container>
             </el-container>
         </div>
