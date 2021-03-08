@@ -9,12 +9,11 @@
     <title>@ViewBag.Title - 海·星の博客</title>
     <partial name="_Styles" />
     <style>
+        .el-scrollbar__bar.is-horizontal {
+            display: none !important;
+        }
         .el-scrollbar__wrap {
             overflow-x: hidden;
-        }
-        .el-scrollbar,
-        .el-scrollbar__view {
-            height:100%;
         }
     </style>
     @RenderSection("styles", required: false)
@@ -26,13 +25,14 @@
     }
     else
     {
-        <div id="app">
+        <div class="hx-dark" id="app">
+            <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
             <el-container>
-                <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
-                <el-container>
+                
+                <!--<el-container>-->
                     @*<partial name="~/Views/Layout/VHeader.cshtml" />*@
                     @*<el-main> @RenderBody()</el-main>*@
-                </el-container>
+                <!--</el-container>-->
             </el-container>
         </div>
     }

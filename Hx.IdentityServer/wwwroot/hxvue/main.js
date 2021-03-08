@@ -11,6 +11,9 @@ window.hxApp = new Vue({
         },
         handleClose(key, keyPath) {
             console.log(key, keyPath);
+        },
+        toggleMenu() {
+            this.isCollapse = !this.isCollapse
         }
     }
 }).$mount('#app')
