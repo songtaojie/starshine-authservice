@@ -68,10 +68,7 @@ button:focus {
     box-shadow: 0 0.25rem 0.25rem rgbA(0, 0, 0, 0.05);
 }
 .hx-body {
-    /* -webkit-transition: width 0.2s ease;
-    transition: width 0.2s ease;*/
     padding-left: 14rem;
-    padding-top: 3.5rem !important;
     animation: bodyToMax .4s;
     -webkit-animation: bodyToMax .4s; /* Safari and Chrome */
 }

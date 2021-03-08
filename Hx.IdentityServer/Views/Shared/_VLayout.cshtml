@@ -26,13 +26,12 @@
     else
     {
         <div class="hx-dark" id="app">
-            <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
-            <el-container>
-                
-                <!--<el-container>-->
-                    @*<partial name="~/Views/Layout/VHeader.cshtml" />*@
-                    @*<el-main> @RenderBody()</el-main>*@
-                <!--</el-container>-->
+            <el-container >
+                <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
+                <el-container class="hx-body" :class="isCollapse?'hx-aside-mini':''">
+                    <partial name="~/Views/Layout/VHeader.cshtml" />
+                    <el-main> @RenderBody()</el-main>
+                </el-container>
             </el-container>
         </div>
     }
