@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "用户列表";
+    bool isSuperAdmin = (ViewData["IsSuperAdmin"] as bool?) == true;
+}
+<div>
+    @if (isSuperAdmin)
+    {
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div>
+                    <div class="pull-left">
+                        <a asp-action="Register" asp-route-returnUrl="/account/list" class="btn btn-primary">
+                            <span title="Register New" class="glyphicon glyphicon-plus-sign"></span> 添加用户
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <el-table :data="tableData" border style="width: 100%">
+        <el-table-column prop="userName" label="用户名" width="180">
+        </el-table-column>
+        <el-table-column prop="realName" label="真实姓名" width="180">
+        </el-table-column>
+        <el-table-column prop="createTime" label="创建时间">
+        </el-table-column>
+        <el-table-column prop="accessFailedCount" label="失败次数">
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="160" v-if="true">
+            <template slot-scope="scope">
+                <el-button size="mini" @@click="handleEdit(scope.row)">编辑</el-button>
+                <el-button type="danger" size="mini" @@click="handleDelete(scope.row)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-pagination @@current-change="handleCurrentChange"
+                   :current-page.sync="queryParam.pageIndex"
+                   :page-size="queryParam.pageSize"
+                   background
+                   layout="total, prev, pager, next"
+                   :total="totalCount">
+    </el-pagination>
+    @*<table class="table table-bordered table-sm">
+            <thead class="thead-light text-center">
+                <tr>
+                    <th style="width:100px;">UserName</th>
+                    <th style="width:65px;">LoginName</th>
+                    <th style="width:200px;">CreateTime</th>
+                    <th style="width:65px;">AccessFailedCount</th>
+                    <th style="width:100px;">操作</th>
+                </tr>
+            </thead>
+        </table>*@
+</div>
+
+@section scripts{
+    <script src="~/vuejs/users.js"></script>
+}

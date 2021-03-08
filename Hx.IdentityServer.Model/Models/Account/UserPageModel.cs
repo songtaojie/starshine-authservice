@@ -6,9 +6,11 @@ namespace Hx.IdentityServer.Model.Account
 {
     public class UserPageModel
     {
+        public string Id { get; set; }
+
         public string UserName { get; set; }
 
-        public string LoginName { get; set; }
+        public string RealName { get; set; }
 
         public DateTime CreateTime { get; set; }
 

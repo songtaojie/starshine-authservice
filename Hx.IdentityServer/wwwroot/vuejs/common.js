@@ -1,11 +1,8 @@
-﻿var hxVue = window.hxVue || {}
-window.hxApp = new Vue({
+﻿window.HxCommonVue = {
     data: {
-        ...window.hxVue.data,
         isCollapse: false
     },
     methods: {
-        ...window.hxVue.methods,
         onMenuClick(menu) {
             window.location.href = menu.route;
         },
@@ -13,4 +10,4 @@ window.hxApp = new Vue({
             window.location.href = command;
         }
     }
-}).$mount('#app')
+}

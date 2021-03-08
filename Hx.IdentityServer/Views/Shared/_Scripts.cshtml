@@ -3,20 +3,25 @@
 }
 @if (!isLoginPage)
 {
-    <environment include="Development">
-        <script src="~/lib/vue/dist/vue.js"></script>
-        <script src="~/lib/element-ui/lib/index.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdn.staticfile.org/vue/2.6.12/vue.min.js"
-                asp-fallback-src="~/lib/vue/dist/vue.min.js"
-                asp-fallback-test="window.Vue">
-        </script>
-        <script src="https://cdn.staticfile.org/element-ui/2.15.1/index.min.js"
-                asp-fallback-src="~/lib/element-ui/lib/index.js"
-                asp-fallback-test="window.Element">
-        </script>
-    </environment>
+<environment include="Development">
+    <script src="~/lib/vue/dist/vue.js"></script>
+    <script src="~/lib/element-ui/lib/index.js"></script>
+    <script src="~/lib/axios/dist/axios.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://cdn.staticfile.org/vue/2.6.12/vue.min.js"
+            asp-fallback-src="~/lib/vue/dist/vue.min.js"
+            asp-fallback-test="window.Vue">
+    </script>
+    <script src="https://cdn.staticfile.org/element-ui/2.15.1/index.min.js"
+            asp-fallback-src="~/lib/element-ui/lib/index.js"
+            asp-fallback-test="window.Element">
+    </script>
+    <script src="https://cdn.staticfile.org/axios/0.1.0/axios.min.js"
+            asp-fallback-src="~/lib/axios/dist/axios.min.js"
+            asp-fallback-test="window.axios">
+    </script>
+</environment>
 }
 
 

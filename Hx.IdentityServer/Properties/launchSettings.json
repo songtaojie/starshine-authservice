@@ -4,6 +4,7 @@
       "commandName": "Project",
       //"commandLineArgs": "/seed",
       "launchBrowser": true,
+      //"launchUrl": "account/users",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

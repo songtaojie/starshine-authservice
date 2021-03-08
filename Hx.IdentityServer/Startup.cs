@@ -53,7 +53,11 @@ namespace Hx.IdentityServer
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action}/{id?}",
+                    defaults:new { controller = "Account", action = "Index" });
+                //endpoints.MapDefaultControllerRoute();
             });
         }
     }

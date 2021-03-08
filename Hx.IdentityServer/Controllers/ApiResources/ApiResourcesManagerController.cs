@@ -24,7 +24,7 @@ namespace Hx.IdentityServer.Controllers.ApiResources
         /// <returns></returns>
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index2()
         {
             return View(await _configurationDbContext.ApiResources
                 .Include(d => d.UserClaims)

@@ -1,4 +1,5 @@
-﻿using Hx.IdentityServer.Common;
+﻿using Hx.IdentityServer.Authorization;
+using Hx.IdentityServer.Common;
 using Hx.IdentityServer.Data;
 using Hx.IdentityServer.Entity;
 using Microsoft.AspNetCore.Authorization;
@@ -34,15 +35,14 @@ namespace Hx.IdentityServer.Extensions
 
             var builder = services.AddIdentityServer(options =>
             {
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
+                //options.Events.RaiseErrorEvents = true;
+                //options.Events.RaiseInformationEvents = true;
+                //options.Events.RaiseFailureEvents = true;
+                //options.Events.RaiseSuccessEvents = true;
                 //// see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
                 //options.EmitStaticAudienceClaim = true;
                 options.UserInteraction.LoginUrl = "/oauth2/authorize";
                 options.UserInteraction.LogoutUrl = "/oauth2/logout";
-                options.UserInteraction.CustomRedirectReturnUrlParameter = "test";
             }).AddAspNetIdentity<ApplicationUser>();
 
             builder.AddConfigAndOperateStore(configuration);
@@ -64,7 +64,7 @@ namespace Hx.IdentityServer.Extensions
             {
                 options.AddPolicy(ConstKey.SuperAdmin, policy => policy.RequireClaim(MyJwtClaimTypes.RoleName, ConstKey.SuperAdmin));
             });
-            //services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
+            services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
             return builder;
         }
     }

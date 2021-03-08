@@ -28,21 +28,20 @@
 }
 else
 {
-    <body>
-        <div class="hx-dark" id="app">
-            <el-container>
-                <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
-                <el-container class="hx-body" :class="isCollapse?'hx-aside-mini':''">
-                    <partial name="~/Views/Layout/VHeader.cshtml" />
-                    <el-main> @RenderBody()</el-main>
-                </el-container>
+<body>
+    <div class="hx-dark" id="app">
+        <el-container>
+            <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
+            <el-container :class="isCollapse?'hx-body hx-aside-mini':'hx-body'">
+                <partial name="~/Views/Layout/VHeader.cshtml" />
+                <el-main> @RenderBody()</el-main>
             </el-container>
-        </div>
-        <partial name="_Scripts" />
-        <script src="~/hxvue/index.js"></script>
-        @RenderSection("scripts", required: false)
-        <script src="~/hxvue/main.js"></script>
-    </body>
+        </el-container>
+    </div>
+    <partial name="_Scripts" />
+    <script src="~/vuejs/common.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
 }
 
 </html>

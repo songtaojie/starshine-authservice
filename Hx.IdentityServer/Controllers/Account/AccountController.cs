@@ -7,6 +7,7 @@ using Hx.IdentityServer.Controllers;
 using Hx.IdentityServer.Entity;
 using Hx.IdentityServer.Model;
 using Hx.IdentityServer.Model.Account;
+using Hx.Sdk.Entity.Extensions;
 using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -345,9 +346,8 @@ namespace Hx.IdentityServer.Controllers
 
         #region 用户相关的操作
         [HttpGet]
-        [Route("account/users")]
         [Authorize]
-        public ActionResult Users(string returnUrl = null)
+        public ActionResult Index(string returnUrl = null)
         {
             ViewData["IsSuperAdmin"] = this.IsSuperAdmin;
             ViewData["ReturnUrl"] = returnUrl;
@@ -356,40 +356,25 @@ namespace Hx.IdentityServer.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> QueryUserPage()
+        public async Task<IActionResult> QueryUserPage([FromBody]UserPageParam param)
         {
-            int draw = Convert.ToInt32(HttpContext.Request.Form["draw"]);
-            int start = Convert.ToInt32(HttpContext.Request.Form["start"]);
-            int length = Convert.ToInt32(HttpContext.Request.Form["length"]);
-            string search = HttpContext.Request.Form["search[value]"];
             //没有过滤的记录数
-            long recordsTotal = 0;
             IQueryable<ApplicationUser> query = _userManager.Users.Where(u=>!u.IsDelete);
-            if (!string.IsNullOrEmpty(search))
-            {
-                query = query.Where(u => u.RealName.Contains(search) || u.UserName.Contains(search));
-            }
-            recordsTotal = query.LongCount();
+            //if (!string.IsNullOrEmpty(search))
+            //{
+            //    query = query.Where(u => u.RealName.Contains(search) || u.UserName.Contains(search));
+            //}
             var data = await query.OrderByDescending(u => u.CreateTime)
-                .Skip(start * length)
-                .Take(length)
-                .Select(u => new
+                .Select(u => new UserPageModel
                 {
-                    u.Id,
-                    u.RealName,
-                    u.UserName,
-                    u.CreateTime,
-                    u.AccessFailedCount
-                }).ToListAsync();
-          
-            return Json(new
-            {
-                draw,
-                recordsTotal,
-                recordsFiltered = recordsTotal,
-                data,
-                IsSuperAdmin
-            });
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    RealName = u.RealName,
+                    CreateTime = u.CreateTime,
+                    AccessFailedCount = u.AccessFailedCount
+                })
+                .ToOrderAndPageListAsync(param);
+            return Json(data);
         }
 
         /// <summary>
