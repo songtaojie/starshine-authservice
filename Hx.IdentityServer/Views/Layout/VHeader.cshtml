@@ -4,7 +4,11 @@
 }
 
 <el-header class="hx-navbar hx-justify-content-end" style="height:3.5rem;">
-    <span>@name</span>
-    <el-link :underline="false" href="/oauth2/logout">注销</el-link>
-    @*<a class="menu-item my-1 btn btn-outline-primary" href="/oauth2/logout">注销</a>*@
+    <el-dropdown type="primary" size="medium" @@command="handleCommand" trigger="click">
+        <el-button>设置 - @name<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+        <el-dropdown-menu slot="dropdown" style="min-width: 8rem;">
+            <el-dropdown-item command="/account/users">用户</el-dropdown-item>
+            <el-dropdown-item command="/oauth2/logout">注销</el-dropdown-item>
+        </el-dropdown-menu>
+    </el-dropdown>
 </el-header>

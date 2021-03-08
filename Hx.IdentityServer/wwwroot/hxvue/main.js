@@ -6,14 +6,11 @@ window.hxApp = new Vue({
     },
     methods: {
         ...window.hxVue.methods,
-        handleOpen(key, keyPath) {
-            console.log(key, keyPath);
+        onMenuClick(menu) {
+            window.location.href = menu.route;
         },
-        handleClose(key, keyPath) {
-            console.log(key, keyPath);
-        },
-        toggleMenu() {
-            this.isCollapse = !this.isCollapse
+        handleCommand(command) {
+            window.location.href = command;
         }
     }
 }).$mount('#app')
