@@ -3,10 +3,6 @@
     ViewBag.Title = "登录";
     ViewBag.IsLoginPage = true;
 }
-@section styles{
-    <link rel="stylesheet"  href="~/css/hx/hx.login.css" />
-    <link rel="stylesheet"  href="~/css/hx/hx.login.bg.css" />
-}
 <div class="hx-login-wrapper">
     <div class="hx-login-container">
         <h1>海·星の博客</h1>
@@ -33,7 +29,7 @@
                 <p class="hx-to-register"><a href="/account/register" class="register">没有账号? 去注册</a><a href="/account/forgot-password" class="reset">忘记密码？重置</a></p>
             </form>
         }
-       
+
         @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
         {
             <div class="alert alert-warning">
@@ -42,6 +38,7 @@
             </div>
         }
     </div>
+
     <ul class="hx-login-bg-bubbles">
         <li></li>
         <li></li>

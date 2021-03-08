@@ -12,21 +12,25 @@
         .el-scrollbar__bar.is-horizontal {
             display: none !important;
         }
+
         .el-scrollbar__wrap {
             overflow-x: hidden;
         }
     </style>
     @RenderSection("styles", required: false)
 </head>
-<body>
-    @if (isLoginPage)
-    {
+@if (isLoginPage)
+{
+    <body>
         @RenderBody()
-    }
-    else
-    {
+        @RenderSection("scripts", required: false)
+    </body>
+}
+else
+{
+    <body>
         <div class="hx-dark" id="app">
-            <el-container >
+            <el-container>
                 <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
                 <el-container class="hx-body" :class="isCollapse?'hx-aside-mini':''">
                     <partial name="~/Views/Layout/VHeader.cshtml" />
@@ -34,10 +38,11 @@
                 </el-container>
             </el-container>
         </div>
-    }
-    <partial name="_Scripts" />
-    <script src="~/hxvue/index.js"></script>
-    @RenderSection("scripts", required: false)
-    <script src="~/hxvue/main.js"></script>
-</body>
+        <partial name="_Scripts" />
+        <script src="~/hxvue/index.js"></script>
+        @RenderSection("scripts", required: false)
+        <script src="~/hxvue/main.js"></script>
+    </body>
+}
+
 </html>
