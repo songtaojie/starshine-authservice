@@ -3,7 +3,6 @@
 html {
     height: 100%;
 }
-
 body {
     margin: unset;
     padding: unset;
@@ -51,6 +50,9 @@ button:focus {
 }
 .hx-hidden {
     display:none !important;
+}
+.hx-float-right {
+    float:right !important;
 }
 /*Header*/
 .hx-header {

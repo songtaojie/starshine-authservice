@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "用户列表";
+    ViewBag.Active = "/";
     bool isSuperAdmin = (ViewData["IsSuperAdmin"] as bool?) == true;
 }
 <div>
@@ -17,7 +18,7 @@
             </div>
         </div>
     }
-    <el-table :data="tableData" border style="width: 100%">
+    <el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
         <el-table-column prop="userName" label="用户名" width="180">
         </el-table-column>
         <el-table-column prop="realName" label="真实姓名" width="180">
@@ -26,20 +27,22 @@
         </el-table-column>
         <el-table-column prop="accessFailedCount" label="失败次数">
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="160" v-if="true">
+        <el-table-column fixed="right" label="操作" width="200" v-if="true" align="center">
             <template slot-scope="scope">
                 <el-button size="mini" @@click="handleEdit(scope.row)">编辑</el-button>
                 <el-button type="danger" size="mini" @@click="handleDelete(scope.row)">删除</el-button>
             </template>
         </el-table-column>
     </el-table>
-    <el-pagination @@current-change="handleCurrentChange"
-                   :current-page.sync="queryParam.pageIndex"
-                   :page-size="queryParam.pageSize"
-                   background
-                   layout="total, prev, pager, next"
-                   :total="totalCount">
-    </el-pagination>
+    <div class="hx-float-right">
+        <el-pagination @@current-change="handleCurrentChange"
+                       :current-page.sync="queryParam.pageIndex"
+                       :page-size="queryParam.pageSize"
+                       background
+                       layout="total, prev, pager, next"
+                       :total="totalCount">
+        </el-pagination>
+    </div>
     @*<table class="table table-bordered table-sm">
             <thead class="thead-light text-center">
                 <tr>

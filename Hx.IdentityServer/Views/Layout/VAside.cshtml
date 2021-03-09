@@ -1,4 +1,8 @@
-﻿<el-aside class="hx-flex hx-flex-column hx-aside" 
+﻿@{ 
+    string active = ViewBag.Active;
+    active = string.IsNullOrEmpty(active) ? "/" : active;
+}
+<el-aside class="hx-flex hx-flex-column hx-aside" 
           :class="isCollapse?'hx-aside-mini':''" 
           :style="isCollapse ?'width: 3.75rem;':'width: 14rem;'">
     <div class="hx-flex hx-aside-brand hx-justify-content-center">
@@ -12,22 +16,22 @@
         </button>
     </div>
     <el-scrollbar wrap-class="" class="hx-aside-scrollbar">
-        <el-menu default-active="1" class="hx-aside-menu" unique-opened
+        <el-menu default-active="@active" class="hx-aside-menu" unique-opened
                  background-color="#3b3e47" text-color="#fff" active-text-color="#ffd04b"
-                 :collapse="isCollapse">
-            <el-menu-item index="1" route="/" @@click="onMenuClick">
+                 :collapse="isCollapse" @@select="onMenuSelect">
+            <el-menu-item  index="/" >
                 <i class="el-icon-user"></i>
                 <span slot="title">用户管理</span>
             </el-menu-item>
-            <el-menu-item index="2" route="/clientsManager/index" @@click="onMenuClick">
+            <el-menu-item index="/clientsmanager/index" >
                 <i class="el-icon-menu"></i>
                 <span slot="title">客户端管理</span>
             </el-menu-item>
-            <el-menu-item index="3" route="/apiresourcesmanager/index" @@click="onMenuClick">
+            <el-menu-item index="/apiresourcesmanager/index" @@click="onMenuClick">
                 <i class="el-icon-document"></i>
                 <span slot="title">资源api</span>
             </el-menu-item>
-            <el-menu-item index="4" route="/grants" @@click="onMenuClick">
+            <el-menu-item index="/grants" @@click="onMenuClick">
                 <i class="el-icon-setting"></i>
                 <span slot="title">授权</span>
             </el-menu-item>

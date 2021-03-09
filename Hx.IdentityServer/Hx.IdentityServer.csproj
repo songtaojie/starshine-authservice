@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\css\hxlayout\**" />
+    <Content Remove="wwwroot\css\hxlayout\**" />
+    <EmbeddedResource Remove="wwwroot\css\hxlayout\**" />
+    <None Remove="wwwroot\css\hxlayout\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
@@ -16,11 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hx.IdentityServer.Extensions\Hx.IdentityServer.Extensions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\css\hxlayout\" />
-    <Folder Include="wwwroot\css\hxvue\" />
   </ItemGroup>
 
 </Project>

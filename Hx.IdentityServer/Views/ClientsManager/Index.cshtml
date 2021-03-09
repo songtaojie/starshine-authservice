@@ -3,19 +3,23 @@
 
 @{
     ViewBag.Title = "客户端资源";
-    ViewBag.Active = "client";
+    ViewBag.Active = "/clientsmanager/index";
 }
-<link href="~/css/showtip.css" rel="stylesheet" />
-<style>
-    table {
-        table-layout: fixed;
-        word-break: break-all;
-    }
 
-    hr {
-        margin: 6px;
-    }
-</style>
+@section styles{
+    <link href="~/css/showtip.css" rel="stylesheet" />
+    <style type="text/css">
+        table {
+            table-layout: fixed;
+            word-break: break-all;
+        }
+
+        hr {
+            margin: 6px;
+        }
+    </style>
+}
+
 <div class="row">
     <div class="col-md-12">
         <div>
@@ -79,4 +83,7 @@
         </tbody>
     </table>
 </div>
+@section scripts{
+    <script src="~/vuejs/clientmanager.js"></script>
+}
 
