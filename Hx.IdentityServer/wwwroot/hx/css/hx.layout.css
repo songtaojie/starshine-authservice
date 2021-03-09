@@ -3,32 +3,39 @@
 html {
     height: 100%;
 }
+
 body {
     margin: unset;
     padding: unset;
     height: inherit;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
-a:focus,
-a:hover,
-button:focus {
-    outline: none;
-}
+
+    a:focus,
+    a:hover,
+    button:focus {
+        outline: none;
+    }
+
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
     cursor: pointer;
 }
+
 .hx-flex {
     display: -ms-flexbox !important;
     display: flex !important;
 }
+
 .hx-flex-column {
     -ms-flex-direction: column !important;
     flex-direction: column !important;
 }
+
 .hx-flex-fill {
     -ms-flex: 1 1 auto !important;
     flex: 1 1 auto !important;
@@ -48,32 +55,30 @@ button:focus {
     -ms-flex-align: center !important;
     align-items: center !important;
 }
+
 .hx-hidden {
-    display:none !important;
+    display: none !important;
 }
+
 .hx-float-right {
-    float:right !important;
+    float: right !important;
 }
 /*Header*/
 .hx-header {
     padding: unset;
 }
 
-.hx-fiexd-top {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-}
 .hx-header-shadow {
     box-shadow: 0 0.25rem 0.25rem rgbA(0, 0, 0, 0.05);
 }
+
 .hx-body {
+    padding-top:3.5rem;
     padding-left: 14rem;
     animation: bodyToMax .4s;
     -webkit-animation: bodyToMax .4s; /* Safari and Chrome */
 }
+
 .hx-navbar {
     position: relative;
     display: -ms-flexbox;
@@ -85,6 +90,16 @@ button:focus {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: .5rem 1rem;
+}
+
+.hx-fiexd-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 14rem;
+    z-index: 1030;
+    animation: HeaderToMax .3s;
+    -webkit-animation: HeaderToMax .3s; /* Safari and Chrome */
 }
 /*navbar-toggler*/
 .hx-navbar-toggler {
@@ -102,11 +117,13 @@ button:focus {
 .thin-toggler:hover .hx-navbar-toggler-icon {
     background-color: #716aca;
 }
+
     .thin-toggler:hover .hx-navbar-toggler-icon::before,
     .thin-toggler:hover .hx-navbar-toggler-icon::after {
         background-color: #716aca;
         width: 100%;
     }
+
 .hx-navbar-toggler-icon {
     display: block;
     position: relative;
@@ -199,10 +216,11 @@ button:focus {
     font-size: 0.825em;
     text-transform: initial;
 }
+
 .hx-aside-menu {
     width: 100%;
     overflow: hidden;
-    border-right:none;
+    border-right: none;
 }
 
 .hx-aside-fixed {
@@ -292,6 +310,12 @@ button:focus {
     -webkit-animation: bodyToMini .3s; /* Safari and Chrome */
 }
 
+    .hx-aside-mini.hx-body .hx-fiexd-top {
+        left: 3.75rem;
+        animation: HeaderToMini .3s;
+        -webkit-animation: HeaderToMini .3s; /* Safari and Chrome */
+    }
+
 .hx-aside-mini.hx-aside-brand,
 .hx-aside-mini.hx-aside:not(.hx-aside-mini-hover) {
     width: 3.75rem;
@@ -318,6 +342,7 @@ button:focus {
 .hx-text-white {
     color: #fff !important;
 }
+
 @keyframes bodyToMini {
     from {
         padding-left: 14rem;
@@ -357,5 +382,47 @@ button:focus {
 
     to {
         padding-left: 14rem;
+    }
+}
+
+@keyframes headerToMini {
+    from {
+        left: 14rem;
+    }
+
+    to {
+        left: 3.75rem;
+    }
+}
+
+@-webkit-keyframes headerToMini /* Safari and Chrome */
+{
+    from {
+        left: 14rem;
+    }
+
+    to {
+        left: 3.75rem;
+    }
+}
+
+@keyframes HeaderToMax {
+    from {
+        left: 3.75rem;
+    }
+
+    to {
+        left: 14rem;
+    }
+}
+
+@-webkit-keyframes HeaderToMax /* Safari and Chrome */
+{
+    from {
+        left: 3.75rem;
+    }
+
+    to {
+        left: 14rem;
     }
 }

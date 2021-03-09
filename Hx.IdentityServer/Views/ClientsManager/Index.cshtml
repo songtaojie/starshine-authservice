@@ -1,9 +1,7 @@
-﻿@model List<IdentityServer4.EntityFramework.Entities.Client>
-@using IdentityServer4.EntityFramework.Mappers
-
-@{
+﻿@{
     ViewBag.Title = "客户端资源";
     ViewBag.Active = "/clientsmanager/index";
+    bool isSuperAdmin = (ViewData["IsSuperAdmin"] as bool?) == true;
 }
 
 @section styles{
@@ -19,7 +17,8 @@
         }
     </style>
 }
-
+@if (isSuperAdmin)
+{ 
 <div class="row">
     <div class="col-md-12">
         <div>
@@ -31,58 +30,50 @@
         </div>
     </div>
 </div>
-<br />
-<div class="">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th style="width:150px;">客户端Id</th>
-                <th style="width:230px;">客户端名</th>
-                <th style="width:180px;">授权类型</th>
-                <th>作用域</th>
-                <th>允许跨域</th>
-                <th>回调地址</th>
-                <th>退出回调</th>
-                <th style="width:80px;">Operate</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                var clientModel = item.ToModel();
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ClientId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ClientName)
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join("<br>", clientModel.AllowedGrantTypes))
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join("<br>", clientModel.AllowedScopes))
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join("<hr>", clientModel.AllowedCorsOrigins))
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join("<hr>", clientModel.RedirectUris))
-                    </td>
-                    <td>
-                        @Html.Raw(string.Join("<hr>", clientModel.PostLogoutRedirectUris))
-                    </td>
-                    <td>
-                        <a asp-action="addorupdate" asp-route-clientId="@item.Id" title="Edit" class="btn btn-warning">
-                            <span class="glyphicon glyphicon-pencil">编辑</span>
-                        </a>
+}
 
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<br />
+<el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
+    <el-table-column prop="clientId" label="客户端Id" width="120" header-align="center">
+    </el-table-column>
+    <el-table-column prop="clientName" label="客户端名" width="180" header-align="center">
+    </el-table-column>
+    <el-table-column prop="allowedGrantTypes" label="授权类型" width="120" header-align="center">
+    </el-table-column>
+    <el-table-column prop="allowedScopes" label="作用域" header-align="center">
+    </el-table-column>
+    <el-table-column prop="allowedCorsOrigins" label="允许跨域" header-align="center">
+        <template slot-scope="scope">
+            <span v-html='scope.row.allowedCorsOrigins'></span>
+        </template>
+    </el-table-column>
+    <el-table-column prop="redirectUris" label="回调地址" header-align="center">
+        <template slot-scope="scope">
+            <span v-html='scope.row.redirectUris'></span>
+        </template>
+    </el-table-column>
+    <el-table-column prop="postLogoutRedirectUris" label="退出回调" header-align="center">
+        <template slot-scope="scope">
+            <span v-html='scope.row.postLogoutRedirectUris'></span>
+        </template>
+    </el-table-column>
+    <el-table-column fixed="right" label="操作" width="200" v-if="@(isSuperAdmin?"true":"false")" align="center">
+        <template slot-scope="scope">
+            <el-button size="mini" @@click="handleEdit(scope.row)">编辑</el-button>
+            <el-button type="danger" size="mini" @@click="handleDelete(scope.row)">删除</el-button>
+        </template>
+    </el-table-column>
+</el-table>
+<div class="hx-float-right">
+    <el-pagination @@current-change="handleCurrentChange"
+                   :current-page.sync="queryParam.pageIndex"
+                   :page-size="queryParam.pageSize"
+                   background
+                   layout="total, prev, pager, next"
+                   :total="totalCount">
+    </el-pagination>
 </div>
+
 @section scripts{
     <script src="~/vuejs/clientmanager.js"></script>
 }
