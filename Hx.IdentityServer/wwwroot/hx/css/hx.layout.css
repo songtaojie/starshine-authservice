@@ -1,68 +1,4 @@
 ﻿/*layout布局*/
-/*公共样式*/
-html {
-    height: 100%;
-}
-
-body {
-    margin: unset;
-    padding: unset;
-    height: inherit;
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-    background-color: transparent;
-}
-
-    a:focus,
-    a:hover,
-    button:focus {
-        outline: none;
-    }
-
-[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
-    cursor: pointer;
-}
-
-.hx-flex {
-    display: -ms-flexbox !important;
-    display: flex !important;
-}
-
-.hx-flex-column {
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
-}
-
-.hx-flex-fill {
-    -ms-flex: 1 1 auto !important;
-    flex: 1 1 auto !important;
-}
-
-.hx-justify-content-center {
-    -ms-flex-pack: center !important;
-    justify-content: center !important;
-}
-
-.hx-justify-content-end {
-    -ms-flex-pack: end !important;
-    justify-content: flex-end !important;
-}
-
-.hx-align-items-center {
-    -ms-flex-align: center !important;
-    align-items: center !important;
-}
-
-.hx-hidden {
-    display: none !important;
-}
-
-.hx-float-right {
-    float: right !important;
-}
 /*Header*/
 .hx-header {
     padding: unset;
@@ -90,6 +26,7 @@ a {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: .5rem 1rem;
+    background-color: #f8f9fa !important;
 }
 
 .hx-fiexd-top {
@@ -98,8 +35,8 @@ a {
     right: 0;
     left: 14rem;
     z-index: 1030;
-    animation: HeaderToMax .3s;
-    -webkit-animation: HeaderToMax .3s; /* Safari and Chrome */
+    animation: headerToMax .3s;
+    -webkit-animation: headerToMax .3s; /* Safari and Chrome */
 }
 /*navbar-toggler*/
 .hx-navbar-toggler {
@@ -312,8 +249,8 @@ a {
 
     .hx-aside-mini.hx-body .hx-fiexd-top {
         left: 3.75rem;
-        animation: HeaderToMini .3s;
-        -webkit-animation: HeaderToMini .3s; /* Safari and Chrome */
+        animation: headerToMini .3s;
+        -webkit-animation: headerToMini .3s; /* Safari and Chrome */
     }
 
 .hx-aside-mini.hx-aside-brand,
@@ -406,7 +343,7 @@ a {
     }
 }
 
-@keyframes HeaderToMax {
+@keyframes headerToMax {
     from {
         left: 3.75rem;
     }
@@ -416,7 +353,7 @@ a {
     }
 }
 
-@-webkit-keyframes HeaderToMax /* Safari and Chrome */
+@-webkit-keyframes headerToMax /* Safari and Chrome */
 {
     from {
         left: 3.75rem;

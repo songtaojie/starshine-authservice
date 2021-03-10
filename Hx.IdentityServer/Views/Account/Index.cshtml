@@ -6,17 +6,7 @@
 <div>
     @if (isSuperAdmin)
     {
-        <div class="row mb-3">
-            <div class="col-md-12">
-                <div>
-                    <div class="pull-left">
-                        <a asp-action="Register" asp-route-returnUrl="/account/list" class="btn btn-primary">
-                            <span title="Register New" class="glyphicon glyphicon-plus-sign"></span> 添加用户
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <el-button class="hx-mb-2" type="primary">添加用户</el-button>
     }
     <el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
         <el-table-column prop="userName" label="用户名" width="180">

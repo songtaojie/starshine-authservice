@@ -2,7 +2,58 @@
     margin:unset;
     padding:unset;
 }
-
+/*公共样式*/
+html {
+    height: 100%;
+}
+body {
+    margin: unset;
+    padding: unset;
+    height: inherit;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+    a:focus,
+    a:hover,
+    button:focus {
+        outline: none;
+    }
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+.hx-flex {
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+.hx-flex-column {
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+}
+.hx-flex-fill {
+    -ms-flex: 1 1 auto !important;
+    flex: 1 1 auto !important;
+}
+.hx-justify-content-center {
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+}
+.hx-justify-content-end {
+    -ms-flex-pack: end !important;
+    justify-content: flex-end !important;
+}
+.hx-align-items-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+}
+.hx-hidden {
+    display: none !important;
+}
+.hx-float-right {
+    float: right !important;
+}
 /*Common*/
 .hx-border-top {
     border-top: 1px solid #e5e5e5;
@@ -13,4 +64,16 @@
 .hx-box-shadow {
     box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
 }
-
+/*margin*/
+.hx-mb-1, .hx-my-1 {
+    margin-bottom: .25rem !important;
+}
+.hx-mt-1, .hx-my-1 {
+    margin-top: .25rem !important;
+}
+.hx-mb-2, .hx-my-2 {
+    margin-bottom: .5rem !important;
+}
+.hx-mt-2, .hx-my-2 {
+    margin-top: .5rem !important;
+}
