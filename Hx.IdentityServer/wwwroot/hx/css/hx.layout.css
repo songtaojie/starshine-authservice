@@ -11,8 +11,6 @@
 .hx-body {
     padding-top:3.5rem;
     padding-left: 14rem;
-    animation: bodyToMax .4s;
-    -webkit-animation: bodyToMax .4s; /* Safari and Chrome */
 }
 
 .hx-navbar {
@@ -35,8 +33,6 @@
     right: 0;
     left: 14rem;
     z-index: 1030;
-    animation: headerToMax .3s;
-    -webkit-animation: headerToMax .3s; /* Safari and Chrome */
 }
 /*navbar-toggler*/
 .hx-navbar-toggler {
@@ -243,14 +239,10 @@
 /*mini时的样式*/
 .hx-aside-mini.hx-body {
     padding-left: 3.75rem;
-    animation: bodyToMini .3s;
-    -webkit-animation: bodyToMini .3s; /* Safari and Chrome */
 }
 
     .hx-aside-mini.hx-body .hx-fiexd-top {
         left: 3.75rem;
-        animation: headerToMini .3s;
-        -webkit-animation: headerToMini .3s; /* Safari and Chrome */
     }
 
 .hx-aside-mini.hx-aside-brand,
@@ -271,7 +263,9 @@
 }
 /*动画效果*/
 .hx-aside,
-.hx-aside-menu {
+.hx-aside-menu,
+.hx-fiexd-top,
+.hx-body {
     transition: all .3s ease;
     -webkit-transition: all .3s ease;
 }
@@ -319,47 +313,5 @@
 
     to {
         padding-left: 14rem;
-    }
-}
-
-@keyframes headerToMini {
-    from {
-        left: 14rem;
-    }
-
-    to {
-        left: 3.75rem;
-    }
-}
-
-@-webkit-keyframes headerToMini /* Safari and Chrome */
-{
-    from {
-        left: 14rem;
-    }
-
-    to {
-        left: 3.75rem;
-    }
-}
-
-@keyframes headerToMax {
-    from {
-        left: 3.75rem;
-    }
-
-    to {
-        left: 14rem;
-    }
-}
-
-@-webkit-keyframes headerToMax /* Safari and Chrome */
-{
-    from {
-        left: 3.75rem;
-    }
-
-    to {
-        left: 14rem;
     }
 }

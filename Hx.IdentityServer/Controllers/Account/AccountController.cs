@@ -396,10 +396,10 @@ namespace Hx.IdentityServer.Controllers
         /// <param name="returnUrl"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("account/register")]
+        [Route("account/addorupdate")]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "SuperAdmin")]
-        public async Task<IActionResult> Register(RegisterCreateModel model)
+        public async Task<IActionResult> AddOrUpdate(RegisterCreateModel model)
         {
             ViewData["ReturnUrl"] = model.ReturnUrl;
             IdentityResult result = new IdentityResult();

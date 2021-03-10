@@ -6,7 +6,7 @@
 <div>
     @if (isSuperAdmin)
     {
-        <el-button class="hx-mb-2" type="primary">添加用户</el-button>
+        <el-button class="hx-mb-2" type="primary" @@click="drawerShow = true">添加用户</el-button>
     }
     <el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
         <el-table-column prop="userName" label="用户名" width="180">
@@ -33,17 +33,7 @@
                        :total="totalCount">
         </el-pagination>
     </div>
-    @*<table class="table table-bordered table-sm">
-            <thead class="thead-light text-center">
-                <tr>
-                    <th style="width:100px;">UserName</th>
-                    <th style="width:65px;">LoginName</th>
-                    <th style="width:200px;">CreateTime</th>
-                    <th style="width:65px;">AccessFailedCount</th>
-                    <th style="width:100px;">操作</th>
-                </tr>
-            </thead>
-        </table>*@
+    <partial name="~/Views/Account/AddOrUpdate.cshtml" />
 </div>
 
 @section scripts{

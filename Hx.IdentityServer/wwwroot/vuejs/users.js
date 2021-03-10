@@ -1,15 +1,74 @@
-﻿new Vue({
+﻿var addOrUpdate = {
     data: {
-        ...window.HxCommonVue.data,
-        tableData: [],
-        totalCount:0,
-        queryParam: {
-            pageIndex: 1,
-            pageSize: 1
+        form: {
+            id:null
+        },
+    },
+    methods: {
+        onSubmit() {
+            var that = this,
+                url = '/account/addorupdate';
+            if (that.loading) return;
+            axios.post(url, that.form)
+                .then(function (response) {
+                    debugger
+                    if (response.success) {
+                        that.loading = false
+                        that.drawerShow = false
+                        that.$message({
+                            type: 'success',
+                            message: '添加成功!'
+                        });
+                    }
+                    else {
+                        that.$message({
+                            type: 'error',
+                            message: response.data.message
+                        });
+                    }
+                    
+                    that.getPageList()
+                })
+                .catch(function (error) {
+                    debugger
+                    that.loading = false
+                    console.log(error);
+                });
+        },
+        handleClose(done) {
+            //if (this.loading) return;
+            this.$confirm('数据未提交，确定关闭窗体？')
+                .then(_ => {
+                    //this.loading = true;
+                    done();
+                })
+                .catch(_ => { });
+        },
+        onCancelForm() {
+            this.drawerShow = false
+        }
+    }
+
+}
+
+window.HxVue = new Vue({
+    data() {
+        return {
+            ...window.HxCommonVue.data,
+            ...addOrUpdate.data,
+            drawerShow: false,
+            tableData: [],
+            totalCount: 0,
+            queryParam: {
+                pageIndex: 1,
+                pageSize: 1
+            }
         }
     },
     methods: {
+        isEmpty:window.HxCommon.isEmpty,
         ...window.HxCommonVue.methods,
+        ...addOrUpdate.methods,
         handleEdit() {
 
         },
@@ -56,4 +115,4 @@
     created() {
         this.getPageList();
     }
-}).$mount('#app')
+}).$mount('#app');
