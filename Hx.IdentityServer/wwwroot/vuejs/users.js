@@ -72,9 +72,9 @@
                 userName: 'songtaojie',
                 realName: '宋涛杰',
                 email: 'songtaojie@qq.com',
-                password: 'pwd$123',
-                confirmPassword: 'pwd$123',
-                sex: 1,
+                password: 'Pwd$123',
+                confirmPassword: 'Pwd$123',
+                sex: "1",
                 birthday:'2020-05-06'
             },
             remoteRuleCache: {
@@ -106,8 +106,25 @@
     },
     methods: {
         ...window.HxCommonVue.methods,
-        handleEdit() {
-
+        handleEdit(row) {
+            var url = '/account/delete/' + row.id
+            axios.post(url)
+                .then(function (response) {
+                    that.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                    that.getPageList()
+                })
+                .catch(function (error) {
+                    if (error.data) {
+                        that.$message({
+                            type: 'error',
+                            message: error.data.message
+                        });
+                    }
+                });
+            debugger
         },
         handleDelete(row) {
             var that = this
@@ -119,7 +136,6 @@
                 var url = '/account/delete/' + row.id
                 axios.post(url)
                     .then(function (response) {
-                        debugger
                         that.$message({
                             type: 'success',
                             message: '删除成功!'
@@ -127,8 +143,12 @@
                         that.getPageList()
                     })
                     .catch(function (error) {
-                        debugger
-                        console.log(error);
+                        if (error.data) {
+                            that.$message({
+                                type: 'error',
+                                message: error.data.message
+                            });
+                        }
                     });
             }).catch(() => {
             });

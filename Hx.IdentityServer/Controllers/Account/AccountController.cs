@@ -7,6 +7,7 @@ using Hx.IdentityServer.Controllers;
 using Hx.IdentityServer.Entity;
 using Hx.IdentityServer.Model;
 using Hx.IdentityServer.Model.Account;
+using Hx.IdentityServer.Model.Models.Account;
 using Hx.Sdk.Entity.Extensions;
 using IdentityModel;
 using IdentityServer4.Events;
@@ -402,6 +403,7 @@ namespace Hx.IdentityServer.Controllers
         public async Task<IActionResult> CreateOrUpdate([FromBody]AccountCreateModel model)
         {
             AjaxResult ajaxResult = new AjaxResult();
+            if (model == null) return Error("请求参数不正确");
             var user = new ApplicationUser
             {
                 Email = model.Email,
@@ -415,7 +417,7 @@ namespace Hx.IdentityServer.Controllers
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                var role = await _roleManager.FindByNameAsync(ConstKey.System);
+                var role = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Code == ConstKey.System);
                 await _userManager.AddClaimsAsync(user, new Claim[]{
                             new Claim(JwtClaimTypes.Name, model.RealName),
                             new Claim(JwtClaimTypes.Email, model.Email),
@@ -432,6 +434,28 @@ namespace Hx.IdentityServer.Controllers
             }
             return Json(ajaxResult);
         }
+
+        /// <summary>
+        /// 获取用户名明细信息
+        /// </summary>
+        /// <param name="id">用户id</param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetDetail(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null) return Error("未找到用户信息");
+            AccountDetailModel detailModel = new AccountDetailModel
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                RealName = user.RealName,
+                Sex = user.Sex
+            };
+            return Success(detailModel);
+        }
+
 
         /// <summary>
         /// 删除操作

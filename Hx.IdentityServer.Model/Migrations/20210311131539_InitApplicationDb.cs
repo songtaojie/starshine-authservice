@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hx.IdentityServer.Model.Migrations
@@ -16,16 +15,16 @@ namespace Hx.IdentityServer.Model.Migrations
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Code = table.Column<string>(nullable: true),
+                    Code = table.Column<string>(maxLength: 36, nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    Remark = table.Column<string>(nullable: true),
+                    Remark = table.Column<string>(maxLength: 1000, nullable: true),
                     OrderSort = table.Column<int>(nullable: false),
                     Enabled = table.Column<bool>(nullable: false),
-                    CreateId = table.Column<string>(nullable: true),
-                    CreateBy = table.Column<string>(nullable: true),
+                    CreateId = table.Column<string>(maxLength: 36, nullable: true),
+                    CreateBy = table.Column<string>(maxLength: 36, nullable: true),
                     CreateTime = table.Column<DateTime>(nullable: true),
-                    ModifyId = table.Column<string>(nullable: true),
-                    ModifyBy = table.Column<string>(nullable: true),
+                    ModifyId = table.Column<string>(maxLength: 36, nullable: true),
+                    ModifyBy = table.Column<string>(maxLength: 36, nullable: true),
                     ModifyTime = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
@@ -52,11 +51,11 @@ namespace Hx.IdentityServer.Model.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    RealName = table.Column<string>(nullable: true),
-                    Sex = table.Column<int>(nullable: false),
+                    RealName = table.Column<string>(maxLength: 36, nullable: true),
+                    Sex = table.Column<string>(maxLength: 1, nullable: true),
                     Age = table.Column<int>(nullable: false),
                     Birthday = table.Column<DateTime>(nullable: false),
-                    Address = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(maxLength: 100, nullable: true),
                     IsDelete = table.Column<bool>(nullable: false),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     ModifyTime = table.Column<DateTime>(nullable: true)
@@ -71,7 +70,7 @@ namespace Hx.IdentityServer.Model.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -92,7 +91,7 @@ namespace Hx.IdentityServer.Model.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -181,7 +180,8 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -207,7 +207,8 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

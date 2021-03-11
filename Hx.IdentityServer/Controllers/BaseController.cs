@@ -1,4 +1,5 @@
 ﻿using Hx.IdentityServer.Common;
+using Hx.IdentityServer.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,23 @@ namespace Hx.IdentityServer.Controllers
                 }
                 return false;
             }
+        }
+
+        protected IActionResult Success(object data)
+        {
+            return Json(new AjaxResult()
+            {
+                Data = data
+            });
+        }
+
+        protected IActionResult Error(string message)
+        {
+            return Json(new AjaxResult
+            {
+                Success = false,
+                Message = message
+            });
         }
     }
 }

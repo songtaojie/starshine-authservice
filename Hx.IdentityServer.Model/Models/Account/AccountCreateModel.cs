@@ -31,7 +31,7 @@ namespace Hx.IdentityServer.Model.Account
 
         public string ConfirmPassword { get; set; }
 
-        public int Sex { get; set; } = 0;
+        public string Sex { get; set; }
 
         public DateTime? Birthday { get; set; } = DateTime.Now;
      
