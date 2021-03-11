@@ -359,6 +359,7 @@ namespace Hx.IdentityServer.Controllers
         public async Task<IActionResult> QueryUserPage([FromBody]UserPageParam param)
         {
             //没有过滤的记录数
+            AjaxResult ajaxResult = new AjaxResult();
             IQueryable<ApplicationUser> query = _userManager.Users.Where(u=>!u.IsDelete);
             //if (!string.IsNullOrEmpty(search))
             //{
@@ -374,7 +375,8 @@ namespace Hx.IdentityServer.Controllers
                     AccessFailedCount = u.AccessFailedCount
                 })
                 .ToOrderAndPageListAsync(param);
-            return Json(data);
+            ajaxResult.Data = data;
+            return Json(ajaxResult);
         }
 
         /// <summary>
@@ -396,56 +398,39 @@ namespace Hx.IdentityServer.Controllers
         /// <param name="returnUrl"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("account/addorupdate")]
-        [ValidateAntiForgeryToken]
         [Authorize(Policy = "SuperAdmin")]
-        public async Task<IActionResult> AddOrUpdate(RegisterCreateModel model)
+        public async Task<IActionResult> CreateOrUpdate([FromBody]AccountCreateModel model)
         {
-            ViewData["ReturnUrl"] = model.ReturnUrl;
-            IdentityResult result = new IdentityResult();
-            if (ModelState.IsValid)
+            AjaxResult ajaxResult = new AjaxResult();
+            var user = new ApplicationUser
             {
-                var userItem = _userManager.FindByNameAsync(model.UserName.Trim()).Result;
-                if (userItem == null)
-                {
-                    var user = new ApplicationUser
-                    {
-                        Email = model.Email,
-                        UserName = model.UserName,
-                        RealName = model.RealName,
-                        Sex = model.Sex,
-                        Age = model.Birthday.Value.Year - DateTime.Now.Year,
-                        Birthday = model.Birthday.Value,
-                        Address = ""
-                    };
-                    result = await _userManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
-                    {
-                        var role = await _roleManager.FindByNameAsync(ConstKey.System);
-                        result = await _userManager.AddClaimsAsync(user, new Claim[]{
+                Email = model.Email,
+                UserName = model.UserName,
+                RealName = model.RealName,
+                Sex = model.Sex,
+                Age = model.Birthday.Value.Year - DateTime.Now.Year,
+                Birthday = model.Birthday.Value,
+                Address = ""
+            };
+            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                var role = await _roleManager.FindByNameAsync(ConstKey.System);
+                await _userManager.AddClaimsAsync(user, new Claim[]{
                             new Claim(JwtClaimTypes.Name, model.RealName),
                             new Claim(JwtClaimTypes.Email, model.Email),
                             new Claim(JwtClaimTypes.EmailVerified, "false", ClaimValueTypes.Boolean),
                             new Claim(JwtClaimTypes.Role, role?.Id),
                             new Claim(MyJwtClaimTypes.RoleName, ConstKey.System),
                         });
-
-                        if (result.Succeeded)
-                        {
-                            // 可以直接登录
-                            return RedirectToLocal(model.ReturnUrl);
-                        }
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, $"用户{userItem?.UserName}已存在");
-                }
-                AddErrors(result);
+                ajaxResult.Data = "添加成功";
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            else
+            {
+                ajaxResult.Success = false;
+                ajaxResult.Message = result.Errors.FirstOrDefault()?.Description;
+            }
+            return Json(ajaxResult);
         }
 
         /// <summary>
@@ -458,7 +443,7 @@ namespace Hx.IdentityServer.Controllers
         [Authorize(Policy = "SuperAdmin")]
         public async Task<JsonResult> Delete(string id)
         {
-            AjaxResult result = new AjaxResult();
+            AjaxResult ajaxResult = new AjaxResult();
             var userItem = await _userManager.FindByIdAsync(id);
             if (userItem != null)
             {
@@ -467,15 +452,16 @@ namespace Hx.IdentityServer.Controllers
                 if (!identityResult.Succeeded && identityResult.Errors.Count() > 0)
                 {
                     var error = identityResult.Errors.FirstOrDefault();
-                    result.Code = error.Code;
-                    result.Message = error.Description;
+                    ajaxResult.Code = error.Code;
+                    ajaxResult.Message = error.Description;
                 }
             }
             else
             {
-                result.Message = "找不到当前用户";
+                ajaxResult.Success = false;
+                ajaxResult.Message = "找不到当前用户";
             }
-            return Json(result);
+            return Json(ajaxResult);
         }
         #endregion
 
@@ -486,12 +472,24 @@ namespace Hx.IdentityServer.Controllers
         /// <param name="userName"></param>
         /// <returns></returns>
         [HttpPost,HttpGet]
-        public async Task<ContentResult> CheckUserName(string userName)
+        public async Task<IActionResult> CheckUserName(string userName)
         {
-            if (string.IsNullOrEmpty(userName)) return Content("用户名不能为空");
+            AjaxResult ajaxResult = new AjaxResult();
+            if (string.IsNullOrEmpty(userName))
+            {
+                ajaxResult.Success = false;
+                ajaxResult.Message = "用户名不能为空";
+                return Json(ajaxResult);
+            }
             var user = await _userManager.FindByNameAsync(userName.Trim());
-            if(user != null) return Content(string.Format("用户名{0}已存在!", userName));
-            return Content("true");
+            if (user != null)
+            {
+                ajaxResult.Success = false;
+                ajaxResult.Message = string.Format("用户名{0}已存在!", userName);
+                return Json(ajaxResult);
+            }
+            ajaxResult.Data = true;
+            return Json(ajaxResult);
         }
 
         /// <summary>
@@ -500,13 +498,24 @@ namespace Hx.IdentityServer.Controllers
         /// <param name="userName"></param>
         /// <returns></returns>
         [HttpPost, HttpGet]
-        public async Task<ContentResult> CheckEmail(string email)
+        public async Task<IActionResult> CheckEmail(string email)
         {
-            if (string.IsNullOrEmpty(email)) return Content("邮箱不能为空");
-            var user =  await _userManager.FindByEmailAsync(email.Trim());
-            if (user != null) return Content(string.Format("邮箱{0}已存在!", email));
-
-            return Content("true");
+            AjaxResult ajaxResult = new AjaxResult();
+            if (string.IsNullOrEmpty(email))
+            {
+                ajaxResult.Success = false;
+                ajaxResult.Message = "邮箱不能为空";
+                return Json(ajaxResult);
+            }
+            var user = await _userManager.FindByNameAsync(email.Trim());
+            if (user != null)
+            {
+                ajaxResult.Success = false;
+                ajaxResult.Message = string.Format("邮箱{0}已存在!", email);
+                return Json(ajaxResult);
+            }
+            ajaxResult.Data = true;
+            return Json(ajaxResult);
         }
         #endregion 
 
