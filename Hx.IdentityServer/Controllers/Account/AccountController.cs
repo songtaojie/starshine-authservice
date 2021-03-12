@@ -404,19 +404,20 @@ namespace Hx.IdentityServer.Controllers
         {
             AjaxResult ajaxResult = new AjaxResult();
             if (model == null) return Error("请求参数不正确");
-            var user = new ApplicationUser
+            if (string.IsNullOrEmpty(model.Id))
             {
-                Email = model.Email,
-                UserName = model.UserName,
-                RealName = model.RealName,
-                Sex = model.Sex,
-                Age = model.Birthday.Value.Year - DateTime.Now.Year,
-                Birthday = model.Birthday.Value,
-                Address = ""
-            };
-            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
+                var user = new ApplicationUser
+                {
+                    Email = model.Email,
+                    UserName = model.UserName,
+                    RealName = model.RealName,
+                    Sex = model.Sex,
+                    Age = model.Birthday.Value.Year - DateTime.Now.Year,
+                    Birthday = model.Birthday.Value,
+                    Address = ""
+                };
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+                if (!result.Succeeded) return Error(result.Errors.FirstOrDefault()?.Description);
                 var role = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Code == ConstKey.System);
                 await _userManager.AddClaimsAsync(user, new Claim[]{
                             new Claim(JwtClaimTypes.Name, model.RealName),
@@ -425,14 +426,18 @@ namespace Hx.IdentityServer.Controllers
                             new Claim(JwtClaimTypes.Role, role?.Id),
                             new Claim(MyJwtClaimTypes.RoleName, ConstKey.System),
                         });
-                ajaxResult.Data = "添加成功";
+                return Success("添加成功");
             }
-            else
+            else// 编辑
             {
-                ajaxResult.Success = false;
-                ajaxResult.Message = result.Errors.FirstOrDefault()?.Description;
+                var user = await _userManager.FindByIdAsync(model.Id);
+                user.RealName = model.RealName;
+                user.Sex = model.Sex;
+                if (model.Birthday.HasValue) user.Birthday = model.Birthday.Value;
+                var result = await _userManager.UpdateAsync(user);
+                if(!result.Succeeded) return Error(result.Errors.FirstOrDefault()?.Description);
+                return Success("修改成功");
             }
-            return Json(ajaxResult);
         }
 
         /// <summary>
@@ -440,7 +445,7 @@ namespace Hx.IdentityServer.Controllers
         /// </summary>
         /// <param name="id">用户id</param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("account/getdetail/{id}")]
         public async Task<IActionResult> GetDetail(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -451,7 +456,8 @@ namespace Hx.IdentityServer.Controllers
                 UserName = user.UserName,
                 Email = user.Email,
                 RealName = user.RealName,
-                Sex = user.Sex
+                Sex = user.Sex,
+                Birthday = user.Birthday
             };
             return Success(detailModel);
         }

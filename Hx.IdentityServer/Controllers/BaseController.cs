@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hx.IdentityServer.Controllers
 {
+   
     //[SecurityHeaders]
     public class BaseController: Controller
     {

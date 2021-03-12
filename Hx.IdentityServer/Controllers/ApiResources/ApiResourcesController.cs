@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Hx.IdentityServer.Controllers.ApiResources
 {
-    public class ApiResourcesManagerController:BaseController
+    public class ApiResourcesController:BaseController
     {
-        private readonly ConfigurationDbContext _configurationDbContext;
+        private readonly ConfigurationDbContext _configurationDb;
 
-        public ApiResourcesManagerController(ConfigurationDbContext configurationDbContext)
+        public ApiResourcesController(ConfigurationDbContext configurationDbContext)
         {
-            _configurationDbContext = configurationDbContext;
+            _configurationDb = configurationDbContext;
         }
 
         /// <summary>
@@ -24,9 +24,9 @@ namespace Hx.IdentityServer.Controllers.ApiResources
         /// <returns></returns>
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Index2()
+        public async Task<IActionResult> Index()
         {
-            return View(await _configurationDbContext.ApiResources
+            return View(await _configurationDb.ApiResources
                 .Include(d => d.UserClaims)
                 .ToListAsync());
         }

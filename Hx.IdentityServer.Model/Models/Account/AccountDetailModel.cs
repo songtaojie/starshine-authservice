@@ -21,5 +21,10 @@ namespace Hx.IdentityServer.Model.Models.Account
         public string Email { get; set; }
 
         public string Sex { get; set; }
+
+        /// <summary>
+        /// 生日
+        /// </summary>
+        public DateTime Birthday { get; set; }
     }
 }

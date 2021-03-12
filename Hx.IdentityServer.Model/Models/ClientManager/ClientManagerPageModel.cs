@@ -10,6 +10,11 @@ namespace Hx.IdentityServer.Model.Models.ClientManager
     public class ClientManagerPageModel
     {
         /// <summary>
+        /// 主键id
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
         /// 客户端id
         /// </summary>
         public string ClientId { get; set; }

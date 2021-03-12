@@ -60,7 +60,6 @@
         };
         return {
             ...window.HxCommonVue.data,
-            drawerShow: false,
             tableData: [],
             totalCount: 0,
             queryParam: {
@@ -68,18 +67,10 @@
                 pageSize: 1
             },
             //表格
-            form: {
-                userName: 'songtaojie',
-                realName: '宋涛杰',
-                email: 'songtaojie@qq.com',
-                password: 'Pwd$123',
-                confirmPassword: 'Pwd$123',
-                sex: "1",
-                birthday:'2020-05-06'
-            },
-            remoteRuleCache: {
-            },
-            rules: {
+            isAdd:true,
+            form: this.initFrom(),
+            remoteRuleCache: {},
+            addRules: {
                 userName: [
                     { required: true, message: '请输入用户名', trigger: 'blur' },
                     { validator: validateUserName, trigger: 'blur' }
@@ -89,10 +80,9 @@
                 ],
                 email: [
                     { required: true, message: '请输入邮箱', trigger: 'blur' },
-                    { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'},
+                    { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' },
                     { validator: validateEmail, trigger: 'blur' }
                 ],
-
                 password: [
                     { required: true, message: '请输入确认密码', trigger: 'blur' },
                     { validator: validatePass, trigger: 'blur' }
@@ -101,31 +91,23 @@
                     { required: true, message: '请输入确认密码', trigger: 'blur' },
                     { validator: validatePass2, trigger: 'blur' }
                 ]
+            },
+            editRules: {
+                userName: [
+                    { required: true, message: '请输入用户名', trigger: 'blur' },
+                ],
+                realName: [
+                    { required: true, message: '请输入真实姓名', trigger: 'blur' }
+                ],
+                email: [
+                    { required: true, message: '请输入邮箱', trigger: 'blur' },
+                    { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' },
+                ],
             }
         }
     },
     methods: {
         ...window.HxCommonVue.methods,
-        handleEdit(row) {
-            var url = '/account/delete/' + row.id
-            axios.post(url)
-                .then(function (response) {
-                    that.$message({
-                        type: 'success',
-                        message: '删除成功!'
-                    });
-                    that.getPageList()
-                })
-                .catch(function (error) {
-                    if (error.data) {
-                        that.$message({
-                            type: 'error',
-                            message: error.data.message
-                        });
-                    }
-                });
-            debugger
-        },
         handleDelete(row) {
             var that = this
             that.$confirm('确定删除当前用户?', '提示', {
@@ -169,7 +151,46 @@
                 });
         },
         //表格
-        onSubmit(formName) {
+        initFrom() {
+            return {
+                userName: '',
+                realName: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+                sex: '',
+                birthday: ''
+            }
+        },
+        onAdd() {
+            this.isAdd = true;
+            this.showDrawer = true;
+        },
+        onEdit(row) {
+            var that = this;
+            var url = '/account/GetDetail/' + row.id;
+            axios.get(url)
+                .then(function (data) {
+                    that.form.id = data.id;
+                    that.form.userName = data.userName;
+                    that.form.realName = data.realName;
+                    that.form.email = data.email;
+                    that.form.sex = data.sex;
+                    that.form.birthday = data.birthday
+                    that.isAdd = false;
+                    that.showDrawer = true;
+                })
+                .catch(function (error) {
+                    if (error.data) {
+                        that.$message({
+                            type: 'error',
+                            message: error.data.message
+                        });
+                    }
+                });
+        },
+        //添加编辑
+        handleSubmit(formName) {
             var that = this,
                 url = '/account/createorupdate';
             if (that.loading) return;
@@ -178,8 +199,12 @@
                     that.loading = true;
                     axios.post(url, that.form)
                         .then(function (data) {
+                            that.$message({
+                                type: 'success',
+                                message: '保存成功!'
+                            });
                             that.loading = false
-                            that.drawerShow = false
+                            that.showDrawer = false
                             that.getPageList()
                         })
                         .catch(function (error) {
@@ -195,7 +220,6 @@
             if (!that.isEmptyObject(that.form)) {
                 this.$confirm('数据未提交，确定关闭窗体？')
                     .then(_ => {
-                        //this.loading = true;
                         done();
                     })
                     .catch(_ => { });
@@ -204,8 +228,11 @@
                 done();
             }
         },
-        onCancelForm() {
-            this.drawerShow = false
+        handleOpened() {
+            if (this.isAdd) {
+                this.form = this.initFrom();
+                this.$refs.ruleForm.resetFields();
+            }
         }
     },
     created() {

@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hx.IdentityServer.Model.ClientManager
+namespace Hx.IdentityServer.Model.Models.ClientManager
 {
-    /// <summary>
-    /// 客户端创建更新model
-    /// </summary>
-    public class ClientCreateModel
+    public class ClientDetailModel
     {
-
         /// <summary>
-        /// 主键
+        /// 主键id
         /// </summary>
         public string Id { get; set; }
 
@@ -60,5 +56,4 @@ namespace Hx.IdentityServer.Model.ClientManager
         /// </summary>
         public string PostLogoutRedirectUris { get; set; }
     }
-    
 }

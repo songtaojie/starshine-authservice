@@ -1,4 +1,4 @@
-﻿; (function (global) {
+﻿; (function (global, Vue) {
     var toast = ELEMENT.Message
     //asiox配置
     // 设置请求超时
@@ -6,7 +6,7 @@
     // 设置post请求头
     //axios.defaults.headers.post['Content-Type'] =
     //    'application/x-www-form-urlencoded;charset=UTF-8'
-    
+
     // 返回状态判断(添加响应拦截器)
     axios.interceptors.response.use(
         (res) => {
@@ -105,7 +105,7 @@
             isCollapse: false,
             loading: false,
             appId: null,
-            showDrawer:false
+            showDrawer: false
         },
         methods: {
             ...hxCommon,
@@ -120,9 +120,12 @@
             }
         }
     }
+    function HxVue(options) {
+        
+    }
 
 
-})(window);
+})(window,Vue);
 
 
 

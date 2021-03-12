@@ -1,74 +1,43 @@
-﻿@model Hx.IdentityServer.Model.ClientManager.ClientCreateModel
-@{
-    ViewBag.Title = "客户端编辑";
-}
-@section styles{
-    
-}
-<div class="hx-register">
-    @*ajax提交*@
-    @*<form asp-route-returnUrl="@ViewData["ReturnUrl"]" data-ajax-method="POST" data-ajax="true">*@
-    <form >
-        <input type="hidden" name="Id" value="@ViewBag.ClientId" />
-        <div class="form-row">
-            <label class="col-sm-2 col-form-label"></label>
-            <h3 class="col-sm-10 mb-4 text-center">创建用户</h3>
+﻿<el-drawer :title="isAdd?'添加客户端管理':'编辑客户端管理'" :visible.sync="showDrawer"
+           direction="rtl"
+           :before-close="handleClose"
+           @@opened="handleOpened"
+           size="50%">
+    <div class="hx-4 hx-flex hx-flex-column hx-h-100">
+        <el-form :model="form" ref="ruleForm" :rules="rules" status-icon
+                 label-width="90px" class="hx-flex-fill">
+            <el-form-item label="客户端id" prop="clientId">
+                <el-input v-model="form.clientId" :disabled="!isAdd"></el-input>
+            </el-form-item>
+            <el-form-item label="客户端名称" prop="clientName">
+                <el-input v-model="form.clientName"></el-input>
+            </el-form-item>
+            <el-form-item label="描述" prop="description">
+                <el-input v-model="form.description"></el-input>
+            </el-form-item>
+            <el-form-item label="客户端秘钥" prop="clientSecrets">
+                <el-input v-model="form.clientSecrets" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
+            </el-form-item>
+            <el-form-item label="授权类型" prop="allowedGrantTypes">
+                <el-input v-model="form.allowedGrantTypes" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
+            </el-form-item>
+            <el-form-item label="作用域" prop="allowedScopes">
+                <el-input v-model="form.allowedScopes" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
+            </el-form-item>
+            <el-form-item label="允许跨域" prop="allowedCorsOrigins">
+                <el-input v-model="form.allowedCorsOrigins" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
+            </el-form-item>
+            <el-form-item label="回调函数" prop="redirectUris">
+                <el-input v-model="form.redirectUris" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
+            </el-form-item>
+            <el-form-item label="退出回调" prop="postLogoutRedirectUris">
+                <el-input v-model="form.postLogoutRedirectUris" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
+            </el-form-item>
+        </el-form>
+        <div class="hx-flex">
+            <el-button class="hx-flex-fill" @@click="showDrawer = false">取 消</el-button>
+            <el-button class="hx-flex-fill" type="primary" @@click="handleSubmit('ruleForm')" :loading="loading">{{ loading ? '提交中 ...' : '提 交' }}</el-button>
         </div>
-        <div class="form-row mb-sm-3">
-            <label asp-for="ClientId" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="ClientId" class="form-control" value="@Model.ClientId" />
-                <span asp-validation-for="ClientId" class="text-danger small"></span>
-            </div>
-        </div>
-        <div class="form-row mb-sm-3">
-            <label asp-for="ClientName" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="ClientName" class="form-control" value="@Model.ClientName" />
-                <span asp-validation-for="ClientName" class="text-danger small"></span>
-            </div>
-        </div>
-        <div class="form-row mb-sm-3">
-            <label asp-for="AllowedGrantTypes" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="AllowedGrantTypes" class="form-control" value="@Model.AllowedGrantTypes" />
-                <span asp-validation-for="AllowedGrantTypes" class="text-danger small"></span>
-            </div>
-        </div>
-        <div class="form-row mb-sm-3">
-            <label asp-for="AllowedScopes" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="AllowedScopes" class="form-control" value="@Model.AllowedScopes" />
-                <span asp-validation-for="AllowedScopes" class="text-danger small"></span>
-            </div>
-        </div>
-        <div class="form-row mb-sm-3">
-            <label asp-for="AllowedCorsOrigins" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="AllowedCorsOrigins" class="form-control" value="@Model.AllowedCorsOrigins" />
-                <span asp-validation-for="AllowedCorsOrigins" class="text-danger small"></span>
-            </div>
-        </div>
-        <div class="form-row mb-sm-3">
-            <label asp-for="RedirectUris" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="RedirectUris" class="form-control" value="@Model.RedirectUris" />
-                <span asp-validation-for="RedirectUris" class="text-danger small"></span>
-            </div>
-        </div>
-        <div class="form-row mb-sm-3">
-            <label asp-for="PostLogoutRedirectUris" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="PostLogoutRedirectUris" class="form-control" value="@Model.PostLogoutRedirectUris" />
-                <span asp-validation-for="PostLogoutRedirectUris" class="text-danger small"></span>
-            </div>
-        </div>
-        <div class="form-row mb-4">
-            <label class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary w-100">注册</button>
-                @*<input type="submit" class="btn btn-outline-secondary w-100" value="注册" />*@
-            </div>
-        </div>
-    </form>
-</div>
+    </div>
+</el-drawer>
+
