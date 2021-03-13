@@ -1,4 +1,4 @@
-﻿window.HxVue = new Vue({
+﻿window.hxVue = new HxVue({
     data() {
         var that = this;
         var remoteRule = function (url,field,value,callback) {
@@ -59,7 +59,6 @@
             }
         };
         return {
-            ...window.HxCommonVue.data,
             tableData: [],
             totalCount: 0,
             queryParam: {
@@ -107,7 +106,6 @@
         }
     },
     methods: {
-        ...window.HxCommonVue.methods,
         handleDelete(row) {
             var that = this
             that.$confirm('确定删除当前用户?', '提示', {
@@ -238,4 +236,4 @@
     created() {
         this.getPageList();
     }
-}).$mount('#app');
+})

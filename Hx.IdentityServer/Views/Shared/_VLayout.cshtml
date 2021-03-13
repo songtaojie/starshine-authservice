@@ -1,6 +1,5 @@
 ﻿@{
-    bool isLoginPage = ViewBag.IsLoginPage == true;
-    string appId = Guid.NewGuid().ToString();
+    string appId = "hx" + Guid.NewGuid().ToString();
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -20,17 +19,8 @@
     </style>
     @RenderSection("styles", required: false)
 </head>
-@if (isLoginPage)
-{
-    <body>
-        @RenderBody()
-        @RenderSection("scripts", required: false)
-    </body>
-}
-else
-{
 <body>
-    <div class="hx-dark" id="app" data-id="@appId" ref="rootDiv">
+    <div class="hx-dark" id="@appId" data-id="@appId">
         <el-container>
             <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
             <el-container :class="isCollapse?'hx-body hx-aside-mini':'hx-body'">
@@ -40,9 +30,37 @@ else
         </el-container>
     </div>
     <partial name="_Scripts" />
-    <script src="~/vuejs/common.js"></script>
+    <script src="~/vuejs/hx.common.js"></script>
     @RenderSection("scripts", required: false)
+    <script>
+            var app, hxVue = window.hxVue || {};
+            app = new Vue({
+                data() {
+                    var hxData = {}
+                    if (hxVue.data) {
+                        const data = hxVue.data();
+                        hxData = data.call(this)
+                    }
+                    return {
+                        isCollapse: false,
+                        loading: false,
+                        showDrawer: false,
+                        ...hxData,
+                    }
+                },
+                methods: {
+                    ...hxVue.methods,
+                    onMenuSelect(menu) {
+                        window.location.href = menu
+                    },
+                    handleCommand(command) {
+                        window.location.href = command;
+                    }
+                },
+                created: hxVue.created
+            });
+            app.$mount('#@appId');
+    </script>
 </body>
-}
 
 </html>

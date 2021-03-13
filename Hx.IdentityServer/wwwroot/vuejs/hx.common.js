@@ -6,19 +6,14 @@
     // 设置post请求头
     //axios.defaults.headers.post['Content-Type'] =
     //    'application/x-www-form-urlencoded;charset=UTF-8'
-    
+
     // 返回状态判断(添加响应拦截器)
     axios.interceptors.response.use(
         (res) => {
             // 对响应数据做些事
             if (res.data.success === false) {
-                //toast({
-                //    message: res.data.message,
-                //    type: 'error',
-                //})
                 return Promise.reject(res)
             }
-
             return res.data.data
         },
         (e) => {
@@ -32,11 +27,11 @@
                 default:
                     break
             }
-
             return Promise.reject(e)
         }
     )
-
+    var enumerables = [//'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 
+        'valueOf', 'toLocaleString', 'toString', 'constructor'];
     var hxCommon = {
         /**
        * 如果传递的值是JavaScript数组，则返回' true '，否则返回' false '.
@@ -57,13 +52,16 @@
             return (value === undefined || value === null) || (!allowEmptyString ? value === '' : false) || (isArray(value) && value.length === 0);
         },
         /**
-        * 判断给定值是否是字符串
-        * @param {any} value 要验证的值
-        * @returns {Boolean} true代表是字符串，false代表不是字符串
-        */
-        isString(value) {
-            return typeof value === 'string';
-        },
+         * 如果传递的值是JavaScript函数则返回“true”，否则返回“false”。
+         * @param {Object} value 要测试的值.
+         * @return {Boolean} 如果传递的值是JavaScript函数则返回“true”，否则返回“false”。
+         */
+        isFunction:
+            (typeof document !== 'undefined' && typeof document.getElementsByTagName('body') === 'function') ? function (value) {
+                return !!value && toString.call(value) === '[object Function]';
+            } : function (value) {
+                return !!value && typeof value === 'function';
+            },
         /**
          * 判断给定制是否是对象
          * @param {any} value 要验证的值
@@ -78,14 +76,6 @@
             }
         },
         /**
-         * 是否是简单地对象
-         * @param {any} value 要验证的值
-         * @returns {Boolean} true代表是简单对象，false代表不是简单对象
-         */
-        isSimpleObject(value) {
-            return value instanceof Object && value.constructor === Object;
-        },
-        /**
          * 检查对象是否为空
          * @param {Object} object 要检查的对象
          * @return {Boolean} true不为空
@@ -98,31 +88,62 @@
                 }
             }
             return true
-        }
-    }
-    global.HxCommonVue = {
-        data: {
-            isCollapse: false,
-            loading: false,
-            appId: null,
-            showDrawer:false
         },
-        methods: {
-            ...hxCommon,
-            onMenuClick(menu) {
-                global.location.href = menu.route;
-            },
-            onMenuSelect(menu) {
-                global.location.href = menu
-            },
-            handleCommand(command) {
-                global.location.href = command;
+        /**
+         * 将config的所有属性复制到指定的对象。支持两种级别的默认值:
+         * @param {Object} object 接受方对象
+         * @param {Object} config 属性的来源对象
+         * @param {Object} defaults 应用于默认值的对象
+         */
+        apply(object, config, defaults) {
+            if (object) {
+                if (defaults) {
+                    hxCommon.apply(object, defaults);
+                }
+
+                if (config && typeof config === 'object') {
+                    var i, j, k;
+
+                    for (i in config) {
+                        object[i] = config[i];
+                    }
+
+                    if (enumerables) {
+                        for (j = enumerables.length; j--;) {
+                            k = enumerables[j];
+                            if (config.hasOwnProperty(k)) {
+                                object[k] = config[k];
+                            }
+                        }
+                    }
+                }
+            }
+
+            return object;
+        },
+    }
+    function HxVue(options) {
+        if (hxCommon.isFunction(options.data)) {
+            this.data = function () {
+                return options.data
+            }
+        } else if (hxCommon.isObject(options.data)) {
+            this.data = function () {
+                return hxCommon.apply({}, options.data)
             }
         }
+        if (hxCommon.isObject(options.methods)) {
+            this.methods = hxCommon.apply({}, options.methods, hxCommon)
+        } else {
+            this.methods = hxCommon
+        }
+        this.created = options.created
+        return this
     }
-
-
-})(window);
+    if (!global.HxVue) {
+        global.HxVue = HxVue;
+    }
+})(typeof window !== 'undefined' ? window : this);
 
 
 

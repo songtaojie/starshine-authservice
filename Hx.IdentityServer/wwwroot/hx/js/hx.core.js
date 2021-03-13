@@ -160,6 +160,32 @@
             }
             return object;
         },
+        Ext.apply = function (object, config, defaults) {
+            if (object) {
+                if (defaults) {
+                    Ext.apply(object, defaults);
+                }
+
+                if (config && typeof config === 'object') {
+                    var i, j, k;
+
+                    for (i in config) {
+                        object[i] = config[i];
+                    }
+
+                    if (enumerables) {
+                        for (j = enumerables.length; j--;) {
+                            k = enumerables[j];
+                            if (config.hasOwnProperty(k)) {
+                                object[k] = config[k];
+                            }
+                        }
+                    }
+                }
+            }
+
+            return object;
+        };
         /**
          * ajax成功时的处理
          * @param {any} r ajax响应的信息

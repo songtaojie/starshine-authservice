@@ -1,4 +1,4 @@
-﻿; (function (global, Vue) {
+﻿; (function (global) {
     var toast = ELEMENT.Message
     //asiox配置
     // 设置请求超时
@@ -36,7 +36,8 @@
             return Promise.reject(e)
         }
     )
-
+    var enumerables = [//'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 
+        'valueOf', 'toLocaleString', 'toString', 'constructor'];
     var hxCommon = {
         /**
        * 如果传递的值是JavaScript数组，则返回' true '，否则返回' false '.
@@ -98,34 +99,90 @@
                 }
             }
             return true
-        }
+        },
+        /**
+         * 将config的所有属性复制到指定的对象。支持两种级别的默认值:
+         * @param {Object} object 接受方对象
+         * @param {Object} config 属性的来源对象
+         * @param {Object} defaults 应用于默认值的对象
+         */
+        apply(object, config, defaults) {
+            if (object) {
+                if (defaults) {
+                    Ext.apply(object, defaults);
+                }
+
+                if (config && typeof config === 'object') {
+                    var i, j, k;
+
+                    for (i in config) {
+                        object[i] = config[i];
+                    }
+
+                    if (enumerables) {
+                        for (j = enumerables.length; j--;) {
+                            k = enumerables[j];
+                            if (config.hasOwnProperty(k)) {
+                                object[k] = config[k];
+                            }
+                        }
+                    }
+                }
+            }
+
+            return object;
+        },
+        /**
+         * 将config的所有属性复制到对象（如果它们尚不存在）。
+         * @param {Object} object 属性的接收者
+         * @param {Object} config 属性的来源
+         * @return {Object} 操作后的对象
+         */
+        applyIf(object, config) {
+            if (object && config && typeof config === 'object') {
+                for (var property in config) {
+                    if (object[property] === undefined) {
+                        object[property] = config[property];
+                    }
+                }
+            }
+            return object;
+        },
     }
-    global.HxCommonVue = {
+    var commonConfig = {
         data: {
             isCollapse: false,
             loading: false,
-            appId: null,
             showDrawer: false
         },
         methods: {
             ...hxCommon,
-            onMenuClick(menu) {
-                global.location.href = menu.route;
-            },
             onMenuSelect(menu) {
                 global.location.href = menu
             },
-            handleCommand(command) {
-                global.location.href = command;
-            }
         }
     }
     function HxVue(options) {
-        
+        if (hxCommon.isFunction(options.data)) {
+            this.data = function () {
+                return hxCommon.apply({}, options.data(), commonConfig.data)
+            }
+        } else if (hxCommon.isObject(options.data)) {
+            this.data = function () {
+                return hxCommon.apply({}, options.data, commonConfig.data)
+            }
+        }
+        if (hxCommon.isObject(options.methods)) {
+            this.methods = hxCommon.apply({}, options, commonConfig.methods)
+        } else {
+            this.methods = commonConfig.methods
+        }
+        return this
     }
-
-
-})(window,Vue);
+    if (!global.HxVue) {
+        global.HxVue = HxVue;
+    }
+})(typeof window !== 'undefined' ? window : this,Vue);
 
 
 
