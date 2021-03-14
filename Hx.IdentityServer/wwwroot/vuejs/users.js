@@ -115,20 +115,12 @@
             }).then(() => {
                 var url = '/account/delete/' + row.id
                 axios.post(url)
-                    .then(function (response) {
+                    .then(function () {
                         that.$message({
                             type: 'success',
                             message: '删除成功!'
                         });
                         that.getPageList()
-                    })
-                    .catch(function (error) {
-                        if (error.data) {
-                            that.$message({
-                                type: 'error',
-                                message: error.data.message
-                            });
-                        }
                     });
             }).catch(() => {
             });
@@ -144,9 +136,6 @@
                     that.tableData = data.items
                     that.totalCount = data.totalCount
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
         },
         //表格
         initFrom() {
@@ -169,23 +158,10 @@
             var url = '/account/GetDetail/' + row.id;
             axios.get(url)
                 .then(function (data) {
-                    that.form.id = data.id;
-                    that.form.userName = data.userName;
-                    that.form.realName = data.realName;
-                    that.form.email = data.email;
-                    that.form.sex = data.sex;
-                    that.form.birthday = data.birthday
+                    that.form = data;
                     that.isAdd = false;
                     that.showDrawer = true;
                 })
-                .catch(function (error) {
-                    if (error.data) {
-                        that.$message({
-                            type: 'error',
-                            message: error.data.message
-                        });
-                    }
-                });
         },
         //添加编辑
         handleSubmit(formName) {
@@ -207,7 +183,6 @@
                         })
                         .catch(function (error) {
                             that.loading = false
-                            console.log(error);
                         });
                 }
             })

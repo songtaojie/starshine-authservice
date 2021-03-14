@@ -33,7 +33,7 @@ namespace Hx.IdentityServer.Controllers
                     "sandbox allow-forms allow-same-origin allow-scripts; " +
                     "style-src 'self' 'unsafe-inline';" +
                     "img-src 'self' data: *;" +
-                    "script-src 'self' 'unsafe-eval'; ";
+                    "script-src 'self' 'unsafe-eval' 'unsafe-inline'; ";
                 // also consider adding upgrade-insecure-requests once you have HTTPS in place for production
                 //csp += "upgrade-insecure-requests;";
                 // also an example if you need client images to be displayed from twitter

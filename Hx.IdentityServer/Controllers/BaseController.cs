@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Hx.IdentityServer.Controllers
 {
-   
-    //[SecurityHeaders]
+
+    [SecurityHeaders]
     public class BaseController: Controller
     {
         /// <summary>
@@ -50,6 +50,16 @@ namespace Hx.IdentityServer.Controllers
         {
             return Json(new AjaxResult
             {
+                Success = false,
+                Message = message
+            });
+        }
+
+        protected IActionResult Error(string message,string code)
+        {
+            return Json(new AjaxResult
+            {
+                Code = code,
                 Success = false,
                 Message = message
             });

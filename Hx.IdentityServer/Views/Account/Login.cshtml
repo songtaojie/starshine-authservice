@@ -1,7 +1,11 @@
 @model Hx.IdentityServer.Model.Account.LoginViewModel
 @{
     ViewBag.Title = "登录";
-    Layout = "_LoginLayout";
+    Layout = "_Layout";
+}
+@section styles{
+    <link rel="stylesheet" href="~/hx/css/hx.login.css" />
+    <link rel="stylesheet" href="~/hx/css/hx.login.bg.css" />
 }
 <div class="hx-login-wrapper">
     <div class="hx-login-container">

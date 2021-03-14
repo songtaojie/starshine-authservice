@@ -339,10 +339,12 @@ namespace Hx.IdentityServer.Controllers
         }
         #endregion
 
-        [HttpGet]
+        [HttpPost,HttpGet]
         public IActionResult AccessDenied()
         {
-            return View();
+            return StatusCode(StatusCodes.Status403Forbidden, "您没有该操作的权限!");
+            //return Error("您无权访问该资源", StatusCodes.Status403Forbidden.ToString());
+            //return View();
         }
 
         #region 用户相关的操作
@@ -558,7 +560,7 @@ namespace Hx.IdentityServer.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(AccountController.Index), "Account");
             }
         }
 

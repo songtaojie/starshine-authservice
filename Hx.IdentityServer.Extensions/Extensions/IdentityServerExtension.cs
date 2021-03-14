@@ -43,6 +43,7 @@ namespace Hx.IdentityServer.Extensions
                 //options.EmitStaticAudienceClaim = true;
                 options.UserInteraction.LoginUrl = "/oauth2/authorize";
                 options.UserInteraction.LogoutUrl = "/oauth2/logout";
+                options.UserInteraction.ErrorUrl = "/error";
             }).AddAspNetIdentity<ApplicationUser>();
 
             builder.AddConfigAndOperateStore(configuration);

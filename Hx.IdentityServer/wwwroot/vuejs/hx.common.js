@@ -12,21 +12,23 @@
         (res) => {
             // 对响应数据做些事
             if (res.data.success === false) {
-                return Promise.reject(res)
+                toast({ message: res.data.message, type: 'error', })
+                return Promise.reject(res.data)
             }
             return res.data.data
         },
         (e) => {
-            switch (e.response && e.response.status) {
+            var res = e.response,
+                msg;
+            switch (res && res.status) {
                 case 403:
-                    toast({
-                        message: '您没有该操作的权限!',
-                        type: 'error',
-                    })
-                    return null
+                    msg = res.data || '您没有该操作的权限!';
+                    toast({ message: msg, type: 'error', })
+                    break;
                 default:
-                    break
+                    break;
             }
+            console.log(e);
             return Promise.reject(e)
         }
     )
