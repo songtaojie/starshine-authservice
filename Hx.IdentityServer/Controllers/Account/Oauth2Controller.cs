@@ -253,7 +253,7 @@ namespace Hx.IdentityServer.Controllers.Account
                 // 这会触发重定向到外部提供商以进行注销
                 return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
             }
-            return RedirectToAction(nameof(Authorize).ToLower(), "oauth2");
+            return RedirectToAction("authorize", "oauth2");
         }
 
         private async Task<LogoutViewModel> BuildLogoutViewModelAsync(string logoutId)
