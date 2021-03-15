@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Hx.IdentityServer
 {
@@ -21,6 +22,7 @@ namespace Hx.IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            ConsoleHelper.WriteSuccessLine("*****开始ConfigureServices注入服务******");
             //services.AddSameSiteCookiePolicy();
             var mvcBuilder = services.AddControllersWithViews()
                 .AddJsonOptions(json => {
@@ -34,12 +36,13 @@ namespace Hx.IdentityServer
             }
             
             services.AddIdentityServerSetup(Configuration);
-            
+            ConsoleHelper.WriteSuccessLine("*****ConfigureServices注入服务完成******");
+            Console.WriteLine();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-           
+            ConsoleHelper.WriteSuccessLine("*****开始ApplicationBuilder配置******");
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -59,6 +62,8 @@ namespace Hx.IdentityServer
                     defaults:new { controller = "Account", action = "Index" });
                 //endpoints.MapDefaultControllerRoute();
             });
+            ConsoleHelper.WriteSuccessLine("*****ApplicationBuilder配置完成******");
+            Console.WriteLine();
         }
     }
 }
