@@ -33,6 +33,9 @@
             <el-form-item label="退出回调" prop="postLogoutRedirectUris">
                 <el-input v-model="form.postLogoutRedirectUris" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
             </el-form-item>
+            <el-form-item label="是否启用" prop="enabled">
+                <el-switch v-model="form.enabled"></el-switch>
+            </el-form-item>
         </el-form>
         <div class="hx-flex">
             <el-button class="hx-flex-fill" @@click="showDrawer = false">取 消</el-button>

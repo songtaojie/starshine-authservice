@@ -30,6 +30,11 @@ namespace Hx.IdentityServer.Extensions
                 .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(options =>
             {
+                //options.Events.OnRedirectToAccessDenied = (c) =>
+                //{
+                //    return Task.CompletedTask;
+                //};
+                options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/oauth2/accessdenied");
                 options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/oauth2/authorize");
             });
 

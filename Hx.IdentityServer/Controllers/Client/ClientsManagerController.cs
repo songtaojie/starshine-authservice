@@ -65,13 +65,14 @@ namespace Hx.IdentityServer.Controllers.Client
                 resultList.Add(new ClientManagerPageModel
                 {
                     Id = c.Id.ToString(),
+                    Enabled = model.Enabled,
                     ClientId = model.ClientId,
                     ClientName = model.ClientName,
-                    AllowedGrantTypes = string.Join("；", model.AllowedGrantTypes),
-                    AllowedScopes = string.Join("；", model.AllowedScopes),
-                    AllowedCorsOrigins = string.Join("；<br/>", model.AllowedCorsOrigins),
-                    RedirectUris = string.Join("；<br/>", model.RedirectUris),
-                    PostLogoutRedirectUris = string.Join("；<br/>", model.PostLogoutRedirectUris)
+                    AllowedGrantTypes = string.Join(", ", model.AllowedGrantTypes),
+                    AllowedScopes = string.Join(", ", model.AllowedScopes),
+                    AllowedCorsOrigins = string.Join("<br/>", model.AllowedCorsOrigins),
+                    RedirectUris = string.Join("<br/>", model.RedirectUris),
+                    PostLogoutRedirectUris = string.Join("<br/>", model.PostLogoutRedirectUris)
                 });
             });
             var result = new PageModel<ClientManagerPageModel>(resultList, clientResult.TotalCount, clientResult.PageIndex, clientResult.PageSize);
@@ -99,6 +100,7 @@ namespace Hx.IdentityServer.Controllers.Client
             ClientDetailModel detailModel = new ClientDetailModel
             {
                 Id = client.Id.ToString(),
+                Enabled = clientModel.Enabled,
                 ClientId = clientModel.ClientId,
                 ClientName = clientModel.ClientName,
                 ClientSecrets = string.Join(",", clientModel.ClientSecrets.Select(s => s.Value)),
@@ -170,6 +172,7 @@ namespace Hx.IdentityServer.Controllers.Client
                 if (isExist) return Error($"已存在客户端Id[{request.ClientId}]");
                 IdentityServer4.Models.Client client = new IdentityServer4.Models.Client()
                 {
+                    Enabled = request.Enabled,
                     ClientId = request.ClientId,
                     ClientName = request.ClientName,
                     Description = request.Description,
@@ -213,7 +216,7 @@ namespace Hx.IdentityServer.Controllers.Client
                     .FirstOrDefaultAsync(d => d.Id == intId);
                 client.ClientName = request.ClientName;
                 client.Description = request.Description;
-
+                client.Enabled = request.Enabled;
 
                 if (!string.IsNullOrEmpty(request.AllowedCorsOrigins))
                 {
@@ -278,7 +281,7 @@ namespace Hx.IdentityServer.Controllers.Client
                 if (!string.IsNullOrEmpty(request.RedirectUris))
                 {
                     var RedirectUris = new List<IdentityServer4.EntityFramework.Entities.ClientRedirectUri>();
-                    request.RedirectUris.Split(",").Where(s => string.IsNullOrEmpty(s)).ToList().ForEach(s =>
+                    request.RedirectUris.Split(",").Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
                     {
                         RedirectUris.Add(new IdentityServer4.EntityFramework.Entities.ClientRedirectUri()
                         {

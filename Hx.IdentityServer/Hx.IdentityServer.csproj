@@ -25,4 +25,11 @@
     <ProjectReference Include="..\Hx.IdentityServer.Extensions\Hx.IdentityServer.Extensions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Oauth2\Logout.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

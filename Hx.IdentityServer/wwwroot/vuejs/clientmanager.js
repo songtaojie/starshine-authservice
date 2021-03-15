@@ -64,6 +64,7 @@
         //表格
         initFrom() {
             return {
+                enabled:true,
                 clientId: '',
                 clientName: '',
                 clientSecrets: '',

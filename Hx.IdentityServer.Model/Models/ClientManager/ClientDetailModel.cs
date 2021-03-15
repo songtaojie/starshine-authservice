@@ -12,6 +12,11 @@ namespace Hx.IdentityServer.Model.Models.ClientManager
         public string Id { get; set; }
 
         /// <summary>
+        /// 是否启用
+        /// </summary>
+        public bool Enabled { get; set; }
+
+        /// <summary>
         /// 客户端id
         /// </summary>
         public string ClientId { get; set; }
