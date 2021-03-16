@@ -11,7 +11,8 @@ IdentityServer,用户认证中心管理
 
 1. 这里是列表文本 拉取代码(dev-vue分支)
 2.  Appsetting.json中配置下数据库链子字符串ConnectionStrings，例如：
-    使用sqlserver数据库：`
+    使用sqlserver数据库：
+    `
     "ConnectionStrings": {
         "DbType": "sqlserver",
         "DefaultConnection": "Server=.;Database=HxIdentityServer;User ID=sa;Password=123456;MultipleActiveResultSets=True"
@@ -21,7 +22,8 @@ IdentityServer,用户认证中心管理
     "ConnectionStrings": {
     "DbType": "mysql",
     "DefaultConnection": "server=localhost;database=HxIdentityServer;user=root;password=song123"
-    }`
+    }
+    `
 3. 生成迁移文件，用于数据库的生成映射，定位到Hx.IdentityServer.Model文件夹cmd执行如下生成命令（要先安装ef工具dotnet tool install --global dotnet-ef）
     3.1、生成ApplicationDbContext的迁移文件
     dotnet ef --startup-project ../Hx.IdentityServer/ migrations add InitApplicationDb -c ApplicationDbContext
