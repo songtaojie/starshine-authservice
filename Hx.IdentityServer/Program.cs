@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hx.IdentityServer.Common;
 using Hx.IdentityServer.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -48,12 +49,14 @@ namespace Hx.IdentityServer
                     return 1;
                 }
 
-                Log.Information("Starting host...");
+                ConsoleHelper.WriteSuccessLine("应用程序启动成功");
                 host.Run();
                 return 1;
             }
             catch (Exception ex)
             {
+                ConsoleHelper.WriteErrorLine(string.Format("异常消息：{0}", ex.Message));
+                ConsoleHelper.WriteErrorLine(string.Format("堆栈StackTrace：{0}", ex.StackTrace));
                 Log.Fatal(ex, "Host terminated unexpectedly.");
                 return 1;
             }
