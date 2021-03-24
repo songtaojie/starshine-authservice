@@ -19,5 +19,15 @@ namespace Hx.IdentityServer.Common
         ///系统管理员
         /// </summary>
         public const string System = "System";
+
+        /// <summary>
+        ///N
+        /// </summary>
+        public const string No = "N";
+
+        /// <summary>
+        ///Yes
+        /// </summary>
+        public const string Yes = "Y";
     }
 }

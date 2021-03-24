@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -40,7 +41,8 @@ namespace Hx.IdentityServer.Entity
         /// <summary>
         /// 是否删除
         /// </summary>
-        public bool IsDelete { get; set; } = false;
+        [Column(TypeName = "char(1)")]
+        public string IsDeleted { get; set; } = "N";
 
         /// <summary>
         /// 创建时间，即注册时间

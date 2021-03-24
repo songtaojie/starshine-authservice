@@ -61,7 +61,7 @@ namespace Hx.IdentityServer.Controllers
         {
             //没有过滤的记录数
             AjaxResult ajaxResult = new AjaxResult();
-            IQueryable<ApplicationUser> query = _userManager.Users.Where(u=>!u.IsDelete);
+            IQueryable<ApplicationUser> query = _userManager.Users.Where(u=>u.IsDeleted == ConstKey.No);
             //if (!string.IsNullOrEmpty(search))
             //{
             //    query = query.Where(u => u.RealName.Contains(search) || u.UserName.Contains(search));
@@ -118,7 +118,7 @@ namespace Hx.IdentityServer.Controllers
                 };
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (!result.Succeeded) return Error(result.Errors.FirstOrDefault()?.Description);
-                var role = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Code == ConstKey.System);
+                var role = await _roleManager.FindByNameAsync(ConstKey.System);
                 await _userManager.AddClaimsAsync(user, new Claim[]{
                             new Claim(JwtClaimTypes.Name, model.RealName),
                             new Claim(JwtClaimTypes.Email, model.Email),
@@ -177,7 +177,7 @@ namespace Hx.IdentityServer.Controllers
             var userItem = await _userManager.FindByIdAsync(id);
             if (userItem != null)
             {
-                userItem.IsDelete = true;
+                userItem.IsDeleted = ConstKey.Yes;
                 IdentityResult  identityResult = await _userManager.UpdateAsync(userItem);
                 if (!identityResult.Succeeded && identityResult.Errors.Count() > 0)
                 {

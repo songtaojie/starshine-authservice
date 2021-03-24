@@ -24,40 +24,36 @@ namespace Hx.IdentityServer.Model.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(36)")
-                        .HasMaxLength(36);
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreateBy")
-                        .HasColumnType("nvarchar(36)")
-                        .HasMaxLength(36);
-
-                    b.Property<string>("CreateId")
-                        .HasColumnType("nvarchar(36)")
-                        .HasMaxLength(36);
-
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifyBy")
+                    b.Property<string>("Creater")
                         .HasColumnType("nvarchar(36)")
                         .HasMaxLength(36);
 
-                    b.Property<string>("ModifyId")
+                    b.Property<string>("CreaterId")
                         .HasColumnType("nvarchar(36)")
                         .HasMaxLength(36);
 
-                    b.Property<DateTime?>("ModifyTime")
+                    b.Property<string>("IsDeleted")
+                        .HasColumnType("char(1)");
+
+                    b.Property<string>("IsDisabled")
+                        .HasColumnType("char(1)");
+
+                    b.Property<string>("LastModifier")
+                        .HasColumnType("nvarchar(36)")
+                        .HasMaxLength(36);
+
+                    b.Property<string>("LastModifierId")
+                        .HasColumnType("nvarchar(36)")
+                        .HasMaxLength(36);
+
+                    b.Property<DateTime?>("LastModifyTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -117,8 +113,8 @@ namespace Hx.IdentityServer.Model.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
+                    b.Property<string>("IsDeleted")
+                        .HasColumnType("char(1)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

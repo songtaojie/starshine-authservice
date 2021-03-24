@@ -151,11 +151,12 @@ namespace Hx.IdentityServer.Data
 
                     var claims = new List<Claim>
                     {
-                        new Claim(JwtClaimTypes.Name, userItem.UserName),
+                        new Claim(ClaimTypes.Name, userItem.UserName),
+                        new Claim(JwtClaimTypes.Name, userItem.NormalizedUserName),
                         new Claim(JwtClaimTypes.Email, userItem.Email),
                     };
                     //角色Code
-                    claims.AddRange(currentRoleList.Select(r=> new Claim(MyJwtClaimTypes.RoleName,r.Code)));
+                    claims.AddRange(currentRoleList.Select(r=> new Claim(MyJwtClaimTypes.RoleName,r.Name)));
                     //角色id，暂时不添加了,Code和id都是唯一的
                     //claims.AddRange(roleIdList.Select(s => new Claim(JwtClaimTypes.Role, s.ToString())));
                     result = userMgr.AddClaimsAsync(userItem, claims).Result;//表AspNetUserClaims添加数据
@@ -197,8 +198,7 @@ namespace Hx.IdentityServer.Data
                     Age = 30,
                     Birthday = DateTime.Parse("1991-10-10"),
                     Address="北京市",
-                    RealName = "宋子轩",
-                    IsDelete = false
+                    RealName = "宋子轩"
                 },
                 new ApplicationUser
                 {
@@ -209,8 +209,7 @@ namespace Hx.IdentityServer.Data
                     Age = 30,
                     Birthday = DateTime.Parse("1991-10-10"),
                     Address="北京市",
-                    RealName = "宋佳",
-                    IsDelete = false
+                    RealName = "宋佳"
                 }
             };
         }
@@ -221,19 +220,15 @@ namespace Hx.IdentityServer.Data
             {
                 new ApplicationRole
                 { 
-                    Code = ConstKey.System,
-                    Name = "系统管理",
+                    Name = ConstKey.System,
+                    NormalizedName="系统管理",
                     CreateTime=DateTime.Now,
-                    Enabled = true,
-                    IsDeleted = false
                 },
                 new ApplicationRole
                 {
-                    Code = ConstKey.SuperAdmin,
-                    Name = "超级管理员",
+                    Name = ConstKey.SuperAdmin,
+                    NormalizedName = "超级管理员",
                     CreateTime=DateTime.Now,
-                    Enabled = true,
-                    IsDeleted = false
                 }
             };
         }

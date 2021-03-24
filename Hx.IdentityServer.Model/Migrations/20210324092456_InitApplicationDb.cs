@@ -15,17 +15,16 @@ namespace Hx.IdentityServer.Model.Migrations
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Code = table.Column<string>(maxLength: 36, nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<string>(type: "char(1)", nullable: true),
                     Remark = table.Column<string>(maxLength: 1000, nullable: true),
                     OrderSort = table.Column<int>(nullable: false),
-                    Enabled = table.Column<bool>(nullable: false),
-                    CreateId = table.Column<string>(maxLength: 36, nullable: true),
-                    CreateBy = table.Column<string>(maxLength: 36, nullable: true),
+                    IsDisabled = table.Column<string>(type: "char(1)", nullable: true),
+                    CreaterId = table.Column<string>(maxLength: 36, nullable: true),
+                    Creater = table.Column<string>(maxLength: 36, nullable: true),
                     CreateTime = table.Column<DateTime>(nullable: true),
-                    ModifyId = table.Column<string>(maxLength: 36, nullable: true),
-                    ModifyBy = table.Column<string>(maxLength: 36, nullable: true),
-                    ModifyTime = table.Column<DateTime>(nullable: true)
+                    LastModifierId = table.Column<string>(maxLength: 36, nullable: true),
+                    LastModifier = table.Column<string>(maxLength: 36, nullable: true),
+                    LastModifyTime = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,7 +55,7 @@ namespace Hx.IdentityServer.Model.Migrations
                     Age = table.Column<int>(nullable: false),
                     Birthday = table.Column<DateTime>(nullable: false),
                     Address = table.Column<string>(maxLength: 100, nullable: true),
-                    IsDelete = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<string>(type: "char(1)", nullable: true),
                     CreateTime = table.Column<DateTime>(nullable: false),
                     ModifyTime = table.Column<DateTime>(nullable: true)
                 },
