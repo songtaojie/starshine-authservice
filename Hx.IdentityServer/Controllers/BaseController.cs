@@ -32,7 +32,7 @@ namespace Hx.IdentityServer.Controllers
             {
                 if (User.Identity?.IsAuthenticated == true)
                 {
-                    return User.Claims.Any(c => c.Type == MyJwtClaimTypes.RoleName && c.Value == ConstKey.SuperAdmin);
+                    return User.Claims.Any(c => c.Type == IdentityModel.JwtClaimTypes.Role && c.Value == ConstKey.Admin);
                 }
                 return false;
             }

@@ -16,7 +16,7 @@ namespace Hx.IdentityServer.Model.Migrations
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<string>(type: "char(1)", nullable: true),
-                    Remark = table.Column<string>(maxLength: 1000, nullable: true),
+                    Remark = table.Column<string>(maxLength: 200, nullable: true),
                     OrderSort = table.Column<int>(nullable: false),
                     IsDisabled = table.Column<string>(type: "char(1)", nullable: true),
                     CreaterId = table.Column<string>(maxLength: 36, nullable: true),

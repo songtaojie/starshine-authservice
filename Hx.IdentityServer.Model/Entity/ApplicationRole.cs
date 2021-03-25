@@ -16,9 +16,9 @@ namespace Hx.IdentityServer.Entity
         [Column(TypeName = "char(1)")]
         public string IsDeleted { get; set; } = "N";
         /// <summary>
-        /// 备注
+        /// 备注说明
         /// </summary>
-        [MaxLength(1000)]
+        [MaxLength(200)]
         public string Remark { get; set; }
         /// <summary>
         ///排序

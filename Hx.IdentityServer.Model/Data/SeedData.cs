@@ -220,14 +220,14 @@ namespace Hx.IdentityServer.Data
             {
                 new ApplicationRole
                 { 
-                    Name = ConstKey.System,
-                    NormalizedName="系统管理",
+                    Name = ConstKey.Client,
+                    Remark="Api资源权限",
                     CreateTime=DateTime.Now,
                 },
                 new ApplicationRole
                 {
-                    Name = ConstKey.SuperAdmin,
-                    NormalizedName = "超级管理员",
+                    Name = ConstKey.Admin,
+                    Remark = "超级管理员",
                     CreateTime=DateTime.Now,
                 }
             };

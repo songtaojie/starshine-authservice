@@ -99,7 +99,7 @@ namespace Hx.IdentityServer.Controllers
         /// <param name="returnUrl"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = ConstKey.Admin)]
         public async Task<IActionResult> CreateOrUpdate([FromBody]AccountCreateModel model)
         {
             AjaxResult ajaxResult = new AjaxResult();
@@ -112,19 +112,27 @@ namespace Hx.IdentityServer.Controllers
                     UserName = model.UserName,
                     RealName = model.RealName,
                     Sex = model.Sex,
-                    Age = model.Birthday.Value.Year - DateTime.Now.Year,
                     Birthday = model.Birthday.Value,
                     Address = ""
                 };
+                if (model.Birthday.HasValue)
+                {
+                    user.Age = model.Birthday.Value.Year - DateTime.Now.Year;
+                    user.Birthday = model.Birthday.Value;
+                }
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (!result.Succeeded) return Error(result.Errors.FirstOrDefault()?.Description);
-                var role = await _roleManager.FindByNameAsync(ConstKey.System);
+                var role = await _roleManager.FindByNameAsync(ConstKey.Client);
+                // 为账号分配角色
+                if (role != null)
+                {
+                    await _userManager.AddToRoleAsync(user, role.Name);
+                }
                 await _userManager.AddClaimsAsync(user, new Claim[]{
                             new Claim(JwtClaimTypes.Name, model.RealName),
                             new Claim(JwtClaimTypes.Email, model.Email),
                             new Claim(JwtClaimTypes.EmailVerified, "false", ClaimValueTypes.Boolean),
-                            new Claim(JwtClaimTypes.Role, role?.Id),
-                            new Claim(MyJwtClaimTypes.RoleName, ConstKey.System),
+                            new Claim(MyJwtClaimTypes.RoleName, ConstKey.Client),
                         });
                 return Success("添加成功");
             }
@@ -170,7 +178,7 @@ namespace Hx.IdentityServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("account/delete/{id}")]
-        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = ConstKey.Admin)]
         public async Task<JsonResult> Delete(string id)
         {
             AjaxResult ajaxResult = new AjaxResult();

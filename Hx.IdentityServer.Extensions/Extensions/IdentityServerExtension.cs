@@ -68,7 +68,7 @@ namespace Hx.IdentityServer.Extensions
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(ConstKey.SuperAdmin, policy => policy.RequireClaim(MyJwtClaimTypes.RoleName, ConstKey.SuperAdmin));
+                options.AddPolicy(ConstKey.Admin, policy => policy.RequireClaim(MyJwtClaimTypes.RoleName, ConstKey.Admin));
             });
             services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
             return builder;
