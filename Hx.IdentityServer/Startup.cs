@@ -24,6 +24,17 @@ namespace Hx.IdentityServer
         {
             ConsoleHelper.WriteSuccessLine("*****开始ConfigureServices注入服务******");
             //services.AddSameSiteCookiePolicy();
+            services.AddCors(c =>
+            {
+                c.AddPolicy("default",
+                         policy =>
+                         {
+                             policy.AllowAnyOrigin()
+                             .WithMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS")
+                             .AllowAnyHeader();
+                         });
+
+            });
             var mvcBuilder = services.AddControllersWithViews()
                 .AddJsonOptions(json => {
                     json.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
@@ -50,7 +61,7 @@ namespace Hx.IdentityServer
             app.UseCookiePolicy();
             app.UseStaticFiles();
             app.UseRouting();
-            
+            app.UseCors("default");
             app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();

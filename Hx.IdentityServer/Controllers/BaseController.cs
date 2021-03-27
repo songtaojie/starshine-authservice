@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Hx.IdentityServer.Controllers
 {
 
-    [SecurityHeaders]
+    //[SecurityHeaders]
     public class BaseController: Controller
     {
         /// <summary>

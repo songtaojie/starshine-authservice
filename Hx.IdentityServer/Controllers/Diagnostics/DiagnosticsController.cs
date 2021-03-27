@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hx.IdentityServer.Controllers
 {
-    [SecurityHeaders]
+    //[SecurityHeaders]
     [Authorize]
     public class DiagnosticsController : Controller
     {

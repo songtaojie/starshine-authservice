@@ -22,7 +22,7 @@ using Microsoft.Extensions.Options;
 namespace Hx.IdentityServer.Controllers
 {
     [Authorize]
-    [SecurityHeaders]
+    //[SecurityHeaders]
     public class DeviceController : Controller
     {
         private readonly IDeviceFlowInteractionService _interaction;

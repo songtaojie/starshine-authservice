@@ -18,7 +18,7 @@ namespace Hx.IdentityServer.Controllers
     /// <summary>
     /// This sample controller allows a user to revoke grants given to clients
     /// </summary>
-    [SecurityHeaders]
+    //[SecurityHeaders]
     [Authorize]
     public class GrantsController : Controller
     {
