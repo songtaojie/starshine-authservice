@@ -23,18 +23,18 @@ namespace Hx.IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             ConsoleHelper.WriteSuccessLine("*****开始ConfigureServices注入服务******");
-            //services.AddSameSiteCookiePolicy();
-            services.AddCors(c =>
-            {
-                c.AddPolicy("default",
-                         policy =>
-                         {
-                             policy.AllowAnyOrigin()
-                             .WithMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS")
-                             .AllowAnyHeader();
-                         });
+            services.AddSameSiteCookiePolicy();
+            //services.AddCors(c =>
+            //{
+            //    c.AddPolicy("default",
+            //             policy =>
+            //             {
+            //                 policy.AllowAnyOrigin()
+            //                 .WithMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS")
+            //                 .AllowAnyHeader();
+            //             });
 
-            });
+            //});
             var mvcBuilder = services.AddControllersWithViews()
                 .AddJsonOptions(json => {
                     json.JsonSerializerOptions.Converters.Add(new DateTimeConverter());

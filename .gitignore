@@ -264,3 +264,4 @@ __pycache__/
 /Hx.IdentityServer/appsettings.Production.json
 *.Development.json
 *.Production.json
+*.jwk

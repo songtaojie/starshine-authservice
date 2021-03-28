@@ -72,7 +72,7 @@ namespace Hx.IdentityServer
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("https://*:5002");
+                    .UseUrls("http://*:5002");
                 });
     }
 }

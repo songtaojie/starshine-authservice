@@ -120,7 +120,7 @@ namespace Hx.IdentityServer.Model
                     },
                     PostLogoutRedirectUris = { "http://vueadmin.neters.club","http://localhost:8091" },
                     AllowedCorsOrigins =     { "http://vueadmin.neters.club","http://localhost:8091"  },
-
+                    
                     AccessTokenLifetime=3600,
 
                     AllowedScopes = {
