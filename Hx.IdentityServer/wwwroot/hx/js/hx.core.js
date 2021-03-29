@@ -160,10 +160,10 @@
             }
             return object;
         },
-        Ext.apply = function (object, config, defaults) {
+        apply = function (object, config, defaults) {
             if (object) {
                 if (defaults) {
-                    Ext.apply(object, defaults);
+                    _hxCore.apply(object, defaults);
                 }
 
                 if (config && typeof config === 'object') {
@@ -185,7 +185,7 @@
             }
 
             return object;
-        };
+        },
         /**
          * ajax成功时的处理
          * @param {any} r ajax响应的信息

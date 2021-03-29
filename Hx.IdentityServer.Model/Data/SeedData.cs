@@ -24,12 +24,12 @@ namespace Hx.IdentityServer.Data
         public static void EnsureSeedData(IServiceProvider serviceProvider)
         {
             //迁移，在Hx.IdentityServer.Model文件路径中执行迁移，指定启动项目
-            //  dotnet ef --startup-project ../Hx.IdentityServer/ migrations remove -c ApplicationDbContext
-            //dotnet ef --startup-project ../Hx.IdentityServer/ migrations add InitApplicationDb -c ApplicationDbContext
-            // dotnet ef --startup-project ../Hx.IdentityServer/ migrations remove -c PersistedGrantDbContext
-            // dotnet ef --startup-project ../Hx.IdentityServer/ migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
-            // dotnet ef --startup-project ../Hx.IdentityServer/ migrations remove -c ConfigurationDbContext
-            // dotnet ef --startup-project ../Hx.IdentityServer/ migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
+            //  dotnet ef -s ../Hx.IdentityServer migrations remove -c ApplicationDbContext
+            //dotnet ef -s ../Hx.IdentityServer migrations add InitApplicationDb -c ApplicationDbContext
+            // dotnet ef -s ../Hx.IdentityServer migrations remove -c PersistedGrantDbContext
+            // dotnet ef -s ../Hx.IdentityServer migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
+            // dotnet ef -s ../Hx.IdentityServer migrations remove -c ConfigurationDbContext
+            // dotnet ef -s ../Hx.IdentityServer migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
             ConsoleHelper.WriteInfoLine("Seeding database...");
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
