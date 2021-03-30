@@ -20,7 +20,6 @@ namespace Hx.IdentityServer.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
             //builder.Entity<ApplicationUserRole>(userRole =>
             //{
             //    userRole.HasKey(ur => new { ur.UserId, ur.RoleId });

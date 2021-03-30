@@ -121,7 +121,7 @@ namespace Hx.IdentityServer.Controllers.Client
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Policy = ConstKey.Admin)]
+        [Authorize(Policy = ConstKey.SuperAdmin)]
         public async Task<IActionResult> AddOrUpdate(ClientCreateModel request)
         {
             if (request == null) return Error("请求参数不正确");
@@ -140,7 +140,7 @@ namespace Hx.IdentityServer.Controllers.Client
         /// </summary>
         /// <returns></returns>
         [HttpPost("{id}")]
-        [Authorize(Policy = ConstKey.Admin)]
+        [Authorize(Policy = ConstKey.SuperAdmin)]
         public async Task<IActionResult> Delete(string id)
         {
             int indId = Convert.ToInt32(id);

@@ -58,5 +58,43 @@ namespace Hx.IdentityServer.Entity
         /// </summary>
         public DateTime? LastModifyTime { get; set; } = DateTime.Now;
 
+        #region 操作
+        /// <summary>
+        /// 设置创建者信息
+        /// </summary>
+        /// <param name="createrId">创建者Id</param>
+        /// <param name="creater">创建者名称</param>
+        public void SetCreater(string createrId,string creater)
+        {
+            this.CreaterId = createrId;
+            this.Creater = creater;
+            this.CreateTime = DateTime.Now;
+            SetModifier(createrId, creater);
+        }
+
+        /// <summary>
+        /// 设置创建者信息
+        /// </summary>
+        /// <param name="modifierId">更新者Id</param>
+        /// <param name="modifier">更新者名称</param>
+        public void SetModifier(string modifierId, string modifier)
+        {
+            this.LastModifierId = modifierId;
+            this.LastModifier = modifier;
+            this.LastModifyTime = DateTime.Now;
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="deleterId">设置删除者id</param>
+        /// <param name="deleter">删除者名称</param>
+        public void SetDelete(string deleterId, string deleter)
+        {
+            this.Deleted = "Y";
+            SetModifier(deleterId, deleter);
+        }
+        #endregion
+
     }
 }

@@ -155,7 +155,7 @@
         },
         onEdit(row) {
             var that = this;
-            var url = '/account/GetDetail/' + row.id;
+            var url = '/account/get/' + row.id;
             axios.get(url)
                 .then(function (data) {
                     that.form = data;

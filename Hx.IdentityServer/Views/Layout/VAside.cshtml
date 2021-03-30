@@ -19,11 +19,15 @@
         <el-menu default-active="@active" class="hx-aside-menu" unique-opened
                  background-color="#3b3e47" text-color="#fff" active-text-color="#ffd04b"
                  :collapse="isCollapse" @@select="onMenuSelect">
-            <el-menu-item  index="/" >
+            <el-menu-item index="/">
                 <i class="el-icon-user"></i>
                 <span slot="title">用户管理</span>
             </el-menu-item>
-            <el-menu-item index="/clientsmanager/index" >
+            <el-menu-item index="/role">
+                <i class="el-icon-menu"></i>
+                <span slot="title">角色管理</span>
+            </el-menu-item>
+            <el-menu-item index="/clientsmanager/index">
                 <i class="el-icon-menu"></i>
                 <span slot="title">客户端管理</span>
             </el-menu-item>

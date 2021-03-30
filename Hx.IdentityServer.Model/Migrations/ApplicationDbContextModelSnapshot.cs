@@ -39,10 +39,14 @@ namespace Hx.IdentityServer.Model.Migrations
                         .HasColumnType("nvarchar(36)")
                         .HasMaxLength(36);
 
-                    b.Property<string>("IsDeleted")
+                    b.Property<string>("Deleted")
                         .HasColumnType("char(1)");
 
-                    b.Property<string>("IsDisabled")
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Enabled")
                         .HasColumnType("char(1)");
 
                     b.Property<string>("LastModifier")
@@ -66,10 +70,6 @@ namespace Hx.IdentityServer.Model.Migrations
 
                     b.Property<int>("OrderSort")
                         .HasColumnType("int");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 
@@ -106,15 +106,15 @@ namespace Hx.IdentityServer.Model.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Deleted")
+                        .HasColumnType("char(1)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("IsDeleted")
-                        .HasColumnType("char(1)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

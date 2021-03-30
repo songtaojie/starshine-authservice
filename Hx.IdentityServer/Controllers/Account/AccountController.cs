@@ -4,6 +4,7 @@
 
 using Hx.IdentityServer.Common;
 using Hx.IdentityServer.Controllers;
+using Hx.IdentityServer.Data;
 using Hx.IdentityServer.Entity;
 using Hx.IdentityServer.Model;
 using Hx.IdentityServer.Model.Account;
@@ -37,12 +38,13 @@ namespace Hx.IdentityServer.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-
+        private readonly ApplicationDbContext _applicationDb;
         public AccountController(UserManager<ApplicationUser> userManager, 
-            RoleManager<ApplicationRole> roleManager)
+            RoleManager<ApplicationRole> roleManager, ApplicationDbContext  applicationDb)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _applicationDb = applicationDb;
         }
 
         #region 用户相关的操作
@@ -57,17 +59,18 @@ namespace Hx.IdentityServer.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> QueryUserPage([FromBody]UserPageParam param)
+        public async Task<IActionResult> QueryUserPage([FromBody]AccountPageParam param)
         {
             //没有过滤的记录数
             AjaxResult ajaxResult = new AjaxResult();
-            IQueryable<ApplicationUser> query = _userManager.Users.Where(u=>u.IsDeleted == ConstKey.No);
+            IQueryable<ApplicationUser> query = _userManager.Users
+                .Where(u=>u.Deleted == ConstKey.No);
             //if (!string.IsNullOrEmpty(search))
             //{
             //    query = query.Where(u => u.RealName.Contains(search) || u.UserName.Contains(search));
             //}
             var data = await query.OrderByDescending(u => u.CreateTime)
-                .Select(u => new UserPageModel
+                .Select(u => new AccountPageModel
                 {
                     Id = u.Id,
                     UserName = u.UserName,
@@ -76,6 +79,21 @@ namespace Hx.IdentityServer.Controllers
                     AccessFailedCount = u.AccessFailedCount
                 })
                 .ToOrderAndPageListAsync(param);
+            var userIds = data.Items.Select(u => u.Id).ToArray();
+            //获取查询结果的所有角色
+            var roles = await (from r in _applicationDb.Roles.AsNoTracking()
+                               join ur in _applicationDb.UserRoles.AsNoTracking() on r.Id equals ur.RoleId
+                               where r.Deleted == ConstKey.No && userIds.Contains(ur.UserId)
+                               select new
+                               {
+                                   ur.UserId,
+                                   ur.RoleId,
+                                   r.Description
+                               }).ToListAsync();
+            data.Items.ForEach(u =>
+            {
+                u.RoleName = string.Join(",", roles.Where(r => r.UserId == u.Id).Select(r=>r.Description)) ;
+            });
             ajaxResult.Data = data;
             return Json(ajaxResult);
         }
@@ -99,7 +117,7 @@ namespace Hx.IdentityServer.Controllers
         /// <param name="returnUrl"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Policy = ConstKey.Admin)]
+        [Authorize(Policy = ConstKey.SuperAdmin)]
         public async Task<IActionResult> CreateOrUpdate([FromBody]AccountCreateModel model)
         {
             AjaxResult ajaxResult = new AjaxResult();
@@ -122,17 +140,16 @@ namespace Hx.IdentityServer.Controllers
                 }
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (!result.Succeeded) return Error(result.Errors.FirstOrDefault()?.Description);
-                var role = await _roleManager.FindByNameAsync(ConstKey.Client);
-                // 为账号分配角色
-                if (role != null)
-                {
-                    await _userManager.AddToRoleAsync(user, role.Name);
-                }
+                //var role = await _roleManager.FindByNameAsync(ConstKey.Client);
+                //// 为账号分配角色
+                //if (role != null)
+                //{
+                //    await _userManager.AddToRoleAsync(user, role.Name);
+                //}
                 await _userManager.AddClaimsAsync(user, new Claim[]{
                             new Claim(JwtClaimTypes.Name, model.RealName),
                             new Claim(JwtClaimTypes.Email, model.Email),
-                            new Claim(JwtClaimTypes.EmailVerified, "false", ClaimValueTypes.Boolean),
-                            new Claim(MyJwtClaimTypes.RoleName, ConstKey.Client),
+                            new Claim(JwtClaimTypes.EmailVerified, "false", ClaimValueTypes.Boolean)
                         });
                 return Success("添加成功");
             }
@@ -153,8 +170,8 @@ namespace Hx.IdentityServer.Controllers
         /// </summary>
         /// <param name="id">用户id</param>
         /// <returns></returns>
-        [HttpGet("account/getdetail/{id}")]
-        public async Task<IActionResult> GetDetail(string id)
+        [HttpGet("account/get/{id}")]
+        public async Task<IActionResult> Get(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return Error("未找到用户信息");
@@ -178,14 +195,14 @@ namespace Hx.IdentityServer.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("account/delete/{id}")]
-        [Authorize(Policy = ConstKey.Admin)]
+        [Authorize(Policy = ConstKey.SuperAdmin)]
         public async Task<JsonResult> Delete(string id)
         {
             AjaxResult ajaxResult = new AjaxResult();
             var userItem = await _userManager.FindByIdAsync(id);
             if (userItem != null)
             {
-                userItem.IsDeleted = ConstKey.Yes;
+                userItem.Deleted = ConstKey.Yes;
                 IdentityResult  identityResult = await _userManager.UpdateAsync(userItem);
                 if (!identityResult.Succeeded && identityResult.Errors.Count() > 0)
                 {

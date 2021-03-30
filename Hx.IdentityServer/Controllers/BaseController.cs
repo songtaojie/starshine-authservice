@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Hx.IdentityServer.Controllers
@@ -32,9 +33,34 @@ namespace Hx.IdentityServer.Controllers
             {
                 if (User.Identity?.IsAuthenticated == true)
                 {
-                    return User.Claims.Any(c => c.Type == IdentityModel.JwtClaimTypes.Role && c.Value == ConstKey.Admin);
+                    return User.Claims.Any(c => c.Type == IdentityModel.JwtClaimTypes.Role && c.Value == ConstKey.SuperAdmin);
                 }
                 return false;
+            }
+        }
+        /// <summary>
+        /// 用户id
+        /// </summary>
+        public string UserId
+        {
+            get
+            {
+                if (IsAuthenticated)
+                {
+                    var claim = User.Claims.FirstOrDefault(c => c.Type == IdentityModel.JwtClaimTypes.Subject);
+                    return claim?.Value;
+                }
+                return string.Empty;
+            }
+        }
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public string UserName
+        {
+            get
+            {
+                return User.Identity?.Name;
             }
         }
 

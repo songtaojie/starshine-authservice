@@ -8,22 +8,25 @@
     {
         <el-button class="hx-mb-2" type="primary" @@click="onAdd">添加用户</el-button>
     }
-    <el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
-        <el-table-column prop="userName" label="用户名" width="180">
-        </el-table-column>
-        <el-table-column prop="realName" label="真实姓名" width="180">
-        </el-table-column>
-        <el-table-column prop="createTime" label="创建时间">
-        </el-table-column>
-        <el-table-column prop="accessFailedCount" label="失败次数">
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="200"  v-if="@(isSuperAdmin?"true":"false")"  align="center">
-            <template slot-scope="scope">
-                <el-button size="mini" @@click="onEdit(scope.row)">编辑</el-button>
-                <el-button type="danger" size="mini" @@click="handleDelete(scope.row)">删除</el-button>
-            </template>
-        </el-table-column>
-    </el-table>
+<el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
+    <el-table-column prop="userName" label="用户名" width="180" header-align="center">
+    </el-table-column>
+    <el-table-column prop="realName" label="真实姓名" width="180" header-align="center">
+    </el-table-column>
+    <el-table-column prop="roleName" label="角色" header-align="center">
+    </el-table-column>
+    <el-table-column prop="createTime" label="创建时间" width="180"  header-align="center">
+    </el-table-column>
+    <el-table-column prop="accessFailedCount" label="失败次数" width="80"  header-align="center">
+    </el-table-column>
+    <el-table-column fixed="right" label="操作" width="300" v-if="@(isSuperAdmin?"true":"false")" align="center" >
+        <template slot-scope="scope">
+            <el-button size="mini" @@click="handleRole(scope.row)">配置角色</el-button>
+            <el-button size="mini" @@click="onEdit(scope.row)">编辑</el-button>
+            <el-button type="danger" size="mini" @@click="handleDelete(scope.row)">删除</el-button>
+        </template>
+    </el-table-column>
+</el-table>
     <div class="hx-float-right">
         <el-pagination @@current-change="handleCurrentChange"
                        :current-page.sync="queryParam.pageIndex"
@@ -37,5 +40,5 @@
 </div>
 
 @section scripts{
-    <script src="~/vuejs/users.js"></script>
+    <script src="~/vuejs/account.js"></script>
 }

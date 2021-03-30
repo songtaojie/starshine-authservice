@@ -13,10 +13,19 @@ namespace Hx.IdentityServer.Model.Account
         /// </summary>
         public string Id { get; set; }
        
+        /// <summary>
+        /// 真实姓名
+        /// </summary>
         public string RealName { get; set; }
        
+        /// <summary>
+        /// 用户名
+        /// </summary>
         public string UserName { get; set; }
        
+        /// <summary>
+        /// 邮箱
+        /// </summary>
         public string Email { get; set; }
 
         /// <summary>
@@ -29,10 +38,19 @@ namespace Hx.IdentityServer.Model.Account
         /// </summary>
         public string Password { get; set; }
 
+        /// <summary>
+        /// 确认密码
+        /// </summary>
         public string ConfirmPassword { get; set; }
 
+        /// <summary>
+        /// 性别
+        /// </summary>
         public string Sex { get; set; }
 
+        /// <summary>
+        /// 生日
+        /// </summary>
         public DateTime? Birthday { get; set; } = DateTime.Now;
      
     }

@@ -23,13 +23,13 @@ namespace Hx.IdentityServer.Data
     {
         public static void EnsureSeedData(IServiceProvider serviceProvider)
         {
-            //迁移，在Hx.IdentityServer.Model文件路径中执行迁移，指定启动项目
-            //  dotnet ef -s ../Hx.IdentityServer migrations remove -c ApplicationDbContext
-            //dotnet ef -s ../Hx.IdentityServer migrations add InitApplicationDb -c ApplicationDbContext
-            // dotnet ef -s ../Hx.IdentityServer migrations remove -c PersistedGrantDbContext
-            // dotnet ef -s ../Hx.IdentityServer migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
-            // dotnet ef -s ../Hx.IdentityServer migrations remove -c ConfigurationDbContext
-            // dotnet ef -s ../Hx.IdentityServer migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
+            //迁移，在解决方案文件路径中执行迁移，指定启动项目，和迁移项目
+            //dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitApplicationDb -c ApplicationDbContext
+            //  dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations remove -c ApplicationDbContext
+            // dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
+            // dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations remove -c PersistedGrantDbContext
+            // dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
+            // dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations remove -c ConfigurationDbContext
             ConsoleHelper.WriteInfoLine("Seeding database...");
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
@@ -151,8 +151,7 @@ namespace Hx.IdentityServer.Data
 
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Name, userItem.UserName),
-                        new Claim(JwtClaimTypes.Name, userItem.NormalizedUserName),
+                        new Claim(JwtClaimTypes.Name, userItem.UserName),
                         new Claim(JwtClaimTypes.Email, userItem.Email),
                     };
                     //角色Code
@@ -221,13 +220,13 @@ namespace Hx.IdentityServer.Data
                 new ApplicationRole
                 { 
                     Name = ConstKey.Client,
-                    Remark="Api资源权限",
+                    Description="Api资源权限",
                     CreateTime=DateTime.Now,
                 },
                 new ApplicationRole
                 {
-                    Name = ConstKey.Admin,
-                    Remark = "超级管理员",
+                    Name = ConstKey.SuperAdmin,
+                    Description = "超级管理员",
                     CreateTime=DateTime.Now,
                 }
             };

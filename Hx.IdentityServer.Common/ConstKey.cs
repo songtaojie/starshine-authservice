@@ -13,7 +13,7 @@ namespace Hx.IdentityServer.Common
         /// <summary>
         /// 超级管理员权限
         /// </summary>
-        public const string Admin = "Admin";
+        public const string SuperAdmin = "SuperAdmin";
 
         /// <summary>
         ///客户端
