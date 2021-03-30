@@ -14,21 +14,21 @@ namespace Hx.IdentityServer.Entity
         /// 是否删除
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string IsDeleted { get; set; } = "N";
+        public string Deleted { get; set; } = "N";
         /// <summary>
-        /// 备注说明
+        /// 描述说明
         /// </summary>
         [MaxLength(200)]
-        public string Remark { get; set; }
+        public string Description { get; set; }
         /// <summary>
         ///排序
         /// </summary>
         public int OrderSort { get; set; }
         /// <summary>
-        /// 是否禁用
+        /// 是否可用
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string IsDisabled { get; set; } = "N";
+        public string Enabled { get; set; } = "Y";
         /// <summary>
         /// 创建ID
         /// </summary>

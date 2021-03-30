@@ -42,7 +42,7 @@ namespace Hx.IdentityServer.Entity
         /// 是否删除
         /// </summary>
         [Column(TypeName = "char(1)")]
-        public string IsDeleted { get; set; } = "N";
+        public string Deleted { get; set; } = "N";
 
         /// <summary>
         /// 创建时间，即注册时间
