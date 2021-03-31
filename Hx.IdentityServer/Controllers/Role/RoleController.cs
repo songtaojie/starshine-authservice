@@ -42,12 +42,33 @@ namespace Hx.IdentityServer.Controllers.Role
         }
 
         /// <summary>
+        /// 数据列表，不分页的
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> GetList()
+        {
+            var list = await _roleManager.Roles.Where(r => r.Deleted == ConstKey.No)
+                .OrderByDescending(r => r.CreateTime)
+                .OrderBy(r => r.OrderSort)
+                .Select(r => new RolePageModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Description = r.Description,
+                    Creater = r.Creater,
+                    CreateTime = r.CreateTime,
+                    Enabled = r.Enabled
+                }).ToListAsync();
+            return Success(list);
+        }
+
+        /// <summary>
         /// 数据列表
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> GetPage([FromBody] RolePageParam param)
         {
             //没有过滤的记录数

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Hx.IdentityServer.Model.Account
@@ -53,5 +54,22 @@ namespace Hx.IdentityServer.Model.Account
         /// </summary>
         public DateTime? Birthday { get; set; } = DateTime.Now;
      
+    }
+
+    /// <summary>
+    /// 添加角色model
+    /// </summary>
+    public class AccountAddRoleModel
+    {
+        /// <summary>
+        /// 用户id
+        /// </summary>
+        public string UserId { get; set; }
+
+        /// <summary>
+        /// 角色name的集合
+        /// </summary>
+        public List<string> RoleNames { get; set; } 
+
     }
 }

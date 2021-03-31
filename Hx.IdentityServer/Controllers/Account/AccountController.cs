@@ -59,7 +59,7 @@ namespace Hx.IdentityServer.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> QueryUserPage([FromBody]AccountPageParam param)
+        public async Task<IActionResult> GetPage([FromBody]AccountPageParam param)
         {
             //没有过滤的记录数
             AjaxResult ajaxResult = new AjaxResult();
@@ -164,6 +164,54 @@ namespace Hx.IdentityServer.Controllers
                 return Success("修改成功");
             }
         }
+
+        /// <summary>
+        /// 获取用户的角色
+        /// </summary>
+        /// <param name="userId">用户id</param>
+        /// <returns></returns>
+        [HttpGet("account/getrole/{userId}")]
+        public async Task<IActionResult> GetRole(string userId)
+        {
+            var user = new ApplicationUser()
+            {
+                Id = userId
+            };
+            var roleNameList = await _userManager.GetRolesAsync(user);
+            return Success(roleNameList);
+        }
+
+        /// <summary>
+        /// 获取用户名明细信息
+        /// </summary>
+        /// <param name="id">用户id</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Authorize(Policy = ConstKey.SuperAdmin)]
+        public async Task<IActionResult> AddRole([FromBody] AccountAddRoleModel model)
+        {
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null) return Error("未找到用户信息");
+            try
+            {
+                using var tran = await _applicationDb.Database.BeginTransactionAsync();
+                var roleList = await _userManager.GetRolesAsync(user);
+                var identityResult = await _userManager.RemoveFromRolesAsync(user, roleList);
+                if (!identityResult.Succeeded) return Error(identityResult.Errors.FirstOrDefault()?.Description);
+                if (model.RoleNames != null || model.RoleNames.Count > 0)
+                {
+                    identityResult = await _userManager.AddToRolesAsync(user, model.RoleNames);
+                    if (!identityResult.Succeeded) return Error(identityResult.Errors.FirstOrDefault()?.Description);
+                }
+                await tran.CommitAsync();
+            }
+            catch (Exception e)
+            {
+                return Error(e.Message);
+            }
+            return Success("配置角色成功");
+        }
+
 
         /// <summary>
         /// 获取用户名明细信息

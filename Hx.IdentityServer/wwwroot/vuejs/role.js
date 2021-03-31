@@ -32,7 +32,7 @@
                             type: 'success',
                             message: '删除成功!'
                         });
-                        that.getPageList()
+                        that.getPage()
                     })
                     .catch(function (error) {
                         if (error.data) {
@@ -48,9 +48,9 @@
         },
         handleCurrentChange(val) {
             this.queryParam.pageIndex = val;
-            this.getPageList();
+            this.getPage();
         },
-        getPageList() {
+        getPage() {
             var that = this
             axios.post('/role/getpage', that.queryParam)
                 .then(function (data) {
@@ -112,7 +112,7 @@
                             });
                             that.loading = false
                             that.showDrawer = false
-                            that.getPageList()
+                            that.getPage()
                         })
                         .catch(function (error) {
                             that.loading = false
@@ -152,6 +152,6 @@
         }
     },
     created() {
-        this.getPageList();
+        this.getPage();
     }
 })

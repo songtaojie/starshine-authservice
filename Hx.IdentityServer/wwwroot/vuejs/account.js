@@ -66,8 +66,13 @@
                 pageSize: 1
             },
             //表格
+            dialogVisible: false,
+            roleList:[],
             isAdd:true,
             form: this.initFrom(),
+            roleForm: {
+                roleNames:[]
+            },
             remoteRuleCache: {},
             addRules: {
                 userName: [
@@ -131,7 +136,7 @@
         },
         getPageList() {
             var that = this
-            axios.post('/account/queryuserpage', that.queryParam)
+            axios.post('/account/getpage', that.queryParam)
                 .then(function (data) {
                     that.tableData = data.items
                     that.totalCount = data.totalCount
@@ -206,6 +211,38 @@
                 this.form = this.initFrom();
                 this.$refs.ruleForm.resetFields();
             }
+        },
+        handleRole(row) {
+            var that = this;
+            that.roleForm.userId = row.id;
+            that.getRole(row.id);
+            that.getRoleList();
+            that.dialogVisible = true
+        },
+        getRole(userId) {
+            var that = this
+            axios.get('/account/getrole/' + userId)
+                .then((data) => {
+                    that.roleForm.roleNames = data
+                })
+        },
+        getRoleList() {
+            var that = this
+            axios.post('/role/getList')
+                .then(function (data) {
+                    that.roleList = data
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        handleAddRole() {
+            var that = this
+            axios.post('/account/addrole', that.roleForm)
+                .then(() => {
+                    that.dialogVisible = false;
+                    that.getPageList();
+                })
         }
     },
     created() {
