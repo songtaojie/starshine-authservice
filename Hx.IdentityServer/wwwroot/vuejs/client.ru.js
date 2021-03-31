@@ -25,7 +25,7 @@
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                var url = '/clientsmanager/delete/' + row.id
+                var url = '/client/delete/' + row.id
                 axios.post(url)
                     .then(function (response) {
                         that.$message({
@@ -52,7 +52,7 @@
         },
         getPageList() {
             var that = this
-            axios.post('/clientsmanager/querypage', that.queryParam)
+            axios.post('/client/GetRuPage', that.queryParam)
                 .then(function (data) {
                     that.tableData = data.items
                     that.totalCount = data.totalCount
@@ -64,14 +64,9 @@
         //表格
         initFrom() {
             return {
-                enabled:true,
+                id:'',
                 clientId: '',
                 clientName: '',
-                clientSecrets: '',
-                description: '',
-                allowedGrantTypes: '',
-                allowedScopes: '',
-                allowedCorsOrigins: '',
                 redirectUris: '',
                 postLogoutRedirectUris: ''
             }
@@ -79,11 +74,13 @@
         onAdd() {
             this.isAdd = true;
             this.showDrawer = true;
-            this.$refs.ruleForm.resetFields();
+            if (this.$refs.ruleForm) {
+                this.$refs.ruleForm.resetFields();
+            }
         },
         onEdit(row) {
             var that = this;
-            var url = '/clientsmanager/get/' + row.id;
+            var url = '/client/get/' + row.id;
             axios.get(url)
                 .then(function (data) {
                     that.form = data;
@@ -102,7 +99,7 @@
         //添加编辑
         handleSubmit(formName) {
             var that = this,
-                url = '/clientsmanager/addorupdate';
+                url = '/client/addorupdate';
             if (that.loading) return;
             this.$refs[formName].validate(valid => {
                 if (valid) {

@@ -20,12 +20,12 @@
     methods: {
         handleDelete(row) {
             var that = this
-            that.$confirm('确定删除当前Api资源?', '提示', {
+            that.$confirm('确定删除当前客户端管理?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                var url = '/apiresource/delete/' + row.id
+                var url = '/client/delete/' + row.id
                 axios.post(url)
                     .then(function (response) {
                         that.$message({
@@ -52,7 +52,7 @@
         },
         getPageList() {
             var that = this
-            axios.post('/apiresource/getpage', that.queryParam)
+            axios.post('/client/GetScPage', that.queryParam)
                 .then(function (data) {
                     that.tableData = data.items
                     that.totalCount = data.totalCount
@@ -64,20 +64,26 @@
         //表格
         initFrom() {
             return {
-                name: '',
-                displayName: '',
+                enabled: true,
+                clientId: '',
+                clientName: '',
+                clientSecrets: '',
                 description: '',
-                userClaims: '',
-                enabled:true
+                allowedGrantTypes: '',
+                allowedScopes: '',
+                allowedCorsOrigins: '',
+                redirectUris: '',
+                postLogoutRedirectUris: ''
             }
         },
         onAdd() {
             this.isAdd = true;
             this.showDrawer = true;
+            this.$refs.ruleForm.resetFields();
         },
         onEdit(row) {
             var that = this;
-            var url = '/apiresource/get/' + row.id;
+            var url = '/client/get/' + row.id;
             axios.get(url)
                 .then(function (data) {
                     that.form = data;
@@ -96,7 +102,7 @@
         //添加编辑
         handleSubmit(formName) {
             var that = this,
-                url = '/apiresource/addorupdate';
+                url = '/client/addorupdate';
             if (that.loading) return;
             this.$refs[formName].validate(valid => {
                 if (valid) {

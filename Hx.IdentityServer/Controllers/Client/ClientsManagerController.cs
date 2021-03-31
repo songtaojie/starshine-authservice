@@ -16,8 +16,9 @@ using System.Threading.Tasks;
 
 namespace Hx.IdentityServer.Controllers.Client
 {
-    [Route("[controller]/[action]")]
+    [Route("client/[action]")]
     [ApiController]
+    [Authorize]
     public class ClientsManagerController : BaseController
     {
         private readonly ConfigurationDbContext _configurationDb;
@@ -33,6 +34,7 @@ namespace Hx.IdentityServer.Controllers.Client
         /// <returns></returns>
         [HttpGet]
         [Authorize]
+        [Route("~/client")]
         public IActionResult Index()
         {
             ViewData["IsSuperAdmin"] = IsSuperAdmin;
@@ -45,8 +47,7 @@ namespace Hx.IdentityServer.Controllers.Client
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> QueryPage([FromBody] ClientManagerPageParam param)
+        public async Task<IActionResult> GetPage([FromBody] ClientManagerPageParam param)
         {
             //没有过滤的记录数
             var query = _configurationDb.Clients
@@ -303,5 +304,112 @@ namespace Hx.IdentityServer.Controllers.Client
         }
         #endregion
 
+
+        #region 作用域和允许跨域
+        /// <summary>
+        /// 数据列表页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Authorize]
+        [Route("~/client/sc")]
+        public IActionResult ScIndex()
+        {
+            ViewData["IsSuperAdmin"] = IsSuperAdmin;
+            return View();
+        }
+
+        /// <summary>
+        /// 作用域和允许跨域的数据列表
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> GetScPage([FromBody] ClientManagerPageParam param)
+        {
+            //没有过滤的记录数
+            var query = _configurationDb.Clients
+              .Include(d => d.AllowedScopes)
+              .Include(d => d.AllowedCorsOrigins);
+            var clientResult = await query.Where(c=>c.Enabled)
+                .OrderByDescending(c => c.Created)
+                .Select(c => c)
+                .ToOrderAndPageListAsync(param);
+            var resultList = new List<ClientManagerPageModel>();
+            clientResult.Items.ForEach(c =>
+            {
+                var model = c.ToModel();
+                resultList.Add(new ClientManagerPageModel
+                {
+                    Id = c.Id.ToString(),
+                    ClientId = model.ClientId,
+                    ClientName = model.ClientName,
+                    AllowedScopes = GetStrong(model.AllowedScopes),
+                    AllowedCorsOrigins = GetStrong(model.AllowedCorsOrigins)
+                });
+            });
+            var result = new PageModel<ClientManagerPageModel>(resultList, clientResult.TotalCount, clientResult.PageIndex, clientResult.PageSize);
+            return Success(result);
+        }
+        private string GetStrong(IEnumerable<string> list)
+        {
+            var strongList = list.Select((s, i) =>
+            {
+                if (i % 2 == 0) return s;
+                return string.Format("<strong>{0}</strong>", s);
+            });
+            return string.Join(", ", strongList);
+        }
+        #endregion
+
+
+        #region 回调地址/退出回调
+
+        /// <summary>
+        /// 数据列表页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Authorize]
+        [Route("~/client/ru")]
+        public IActionResult RuIndex()
+        {
+            ViewData["IsSuperAdmin"] = IsSuperAdmin;
+            return View();
+        }
+
+        /// <summary>
+        /// 作用域和允许跨域的数据列表
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> GetRuPage([FromBody] ClientManagerPageParam param)
+        {
+            //没有过滤的记录数
+            var query = _configurationDb.Clients
+              .Include(d => d.RedirectUris)
+              .Include(d => d.PostLogoutRedirectUris);
+            var clientResult = await query.Where(c => c.Enabled)
+                .OrderByDescending(c => c.Created)
+                .Select(c => c)
+                .ToOrderAndPageListAsync(param);
+            var resultList = new List<ClientManagerPageModel>();
+            clientResult.Items.ForEach(c =>
+            {
+                var model = c.ToModel();
+                resultList.Add(new ClientManagerPageModel
+                {
+                    Id = c.Id.ToString(),
+                    ClientId = model.ClientId,
+                    ClientName = model.ClientName,
+                    RedirectUris = GetStrong(model.RedirectUris),
+                    PostLogoutRedirectUris = GetStrong(model.PostLogoutRedirectUris)
+                });
+            });
+            var result = new PageModel<ClientManagerPageModel>(resultList, clientResult.TotalCount, clientResult.PageIndex, clientResult.PageSize);
+            return Success(result);
+        }
+        #endregion
     }
 }

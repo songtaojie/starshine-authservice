@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Hx.IdentityServer.Controllers.ApiResources
 {
-    [Route("[controller]/[action]")]
+    [Route("apiresource/[action]")]
     [ApiController]
     public class ApiResourcesController:BaseController
     {
@@ -31,6 +31,7 @@ namespace Hx.IdentityServer.Controllers.ApiResources
         /// <returns></returns>
         [HttpGet]
         [Authorize]
+        [Route("~/apiresource")]
         public IActionResult Index()
         {
             ViewData["IsSuperAdmin"] = IsSuperAdmin;
@@ -44,7 +45,7 @@ namespace Hx.IdentityServer.Controllers.ApiResources
         /// <returns></returns>
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> QueryPage(ApiResourcePageParam param)
+        public async Task<IActionResult> GetPage(ApiResourcePageParam param)
         {
             //没有过滤的记录数
             var query = _configurationDb.ApiResources
