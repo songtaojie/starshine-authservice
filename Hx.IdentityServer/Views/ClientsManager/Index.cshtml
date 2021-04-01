@@ -12,6 +12,10 @@
     </el-table-column>
     <el-table-column prop="clientName" label="客户端名" width="180" header-align="center">
     </el-table-column>
+    <el-table-column prop="identityTokenLifetime" label="IdentityToken时长(秒)" width="100" align="center">
+    </el-table-column>
+    <el-table-column prop="accessTokenLifetime" label="AccessToken时长(秒)" width="100" align="center">
+    </el-table-column>
     <el-table-column prop="allowedGrantTypes" label="授权类型" header-align="center">
         <template slot-scope="scope">
             <span v-html='scope.row.allowedGrantTypes'></span>

@@ -35,6 +35,16 @@ namespace Hx.IdentityServer.Model.Models.ClientManager
         public string Description { get; set; }
 
         public string AllowedGrantTypes { get; set; }
+
+        /// <summary>
+        /// 身份令牌的生存时间（以秒为单位）（默认为300秒/ 5分钟）
+        /// </summary>
+        public int IdentityTokenLifetime { get; set; } = 300;
+
+        /// <summary>
+        /// 访问令牌的生存时间（以秒为单位）（默认为3600秒/ 1小时）
+        /// </summary>
+        public int AccessTokenLifetime { get; set; }
     }
 
     /// <summary>

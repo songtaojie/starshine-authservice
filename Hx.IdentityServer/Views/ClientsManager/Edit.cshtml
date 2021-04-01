@@ -12,6 +12,66 @@
             <el-form-item label="客户端名称" prop="clientName">
                 <el-input v-model="form.clientName"></el-input>
             </el-form-item>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="IdentityToken时长(秒)" prop="identityTokenLifetime">
+                        <el-input v-model.number="form.identityTokenLifetime" type="number"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="AccessToken时长(秒)" prop="accessTokenLifetime">
+                        <el-input v-model.number="form.accessTokenLifetime" type="number"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="RefreshTokenUsage" prop="refreshTokenUsage" label-width="90px">
+                        <el-select v-model="form.refreshTokenUsage" placeholder="--请选择--">
+                            <el-option :value="0" label="ReUse"></el-option>
+                            <el-option :value="1" label="OneTime"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="RefreshTokenExpiration" prop="refreshTokenExpiration" label-width="90px">
+                        <el-select v-model="form.refreshTokenExpiration" placeholder="--请选择--">
+                            <el-option :value="0" label="Sliding"></el-option>
+                            <el-option :value="1" label="Absolute"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="AbsoluteRefreshTokenLifetime" prop="absoluteRefreshTokenLifetime">
+                        <el-input v-model.number="form.absoluteRefreshTokenLifetime" type="number" 
+                                  :disabled="form.refreshTokenExpiration !== 1">
+                        </el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="SlidingRefreshTokenLifetime" prop="slidingRefreshTokenLifetime">
+                        <el-form-item label="SlidingRefreshTokenLifetime" prop="slidingRefreshTokenLifetime">
+                            <el-input v-model.number="form.slidingRefreshTokenLifetime" type="number"
+                                      :disabled="form.refreshTokenExpiration !== 0">
+                            </el-input>
+                        </el-form-item>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="需要同意页" prop="requireConsent">
+                        <el-switch v-model="form.requireConsent"></el-switch>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="记住同意" prop="allowRememberConsent">
+                        <el-switch v-model="form.allowRememberConsent"></el-switch>
+                    </el-form-item>
+                </el-col>
+            </el-row>
             <el-form-item label="描述" prop="description">
                 <el-input v-model="form.description"></el-input>
             </el-form-item>

@@ -67,6 +67,8 @@ namespace Hx.IdentityServer.Controllers.Client
                     ClientName = model.ClientName,
                     Description = model.Description,
                     AllowedGrantTypes = GetStrong(model.AllowedGrantTypes),
+                    IdentityTokenLifetime = model.IdentityTokenLifetime,
+                    AccessTokenLifetime = model.AccessTokenLifetime
                 });
             });
             var result = new PageModel<ClientPageModel>(resultList, clientResult.TotalCount, clientResult.PageIndex, clientResult.PageSize);
@@ -86,16 +88,24 @@ namespace Hx.IdentityServer.Controllers.Client
             .Include(d => d.AllowedGrantTypes)
             .FirstOrDefaultAsync(c => c.Id == intId);
             if (client == null) return Error("未找到当前客户端信息");
-            var clientModel = client.ToModel();
+            var model = client.ToModel();
             ClientDetailModel detailModel = new ClientDetailModel
             {
                 Id = client.Id.ToString(),
-                Enabled = clientModel.Enabled,
-                ClientId = clientModel.ClientId,
-                ClientName = clientModel.ClientName,
-                ClientSecrets = string.Join(",", clientModel.ClientSecrets.Select(s => s.Value)),
-                Description = clientModel.Description,
-                AllowedGrantTypes = clientModel.AllowedGrantTypes.ToList()
+                Enabled = model.Enabled,
+                ClientId = model.ClientId,
+                ClientName = model.ClientName,
+                ClientSecrets = string.Join(",", model.ClientSecrets.Select(s => s.Value)),
+                Description = model.Description,
+                AllowedGrantTypes = model.AllowedGrantTypes.ToList(),
+                IdentityTokenLifetime = model.IdentityTokenLifetime,
+                AccessTokenLifetime = model.AccessTokenLifetime,
+                RequireConsent = model.RequireConsent,
+                AllowRememberConsent = model.AllowRememberConsent,
+                AbsoluteRefreshTokenLifetime = model.AbsoluteRefreshTokenLifetime,
+                SlidingRefreshTokenLifetime = model.SlidingRefreshTokenLifetime,
+                RefreshTokenExpiration = model.RefreshTokenExpiration,
+                RefreshTokenUsage = model.RefreshTokenUsage
             };
             return Success(detailModel);
         }
@@ -162,6 +172,14 @@ namespace Hx.IdentityServer.Controllers.Client
                     ClientName = request.ClientName,
                     Description = request.Description,
                     AllowedGrantTypes = request.AllowedGrantTypes,
+                    IdentityTokenLifetime = request.IdentityTokenLifetime,
+                    AccessTokenLifetime = request.AccessTokenLifetime,
+                    RequireConsent = request.RequireConsent,
+                    AllowRememberConsent = request.AllowRememberConsent,
+                    RefreshTokenUsage = request.RefreshTokenUsage,
+                    RefreshTokenExpiration = request.RefreshTokenExpiration,
+                    AbsoluteRefreshTokenLifetime = request.AbsoluteRefreshTokenLifetime,
+                    SlidingRefreshTokenLifetime = request.SlidingRefreshTokenLifetime
                 };
 
                 if (!string.IsNullOrEmpty(request.ClientSecrets))
@@ -195,6 +213,14 @@ namespace Hx.IdentityServer.Controllers.Client
                 client.ClientName = request.ClientName;
                 client.Description = request.Description;
                 client.Enabled = request.Enabled;
+                client.IdentityTokenLifetime = request.IdentityTokenLifetime;
+                client.AccessTokenLifetime = request.AccessTokenLifetime;
+                client.RequireConsent = request.RequireConsent;
+                client.AllowRememberConsent = request.AllowRememberConsent;
+                client.RefreshTokenUsage = request.RefreshTokenUsage.GetHashCode();
+                client.RefreshTokenExpiration = request.RefreshTokenExpiration.GetHashCode();
+                client.AbsoluteRefreshTokenLifetime = request.AbsoluteRefreshTokenLifetime;
+                client.SlidingRefreshTokenLifetime = request.SlidingRefreshTokenLifetime;
                 // 先删除原来的
                 _configurationDb.Set<IdentityServer4.EntityFramework.Entities.ClientGrantType>()
                     .RemoveRange(client.AllowedGrantTypes);

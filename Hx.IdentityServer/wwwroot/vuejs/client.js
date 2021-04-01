@@ -18,7 +18,7 @@
                 { value: 'hybrid', label: 'Hybrid' },
                 { value: 'HybridAndClientCredentials', label: 'HybridAndClientCredentials' },
                 { value: 'client_credentials', label: 'ClientCredentials' },
-                { value: 'ResourceOwnerPassword', label: 'ResourceOwnerPassword' },
+                { value: 'password', label: 'ResourceOwnerPassword' },
                 { value: 'ResourceOwnerPasswordAndClientCredentials', label: 'ResourceOwnerPasswordAndClientCredentials' },
                 { value: 'DeviceFlow', label: 'DeviceFlow' },
             ],
@@ -82,6 +82,14 @@
                 clientSecrets: '',
                 description: '',
                 allowedGrantTypes: [],
+                identityTokenLifetime: 300,
+                accessTokenLifetime: 3600,
+                requireConsent: false,
+                allowRememberConsent: false,
+                absoluteRefreshTokenLifetime: 2592000,
+                slidingRefreshTokenLifetime: 1296000,
+                refreshTokenUsage:1,
+                refreshTokenExpiration: 1
             }
         },
         onAdd() {

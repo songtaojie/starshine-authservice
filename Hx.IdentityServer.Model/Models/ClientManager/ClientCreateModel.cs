@@ -44,6 +44,49 @@ namespace Hx.IdentityServer.Model.ClientManager
         /// 指定允许的授予类型
         /// </summary>
         public List<string> AllowedGrantTypes { get; set; }
+
+        /// <summary>
+        /// 身份令牌的生存时间（以秒为单位）（默认为300秒/ 5分钟）
+        /// </summary>
+        public int IdentityTokenLifetime { get; set; } = 300;
+
+        /// <summary>
+        /// 访问令牌的生存时间（以秒为单位）（默认为3600秒/ 1小时）
+        /// </summary>
+        public int AccessTokenLifetime { get; set; }
+
+        /// <summary>
+        /// 是否需要同意页面
+        /// </summary>
+        public bool RequireConsent { get; set; }
+
+        /// <summary>
+        /// 是否存储同意决定
+        /// </summary>
+        public bool AllowRememberConsent { get; set; }
+
+        /// <summary>
+        /// 刷新令牌的最大生存期（以秒为单位）。 默认为2592000秒30天
+        /// </summary>
+        public int AbsoluteRefreshTokenLifetime { get; set; }
+
+        /// <summary>
+        /// 刷新令牌的滑动寿命（以秒为单位）。 默认为1296000秒15天
+        /// </summary>
+        public int SlidingRefreshTokenLifetime { get; set; }
+
+        /// <summary>
+        /// ReUse：刷新令牌句柄在刷新令牌时将保持不变
+        /// OneTime：刷新令牌句柄在刷新令牌时将被更新
+        /// </summary>
+        public IdentityServer4.Models.TokenUsage RefreshTokenUsage { get; set; }
+
+        /// <summary>
+        /// Absolute：刷新令牌将在固定的时间点到期（由AbsoluteRefreshTokenLifetime指定）
+        /// Sliding：刷新令牌时，刷新令牌的生存期将更新（按SlidingRefreshTokenLifetime中指定的数量）。 
+        /// 生存期将不超过AbsoluteRefreshTokenLifetime。
+        /// </summary>
+        public IdentityServer4.Models.TokenExpiration RefreshTokenExpiration { get; set; }
     }
 
 
