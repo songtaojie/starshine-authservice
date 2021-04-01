@@ -3,10 +3,6 @@
     ViewBag.Active = "/client/ru";
     bool isSuperAdmin = (ViewData["IsSuperAdmin"] as bool?) == true;
 }
-@if (isSuperAdmin)
-{
-    <el-button class="hx-mb-2" type="primary" @@click="onAdd">添加</el-button>
-}
 <el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
     <el-table-column prop="clientId" label="客户端Id" width="120" header-align="center">
     </el-table-column>
@@ -24,7 +20,7 @@
     </el-table-column>
     <el-table-column fixed="right" label="操作" width="90" v-if="@(isSuperAdmin?"true":"false")" align="center">
         <template slot-scope="scope">
-            <el-button size="mini" @@click="onEdit(scope.row)">编辑</el-button>
+            <el-button size="mini" @@click="handleEdit(scope.row)">编辑</el-button>
         </template>
     </el-table-column>
 </el-table>

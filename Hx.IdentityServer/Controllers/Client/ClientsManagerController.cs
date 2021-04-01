@@ -47,36 +47,29 @@ namespace Hx.IdentityServer.Controllers.Client
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> GetPage([FromBody] ClientManagerPageParam param)
+        public async Task<IActionResult> GetPage([FromBody] ClientPageParam param)
         {
             //没有过滤的记录数
             var query = _configurationDb.Clients
-              .Include(d => d.AllowedGrantTypes)
-              .Include(d => d.AllowedScopes)
-              .Include(d => d.AllowedCorsOrigins)
-              .Include(d => d.RedirectUris)
-              .Include(d => d.PostLogoutRedirectUris);
+              .Include(d => d.AllowedGrantTypes);
             var clientResult = await query.OrderByDescending(c => c.Created)
                 .Select(c => c)
                 .ToOrderAndPageListAsync(param);
-            var resultList = new List<ClientManagerPageModel>();
+            var resultList = new List<ClientPageModel>();
             clientResult.Items.ForEach(c =>
             {
                 var model = c.ToModel();
-                resultList.Add(new ClientManagerPageModel
+                resultList.Add(new ClientPageModel
                 {
                     Id = c.Id.ToString(),
                     Enabled = model.Enabled,
                     ClientId = model.ClientId,
                     ClientName = model.ClientName,
-                    AllowedGrantTypes = string.Join(", ", model.AllowedGrantTypes),
-                    AllowedScopes = string.Join(", ", model.AllowedScopes),
-                    AllowedCorsOrigins = string.Join("<br/>", model.AllowedCorsOrigins),
-                    RedirectUris = string.Join("<br/>", model.RedirectUris),
-                    PostLogoutRedirectUris = string.Join("<br/>", model.PostLogoutRedirectUris)
+                    Description = model.Description,
+                    AllowedGrantTypes = GetStrong(model.AllowedGrantTypes),
                 });
             });
-            var result = new PageModel<ClientManagerPageModel>(resultList, clientResult.TotalCount, clientResult.PageIndex, clientResult.PageSize);
+            var result = new PageModel<ClientPageModel>(resultList, clientResult.TotalCount, clientResult.PageIndex, clientResult.PageSize);
             return Success(result);
         }
 
@@ -91,10 +84,6 @@ namespace Hx.IdentityServer.Controllers.Client
             int intId = Convert.ToInt32(id);
             var client = await _configurationDb.Clients
             .Include(d => d.AllowedGrantTypes)
-            .Include(d => d.AllowedScopes)
-            .Include(d => d.AllowedCorsOrigins)
-            .Include(d => d.RedirectUris)
-            .Include(d => d.PostLogoutRedirectUris)
             .FirstOrDefaultAsync(c => c.Id == intId);
             if (client == null) return Error("未找到当前客户端信息");
             var clientModel = client.ToModel();
@@ -106,12 +95,7 @@ namespace Hx.IdentityServer.Controllers.Client
                 ClientName = clientModel.ClientName,
                 ClientSecrets = string.Join(",", clientModel.ClientSecrets.Select(s => s.Value)),
                 Description = clientModel.Description,
-                AllowedGrantTypes = string.Join(",", clientModel.AllowedGrantTypes),
-                AllowedCorsOrigins = string.Join(",", clientModel.AllowedCorsOrigins),
-                AllowedScopes = string.Join(",", clientModel.AllowedScopes),
-                RedirectUris = string.Join(",", clientModel.RedirectUris),
-                PostLogoutRedirectUris = string.Join(",", clientModel.PostLogoutRedirectUris),
-
+                AllowedGrantTypes = clientModel.AllowedGrantTypes.ToList()
             };
             return Success(detailModel);
         }
@@ -177,11 +161,7 @@ namespace Hx.IdentityServer.Controllers.Client
                     ClientId = request.ClientId,
                     ClientName = request.ClientName,
                     Description = request.Description,
-                    AllowedCorsOrigins = request.AllowedCorsOrigins?.Split(","),
-                    AllowedGrantTypes = request.AllowedGrantTypes?.Split(","),
-                    AllowedScopes = request.AllowedScopes?.Split(","),
-                    PostLogoutRedirectUris = request.PostLogoutRedirectUris?.Split(","),
-                    RedirectUris = request.RedirectUris?.Split(","),
+                    AllowedGrantTypes = request.AllowedGrantTypes,
                 };
 
                 if (!string.IsNullOrEmpty(request.ClientSecrets))
@@ -209,35 +189,19 @@ namespace Hx.IdentityServer.Controllers.Client
             {
                 int intId = Convert.ToInt32(request.Id);
                 var client = await _configurationDb.Clients
-                    .Include(d => d.AllowedGrantTypes)
-                    .Include(d => d.AllowedScopes)
-                    .Include(d => d.AllowedCorsOrigins)
-                    .Include(d => d.RedirectUris)
-                    .Include(d => d.PostLogoutRedirectUris)
-                    .FirstOrDefaultAsync(d => d.Id == intId);
+                    .Include(c=>c.AllowedGrantTypes)
+                    .FirstOrDefaultAsync(c => c.ClientId == request.ClientId);
+                if (client == null)return Error($"未找到客户端Id[{request.ClientId}]信息");
                 client.ClientName = request.ClientName;
                 client.Description = request.Description;
                 client.Enabled = request.Enabled;
-
-                if (!string.IsNullOrEmpty(request.AllowedCorsOrigins))
-                {
-                    var AllowedCorsOrigins = new List<IdentityServer4.EntityFramework.Entities.ClientCorsOrigin>();
-                    request.AllowedCorsOrigins.Split(",").Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
-                    {
-                        AllowedCorsOrigins.Add(new IdentityServer4.EntityFramework.Entities.ClientCorsOrigin()
-                        {
-                            Client = client,
-                            ClientId = client.Id,
-                            Origin = s
-                        });
-                    });
-                    client.AllowedCorsOrigins = AllowedCorsOrigins;
-                }
-
-                if (!string.IsNullOrEmpty(request.AllowedGrantTypes))
+                // 先删除原来的
+                _configurationDb.Set<IdentityServer4.EntityFramework.Entities.ClientGrantType>()
+                    .RemoveRange(client.AllowedGrantTypes);
+                if (request.AllowedGrantTypes != null && request.AllowedGrantTypes.Count > 0)
                 {
                     var AllowedGrantTypes = new List<IdentityServer4.EntityFramework.Entities.ClientGrantType>();
-                    request?.AllowedGrantTypes.Split(",").Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
+                    request.AllowedGrantTypes.Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
                     {
                         AllowedGrantTypes.Add(new IdentityServer4.EntityFramework.Entities.ClientGrantType()
                         {
@@ -247,51 +211,6 @@ namespace Hx.IdentityServer.Controllers.Client
                         });
                     });
                     client.AllowedGrantTypes = AllowedGrantTypes;
-                }
-
-                if (!string.IsNullOrEmpty(request.AllowedScopes))
-                {
-                    var AllowedScopes = new List<IdentityServer4.EntityFramework.Entities.ClientScope>();
-                    request.AllowedScopes.Split(",").Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
-                    {
-                        AllowedScopes.Add(new IdentityServer4.EntityFramework.Entities.ClientScope()
-                        {
-                            Client = client,
-                            ClientId = client.Id,
-                            Scope = s
-                        });
-                    });
-                    client.AllowedScopes = AllowedScopes;
-                }
-
-                if (!string.IsNullOrEmpty(request.PostLogoutRedirectUris))
-                {
-                    var PostLogoutRedirectUris = new List<IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri>();
-                    request.PostLogoutRedirectUris.Split(",").Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
-                    {
-                        PostLogoutRedirectUris.Add(new IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri()
-                        {
-                            Client = client,
-                            ClientId = client.Id,
-                            PostLogoutRedirectUri = s
-                        });
-                    });
-                    client.PostLogoutRedirectUris = PostLogoutRedirectUris;
-                }
-
-                if (!string.IsNullOrEmpty(request.RedirectUris))
-                {
-                    var RedirectUris = new List<IdentityServer4.EntityFramework.Entities.ClientRedirectUri>();
-                    request.RedirectUris.Split(",").Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
-                    {
-                        RedirectUris.Add(new IdentityServer4.EntityFramework.Entities.ClientRedirectUri()
-                        {
-                            Client = client,
-                            ClientId = client.Id,
-                            RedirectUri = s
-                        });
-                    });
-                    client.RedirectUris = RedirectUris;
                 }
                 var result = _configurationDb.Clients.Update(client);
                 await _configurationDb.SaveChangesAsync();
@@ -325,7 +244,7 @@ namespace Hx.IdentityServer.Controllers.Client
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> GetScPage([FromBody] ClientManagerPageParam param)
+        public async Task<IActionResult> GetScPage([FromBody] ClientPageParam param)
         {
             //没有过滤的记录数
             var query = _configurationDb.Clients
@@ -335,30 +254,108 @@ namespace Hx.IdentityServer.Controllers.Client
                 .OrderByDescending(c => c.Created)
                 .Select(c => c)
                 .ToOrderAndPageListAsync(param);
-            var resultList = new List<ClientManagerPageModel>();
+            var resultList = new List<ClientScPageModel>();
             clientResult.Items.ForEach(c =>
             {
                 var model = c.ToModel();
-                resultList.Add(new ClientManagerPageModel
+                resultList.Add(new ClientScPageModel
                 {
-                    Id = c.Id.ToString(),
                     ClientId = model.ClientId,
                     ClientName = model.ClientName,
                     AllowedScopes = GetStrong(model.AllowedScopes),
                     AllowedCorsOrigins = GetStrong(model.AllowedCorsOrigins)
                 });
             });
-            var result = new PageModel<ClientManagerPageModel>(resultList, clientResult.TotalCount, clientResult.PageIndex, clientResult.PageSize);
+            var result = new PageModel<ClientScPageModel>(resultList, clientResult.TotalCount, clientResult.PageIndex, clientResult.PageSize);
             return Success(result);
         }
-        private string GetStrong(IEnumerable<string> list)
+
+        /// <summary>
+        /// 获取作用域/允许跨域详情数据
+        /// </summary>
+        /// <param name="id">客户端id</param>
+        /// <returns></returns>
+        [HttpGet("{clientId}")]
+        public async Task<IActionResult> GetSc(string clientId)
         {
-            var strongList = list.Select((s, i) =>
+            var client = await _configurationDb.Clients
+            .Include(d => d.AllowedScopes)
+            .Include(d => d.AllowedCorsOrigins)
+            .FirstOrDefaultAsync(c => c.ClientId == clientId);
+            if (client == null) return Error("未找到当前信息");
+            var clientModel = client.ToModel();
+            ClientScDetailModel detailModel = new ClientScDetailModel
             {
-                if (i % 2 == 0) return s;
-                return string.Format("<strong>{0}</strong>", s);
-            });
-            return string.Join(", ", strongList);
+                ClientId = clientModel.ClientId,
+                ClientName = clientModel.ClientName,
+                AllowedCorsOrigins = string.Join(",", clientModel.AllowedCorsOrigins),
+                AllowedScopes = string.Join(",", clientModel.AllowedScopes),
+            };
+            return Success(detailModel);
+        }
+
+        /// <summary>
+        /// 数据修改编辑
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Authorize(Policy = ConstKey.SuperAdmin)]
+        public async Task<IActionResult> UpdateSc(ClientScCreateModel request)
+        {
+            if (request == null) return Error("请求参数不正确");
+            try
+            {
+                var client = await _configurationDb.Clients
+                    .Include(c=>c.AllowedScopes)
+                    .Include(c=>c.AllowedCorsOrigins)
+                    .FirstOrDefaultAsync(d => d.ClientId == request.ClientId);
+                if (client == null) return Error($"未找到客户端Id[{request.ClientId}]信息");
+                var tempModel = new IdentityServer4.Models.Client()
+                {
+                    AllowedScopes = request.AllowedScopes.Split(",")
+                };
+                //作用域信息
+                _configurationDb.Set<IdentityServer4.EntityFramework.Entities.ClientScope>()
+                    .RemoveRange(client.AllowedScopes);
+                if (!string.IsNullOrEmpty(request.AllowedScopes))
+                {
+                    var AllowedScopes = new List<IdentityServer4.EntityFramework.Entities.ClientScope>();
+                    request.AllowedScopes.Split(",").Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
+                    {
+                        AllowedScopes.Add(new IdentityServer4.EntityFramework.Entities.ClientScope()
+                        {
+                            Client = client,
+                            ClientId = client.Id,
+                            Scope = s
+                        });
+                    });
+                    client.AllowedScopes = AllowedScopes;
+                }
+                //允许跨域信息
+                _configurationDb.ClientCorsOrigins.RemoveRange(client.AllowedCorsOrigins);
+                if (!string.IsNullOrEmpty(request.AllowedCorsOrigins))
+                {
+                    var AllowedCorsOrigins = new List<IdentityServer4.EntityFramework.Entities.ClientCorsOrigin>();
+                    request.AllowedCorsOrigins.Split(",").Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
+                    {
+                        AllowedCorsOrigins.Add(new IdentityServer4.EntityFramework.Entities.ClientCorsOrigin()
+                        {
+                            Client = client,
+                            ClientId = client.Id,
+                            Origin = s
+                        });
+                    });
+                    client.AllowedCorsOrigins = AllowedCorsOrigins;
+                }
+
+                var result = _configurationDb.Clients.Update(client);
+                await _configurationDb.SaveChangesAsync();
+                return Success("保存成功");
+            }
+            catch (Exception e)
+            {
+                return Error(e.Message);
+            }
         }
         #endregion
 
@@ -384,7 +381,7 @@ namespace Hx.IdentityServer.Controllers.Client
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> GetRuPage([FromBody] ClientManagerPageParam param)
+        public async Task<IActionResult> GetRuPage([FromBody] ClientPageParam param)
         {
             //没有过滤的记录数
             var query = _configurationDb.Clients
@@ -394,22 +391,118 @@ namespace Hx.IdentityServer.Controllers.Client
                 .OrderByDescending(c => c.Created)
                 .Select(c => c)
                 .ToOrderAndPageListAsync(param);
-            var resultList = new List<ClientManagerPageModel>();
+            var resultList = new List<ClientRuPageModel>();
             clientResult.Items.ForEach(c =>
             {
                 var model = c.ToModel();
-                resultList.Add(new ClientManagerPageModel
+                resultList.Add(new ClientRuPageModel
                 {
-                    Id = c.Id.ToString(),
                     ClientId = model.ClientId,
                     ClientName = model.ClientName,
                     RedirectUris = GetStrong(model.RedirectUris),
                     PostLogoutRedirectUris = GetStrong(model.PostLogoutRedirectUris)
                 });
             });
-            var result = new PageModel<ClientManagerPageModel>(resultList, clientResult.TotalCount, clientResult.PageIndex, clientResult.PageSize);
+            var result = new PageModel<ClientRuPageModel>(resultList, clientResult.TotalCount, clientResult.PageIndex, clientResult.PageSize);
             return Success(result);
         }
+
+        /// <summary>
+        /// 获取作用域/允许跨域详情数据
+        /// </summary>
+        /// <param name="id">客户端id</param>
+        /// <returns></returns>
+        [HttpGet("{clientId}")]
+        public async Task<IActionResult> GetRu(string clientId)
+        {
+            var client = await _configurationDb.Clients
+            .Include(d => d.RedirectUris)
+            .Include(d => d.PostLogoutRedirectUris)
+            .FirstOrDefaultAsync(c => c.ClientId == clientId);
+            if (client == null) return Error("未找到当前信息");
+            var clientModel = client.ToModel();
+            ClientRuDetailModel detailModel = new ClientRuDetailModel
+            {
+                ClientId = clientModel.ClientId,
+                ClientName = clientModel.ClientName,
+                RedirectUris = string.Join(",", clientModel.RedirectUris),
+                PostLogoutRedirectUris = string.Join(",", clientModel.PostLogoutRedirectUris),
+            };
+            return Success(detailModel);
+        }
+
+        /// <summary>
+        /// 数据修改编辑
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Authorize(Policy = ConstKey.SuperAdmin)]
+        public async Task<IActionResult> UpdateRu(ClientRuCreateModel request)
+        {
+            if (request == null) return Error("请求参数不正确");
+            try
+            {
+                var client = await _configurationDb.Clients
+                     .Include(d => d.RedirectUris)
+                    .Include(d => d.PostLogoutRedirectUris)
+                    .FirstOrDefaultAsync(d => d.ClientId == request.ClientId);
+                if (client == null) return Error($"未找到客户端Id[{request.ClientId}]信息");
+                //退出回调
+                _configurationDb.Set<IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri>()
+                    .RemoveRange(client.PostLogoutRedirectUris);
+                if (!string.IsNullOrEmpty(request.PostLogoutRedirectUris))
+                {
+                    var PostLogoutRedirectUris = new List<IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri>();
+                    request.PostLogoutRedirectUris.Split(",").Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
+                    {
+                        PostLogoutRedirectUris.Add(new IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri()
+                        {
+                            Client = client,
+                            ClientId = client.Id,
+                            PostLogoutRedirectUri = s
+                        });
+                    });
+                    client.PostLogoutRedirectUris = PostLogoutRedirectUris;
+                }
+
+                //回调
+                _configurationDb.Set<IdentityServer4.EntityFramework.Entities.ClientRedirectUri>()
+                    .RemoveRange(client.RedirectUris);
+                if (!string.IsNullOrEmpty(request.RedirectUris))
+                {
+                    var RedirectUris = new List<IdentityServer4.EntityFramework.Entities.ClientRedirectUri>();
+                    request.RedirectUris.Split(",").Where(s => !string.IsNullOrEmpty(s)).ToList().ForEach(s =>
+                    {
+                        RedirectUris.Add(new IdentityServer4.EntityFramework.Entities.ClientRedirectUri()
+                        {
+                            Client = client,
+                            ClientId = client.Id,
+                            RedirectUri = s
+                        });
+                    });
+                    client.RedirectUris = RedirectUris;
+                }
+                
+                var result = _configurationDb.Clients.Update(client);
+                await _configurationDb.SaveChangesAsync();
+                return Success("保存成功");
+            }
+            catch (Exception e)
+            {
+                return Error(e.Message);
+            }
+        }
+
         #endregion
+
+        private string GetStrong(IEnumerable<string> list)
+        {
+            var strongList = list.Select((s, i) =>
+            {
+                if (i % 2 == 0) return s;
+                return string.Format("<strong>{0}</strong>", s);
+            });
+            return string.Join(", ", strongList);
+        }
     }
 }

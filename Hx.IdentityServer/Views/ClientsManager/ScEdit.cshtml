@@ -1,40 +1,28 @@
-﻿<el-drawer :title="isAdd?'添加作用域/跨域':'编辑作用域/跨域'" :visible.sync="showDrawer"
+﻿<el-drawer title="编辑作用域/跨域" :visible.sync="showDrawer"
            direction="rtl"
            :before-close="handleClose"
            @@opened="handleOpened"
            size="50%">
     <div class="hx-4 hx-flex hx-flex-column hx-h-100">
-        <el-form :model="form" ref="ruleForm" :rules="rules" status-icon
+        <el-form :model="form" ref="ruleForm"  status-icon
                  label-width="90px" class="hx-flex-fill">
-            <el-form-item label="客户端id" prop="clientId">
-                <el-input v-model="form.clientId" :disabled="!isAdd"></el-input>
-            </el-form-item>
-            <el-form-item label="客户端名称" prop="clientName">
-                <el-input v-model="form.clientName"></el-input>
-            </el-form-item>
-            <el-form-item label="描述" prop="description">
-                <el-input v-model="form.description"></el-input>
-            </el-form-item>
-            <el-form-item label="客户端秘钥" prop="clientSecrets">
-                <el-input v-model="form.clientSecrets" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
-            </el-form-item>
-            <el-form-item label="授权类型" prop="allowedGrantTypes">
-                <el-input v-model="form.allowedGrantTypes" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
-            </el-form-item>
+            <el-row>
+                <el-col :span="12">
+                    <el-form-item label="客户端" prop="clientId" >
+                        <el-input v-model="form.clientId" placeholder="客户端id" disabled></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item prop="clientName" label-width="10px" >
+                        <el-input v-model="form.clientName" placeholder="客户端名称" disabled></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
             <el-form-item label="作用域" prop="allowedScopes">
                 <el-input v-model="form.allowedScopes" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
             </el-form-item>
             <el-form-item label="允许跨域" prop="allowedCorsOrigins">
                 <el-input v-model="form.allowedCorsOrigins" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
-            </el-form-item>
-            <el-form-item label="回调函数" prop="redirectUris">
-                <el-input v-model="form.redirectUris" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
-            </el-form-item>
-            <el-form-item label="退出回调" prop="postLogoutRedirectUris">
-                <el-input v-model="form.postLogoutRedirectUris" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
-            </el-form-item>
-            <el-form-item label="是否启用" prop="enabled">
-                <el-switch v-model="form.enabled"></el-switch>
             </el-form-item>
         </el-form>
         <div class="hx-flex">

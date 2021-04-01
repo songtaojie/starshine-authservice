@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Hx.IdentityServer.Model.Models.ClientManager
 {
-    public class ClientManagerPageParam:BasePageParam
+    public class ClientPageParam:BasePageParam
     {
     }
 }

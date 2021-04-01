@@ -10,6 +10,18 @@
             //添加编辑
             isAdd: true,
             form: this.initFrom(),
+            grantOptions: [
+                { value: 'implicit', label: 'Implicit' },
+                { value: 'ImplicitAndClientCredentials', label: 'ImplicitAndClientCredentials' },
+                { value: 'authorization_code', label: 'Code' },
+                { value: 'CodeAndClientCredentials', label: 'CodeAndClientCredentials' },
+                { value: 'hybrid', label: 'Hybrid' },
+                { value: 'HybridAndClientCredentials', label: 'HybridAndClientCredentials' },
+                { value: 'client_credentials', label: 'ClientCredentials' },
+                { value: 'ResourceOwnerPassword', label: 'ResourceOwnerPassword' },
+                { value: 'ResourceOwnerPasswordAndClientCredentials', label: 'ResourceOwnerPasswordAndClientCredentials' },
+                { value: 'DeviceFlow', label: 'DeviceFlow' },
+            ],
             rules: {
                 clientId: [
                     { required: true, message: '请输入客户端id', trigger: 'blur' },
@@ -32,7 +44,7 @@
                             type: 'success',
                             message: '删除成功!'
                         });
-                        that.getPageList()
+                        that.getPage()
                     })
                     .catch(function (error) {
                         if (error.data) {
@@ -48,9 +60,9 @@
         },
         handleCurrentChange(val) {
             this.queryParam.pageIndex = val;
-            this.getPageList();
+            this.getPage();
         },
-        getPageList() {
+        getPage() {
             var that = this
             axios.post('/client/getpage', that.queryParam)
                 .then(function (data) {
@@ -69,17 +81,15 @@
                 clientName: '',
                 clientSecrets: '',
                 description: '',
-                allowedGrantTypes: '',
-                allowedScopes: '',
-                allowedCorsOrigins: '',
-                redirectUris: '',
-                postLogoutRedirectUris: ''
+                allowedGrantTypes: [],
             }
         },
         onAdd() {
             this.isAdd = true;
             this.showDrawer = true;
-            this.$refs.ruleForm.resetFields();
+            if (this.$refs.ruleForm) {
+                this.$refs.ruleForm.resetFields();
+            }
         },
         onEdit(row) {
             var that = this;
@@ -115,7 +125,7 @@
                             });
                             that.loading = false
                             that.showDrawer = false
-                            that.getPageList()
+                            that.getPage()
                         })
                         .catch(function (error) {
                             that.loading = false
@@ -153,6 +163,6 @@
         }
     },
     created() {
-        this.getPageList();
+        this.getPage();
     }
 })

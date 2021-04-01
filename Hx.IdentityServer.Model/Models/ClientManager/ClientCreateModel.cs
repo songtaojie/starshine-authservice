@@ -43,7 +43,19 @@ namespace Hx.IdentityServer.Model.ClientManager
         /// <summary>
         /// 指定允许的授予类型
         /// </summary>
-        public string AllowedGrantTypes { get; set; }
+        public List<string> AllowedGrantTypes { get; set; }
+    }
+
+
+    /// <summary>
+    /// 客户端作用域/允许跨域创建model
+    /// </summary>
+    public class ClientScCreateModel
+    {
+        /// <summary>
+        /// 客户端id
+        /// </summary>
+        public string ClientId { get; set; }
 
         /// <summary>
         /// 指定允许客户端请求的api作用域。 如果为空，则客户端无法访问任何范围
@@ -54,6 +66,17 @@ namespace Hx.IdentityServer.Model.ClientManager
         /// 获取或设置JavaScript客户端允许的CORS源。
         /// </summary>
         public string AllowedCorsOrigins { get; set; }
+    }
+
+    /// <summary>
+    /// 客户端回调/退出回调创建model
+    /// </summary>
+    public class ClientRuCreateModel
+    {
+        /// <summary>
+        /// 客户端id
+        /// </summary>
+        public string ClientId { get; set; }
 
         /// <summary>
         /// 回调地址,指定允许的URI，以将令牌或授权码返回给
@@ -65,5 +88,5 @@ namespace Hx.IdentityServer.Model.ClientManager
         /// </summary>
         public string PostLogoutRedirectUris { get; set; }
     }
-    
+
 }

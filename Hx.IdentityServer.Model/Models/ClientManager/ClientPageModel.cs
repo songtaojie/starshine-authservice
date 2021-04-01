@@ -5,9 +5,9 @@ using System.Text;
 namespace Hx.IdentityServer.Model.Models.ClientManager
 {
     /// <summary>
-    /// 客户端管理详情数据
+    /// 客户端管理model
     /// </summary>
-    public class ClientDetailModel
+    public class ClientPageModel
     {
         /// <summary>
         /// 主键id
@@ -30,26 +30,17 @@ namespace Hx.IdentityServer.Model.Models.ClientManager
         public string ClientName { get; set; }
 
         /// <summary>
-        /// 客户端秘钥
-        /// </summary>
-        public string ClientSecrets { get; set; }
-
-        /// <summary>
-        /// 描述
+        /// 描述说明
         /// </summary>
         public string Description { get; set; }
 
-        /// <summary>
-        /// 指定允许的授予类型
-        /// </summary>
-        public List<string> AllowedGrantTypes { get; set; }
+        public string AllowedGrantTypes { get; set; }
     }
 
-
     /// <summary>
-    /// 客户端作用域/跨域详情model
+    /// 客户端作用域/跨域，odel
     /// </summary>
-    public class ClientScDetailModel
+    public class ClientScPageModel
     {
         /// <summary>
         /// 客户端id
@@ -62,21 +53,20 @@ namespace Hx.IdentityServer.Model.Models.ClientManager
         public string ClientName { get; set; }
 
         /// <summary>
-        /// 指定允许客户端请求的api作用域。 如果为空，则客户端无法访问任何范围
+        /// 允许的作用域
         /// </summary>
         public string AllowedScopes { get; set; }
 
         /// <summary>
-        /// 获取或设置JavaScript客户端允许的CORS源。
+        /// 允许跨域的地址
         /// </summary>
         public string AllowedCorsOrigins { get; set; }
     }
 
-
     /// <summary>
-    /// 客户端回调/退出回调详情model
+    /// 客户端回调地址model
     /// </summary>
-    public class ClientRuDetailModel
+    public class ClientRuPageModel
     {
         /// <summary>
         /// 客户端id
@@ -89,12 +79,12 @@ namespace Hx.IdentityServer.Model.Models.ClientManager
         public string ClientName { get; set; }
 
         /// <summary>
-        /// 回调地址,指定允许的URI，以将令牌或授权码返回给
+        /// 回调地址
         /// </summary>
         public string RedirectUris { get; set; }
 
         /// <summary>
-        /// 退出回调地址,指定允许的URI在注销后重定向到
+        /// 退出回调的地址
         /// </summary>
         public string PostLogoutRedirectUris { get; set; }
     }

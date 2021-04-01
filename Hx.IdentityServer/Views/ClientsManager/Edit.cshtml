@@ -19,19 +19,13 @@
                 <el-input v-model="form.clientSecrets" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
             </el-form-item>
             <el-form-item label="授权类型" prop="allowedGrantTypes">
-                <el-input v-model="form.allowedGrantTypes" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
-            </el-form-item>
-            <el-form-item label="作用域" prop="allowedScopes">
-                <el-input v-model="form.allowedScopes" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
-            </el-form-item>
-            <el-form-item label="允许跨域" prop="allowedCorsOrigins">
-                <el-input v-model="form.allowedCorsOrigins" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
-            </el-form-item>
-            <el-form-item label="回调函数" prop="redirectUris">
-                <el-input v-model="form.redirectUris" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
-            </el-form-item>
-            <el-form-item label="退出回调" prop="postLogoutRedirectUris">
-                <el-input v-model="form.postLogoutRedirectUris" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
+                <el-select v-model="form.allowedGrantTypes" multiple clearable placeholder="--请选择--" style="width:100%">
+                    <el-option v-for="item in grantOptions"
+                               :key="item.value"
+                               :label="item.label"
+                               :value="item.value">
+                    </el-option>
+                </el-select>
             </el-form-item>
             <el-form-item label="是否启用" prop="enabled">
                 <el-switch v-model="form.enabled"></el-switch>

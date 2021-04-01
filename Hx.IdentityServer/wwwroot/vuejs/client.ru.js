@@ -8,44 +8,10 @@
                 pageSize: 10
             },
             //添加编辑
-            isAdd: true,
             form: this.initFrom(),
-            rules: {
-                clientId: [
-                    { required: true, message: '请输入客户端id', trigger: 'blur' },
-                ]
-            },
         }
     },
     methods: {
-        handleDelete(row) {
-            var that = this
-            that.$confirm('确定删除当前客户端管理?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-            }).then(() => {
-                var url = '/client/delete/' + row.id
-                axios.post(url)
-                    .then(function (response) {
-                        that.$message({
-                            type: 'success',
-                            message: '删除成功!'
-                        });
-                        that.getPageList()
-                    })
-                    .catch(function (error) {
-                        if (error.data) {
-                            that.$message({
-                                type: 'error',
-                                message: error.data.message
-                            });
-                        }
-                        console.log(error);
-                    });
-            }).catch(() => {
-            });
-        },
         handleCurrentChange(val) {
             this.queryParam.pageIndex = val;
             this.getPageList();
@@ -64,27 +30,18 @@
         //表格
         initFrom() {
             return {
-                id:'',
                 clientId: '',
                 clientName: '',
                 redirectUris: '',
                 postLogoutRedirectUris: ''
             }
         },
-        onAdd() {
-            this.isAdd = true;
-            this.showDrawer = true;
-            if (this.$refs.ruleForm) {
-                this.$refs.ruleForm.resetFields();
-            }
-        },
-        onEdit(row) {
+        handleEdit(row) {
             var that = this;
-            var url = '/client/get/' + row.id;
+            var url = '/client/getru/' + row.clientId;
             axios.get(url)
                 .then(function (data) {
                     that.form = data;
-                    that.isAdd = false;
                     that.showDrawer = true;
                 })
                 .catch(function (error) {
@@ -99,7 +56,7 @@
         //添加编辑
         handleSubmit(formName) {
             var that = this,
-                url = '/client/addorupdate';
+                url = '/client/updateru';
             if (that.loading) return;
             this.$refs[formName].validate(valid => {
                 if (valid) {
@@ -143,8 +100,7 @@
             }
         },
         handleOpened() {
-            if (this.isAdd) {
-                this.form = this.initFrom();
+            if (this.$refs.ruleForm) {
                 this.$refs.ruleForm.resetFields();
             }
         }
