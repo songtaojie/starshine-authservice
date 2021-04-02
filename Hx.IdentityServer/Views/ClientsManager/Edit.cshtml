@@ -14,28 +14,34 @@
             </el-form-item>
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-form-item label="IdentityToken时长(秒)" prop="identityTokenLifetime">
-                        <el-input v-model.number="form.identityTokenLifetime" type="number"></el-input>
+                    <el-form-item label="IdentityToken时长(秒)" prop="identityTokenLifetime" class="hx-label-nowrap">
+                        <el-input v-model.number="form.identityTokenLifetime" type="number">
+                            <template slot="append">秒</template>
+                        </el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="AccessToken时长(秒)" prop="accessTokenLifetime">
-                        <el-input v-model.number="form.accessTokenLifetime" type="number"></el-input>
+                    <el-form-item label="AccessToken时长(秒)" prop="accessTokenLifetime" class="hx-label-nowrap">
+                        <el-input v-model.number="form.accessTokenLifetime" type="number">
+                            <template slot="append">
+                                秒
+                            </template>
+                        </el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-form-item label="RefreshTokenUsage" prop="refreshTokenUsage" label-width="90px">
-                        <el-select v-model="form.refreshTokenUsage" placeholder="--请选择--">
+                    <el-form-item label="RefreshTokenUsage" prop="refreshTokenUsage" label-width="90px" class="hx-label-nowrap">
+                        <el-select v-model="form.refreshTokenUsage" placeholder="--请选择--" style="width:100%;">
                             <el-option :value="0" label="ReUse"></el-option>
                             <el-option :value="1" label="OneTime"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="RefreshTokenExpiration" prop="refreshTokenExpiration" label-width="90px">
-                        <el-select v-model="form.refreshTokenExpiration" placeholder="--请选择--">
+                    <el-form-item label="RefreshTokenExpiration" prop="refreshTokenExpiration" label-width="90px" class="hx-label-nowrap">
+                        <el-select v-model="form.refreshTokenExpiration" placeholder="--请选择--" style="width:100%;">
                             <el-option :value="0" label="Sliding"></el-option>
                             <el-option :value="1" label="Absolute"></el-option>
                         </el-select>
@@ -44,19 +50,23 @@
             </el-row>
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-form-item label="AbsoluteRefreshTokenLifetime" prop="absoluteRefreshTokenLifetime">
-                        <el-input v-model.number="form.absoluteRefreshTokenLifetime" type="number" 
+                    <el-form-item label="AbsoluteRefreshTokenLifetime" prop="absoluteRefreshTokenLifetime" class="hx-label-nowrap">
+                        <el-input v-model.number="form.absoluteRefreshTokenLifetime" type="number"
                                   :disabled="form.refreshTokenExpiration !== 1">
+                            <template slot="append">
+                                秒
+                            </template>
                         </el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="SlidingRefreshTokenLifetime" prop="slidingRefreshTokenLifetime">
-                        <el-form-item label="SlidingRefreshTokenLifetime" prop="slidingRefreshTokenLifetime">
-                            <el-input v-model.number="form.slidingRefreshTokenLifetime" type="number"
-                                      :disabled="form.refreshTokenExpiration !== 0">
-                            </el-input>
-                        </el-form-item>
+                    <el-form-item label="SlidingRefreshTokenLifetime" prop="slidingRefreshTokenLifetime" class="hx-label-nowrap">
+                        <el-input v-model.number="form.slidingRefreshTokenLifetime" type="number"
+                                  :disabled="form.refreshTokenExpiration !== 0">
+                            <template slot="append">
+                                秒
+                            </template>
+                        </el-input>
                     </el-form-item>
                 </el-col>
             </el-row>

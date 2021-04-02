@@ -3,6 +3,17 @@
     ViewBag.Active = "/client";
     bool isSuperAdmin = (ViewData["IsSuperAdmin"] as bool?) == true;
 }
+@section styles{ 
+    <style>
+        .hx-label-nowrap label{
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 20px;
+            text-align: left;
+        }
+    </style>
+}
+
 @if (isSuperAdmin)
 {
     <el-button class="hx-mb-2" type="primary" @@click="onAdd">添加客户端</el-button>
