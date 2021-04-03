@@ -27,13 +27,13 @@ namespace Hx.IdentityServer.Controllers
                 }
 
                 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
-                var csp = "default-src 'self';" +
+                var csp = "default-src 'self' https://cdn.staticfile.org/;" +
                     "object-src 'none'; " +
                     "frame-ancestors 'none'; " +
                     "sandbox allow-forms allow-same-origin allow-scripts; " +
-                    "style-src 'self' 'unsafe-inline';" +
+                    "style-src 'self' 'unsafe-inline' https://cdn.staticfile.org/;" +
                     "img-src 'self' data: *;" +
-                    "script-src 'self' 'unsafe-eval'; ";
+                    "script-src 'self' 'unsafe-eval' https://cdn.staticfile.org; ";
                 // also consider adding upgrade-insecure-requests once you have HTTPS in place for production
                 //csp += "upgrade-insecure-requests;";
                 // also an example if you need client images to be displayed from twitter
