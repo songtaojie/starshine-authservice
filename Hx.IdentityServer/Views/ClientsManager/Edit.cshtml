@@ -78,7 +78,7 @@
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="记住同意" prop="allowRememberConsent">
-                        <el-switch v-model="form.allowRememberConsent"></el-switch>
+                        <el-switch v-model="form.allowRememberConsent" :disabled="form.requireConsent !== true"></el-switch>
                     </el-form-item>
                 </el-col>
             </el-row>

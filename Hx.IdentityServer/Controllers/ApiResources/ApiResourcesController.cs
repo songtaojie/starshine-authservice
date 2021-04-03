@@ -64,7 +64,7 @@ namespace Hx.IdentityServer.Controllers.ApiResources
                    Enabled = model.Enabled,
                    DisplayName = model.DisplayName,
                    Description = model.Description,
-                   UserClaims = string.Join(",",model.UserClaims)
+                   UserClaims = GetStrong(model.UserClaims)
                 });
             });
             var result = new PageModel<ApiResourcePageModel>(resultList, resource.TotalCount, resource.PageIndex, resource.PageSize);
@@ -200,6 +200,16 @@ namespace Hx.IdentityServer.Controllers.ApiResources
                 return Error(e.Message);
             }
             
+        }
+
+        private string GetStrong(IEnumerable<string> list)
+        {
+            var strongList = list.Select((s, i) =>
+            {
+                if (i % 2 == 0) return s;
+                return string.Format("<strong>{0}</strong>", s);
+            });
+            return string.Join(", ", strongList);
         }
         #endregion
     }
