@@ -1,25 +1,60 @@
+
 # Hx.IdentityServer
 
-#### 介绍
+## 介绍
 IdentityServer,用户认证中心管理
 
-#### 软件架构
+## 软件架构
 软件架构说明
 
 
-#### 安装教程
+## 安装教程
+
+- **1. 拉取代码(dev-vue分支)**
+- **2.  Appsetting.json中配置下数据库链子字符串ConnectionStrings**
+
+    使用sqlserver数据库：
+    ```javascript
+    "ConnectionStrings": {
+        "DbType": "sqlserver",
+        "DefaultConnection": "Server=.;Database=HxIdentityServer;User ID=sa;Password=123456;
+         MultipleActiveResultSets=True"
+    }
+    ```
+
+    使用mySql数据库：
+    ```javascript
+    "ConnectionStrings": {
+        "DbType": "mysql",
+        "DefaultConnection": "server=localhost;database=HxIdentityServer;user=root;password=123456"
+    }
+    ```
+- **3. 生成迁移文件，用于数据库的生成映射，定位到Hx.IdentityServer.Model文件夹cmd执行如下生成命令**
+
+    **如果没安装过ef工具的，要先安装ef工具**
+    
+    > dotnet tool install --global dotnet-ef
+
+    **3.1 生成ApplicationDbContext的迁移文件**
+    > dotnet ef --startup-project ../Hx.IdentityServer/ migrations add InitApplicationDb -c ApplicationDbContext
+
+    **3.2 生成PersistedGrantDbContext的迁移文件**
+    > dotnet ef --startup-project ../Hx.IdentityServer/ migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o         Migrations/IdentityServer/PersistedGrantDb
+
+    **3.3 生成ConfigurationDbContext的迁移文件**
+    > dotnet ef --startup-project ../Hx.IdentityServer/ migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
+    
+- **4. 执行迁移，初始化数据，定位到启动文件Hx.IdentityServer中cmd执行如下命令**
+
+    > dotnet run /seed
+
+## 使用说明
 
 1.  xxxx
 2.  xxxx
 3.  xxxx
 
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
+## 参与贡献
 
 1.  Fork 本仓库
 2.  新建 Feat_xxx 分支
@@ -27,7 +62,7 @@ IdentityServer,用户认证中心管理
 4.  新建 Pull Request
 
 
-#### 特技
+## 特技
 
 1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
 2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
