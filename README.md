@@ -50,9 +50,9 @@ IdentityServer,用户认证中心管理
 
 ## 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. 上述步骤执行完之后，浏览器输入http://127.0.0.1:5002或者http://localhost:5002打开网站地址进入登录页如下：
+![登录页](https://images.gitee.com/uploads/images/2021/0403/135612_6a887a67_2229723.png "屏幕截图.png")
+2.  内置两个账号，用户名：alice和bob，密码都是：Pass123$
 
 ## 参与贡献
 
