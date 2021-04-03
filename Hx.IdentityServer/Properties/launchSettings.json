@@ -1,14 +1,18 @@
-﻿{
+{
   "profiles": {
     "SelfHost": {
       "commandName": "Project",
-      //"commandLineArgs": "/seed",
       "launchBrowser": true,
-      //"launchUrl": "account/users",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5002"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true
     }
   }
 }
