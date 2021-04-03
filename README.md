@@ -10,7 +10,7 @@ IdentityServer,用户认证中心管理
 
 ## 安装教程
 
-- **1. 拉取代码(dev-vue分支)**
+- **1. 拉取代码**
 - **2.  Appsetting.json中配置下数据库链子字符串ConnectionStrings**
 
     使用sqlserver数据库：
@@ -29,24 +29,24 @@ IdentityServer,用户认证中心管理
         "DefaultConnection": "server=localhost;database=HxIdentityServer;user=root;password=123456"
     }
     ```
-- **3. 生成迁移文件，用于数据库的生成映射，定位到Hx.IdentityServer.Model文件夹cmd执行如下生成命令**
+- **3. 生成迁移文件，用于数据库的生成映射，迁移，在解决方案文件路径中执行迁移指定启动项目，和迁移项目，cmd执行如下生成命令：**
 
     **如果没安装过ef工具的，要先安装ef工具**
     
     > dotnet tool install --global dotnet-ef
 
     **3.1 生成ApplicationDbContext的迁移文件**
-    > dotnet ef --startup-project ../Hx.IdentityServer/ migrations add InitApplicationDb -c ApplicationDbContext
+    > dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitApplicationDb -c ApplicationDbContext
 
     **3.2 生成PersistedGrantDbContext的迁移文件**
-    > dotnet ef --startup-project ../Hx.IdentityServer/ migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o         Migrations/IdentityServer/PersistedGrantDb
+    > dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
 
     **3.3 生成ConfigurationDbContext的迁移文件**
-    > dotnet ef --startup-project ../Hx.IdentityServer/ migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
+    > dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
     
-- **4. 执行迁移，初始化数据，定位到启动文件Hx.IdentityServer中cmd执行如下命令**
+- **4. 执行完迁移后，初始化数据，cmd执行如下命令**
 
-    > dotnet run /seed
+    > dotnet run -s Hx.IdentityServer /seed
 
 ## 使用说明
 
