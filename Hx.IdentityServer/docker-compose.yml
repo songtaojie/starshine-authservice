@@ -1,0 +1,19 @@
+﻿version: '3.4'
+
+services:
+  hx.identityserver:
+    container_name: hx.identityserver
+    labels: 
+      hx.identityserver: "mvc"
+    build:
+      context: /root/src
+      dockerfile: Services/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - Logging__LogLevel__Default=${DEFAULTLOGLEVEL}
+      - Domain=https://${ENV_Prefix}m${DOMAIN}
+      - DbConfig__Mysql__ConnectionString=Server=${DREAMWORK_RDS_NAME_OR_IP};Port=${DREAMWORK_RDS_PORT};Database=${ENV_Prefix}gbguoba_mp_microcourse_db;uid=${DREAMWORK_RDS_UID};pwd=${DREAMWORK_RDS_PWD};Charset=utf8mb4;
+     
+    ports:
+      - '5002:5002'
+ 

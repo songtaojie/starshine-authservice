@@ -23,6 +23,8 @@ namespace Hx.IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             ConsoleHelper.WriteSuccessLine("*****开始ConfigureServices注入服务******");
+            var connString = Configuration.GetConnectionString("DefaultConnection");
+            ConsoleHelper.WriteInfoLine("数据库连接字符串："+ connString);
             services.AddSameSiteCookiePolicy();
             //services.AddCors(c =>
             //{
