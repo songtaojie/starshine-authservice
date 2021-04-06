@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\css\hxlayout\**" />
+    <Compile Remove="新文件夹\**" />
     <Content Remove="wwwroot\css\hxlayout\**" />
+    <Content Remove="新文件夹\**" />
     <EmbeddedResource Remove="wwwroot\css\hxlayout\**" />
+    <EmbeddedResource Remove="新文件夹\**" />
     <None Remove="wwwroot\css\hxlayout\**" />
+    <None Remove="新文件夹\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +41,6 @@
 
   <ItemGroup>
     <Folder Include="log\" />
-    <Folder Include="新文件夹\" />
   </ItemGroup>
 
   <ItemGroup>
