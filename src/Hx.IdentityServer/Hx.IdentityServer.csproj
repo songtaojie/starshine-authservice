@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <Folder Include="log\" />
+    <Folder Include="新文件夹\" />
   </ItemGroup>
 
   <ItemGroup>
