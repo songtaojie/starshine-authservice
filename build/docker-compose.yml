@@ -1,0 +1,17 @@
+﻿version: '3.7'
+
+services:
+  hx.identityserver:
+    container_name: hx.identityserver
+    image: registry.cn-hangzhou.aliyuncs.com/songtaojie/hx.identityserver
+    labels: 
+      hx.identityserver: "mvc"
+    build:
+      context: ./
+      dockerfile: Hx.IdentityServer/Dockerfile
+    environment:
+      - ConnectionStrings_DbType=sqlserver
+      - ConnectionStrings_DefaultConnection=Server=host.docker.internal;Database=HxIdentityServer;User ID=sa;Password=song123;MultipleActiveResultSets=True
+    ports:
+      - 5002:5002
+ 
