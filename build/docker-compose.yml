@@ -7,8 +7,8 @@ services:
     labels: 
       hx.identityserver: "mvc"
     build:
-      context: ../src
-      dockerfile: Hx.IdentityServer/Dockerfile
+      context: ../
+      dockerfile: src/Hx.IdentityServer/Dockerfile
     environment:
       - ConnectionStrings_DbType=sqlserver
       - ConnectionStrings_DefaultConnection=Server=host.docker.internal;Database=HxIdentityServer;User ID=sa;Password=song123;MultipleActiveResultSets=True
