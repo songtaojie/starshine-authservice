@@ -24,12 +24,12 @@ namespace Hx.IdentityServer.Data
         public static void EnsureSeedData(IServiceProvider serviceProvider)
         {
             //迁移，在解决方案文件路径中执行迁移，指定启动项目，和迁移项目
-            //dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitApplicationDb -c ApplicationDbContext
-            //  dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations remove -c ApplicationDbContext
-            // dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
-            // dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations remove -c PersistedGrantDbContext
-            // dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
-            // dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations remove -c ConfigurationDbContext
+            //dotnet ef -s src/Hx.IdentityServer -p src/Hx.IdentityServer.Model migrations add InitApplicationDb -c ApplicationDbContext
+            //  dotnet ef -s src/Hx.IdentityServer -p src/Hx.IdentityServer.Model migrations remove -c ApplicationDbContext
+            // dotnet ef -s src/Hx.IdentityServer -p src/Hx.IdentityServer.Model migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
+            // dotnet ef -s src/Hx.IdentityServer -p src/Hx.IdentityServer.Model migrations remove -c PersistedGrantDbContext
+            // dotnet ef -s src/Hx.IdentityServer -p src/Hx.IdentityServer.Model migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
+            // dotnet ef -s src/Hx.IdentityServer -p src/Hx.IdentityServer.Model migrations remove -c ConfigurationDbContext
             ConsoleHelper.WriteInfoLine("Seeding database...");
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
