@@ -8,12 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="log\**" />
+    <Compile Remove="publish\**" />
     <Compile Remove="wwwroot\css\hxlayout\**" />
     <Compile Remove="新文件夹\**" />
+    <Content Remove="log\**" />
+    <Content Remove="publish\**" />
     <Content Remove="wwwroot\css\hxlayout\**" />
     <Content Remove="新文件夹\**" />
+    <EmbeddedResource Remove="log\**" />
+    <EmbeddedResource Remove="publish\**" />
     <EmbeddedResource Remove="wwwroot\css\hxlayout\**" />
     <EmbeddedResource Remove="新文件夹\**" />
+    <None Remove="log\**" />
+    <None Remove="publish\**" />
     <None Remove="wwwroot\css\hxlayout\**" />
     <None Remove="新文件夹\**" />
   </ItemGroup>
@@ -38,10 +46,6 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="log\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,6 +13,11 @@ namespace Hx.IdentityServer.Extensions
     /// </summary>
     public static class SameSiteHandlingExtension
     {
+        /// <summary>
+        /// 设置为http时，需要添加此方法进行一些代理的设置
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         public static IServiceCollection AddSameSiteCookiePolicy(this IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
