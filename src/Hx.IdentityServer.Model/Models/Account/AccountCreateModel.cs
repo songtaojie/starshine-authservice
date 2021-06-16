@@ -69,7 +69,11 @@ namespace Hx.IdentityServer.Model.Account
         /// <summary>
         /// 角色name的集合
         /// </summary>
-        public List<string> RoleNames { get; set; } 
+        public List<string> RoleNames { get; set; }
 
+        /// <summary>
+        /// 角色id的集合
+        /// </summary>
+        public List<string> RoleIds { get; set; }
     }
 }

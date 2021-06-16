@@ -25,6 +25,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -182,7 +183,7 @@ namespace Hx.IdentityServer.Controllers
         }
 
         /// <summary>
-        /// 获取用户名明细信息
+        ///添加角色
         /// </summary>
         /// <param name="id">用户id</param>
         /// <returns></returns>
@@ -190,19 +191,30 @@ namespace Hx.IdentityServer.Controllers
         [Authorize(Policy = ConstKey.SuperAdmin)]
         public async Task<IActionResult> AddRole([FromBody] AccountAddRoleModel model)
         {
+            if (model.RoleNames == null || model.RoleNames.Count == 0 || model.RoleIds ==null 
+                || model.RoleIds.Count != model.RoleNames.Count) return Error("请选择角色");
             var user = await _userManager.FindByIdAsync(model.UserId);
             if (user == null) return Error("未找到用户信息");
             try
             {
                 using var tran = await _applicationDb.Database.BeginTransactionAsync();
+
+                //添加角色
                 var roleList = await _userManager.GetRolesAsync(user);
-                var identityResult = await _userManager.RemoveFromRolesAsync(user, roleList);
+                if(roleList.Count > 0) await _userManager.RemoveFromRolesAsync(user, roleList);
+                var identityResult = await _userManager.AddToRolesAsync(user, model.RoleNames);
                 if (!identityResult.Succeeded) return Error(identityResult.Errors.FirstOrDefault()?.Description);
-                if (model.RoleNames != null || model.RoleNames.Count > 0)
+                //添加Claim
+                var allClaims = await _userManager.GetClaimsAsync(user);
+                var roleClaims = allClaims.Where(c => c.Type == MyJwtClaimTypes.RoleId).ToList();
+                if (roleClaims.Count > 0) await _userManager.RemoveClaimsAsync(user, roleClaims);
+                var newRoleClaims = new List<Claim>();
+                model.RoleIds.ForEach(roleId =>
                 {
-                    identityResult = await _userManager.AddToRolesAsync(user, model.RoleNames);
-                    if (!identityResult.Succeeded) return Error(identityResult.Errors.FirstOrDefault()?.Description);
-                }
+                    newRoleClaims.Add(new Claim(MyJwtClaimTypes.RoleId, roleId));
+                });
+                identityResult = await _userManager.AddClaimsAsync(user, newRoleClaims);
+                if (!identityResult.Succeeded) return Error(identityResult.Errors.FirstOrDefault()?.Description);
                 await tran.CommitAsync();
             }
             catch (Exception e)

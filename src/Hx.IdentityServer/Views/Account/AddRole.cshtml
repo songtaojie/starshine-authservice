@@ -1,11 +1,12 @@
 ﻿<el-dialog title="配置角色" :visible.sync="dialogVisible">
     <el-form ref="dynamicValidateForm" :model="roleForm" label-width="60px" :visible.sync="dialogVisible">
         <el-form-item label="角色">
-            <el-select v-model="roleForm.roleNames" multiple style="width:100%" clearable placeholder="--请选择--">
+            <el-select v-model="roleForm.roleNames" multiple style="width:100%" clearable placeholder="--请选择--"  
+                           @@change="onSelectChange">
                 <el-option v-for="item in roleList"
                            :key="item.name"
                            :label="item.description"
-                           :value="item.name" />
+                           :value="item.name"/>
             </el-select>
         </el-form-item>
     </el-form>

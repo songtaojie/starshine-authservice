@@ -11,5 +11,10 @@ namespace Hx.IdentityServer.Common
         /// 角色名称
         /// </summary>
         public const string RoleName = "rolename";
+
+        /// <summary>
+        /// 角色id
+        /// </summary>
+        public const string RoleId = "roleId";
     }
 }

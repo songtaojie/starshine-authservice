@@ -154,10 +154,7 @@ namespace Hx.IdentityServer.Data
                         new Claim(JwtClaimTypes.Name, userItem.UserName),
                         new Claim(JwtClaimTypes.Email, userItem.Email),
                     };
-                    //角色Code
-                    claims.AddRange(currentRoleList.Select(r=> new Claim(MyJwtClaimTypes.RoleName,r.Name)));
-                    //角色id，暂时不添加了,Code和id都是唯一的
-                    //claims.AddRange(roleIdList.Select(s => new Claim(JwtClaimTypes.Role, s.ToString())));
+                    claims.AddRange(roleIdList.Select(s => new Claim(JwtClaimTypes.Role, s.ToString())));
                     result = userMgr.AddClaimsAsync(userItem, claims).Result;//表AspNetUserClaims添加数据
                     if (!result.Succeeded)
                     {

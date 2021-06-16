@@ -70,13 +70,16 @@ namespace Hx.IdentityServer.Extensions
             // and none in this range require it.
             // Note: this covers some pre-Chromium Edge versions, 
             // but pre-Chromium Edge does not require SameSite=None.
-            if (userAgent.Contains("Chrome/5") || userAgent.Contains("Chrome/6"))
+            if (userAgent.Contains("Chrome/"))
             {
-                return SameSiteMode.Unspecified;
-            }
-            if (userAgent.Contains("Chrome/8"))
-            {
-                return SameSiteMode.Lax;
+                if (userAgent.Contains("Chrome/5") || userAgent.Contains("Chrome/6"))
+                {
+                    return SameSiteMode.Unspecified;
+                }
+                else
+                {
+                    return SameSiteMode.Lax;
+                }
             }
 
             return SameSiteMode.None;

@@ -71,6 +71,7 @@
             isAdd:true,
             form: this.initFrom(),
             roleForm: {
+                roleIds:[],
                 roleNames:[]
             },
             remoteRuleCache: {},
@@ -224,6 +225,7 @@
             axios.get('/account/getrole/' + userId)
                 .then((data) => {
                     that.roleForm.roleNames = data
+                    that.onSelectChange(data)
                 })
         },
         getRoleList() {
@@ -231,6 +233,7 @@
             axios.post('/role/getList')
                 .then(function (data) {
                     that.roleList = data
+                    that.onSelectChange(that.roleForm.roleNames)
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -243,6 +246,14 @@
                     that.dialogVisible = false;
                     that.getPageList();
                 })
+        },
+        onSelectChange(value) {
+            if (value != null && value.length > 0) {
+                var selectItems = this.roleList.filter(r => {
+                    return value.indexOf(r.name) >= 0
+                });
+                this.roleForm.roleIds = selectItems.map(r => r.id);
+            }
         }
     },
     created() {
