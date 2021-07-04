@@ -147,11 +147,12 @@ namespace Hx.IdentityServer.Controllers
                 //{
                 //    await _userManager.AddToRoleAsync(user, role.Name);
                 //}
-                await _userManager.AddClaimsAsync(user, new Claim[]{
-                            new Claim(JwtClaimTypes.Name, model.RealName),
-                            new Claim(JwtClaimTypes.Email, model.Email),
-                            new Claim(JwtClaimTypes.EmailVerified, "false", ClaimValueTypes.Boolean)
-                        });
+                await _userManager.AddClaimsAsync(user, new Claim[]
+                {
+                    new Claim(JwtClaimTypes.GivenName, model.RealName),
+                    new Claim(JwtClaimTypes.Email, model.Email),
+                    new Claim(JwtClaimTypes.EmailVerified, "false", ClaimValueTypes.Boolean)
+                });
                 return Success("添加成功");
             }
             else// 编辑
@@ -162,6 +163,14 @@ namespace Hx.IdentityServer.Controllers
                 if (model.Birthday.HasValue) user.Birthday = model.Birthday.Value;
                 var result = await _userManager.UpdateAsync(user);
                 if(!result.Succeeded) return Error(result.Errors.FirstOrDefault()?.Description);
+                //重新添加GivenName claim
+                var claims = await _userManager.GetClaimsAsync(user);
+                var giveNameClaim = claims.FirstOrDefault(c => c.Type == JwtClaimTypes.GivenName);
+                if (giveNameClaim != null)
+                {
+                    await _userManager.RemoveClaimAsync(user, giveNameClaim);
+                    await _userManager.AddClaimAsync(user, new Claim(JwtClaimTypes.GivenName, model.RealName));
+                }
                 return Success("修改成功");
             }
         }
