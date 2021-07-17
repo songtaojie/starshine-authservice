@@ -1,15 +1,16 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+FROM registry.cn-hangzhou.aliyuncs.com/songtaojie_centos/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+FROM registry.cn-hangzhou.aliyuncs.com/songtaojie_centos/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["src/Hx.IdentityServer/Hx.IdentityServer.csproj", "Hx.IdentityServer/"]
-COPY ["src/Hx.IdentityServer.Extensions/Hx.IdentityServer.Extensions.csproj", "Hx.IdentityServer.Extensions/"]
-COPY ["src/Hx.IdentityServer.Model/Hx.IdentityServer.Model.csproj", "Hx.IdentityServer.Model/"]
-COPY ["src/Hx.IdentityServer.Common/Hx.IdentityServer.Common.csproj", "Hx.IdentityServer.Common/"]
+COPY ["src/Hx.IdentityServer/Hx.IdentityServer.csproj", "/src/Hx.IdentityServer/"]
+COPY ["src/Hx.IdentityServer.Extensions/Hx.IdentityServer.Extensions.csproj", "/src/Hx.IdentityServer.Extensions/"]
+COPY ["src/Hx.IdentityServer.Model/Hx.IdentityServer.Model.csproj", "/src/Hx.IdentityServer.Model/"]
+COPY ["src/Hx.IdentityServer.Common/Hx.IdentityServer.Common.csproj", "/src/Hx.IdentityServer.Common/"]
+
 RUN dotnet restore "src/Hx.IdentityServer/Hx.IdentityServer.csproj"
 COPY . .
 WORKDIR "/src/src/Hx.IdentityServer"
