@@ -11,7 +11,7 @@ COPY ["src/Hx.IdentityServer.Extensions/Hx.IdentityServer.Extensions.csproj", "/
 COPY ["src/Hx.IdentityServer.Model/Hx.IdentityServer.Model.csproj", "/src/Hx.IdentityServer.Model/"]
 COPY ["src/Hx.IdentityServer.Common/Hx.IdentityServer.Common.csproj", "/src/Hx.IdentityServer.Common/"]
 
-RUN dotnet restore "src/Hx.IdentityServer/Hx.IdentityServer.csproj"
+RUN dotnet restore "/src/Hx.IdentityServer/Hx.IdentityServer.csproj"
 COPY . .
 WORKDIR "/src/src/Hx.IdentityServer"
 RUN dotnet build "Hx.IdentityServer.csproj" -c Release -o /app/build
