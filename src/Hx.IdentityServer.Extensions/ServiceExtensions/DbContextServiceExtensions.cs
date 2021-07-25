@@ -1,16 +1,11 @@
 ﻿using Hx.IdentityServer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 
-namespace Hx.IdentityServer.Extensions
+namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class DbContextExtension
+    public static class DbContextServiceExtensions
     {
         private static readonly string migrationsAssembly = "Hx.IdentityServer.Model";
         /// <summary>

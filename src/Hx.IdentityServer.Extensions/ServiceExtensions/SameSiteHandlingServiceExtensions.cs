@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hx.IdentityServer.Extensions
+namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
     /// SameSite扩展
     /// </summary>
-    public static class SameSiteHandlingExtension
+    public static class SameSiteHandlingServiceExtensions
     {
         /// <summary>
         /// 设置为http时，需要添加此方法进行一些代理的设置

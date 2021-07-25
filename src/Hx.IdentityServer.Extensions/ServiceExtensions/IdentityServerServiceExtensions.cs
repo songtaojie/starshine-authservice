@@ -11,9 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hx.IdentityServer.Extensions
+namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class IdentityServerExtension
+    public static class IdentityServerServiceExtensions
     {
         /// <summary>
         /// 添加IdentityServer4
