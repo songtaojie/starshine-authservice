@@ -4,14 +4,14 @@ services:
   hx.identityserver:
     container_name: hx.identityserver
     image: registry.cn-hangzhou.aliyuncs.com/songtaojie/hx.identityserver
-    labels: 
-      hx.identityserver: "mvc"
     build:
       context: ../
       dockerfile: src/Hx.IdentityServer/Dockerfile
     environment:
-      - ConnectionStrings_DbType=sqlserver
-      - ConnectionStrings_DefaultConnection=Server=host.docker.internal;Database=HxIdentityServer;User ID=sa;Password=song123;MultipleActiveResultSets=True
+       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - Logging__LogLevel__Default=${DEFAULTLOGLEVEL}
+      - ConnectionStrings__DbType=mysql
+      - ConnectionStrings__DefaultConnection=Server=${DB_SERVER};Port=${DB_PORT};Database=hxidentityserver;Uid=${DB_UID};Pwd=${DB_PWD};CharSet=utf8
     ports:
       - 5002:5002
  
