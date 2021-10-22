@@ -51,7 +51,7 @@ namespace Hx.IdentityServer
             Console.WriteLine();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostApplicationLifetime lifetime)
         {
             ConsoleHelper.WriteSuccessLine("*****开始ApplicationBuilder配置******");
             if (Environment.IsDevelopment())
@@ -73,8 +73,8 @@ namespace Hx.IdentityServer
                     defaults:new { controller = "Account", action = "Index" });
                 //endpoints.MapDefaultControllerRoute();
             });
+            //app.UseConsulService(lifetime);
             ConsoleHelper.WriteSuccessLine("*****ApplicationBuilder配置完成******");
-            Console.WriteLine();
         }
     }
 }
