@@ -1,10 +1,10 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM registry.cn-hangzhou.aliyuncs.com/songtaojie_centos/aspnet:3.1-buster-slim AS base
+FROM registry.cn-hangzhou.aliyuncs.com/songtaojie_centos/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM registry.cn-hangzhou.aliyuncs.com/songtaojie_centos/sdk:3.1-buster AS build
+FROM registry.cn-hangzhou.aliyuncs.com/songtaojie_centos/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["src/Hx.IdentityServer/Hx.IdentityServer.csproj", "/src/Hx.IdentityServer/"]
 COPY ["src/Hx.IdentityServer.Extensions/Hx.IdentityServer.Extensions.csproj", "/src/Hx.IdentityServer.Extensions/"]
