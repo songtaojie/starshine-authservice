@@ -1,7 +1,7 @@
 ﻿using Hx.IdentityServer.Common;
 using Hx.IdentityServer.Entity;
 using Hx.IdentityServer.Model.Role;
-using Hx.Sdk.Entity.Extensions;
+using Hx.Sdk.Extensions;
 using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

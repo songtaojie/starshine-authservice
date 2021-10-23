@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using MySql.EntityFrameworkCore.Metadata;
 
 namespace Hx.IdentityServer.Model.Migrations
 {
@@ -12,20 +12,20 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(type: "varchar(767)", nullable: false),
                     Deleted = table.Column<string>(type: "char(1)", nullable: true),
-                    Description = table.Column<string>(maxLength: 200, nullable: true),
-                    OrderSort = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
+                    OrderSort = table.Column<int>(type: "int", nullable: false),
                     Enabled = table.Column<string>(type: "char(1)", nullable: true),
-                    CreaterId = table.Column<string>(maxLength: 36, nullable: true),
-                    Creater = table.Column<string>(maxLength: 36, nullable: true),
-                    CreateTime = table.Column<DateTime>(nullable: true),
-                    LastModifierId = table.Column<string>(maxLength: 36, nullable: true),
-                    LastModifier = table.Column<string>(maxLength: 36, nullable: true),
-                    LastModifyTime = table.Column<DateTime>(nullable: true)
+                    CreaterId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: true),
+                    Creater = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime", nullable: true),
+                    LastModifierId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: true),
+                    LastModifier = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: true),
+                    LastModifyTime = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,29 +36,29 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    RealName = table.Column<string>(maxLength: 36, nullable: true),
-                    Sex = table.Column<string>(maxLength: 1, nullable: true),
-                    Age = table.Column<int>(nullable: false),
-                    Birthday = table.Column<DateTime>(nullable: false),
-                    Address = table.Column<string>(maxLength: 100, nullable: true),
+                    Id = table.Column<string>(type: "varchar(767)", nullable: false),
+                    RealName = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: true),
+                    Sex = table.Column<string>(type: "varchar(1)", maxLength: 1, nullable: true),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    Birthday = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Address = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
                     Deleted = table.Column<string>(type: "char(1)", nullable: true),
-                    CreateTime = table.Column<DateTime>(nullable: false),
-                    ModifyTime = table.Column<DateTime>(nullable: true)
+                    CreateTime = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ModifyTime = table.Column<DateTime>(type: "datetime", nullable: true),
+                    UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,11 +69,11 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    RoleId = table.Column<string>(type: "varchar(767)", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,11 +90,11 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(type: "varchar(767)", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,10 +111,10 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    LoginProvider = table.Column<string>(type: "varchar(767)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "varchar(767)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<string>(type: "varchar(767)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,8 +131,8 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(type: "varchar(767)", nullable: false),
+                    RoleId = table.Column<string>(type: "varchar(767)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,10 +155,10 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(type: "varchar(767)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "varchar(767)", nullable: false),
+                    Name = table.Column<string>(type: "varchar(767)", nullable: false),
+                    Value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

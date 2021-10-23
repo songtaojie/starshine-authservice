@@ -1,6 +1,6 @@
 ﻿using Hx.IdentityServer.Common;
 using Hx.IdentityServer.Model.Models.ApiResource;
-using Hx.Sdk.Entity.Extensions;
+using Hx.Sdk.Extensions;
 using Hx.Sdk.Entity.Page;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;

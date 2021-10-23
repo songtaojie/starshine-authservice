@@ -3,27 +3,17 @@
 
 
 using Hx.IdentityServer.Common;
-using Hx.IdentityServer.Controllers;
 using Hx.IdentityServer.Data;
 using Hx.IdentityServer.Entity;
 using Hx.IdentityServer.Model;
 using Hx.IdentityServer.Model.Account;
 using Hx.IdentityServer.Model.Models.Account;
-using Hx.Sdk.Entity.Extensions;
+using Hx.Sdk.Extensions;
 using IdentityModel;
-using IdentityServer4.Events;
-using IdentityServer4.Extensions;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
-using IdentityServer4.Stores;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
