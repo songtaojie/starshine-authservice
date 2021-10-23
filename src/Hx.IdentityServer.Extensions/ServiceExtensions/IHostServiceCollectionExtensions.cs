@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="webHost"></param>
         /// <param name="seeder"></param>
         /// <returns></returns>
-        public static IHost MigrateDbContext<TContext>(this IHost webHost, Action<TContext, IServiceProvider> seeder) where TContext : DbContext
+        public static IHost MigrateDbContext<TContext>(this IHost webHost, Action<TContext, IServiceProvider> seeder = null) where TContext : DbContext
         {
             using (var scope = webHost.Services.CreateScope())
             {
@@ -38,7 +38,7 @@ namespace Microsoft.Extensions.Hosting
                     retry.Execute(() =>
                     {
                         context.Database.Migrate();
-                        seeder(context, services);
+                        seeder?.Invoke(context, services);
                     });
 
                     logger.LogInformation($"Migrated database associated with context {typeof(TContext).Name}");

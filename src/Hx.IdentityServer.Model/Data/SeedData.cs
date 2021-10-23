@@ -49,12 +49,12 @@ namespace Hx.IdentityServer.Data
             }
             ConsoleHelper.WriteInfoLine("Done seeding database.");
         }
-
+        #region 客户端授权种子数据
         /// <summary>
         /// 客户端授权数据
         /// </summary>
         /// <param name="context"></param>
-        private static void EnsureSeedData(ConfigurationDbContext context)
+        public static void EnsureSeedData(ConfigurationDbContext context)
         {
             if (!context.Clients.Any())
             {
@@ -112,8 +112,10 @@ namespace Hx.IdentityServer.Data
                 ConsoleHelper.WriteWarningLine("ApiScopes already populated");
             }
         }
+        #endregion
 
-        private static void EnsureSeedData(IServiceProvider serviceProvider,ApplicationDbContext context)
+        #region 用户种子数据
+        public static void EnsureSeedData(IServiceProvider serviceProvider,ApplicationDbContext context)
         {
             var userMgr = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleMgr = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
@@ -179,7 +181,7 @@ namespace Hx.IdentityServer.Data
             });
            
         }
-
+        #endregion
         #region 用户角色
         private static List<ApplicationUser> GetApplicationUsers()
         {

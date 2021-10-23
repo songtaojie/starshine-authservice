@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hx.IdentityServer.Common;
 using Hx.IdentityServer.Data;
+using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,14 +44,18 @@ namespace Hx.IdentityServer
                     args = args.Except(new[] { "/seed" }).ToArray();
                 }
                 var host = CreateHostBuilder(args).Build();
-                if (seed)
-                {
-                    SeedData.EnsureSeedData(host.Services);
-                    return 1;
-                }
-
-                ConsoleHelper.WriteSuccessLine("应用程序启动成功");
+                host.MigrateDbContext<PersistedGrantDbContext>()
+                    .MigrateDbContext<ConfigurationDbContext>((db, _) =>
+                    {
+                        //if (seed) SeedData.EnsureSeedData(db);
+                        SeedData.EnsureSeedData(db);
+                    }).MigrateDbContext<ApplicationDbContext>((db, s) =>
+                    {
+                        //if (seed) SeedData.EnsureSeedData(s,db);
+                        SeedData.EnsureSeedData(s, db);
+                    });
                 host.Run();
+                ConsoleHelper.WriteSuccessLine("program success");
                 return 1;
             }
             catch (Exception ex)

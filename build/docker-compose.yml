@@ -1,17 +1,22 @@
 ﻿version: '3.7'
 
 services:
-  hx.identityserver:
-    container_name: hx.identityserver
-    image: registry.cn-hangzhou.aliyuncs.com/songtaojie/hx.identityserver
+  hx.identityserver.api:
+    container_name: hx.identityserver.api
+    image: ${DOCKER_REGISTRY}/${DOCKER_REGISTRY_NAMESPACE}/hx.identityserver.api
     build:
       context: ../
       dockerfile: src/Hx.IdentityServer/Dockerfile
     environment:
-       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
       - Logging__LogLevel__Default=${DEFAULTLOGLEVEL}
       - ConnectionStrings__DbType=mysql
       - ConnectionStrings__DefaultConnection=Server=${DB_SERVER};Port=${DB_PORT};Database=hxidentityserver;Uid=${DB_UID};Pwd=${DB_PWD};CharSet=utf8
+      - ConsulSettings__Address=http://${LOCAL_SERVICE_IP}:8500
+      - ConsulSettings__AgentService__Check__HTTP=http://${LOCAL_SERVICE_IP}:5002/api/HealthCheck
     ports:
       - 5002:5002
+    dns:
+      - ${DNS_PROVIDER1}
+      - ${DNS_PROVIDER2}
  

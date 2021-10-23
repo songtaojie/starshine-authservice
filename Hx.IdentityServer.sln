@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{079AAFD7
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
 		build\.env = build\.env
+		build\build.sh = build\build.sh
 		build\docker-compose.yml = build\docker-compose.yml
 		build\publish.docker-compose.bat = build\publish.docker-compose.bat
 		build\run.sh = build\run.sh
