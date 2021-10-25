@@ -22,7 +22,6 @@ namespace Hx.IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            ConsoleHelper.WriteSuccessLine("*****开始ConfigureServices注入服务******");
             services.AddSameSiteCookiePolicy();
             services.AddSingleton(new AppSettings(Configuration));
             //services.AddCors(c =>
@@ -48,13 +47,10 @@ namespace Hx.IdentityServer
             }
             
             services.AddIdentityServerSetup(Configuration);
-            ConsoleHelper.WriteSuccessLine("*****ConfigureServices注入服务完成******");
-            Console.WriteLine();
         }
 
         public void Configure(IApplicationBuilder app, IHostApplicationLifetime lifetime)
         {
-            ConsoleHelper.WriteSuccessLine("*****开始ApplicationBuilder配置******");
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -63,6 +59,7 @@ namespace Hx.IdentityServer
             app.UseStaticFiles();
             app.UseRouting();
             //app.UseCors("default");
+            app.UseConsulService(lifetime);
             app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -74,8 +71,6 @@ namespace Hx.IdentityServer
                     defaults:new { controller = "Account", action = "Index" });
                 //endpoints.MapDefaultControllerRoute();
             });
-            app.UseConsulService(lifetime);
-            ConsoleHelper.WriteSuccessLine("*****ApplicationBuilder配置完成******");
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Hx.IdentityServer.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("~/api/[controller]")]
+        [Route("~/api/HealthCheck")]
         public IActionResult Get()
         {
             return Ok("ok");
