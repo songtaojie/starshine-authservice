@@ -24,6 +24,7 @@ namespace Hx.IdentityServer
         {
             ConsoleHelper.WriteSuccessLine("*****开始ConfigureServices注入服务******");
             services.AddSameSiteCookiePolicy();
+            services.AddSingleton(new AppSettings(Configuration));
             //services.AddCors(c =>
             //{
             //    c.AddPolicy("default",
@@ -73,7 +74,7 @@ namespace Hx.IdentityServer
                     defaults:new { controller = "Account", action = "Index" });
                 //endpoints.MapDefaultControllerRoute();
             });
-            //app.UseConsulService(lifetime);
+            app.UseConsulService(lifetime);
             ConsoleHelper.WriteSuccessLine("*****ApplicationBuilder配置完成******");
         }
     }

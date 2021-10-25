@@ -11,8 +11,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
       - Logging__LogLevel__Default=${DEFAULTLOGLEVEL}
       - ConnectionStrings__DbType=mysql
-      - ConnectionStrings__DefaultConnection=Server=${DB_SERVER};Port=${DB_PORT};Database=hxidentityserver;Uid=${DB_UID};Pwd=${DB_PWD};CharSet=utf8
+      - ConnectionStrings__MySqlConnectionString=Server=${DB_SERVER};Port=${DB_PORT};Database=hxidentityserver;Uid=${DB_UID};Pwd=${DB_PWD};CharSet=utf8
       - ConsulSettings__Address=http://${LOCAL_SERVICE_IP}:8500
+      - ConsulSettings__AgentService__Address=${LOCAL_SERVICE_IP}
       - ConsulSettings__AgentService__Check__HTTP=http://${LOCAL_SERVICE_IP}:5002/api/HealthCheck
     ports:
       - 5002:5002

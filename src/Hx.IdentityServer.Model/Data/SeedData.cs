@@ -119,7 +119,11 @@ namespace Hx.IdentityServer.Data
         {
             var userMgr = serviceProvider.GetRequiredService<UserManager<AspNetUsers>>();
             var roleMgr = serviceProvider.GetRequiredService<RoleManager<AspNetRoles>>();
-            
+            if (userMgr.Users.Any())
+            {
+                ConsoleHelper.WriteWarningLine("AspNetUsers already populated");
+                return;
+            }
             var userList = GetApplicationUsers();
             var roleList = GetApplicationRoles();
             var userRoleList = GetApplicationUserRoles(userList, roleList);
