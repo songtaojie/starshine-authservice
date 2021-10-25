@@ -14,6 +14,7 @@ services:
       - ConnectionStrings__MySqlConnectionString=Server=${DB_SERVER};Port=${DB_PORT};Database=hxidentityserver;Uid=${DB_UID};Pwd=${DB_PWD};CharSet=utf8
       - ConsulSettings__Address=http://${LOCAL_SERVICE_IP}:8500
       - ConsulSettings__AgentService__Address=${LOCAL_SERVICE_IP}
+      - ConsulSettings__AgentService__Port=5002
       - ConsulSettings__AgentService__Check__HTTP=http://${LOCAL_SERVICE_IP}:5002/api/HealthCheck
     ports:
       - 5002:5002
