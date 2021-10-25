@@ -27,11 +27,11 @@ namespace Hx.IdentityServer.Controllers
     /// </summary>
     public class AccountController : BaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly UserManager<AspNetUsers> _userManager;
+        private readonly RoleManager<AspNetRoles> _roleManager;
         private readonly ApplicationDbContext _applicationDb;
-        public AccountController(UserManager<ApplicationUser> userManager, 
-            RoleManager<ApplicationRole> roleManager, ApplicationDbContext  applicationDb)
+        public AccountController(UserManager<AspNetUsers> userManager, 
+            RoleManager<AspNetRoles> roleManager, ApplicationDbContext  applicationDb)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -54,7 +54,7 @@ namespace Hx.IdentityServer.Controllers
         {
             //没有过滤的记录数
             AjaxResult ajaxResult = new AjaxResult();
-            IQueryable<ApplicationUser> query = _userManager.Users
+            IQueryable<AspNetUsers> query = _userManager.Users
                 .Where(u=>u.Deleted == ConstKey.No);
             //if (!string.IsNullOrEmpty(search))
             //{
@@ -115,7 +115,7 @@ namespace Hx.IdentityServer.Controllers
             if (model == null) return Error("请求参数不正确");
             if (string.IsNullOrEmpty(model.Id))
             {
-                var user = new ApplicationUser
+                var user = new AspNetUsers
                 {
                     Email = model.Email,
                     UserName = model.UserName,
@@ -173,7 +173,7 @@ namespace Hx.IdentityServer.Controllers
         [HttpGet("account/getrole/{userId}")]
         public async Task<IActionResult> GetRole(string userId)
         {
-            var user = new ApplicationUser()
+            var user = new AspNetUsers()
             {
                 Id = userId
             };

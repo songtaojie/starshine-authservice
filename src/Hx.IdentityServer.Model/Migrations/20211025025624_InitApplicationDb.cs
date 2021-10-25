@@ -12,7 +12,7 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(767)", nullable: false),
+                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false),
                     Deleted = table.Column<string>(type: "char(1)", nullable: true),
                     Description = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
                     OrderSort = table.Column<int>(type: "int", nullable: false),
@@ -36,7 +36,7 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(767)", nullable: false),
+                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false),
                     RealName = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: true),
                     Sex = table.Column<string>(type: "varchar(1)", maxLength: 1, nullable: true),
                     Age = table.Column<int>(type: "int", nullable: false),
@@ -71,7 +71,7 @@ namespace Hx.IdentityServer.Model.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<string>(type: "varchar(767)", nullable: false),
+                    RoleId = table.Column<string>(type: "varchar(36)", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
@@ -92,7 +92,7 @@ namespace Hx.IdentityServer.Model.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(type: "varchar(767)", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(36)", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
@@ -111,10 +111,10 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "varchar(767)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "varchar(767)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    ProviderKey = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<string>(type: "varchar(767)", nullable: false)
+                    UserId = table.Column<string>(type: "varchar(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,8 +131,8 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "varchar(767)", nullable: false),
-                    RoleId = table.Column<string>(type: "varchar(767)", nullable: false)
+                    UserId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false),
+                    RoleId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,9 +155,9 @@ namespace Hx.IdentityServer.Model.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "varchar(767)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "varchar(767)", nullable: false),
-                    Name = table.Column<string>(type: "varchar(767)", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(36)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>

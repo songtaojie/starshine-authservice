@@ -117,8 +117,8 @@ namespace Hx.IdentityServer.Data
         #region 用户种子数据
         public static void EnsureSeedData(IServiceProvider serviceProvider,ApplicationDbContext context)
         {
-            var userMgr = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            var roleMgr = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+            var userMgr = serviceProvider.GetRequiredService<UserManager<AspNetUsers>>();
+            var roleMgr = serviceProvider.GetRequiredService<RoleManager<AspNetRoles>>();
             
             var userList = GetApplicationUsers();
             var roleList = GetApplicationRoles();
@@ -183,11 +183,11 @@ namespace Hx.IdentityServer.Data
         }
         #endregion
         #region 用户角色
-        private static List<ApplicationUser> GetApplicationUsers()
+        private static List<AspNetUsers> GetApplicationUsers()
         {
-            return new List<ApplicationUser>
+            return new List<AspNetUsers>
             {
-                new ApplicationUser
+                new AspNetUsers
                 {
                     UserName = "alice",
                     Email = "AliceSmith@email.com",
@@ -198,7 +198,7 @@ namespace Hx.IdentityServer.Data
                     Address="北京市",
                     RealName = "宋子轩"
                 },
-                new ApplicationUser
+                new AspNetUsers
                 {
                     UserName = "bob",
                     Email = "BobSmith@email.com",
@@ -212,17 +212,17 @@ namespace Hx.IdentityServer.Data
             };
         }
 
-        private static List<ApplicationRole> GetApplicationRoles()
+        private static List<AspNetRoles> GetApplicationRoles()
         {
-            return new List<ApplicationRole>
+            return new List<AspNetRoles>
             {
-                new ApplicationRole
+                new AspNetRoles
                 { 
                     Name = ConstKey.Client,
                     Description="Api资源权限",
                     CreateTime=DateTime.Now,
                 },
-                new ApplicationRole
+                new AspNetRoles
                 {
                     Name = ConstKey.SuperAdmin,
                     Description = "超级管理员",
@@ -231,14 +231,14 @@ namespace Hx.IdentityServer.Data
             };
         }
 
-        private static List<ApplicationUserRole> GetApplicationUserRoles(List<ApplicationUser> users, List<ApplicationRole> roles)
+        private static List<AspNetUserRoles> GetApplicationUserRoles(List<AspNetUsers> users, List<AspNetRoles> roles)
         {
-            List<ApplicationUserRole> userRoles = new List<ApplicationUserRole>();
+            List<AspNetUserRoles> userRoles = new List<AspNetUserRoles>();
             var random = new Random();
             users.ForEach(u =>
             {
                 var index = random.Next(0, roles.Count);
-                userRoles.Add(new ApplicationUserRole
+                userRoles.Add(new AspNetUserRoles
                 {
                     RoleId = roles[index].Id,
                     UserId = u.Id

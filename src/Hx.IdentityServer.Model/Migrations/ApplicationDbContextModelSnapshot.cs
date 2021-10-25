@@ -17,10 +17,11 @@ namespace Hx.IdentityServer.Model.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.11");
 
-            modelBuilder.Entity("Hx.IdentityServer.Entity.ApplicationRole", b =>
+            modelBuilder.Entity("Hx.IdentityServer.Entity.AspNetRoles", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(767)");
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -78,10 +79,73 @@ namespace Hx.IdentityServer.Model.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Hx.IdentityServer.Entity.ApplicationUser", b =>
+            modelBuilder.Entity("Hx.IdentityServer.Entity.AspNetUserLogins", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Hx.IdentityServer.Entity.AspNetUserRoles", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("RoleId")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Hx.IdentityServer.Entity.AspNetUserTokens", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Hx.IdentityServer.Entity.AspNetUsers", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(767)");
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -169,21 +233,6 @@ namespace Hx.IdentityServer.Model.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Hx.IdentityServer.Entity.ApplicationUserRole", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("varchar(767)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -198,7 +247,7 @@ namespace Hx.IdentityServer.Model.Migrations
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -221,7 +270,7 @@ namespace Hx.IdentityServer.Model.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -230,56 +279,33 @@ namespace Hx.IdentityServer.Model.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Hx.IdentityServer.Entity.AspNetUserLogins", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(767)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins");
+                    b.HasOne("Hx.IdentityServer.Entity.AspNetUsers", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Hx.IdentityServer.Entity.AspNetUserRoles", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("varchar(767)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("text");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Hx.IdentityServer.Entity.ApplicationUserRole", b =>
-                {
-                    b.HasOne("Hx.IdentityServer.Entity.ApplicationRole", null)
+                    b.HasOne("Hx.IdentityServer.Entity.AspNetRoles", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Hx.IdentityServer.Entity.ApplicationUser", null)
+                    b.HasOne("Hx.IdentityServer.Entity.AspNetUsers", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Hx.IdentityServer.Entity.AspNetUserTokens", b =>
+                {
+                    b.HasOne("Hx.IdentityServer.Entity.AspNetUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -288,7 +314,7 @@ namespace Hx.IdentityServer.Model.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Hx.IdentityServer.Entity.ApplicationRole", null)
+                    b.HasOne("Hx.IdentityServer.Entity.AspNetRoles", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -297,25 +323,7 @@ namespace Hx.IdentityServer.Model.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Hx.IdentityServer.Entity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("Hx.IdentityServer.Entity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("Hx.IdentityServer.Entity.ApplicationUser", null)
+                    b.HasOne("Hx.IdentityServer.Entity.AspNetUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

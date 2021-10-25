@@ -22,9 +22,9 @@ namespace Hx.IdentityServer.Controllers.Role
     [Authorize]
     public class RoleController : BaseController
     {
-        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly RoleManager<AspNetRoles> _roleManager;
 
-        public RoleController(RoleManager<ApplicationRole> roleManager)
+        public RoleController(RoleManager<AspNetRoles> roleManager)
         {
             _roleManager = roleManager;
         }
@@ -116,7 +116,7 @@ namespace Hx.IdentityServer.Controllers.Role
         public async Task<IActionResult> Create(RoleCreateModel request)
         {
             if (request == null) return Error("请求参数不正确");
-            var role = new ApplicationRole
+            var role = new AspNetRoles
             {
                 Name = request.Name,
                 Description = request.Description,
@@ -162,7 +162,7 @@ namespace Hx.IdentityServer.Controllers.Role
         {
             try
             {
-                var role = new ApplicationRole()
+                var role = new AspNetRoles()
                 {
                     Id = id
                 };

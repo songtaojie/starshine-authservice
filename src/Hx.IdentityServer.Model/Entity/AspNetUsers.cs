@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace Hx.IdentityServer.Entity
 {
-    public class ApplicationUser : IdentityUser
+    public class AspNetUsers : IdentityUser
     {
+        [MaxLength(36)]
+        public override string Id { get => base.Id; set => base.Id = value; }
         /// <summary>
         /// 真实姓名
         /// </summary>

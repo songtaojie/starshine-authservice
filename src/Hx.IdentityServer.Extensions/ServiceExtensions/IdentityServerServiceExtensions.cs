@@ -25,7 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddApplicationDb(configuration);
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
+            services.AddIdentity<AspNetUsers, AspNetRoles>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(options =>
@@ -49,7 +49,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.UserInteraction.LoginUrl = "/oauth2/authorize";
                 options.UserInteraction.LogoutUrl = "/oauth2/logout";
                 options.UserInteraction.ErrorUrl = "/error";
-            }).AddAspNetIdentity<ApplicationUser>();
+            }).AddAspNetIdentity<AspNetUsers>();
 
             builder.AddConfigAndOperateStore(configuration);
             // not recommended for production - you need to store your key material somewhere secure

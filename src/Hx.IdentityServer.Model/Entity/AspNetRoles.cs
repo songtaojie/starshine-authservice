@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace Hx.IdentityServer.Entity
 {
-    public class ApplicationRole : IdentityRole
+    public class AspNetRoles : IdentityRole
     {
+        [MaxLength(36)]
+        public override string Id { get => base.Id; set => base.Id = value; }
         /// <summary>
         /// 是否删除
         /// </summary>
