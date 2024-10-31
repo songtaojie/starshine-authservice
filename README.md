@@ -1,5 +1,5 @@
 
-# Hx.IdentityServer
+# Starshine.Authservice
 
 ## 介绍
 IdentityServer,用户认证中心管理
@@ -36,25 +36,25 @@ IdentityServer,用户认证中心管理
     > dotnet tool install --global dotnet-ef
 
     **3.1 生成ApplicationDbContext的迁移文件**
-    > dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitApplicationDb -c ApplicationDbContext
+    > dotnet ef -s Starshine.Authservice -p Starshine.Authservice.Model migrations add InitApplicationDb -c ApplicationDbContext
 
     **3.2 生成PersistedGrantDbContext的迁移文件**
-    > dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
+    > dotnet ef -s Starshine.Authservice -p Starshine.Authservice.Model migrations add InitPersistedGrantDb -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
 
     **3.3 生成ConfigurationDbContext的迁移文件**
-    > dotnet ef -s Hx.IdentityServer -p Hx.IdentityServer.Model migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
+    > dotnet ef -s Starshine.Authservice -p Starshine.Authservice.Model migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
     
 - **4. 执行完迁移后，初始化数据，cmd执行如下命令**
 
-    > dotnet run -s Hx.IdentityServer /seed
+    > dotnet run -s Starshine.Authservice /seed
 
 ## 使用说明
 
-- **1. 上述步骤执行完之后，启动项目，，或者运行doenet  Hx.IdentityServer.dll**
+- **1. 上述步骤执行完之后，启动项目，，或者运行doenet  Starshine.Authservice.dll**
 
   **1.1 通过vs2019启动**
 
-    **1.2 解决方案文件中打开cmd执行dotnet build编译项目，然后在生成的Hx.IdentityServer.dll所在路径执行如下命令启动应用，dotnet Hx.IdentityServer.dll**
+    **1.2 解决方案文件中打开cmd执行dotnet build编译项目，然后在生成的Hx.IdentityServer.dll所在路径执行如下命令启动应用，dotnet Starshine.Authservice.dll**
     
     **1.3 解决方案文件中打开cmd执行dotnet build编译项目，然后定位到生成路径一般为Hx.IdentityServer\bin\Debug\netcoreapp3.1路径，直接点击应用Hx.IdentityServer.exe启动应用**
 - **2. 浏览器输入http://127.0.0.1:5002或者http://localhost:5002打开网站地址进入登录页如下：**
