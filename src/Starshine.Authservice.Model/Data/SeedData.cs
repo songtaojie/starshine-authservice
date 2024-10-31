@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using IdentityModel;
-using IdentityServer4.EntityFramework.Mappers;
 using Starshine.Authservice.Data;
 using Starshine.Authservice.Model;
 using Starshine.Authservice.Entity;
