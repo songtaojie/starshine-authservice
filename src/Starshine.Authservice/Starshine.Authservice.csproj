@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -11,19 +11,15 @@
     <Compile Remove="log\**" />
     <Compile Remove="publish\**" />
     <Compile Remove="wwwroot\css\hxlayout\**" />
-    <Compile Remove="新文件夹\**" />
     <Content Remove="log\**" />
     <Content Remove="publish\**" />
     <Content Remove="wwwroot\css\hxlayout\**" />
-    <Content Remove="新文件夹\**" />
     <EmbeddedResource Remove="log\**" />
     <EmbeddedResource Remove="publish\**" />
     <EmbeddedResource Remove="wwwroot\css\hxlayout\**" />
-    <EmbeddedResource Remove="新文件夹\**" />
     <None Remove="log\**" />
     <None Remove="publish\**" />
     <None Remove="wwwroot\css\hxlayout\**" />
-    <None Remove="新文件夹\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hx.IdentityServer.Extensions\Hx.IdentityServer.Extensions.csproj" />
+    <ProjectReference Include="..\Starshine.Authservice.Extensions\Starshine.Authservice.Extensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +48,11 @@
     <None Update="Dockerfile">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\hx\css\" />
+    <Folder Include="wwwroot\site\js\" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,9 @@
-using Starshine.Authservice.Common;
-using Starshine.Authservice.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
+using Starshine.JsonSerialization;
 
 namespace Starshine.Authservice
 {
@@ -23,7 +21,6 @@ namespace Starshine.Authservice
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSameSiteCookiePolicy();
-            services.AddSingleton(new AppSettings(Configuration));
             //services.AddCors(c =>
             //{
             //    c.AddPolicy("default",
@@ -36,10 +33,10 @@ namespace Starshine.Authservice
 
             //});
             var mvcBuilder = services.AddControllersWithViews()
-                .AddJsonOptions(json =>
+                .AddJsonOptions(jsonOptions =>
                 {
-                    json.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
-                    json.JsonSerializerOptions.Converters.Add(new DateTimeNullConverter());
+                    jsonOptions.JsonSerializerOptions.Converters.Add(new SystemTextJsonDateTimeJsonConverter());
+                    jsonOptions.JsonSerializerOptions.Converters.Add(new SystemTextJsonNullableDateTimeJsonConverter());
                     //json.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
                 });
             if (Environment.IsDevelopment())

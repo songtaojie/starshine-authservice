@@ -8,4 +8,4 @@
     if (i && i[a] !== b)
         for (e = 0; e < c.length; e++)
             f.write('<link href="' + c[e] + '" ' + d + "/>")
-}("visibility", "hidden", ["/lib/element-ui/lib/theme-chalk/index.css"], "rel=\u0022stylesheet\u0022 ");
+}("visibility", "hidden", ["/lib/element-plus/theme-chalk/index.min.css"], "rel=\u0022stylesheet\u0022 ");

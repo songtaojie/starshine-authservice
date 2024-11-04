@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Starshine.Authservice.Model\Starshine.Authservice.Model.csproj" />
+    <ProjectReference Include="..\Starshine.Authservice.Application\Starshine.Authservice.Application.csproj" />
   </ItemGroup>
 
 </Project>

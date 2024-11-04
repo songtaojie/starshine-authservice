@@ -5,7 +5,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Hx.IdentityServer.Controllers
+namespace Starshine.Authservice.Controllers
 {
     public class SecurityHeadersAttribute : ActionFilterAttribute
     {

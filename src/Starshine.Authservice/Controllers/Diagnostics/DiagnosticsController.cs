@@ -4,12 +4,12 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-using Hx.IdentityServer.Model.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Starshine.Authservice.Application.Contracts.Dtos.Diagnostics;
 
-namespace Hx.IdentityServer.Controllers
+namespace Starshine.Authservice.Controllers
 {
     //[SecurityHeaders]
     [Authorize]

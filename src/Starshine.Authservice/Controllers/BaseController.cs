@@ -1,17 +1,13 @@
-﻿using Hx.IdentityServer.Common;
-using Hx.IdentityServer.Model;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Starshine.Authservice.Entity.Consts;
+using Starshine.Common;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
-namespace Hx.IdentityServer.Controllers
+namespace Starshine.Authservice.Controllers
 {
 
     [SecurityHeaders]
-    public class BaseController: Controller
+    public class BaseController : Controller
     {
         /// <summary>
         /// 是否已授权
@@ -66,27 +62,28 @@ namespace Hx.IdentityServer.Controllers
 
         protected IActionResult Success(object data)
         {
-            return Json(new AjaxResult()
+            return Json(new AjaxResult<object>()
             {
+                Succeeded = true,
                 Data = data
             });
         }
 
         protected IActionResult Error(string message)
         {
-            return Json(new AjaxResult
+            return Json(new AjaxResult<object>
             {
-                Success = false,
+                Succeeded = false,
                 Message = message
             });
         }
 
-        protected IActionResult Error(string message,string code)
+        protected IActionResult Error(string message, int code)
         {
-            return Json(new AjaxResult
+            return Json(new AjaxResult<object>
             {
-                Code = code,
-                Success = false,
+                StatusCode = code,
+                Succeeded = false,
                 Message = message
             });
         }

@@ -1,16 +1,13 @@
-﻿using Hx.IdentityServer.Model.Error;
-using IdentityServer4.Services;
+﻿using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Starshine.Authservice.Application.Contracts.Dtos.Error;
 using System.Threading.Tasks;
 
-namespace Hx.IdentityServer.Controllers.Error
+namespace Starshine.Authservice.Controllers.Error
 {
-    public class ErrorController:BaseController
+    public class ErrorController : BaseController
     {
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IHostEnvironment _environment;

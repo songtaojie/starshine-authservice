@@ -1,13 +1,12 @@
-﻿using Starshine.Authservice.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Starshine.Authservice.EntityFrameworkCore.DbContexts;
 using System;
-
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class DbContextServiceExtensions
     {
-        private static readonly string migrationsAssembly = "Starshine.Authservice.Model";
+        private static readonly string migrationsAssembly = "Starshine.Authservice.EntityFrameworkCore";
         /// <summary>
         /// 添加ApplicationDbContext
         /// </summary>
@@ -17,8 +16,11 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var connectionString = configuration.GetConnectionString("MySqlConnectionString");
             if (string.IsNullOrEmpty(connectionString)) throw new ArgumentException("缺少数据库连接字符串配置");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(connectionString,
-                        sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly)));
+            services.AddDbContext<ApplicationDbContext, ApplicationDbContext>(options => 
+            {
+                options.UseMySql(ServerVersion.AutoDetect(connectionString),
+                        sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly));
+            });
             return services;
         }
 
@@ -33,12 +35,12 @@ namespace Microsoft.Extensions.DependencyInjection
             if (string.IsNullOrEmpty(connectionString)) throw new ArgumentException("缺少数据库连接字符串配置");
             builder.AddConfigurationStore(options =>
              {
-                 options.ConfigureDbContext = b => b.UseMySQL(connectionString, sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly));
+                 options.ConfigureDbContext = b => b.UseMySql(ServerVersion.AutoDetect(connectionString), sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly));
              })
             // this adds the operational data from DB (codes, tokens, consents)
             .AddOperationalStore(options =>
             {
-                options.ConfigureDbContext = b => b.UseMySQL(connectionString, sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly));
+                options.ConfigureDbContext = b => b.UseMySql(ServerVersion.AutoDetect(connectionString), sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly));
                 // this enables automatic token cleanup. this is optional.
                 options.EnableTokenCleanup = true;
                 // options.TokenCleanupInterval = 15; // frequency in seconds to cleanup stale grants. 15 is useful during debugging

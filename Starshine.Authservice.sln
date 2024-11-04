@@ -5,11 +5,7 @@ VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice", "src\Starshine.Authservice\Starshine.Authservice.csproj", "{F250ED18-37AE-4989-A2A2-A94FD875226D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.Common", "src\Starshine.Authservice.Common\Starshine.Authservice.Common.csproj", "{475B2493-23DA-4760-BA19-4D2E91F0B1E5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.Extensions", "src\Starshine.Authservice.Extensions\Starshine.Authservice.Extensions.csproj", "{8CD8CD18-4C5B-4B3A-8EC7-D95A0C5EB525}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.Model", "src\Starshine.Authservice.Model\Starshine.Authservice.Model.csproj", "{E5936B93-6407-429E-AED0-E36764B32916}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}"
 EndProject
@@ -23,7 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{079AAFD7
 		build\run.sh = build\run.sh
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Authservice.Dto", "src\Starshine.Authservice.Dto\Starshine.Authservice.Dto.csproj", "{B465945C-E820-4CC9-9795-EA3386018D12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.Application", "src\Starshine.Authservice.Application\Starshine.Authservice.Application.csproj", "{3B22F224-80BE-4236-A07B-8DF2B8DF3624}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.Entity", "Starshine.Authservice.Entity\Starshine.Authservice.Entity.csproj", "{0C4C0EE4-1A1F-4B16-B11A-6B5E2B6F210C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.Application.Contracts", "Starshine.Authservice.Application.Contracts\Starshine.Authservice.Application.Contracts.csproj", "{D9C8EC78-5EC6-4CD9-8972-8EABE2437A32}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.EntityFrameworkCore", "src\Starshine.Authservice.EntityFrameworkCore\Starshine.Authservice.EntityFrameworkCore.csproj", "{D4F0CDEF-31CB-4F6C-85A3-A29CF4AFBBD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,32 +37,37 @@ Global
 		{F250ED18-37AE-4989-A2A2-A94FD875226D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F250ED18-37AE-4989-A2A2-A94FD875226D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F250ED18-37AE-4989-A2A2-A94FD875226D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{475B2493-23DA-4760-BA19-4D2E91F0B1E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{475B2493-23DA-4760-BA19-4D2E91F0B1E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{475B2493-23DA-4760-BA19-4D2E91F0B1E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{475B2493-23DA-4760-BA19-4D2E91F0B1E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8CD8CD18-4C5B-4B3A-8EC7-D95A0C5EB525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8CD8CD18-4C5B-4B3A-8EC7-D95A0C5EB525}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CD8CD18-4C5B-4B3A-8EC7-D95A0C5EB525}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CD8CD18-4C5B-4B3A-8EC7-D95A0C5EB525}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E5936B93-6407-429E-AED0-E36764B32916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5936B93-6407-429E-AED0-E36764B32916}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5936B93-6407-429E-AED0-E36764B32916}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5936B93-6407-429E-AED0-E36764B32916}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B465945C-E820-4CC9-9795-EA3386018D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B465945C-E820-4CC9-9795-EA3386018D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B465945C-E820-4CC9-9795-EA3386018D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B465945C-E820-4CC9-9795-EA3386018D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B22F224-80BE-4236-A07B-8DF2B8DF3624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B22F224-80BE-4236-A07B-8DF2B8DF3624}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B22F224-80BE-4236-A07B-8DF2B8DF3624}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B22F224-80BE-4236-A07B-8DF2B8DF3624}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C4C0EE4-1A1F-4B16-B11A-6B5E2B6F210C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C4C0EE4-1A1F-4B16-B11A-6B5E2B6F210C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C4C0EE4-1A1F-4B16-B11A-6B5E2B6F210C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C4C0EE4-1A1F-4B16-B11A-6B5E2B6F210C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9C8EC78-5EC6-4CD9-8972-8EABE2437A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C8EC78-5EC6-4CD9-8972-8EABE2437A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C8EC78-5EC6-4CD9-8972-8EABE2437A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C8EC78-5EC6-4CD9-8972-8EABE2437A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F0CDEF-31CB-4F6C-85A3-A29CF4AFBBD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F0CDEF-31CB-4F6C-85A3-A29CF4AFBBD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F0CDEF-31CB-4F6C-85A3-A29CF4AFBBD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F0CDEF-31CB-4F6C-85A3-A29CF4AFBBD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F250ED18-37AE-4989-A2A2-A94FD875226D} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
-		{475B2493-23DA-4760-BA19-4D2E91F0B1E5} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
 		{8CD8CD18-4C5B-4B3A-8EC7-D95A0C5EB525} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
-		{E5936B93-6407-429E-AED0-E36764B32916} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
-		{B465945C-E820-4CC9-9795-EA3386018D12} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
+		{3B22F224-80BE-4236-A07B-8DF2B8DF3624} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
+		{0C4C0EE4-1A1F-4B16-B11A-6B5E2B6F210C} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
+		{D9C8EC78-5EC6-4CD9-8972-8EABE2437A32} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
+		{D4F0CDEF-31CB-4F6C-85A3-A29CF4AFBBD2} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {908410DD-9E1E-4818-8CC5-B2F91948B075}
