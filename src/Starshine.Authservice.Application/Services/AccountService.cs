@@ -9,12 +9,13 @@ using Starshine.Authservice.Application.Contracts.Services;
 using Starshine.Authservice.Entity;
 using Starshine.Authservice.EntityFrameworkCore.DbContexts;
 using Starshine.Common;
+using Starshine.DependencyInjection;
 using Starshine.Extensions;
 using System.Security.Claims;
 
 namespace Starshine.Authservice.Application.Services
 {
-    public class AccountService : IAccountService
+    public class AccountService : IAccountService,IScopedDependency
     {
         private readonly UserManager<AspNetUsers> _userManager;
         private readonly RoleManager<AspNetRoles> _roleManager;

@@ -57,7 +57,7 @@ namespace Starshine.Authservice
             app.UseStaticFiles();
             app.UseRouting();
             //app.UseCors("default");
-            app.UseConsulService(lifetime);
+            //app.UseConsulService(lifetime);
             app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();

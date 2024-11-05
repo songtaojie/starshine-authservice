@@ -11,7 +11,7 @@ namespace Starshine.Authservice.Entity
         /// 真实姓名
         /// </summary>
         [MaxLength(36)]
-        public string? RealName { get; set; }
+        public string RealName { get; set; }
 
         /// <summary>
         /// 0，保密，1：男，2：女
@@ -32,7 +32,7 @@ namespace Starshine.Authservice.Entity
         /// 地址
         /// </summary>
         [MaxLength(100)]
-        public string? Address { get; set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// 是否删除

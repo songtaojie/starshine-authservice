@@ -20,7 +20,7 @@ namespace Starshine.Authservice.Entity
         /// 描述说明
         /// </summary>
         [MaxLength(200)]
-        public string? Description { get; set; }
+        public string Description { get; set; }
         /// <summary>
         ///排序
         /// </summary>

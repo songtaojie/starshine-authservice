@@ -16,11 +16,11 @@ namespace Starshine.Authservice.Application.Contracts.Dtos.Account
         /// <summary>
         /// 用户名
         /// </summary>
-        public string? UserName { get; set; }
+        public string UserName { get; set; }
         /// <summary>
         /// 真实姓名
         /// </summary>
-        public string? RealName { get; set; }
+        public string RealName { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
