@@ -1,15 +1,10 @@
 using System;
-using System.Linq;
-using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
-using Starshine.Authservice.EntityFrameworkCore.DbContexts;
-using Starshine.Authservice.EntityFrameworkCore.SeedDatas;
-using Starshine.Common;
 Log.Logger = new LoggerConfiguration()
         .MinimumLevel.Debug()
         .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
@@ -18,7 +13,7 @@ Log.Logger = new LoggerConfiguration()
         .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
         .Enrich.FromLogContext()
         // uncomment to write to Azure diagnostics stream
-        .WriteTo.File($"log/{DateTime.Now:yyyy-MM-dd}.log",
+        .WriteTo.File($"logs/log{DateTime.Now:yyyy-MM-dd}.log",
                         fileSizeLimitBytes: 1_000_000,
                         rollOnFileSizeLimit: true,
                         shared: true,
@@ -32,12 +27,11 @@ try
     Log.Information("Starting web application");
     var builder = WebApplication.CreateBuilder();
     builder.ConfigureStarshineWebApp();
-    builder.Services.AddAuthserviceCoreService(builder.Configuration);
-    builder.Logging.ClearProviders();
+    builder.Services.AddAuthserviceCoreService(builder.Configuration,builder.Environment);
     builder.Host.UseSerilogSetup();
     var app = builder.Build();
     app.MigrateDbContext();
-    app.UseAdminCoreApp(builder.Environment);
+    app.UseAuthServiceCoreApp(builder.Environment);
     app.Run();
 }
 catch (Exception ex)

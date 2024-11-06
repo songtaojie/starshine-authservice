@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Hosting
     public static class IHostServiceCollectionExtensions
     {
 
-        public static IApplicationBuilder MigrateDbContext(IApplicationBuilder app)
+        public static IApplicationBuilder MigrateDbContext(this IApplicationBuilder app)
         {
             using (var scope = app.ApplicationServices.CreateScope())
             {

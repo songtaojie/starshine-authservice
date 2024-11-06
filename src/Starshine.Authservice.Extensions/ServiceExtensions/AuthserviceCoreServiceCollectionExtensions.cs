@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Starshine.JsonSerialization;
 using System;
 using System.Collections.Generic;
@@ -12,8 +14,10 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class AuthserviceCoreServiceCollectionExtensions
     {
-        public static void AddAuthserviceCoreService(this IServiceCollection services, IConfiguration configuration)
+        public static void AddAuthserviceCoreService(this IServiceCollection services, IConfiguration configuration,IWebHostEnvironment environment)
         {
+            services.AddSameSiteCookiePolicy();
+
             services.AddAdminOptions();
             services.AddControllersWithViews()
                 .AddMvcOptions(options =>
@@ -43,7 +47,20 @@ namespace Microsoft.Extensions.DependencyInjection
             //services.AddLogoDisplay();
             //// 验证码
             //services.AddLazyCaptcha(configuration);
-        }
+           
+            var mvcBuilder = services.AddControllersWithViews()
+                .AddJsonOptions(jsonOptions =>
+                {
+                    jsonOptions.JsonSerializerOptions.Converters.Add(new SystemTextJsonDateTimeJsonConverter());
+                    jsonOptions.JsonSerializerOptions.Converters.Add(new SystemTextJsonNullableDateTimeJsonConverter());
+                    //json.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+                });
+            if (environment.IsDevelopment())
+            {
+                mvcBuilder.AddRazorRuntimeCompilation();
+            }
 
+            services.AddIdentityServerSetup(configuration);
+        }
     }
 }

@@ -1,0 +1,63 @@
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information", //最小日志记录级别
+      "Override": {
+        "Microsoft": "Information",
+        "Microsoft.AspNetCore": "Warning",
+        "System": "Warning",
+        "System.Net.Http.HttpClient": "Warning",
+        "Quartz": "Information"
+      }
+    },
+    "Enrich": [
+      "FromLogContext"
+    ],
+    "WriteTo": [
+      {
+        "Name": "Console"
+      }, //输出到控制台
+      {
+        "Name": "Async", //异步写入日志
+        "Args": {
+          "configure": [
+            {
+              "Name": "File", //输出文件
+              "Args": {
+                "path": "logs\\Error_Log.txt",
+                "restrictedToMinimumLevel": "Error", // 只记录 Error 等级的日志
+                "shared": false,
+                "outputTemplate": "{NewLine}Date:{Timestamp:yyyy-MM-dd HH:mm:ss.fff} {Level} Class:{SourceContext}{NewLine}Message:{Message}{NewLine}{Exception}",
+                "rollingInterval": "Day" //日志文件生成精度：1：年  2：月 3：日 4：小时
+              }
+            },
+            {
+              "Name": "File", //输出文件
+              "Args": {
+                "path": "logs\\Information_Log.txt",
+                "restrictedToMinimumLevel": "Information", // 只记录 Information 等级的日志
+                "shared": false,
+                "outputTemplate": "{NewLine}Date:{Timestamp:yyyy-MM-dd HH:mm:ss.fff} {Level} Class:{SourceContext}{NewLine}Message:{Message}{NewLine}{Exception}",
+                "rollingInterval": "Day" //日志文件生成精度：1：年  2：月 3：日 4：小时
+              }
+            },
+            {
+              "Name": "File", //输出文件
+              "Args": {
+                "path": "logs2\\Other_Log.txt",
+                "outputTemplate": "{NewLine}Date:{Timestamp:yyyy-MM-dd HH:mm:ss.fff} {Level} Class:{SourceContext}{NewLine}Message:{Message}{NewLine}{Exception}",
+                "rollingInterval": "Day", //日志文件生成精度：1：年  2：月 3：日 4：小时
+              },
+              "Filter": "ByExcluding",
+              "ArgsFilter": {
+                "expression": "Level == Information || Level == Error"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+
+}
+
