@@ -18,6 +18,7 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns>应用构建器</returns>
         public static IApplicationBuilder UseAuthServiceCoreApp(this IApplicationBuilder app, IHostEnvironment env)
         {
+            app.MigrateDbContext();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

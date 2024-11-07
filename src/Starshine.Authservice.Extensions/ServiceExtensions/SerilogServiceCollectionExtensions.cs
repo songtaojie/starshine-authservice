@@ -20,8 +20,9 @@ public static class SerilogServiceCollectionExtensions
         builder.UseSerilog((context, serviceProvider, loggerConfig) =>
         {
             loggerConfig
-             .ReadFrom.Configuration(context.Configuration)
-             .ReadFrom.Services(serviceProvider);
+             .ReadFrom.Configuration(context.Configuration);
+             //.WriteTo.Console();
+             //.ReadFrom.Services(serviceProvider);
         });
         //builder.ConfigureServices(services =>
         //{

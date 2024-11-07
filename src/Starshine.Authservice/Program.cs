@@ -13,7 +13,7 @@ Log.Logger = new LoggerConfiguration()
         .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
         .Enrich.FromLogContext()
         // uncomment to write to Azure diagnostics stream
-        .WriteTo.File($"logs/log{DateTime.Now:yyyy-MM-dd}.log",
+        .WriteTo.File($"logs/Log{DateTime.Now:yyyy-MM-dd}.log",
                         fileSizeLimitBytes: 1_000_000,
                         rollOnFileSizeLimit: true,
                         shared: true,
@@ -30,7 +30,7 @@ try
     builder.Services.AddAuthserviceCoreService(builder.Configuration,builder.Environment);
     builder.Host.UseSerilogSetup();
     var app = builder.Build();
-    app.MigrateDbContext();
+    
     app.UseAuthServiceCoreApp(builder.Environment);
     app.Run();
 }

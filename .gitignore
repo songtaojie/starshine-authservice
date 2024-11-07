@@ -260,11 +260,10 @@ paket-files/
 __pycache__/
 *.pyc
 
-/Hx.IdentityServer/appsettings.Development.json
-/Hx.IdentityServer/appsettings.Production.json
 *.Development.json
 *.Production.json
 *.jwk
 *.db
 *.db-shm
 *.db-wal
+[Ll]ogs/

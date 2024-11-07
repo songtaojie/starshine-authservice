@@ -44,9 +44,9 @@
             {
               "Name": "File", //输出文件
               "Args": {
-                "path": "logs2\\Other_Log.txt",
+                "path": "logs\\Log.txt",
                 "outputTemplate": "{NewLine}Date:{Timestamp:yyyy-MM-dd HH:mm:ss.fff} {Level} Class:{SourceContext}{NewLine}Message:{Message}{NewLine}{Exception}",
-                "rollingInterval": "Day", //日志文件生成精度：1：年  2：月 3：日 4：小时
+                "rollingInterval": "Day" //日志文件生成精度：1：年  2：月 3：日 4：小时
               },
               "Filter": "ByExcluding",
               "ArgsFilter": {
