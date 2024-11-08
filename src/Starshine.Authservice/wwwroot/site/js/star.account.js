@@ -5,11 +5,11 @@
     //默认的配置
     var defaults = {
         login: {
-            class: '.hx-login',
+            class: '.star-login',
             validatecodeurl:''
         },
         register: {
-            class: '.hx-register',
+            class: '.star-register',
             usernameurl: '/account/checkusername',
             emailurl:'/account/checkemail'
         },

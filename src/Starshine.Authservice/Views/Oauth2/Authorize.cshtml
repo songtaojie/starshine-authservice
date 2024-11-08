@@ -4,46 +4,47 @@
     Layout = "_Layout";
 }
 @section styles {
-    <link rel="stylesheet" href="~/site/css/hx.login.css" />
-    <link rel="stylesheet" href="~/site/css/hx.login.bg.css" />
+    <link rel="stylesheet" href="~/site/css/star.login.css" />
+    <link rel="stylesheet" href="~/site/css/star.login.bg.css" />
 }
-<div class="hx-login-wrapper">
-    <div class="hx-login-container">
+<div class="star-login-wrapper">
+    <div class="star-login-container">
         <h1>星海科技</h1>
-
         <partial name="_ValidationSummary" />
         @if (Model.EnableLocalLogin)
         {
-                <form asp-route="authorize" asp-route-returnUrl="@Model.ReturnUrl" class="form hx-login-form">
-                    <input type="hidden" asp-for="ReturnUrl" />
-                    <input class="hx-login-name" value="alice" placeholder="Username" asp-for="Username">
-                    <input class="hx-login-pass" type="password" value="Pass123$" placeholder="Password" asp-for="Password" autocomplete="off">
+            <form asp-route="authorize" asp-route-returnUrl="@Model.ReturnUrl" class="form star-login-form">
+                <input type="hidden" asp-for="ReturnUrl" />
+                <input class="star-login-name" value="alice" placeholder="Username" asp-for="Username">
+                <input class="star-login-pass" type="password" value="Pass123$" placeholder="Password"
+                    asp-for="Password" autocomplete="off">
 
                 @if (Model.AllowRememberLogin)
                 {
-                            <div class="hx-login-remember">
-                                <label asp-for="RememberLogin">
-                                    <input asp-for="RememberLogin">
-                                    <strong>记住我</strong>
-                                </label>
-                            </div>
+                    <div class="star-login-remember">
+                        <label asp-for="RememberLogin">
+                            <input asp-for="RememberLogin">
+                            <strong>记住我</strong>
+                        </label>
+                    </div>
                 }
-                    <button type="submit" class="hx-login" name="button" value="login">Login</button>
-                    <button name="button" value="cancel">Cancel</button>
-                    <p class="hx-to-register"><a href="/account/register" class="register">没有账号? 去注册</a><a href="/account/forgot-password" class="reset">忘记密码？重置</a></p>
-                </form>
+                <button type="submit" class="star-login" name="button" value="login">Login</button>
+                <button name="button" value="cancel">Cancel</button>
+                <p class="star-to-register"><a href="/account/register" class="register">没有账号? 去注册</a><a
+                        href="/account/forgot-password" class="reset">忘记密码？重置</a></p>
+            </form>
         }
 
         @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
         {
-                <div class="alert alert-warning">
-                    <strong>无效的登录请求</strong>
-                    没有为此客户端配置登录方案。
-                </div>
+            <div class="alert alert-warning">
+                <strong>无效的登录请求</strong>
+                没有为此客户端配置登录方案。
+            </div>
         }
     </div>
 
-    <ul class="hx-login-bg-bubbles">
+    <ul class="star-login-bg-bubbles">
         <li></li>
         <li></li>
         <li></li>

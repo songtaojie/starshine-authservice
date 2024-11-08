@@ -24,12 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     //options.Conventions.Add(new WebApiApplicationModelConvention());
                 })
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.Converters.Add(new SystemTextJsonDateTimeJsonConverter());
-                    options.JsonSerializerOptions.Converters.Add(new SystemTextJsonNullableDateTimeJsonConverter());
-                    options.JsonSerializerOptions.Converters.Add(new SystemTextJsonLongToStringJsonConverter());
-                });
+                .AddNewtonsoftJson();
             // 雪花Id
 
             // 配置Nginx转发获取客户端真实IP

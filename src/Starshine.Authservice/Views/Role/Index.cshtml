@@ -5,12 +5,12 @@
 }
 @if (isSuperAdmin)
 {
-    <el-button class="hx-mb-2" type="primary" @@click="onAdd">添加角色</el-button>
+    <el-button class="starshine-mb-2" type="primary" @@click="onAdd">添加角色</el-button>
 }
 <el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
     <el-table-column prop="name" label="角色名称" width="180" header-align="center">
     </el-table-column>
-    <el-table-column prop="description" label="说明"  header-align="center">
+    <el-table-column prop="description" label="说明" header-align="center">
     </el-table-column>
     <el-table-column prop="creater" label="创建者" width="120" header-align="center">
     </el-table-column>
@@ -30,19 +30,14 @@
         </template>
     </el-table-column>
 </el-table>
-<div class="hx-float-right">
-    <el-pagination @@current-change="handleCurrentChange"
-                   :current-page.sync="queryParam.pageIndex"
-                   :page-size="queryParam.pageSize"
-                   background
-                   layout="total, prev, pager, next"
-                   :total="totalCount">
+<div class="starshine-float-right">
+    <el-pagination @@current-change="handleCurrentChange" :current-page.sync="queryParam.pageIndex"
+        :page-size="queryParam.pageSize" background layout="total, prev, pager, next" :total="totalCount">
     </el-pagination>
 </div>
 
 <partial name="~/Views/Role/AddOrUpdate.cshtml" />
 
-@section scripts{
+@section scripts {
     <script src="~/vuejs/role.js"></script>
 }
-

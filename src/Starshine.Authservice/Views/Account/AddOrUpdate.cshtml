@@ -1,11 +1,8 @@
-﻿<el-drawer :title="isAdd?'添加用户':'编辑用户'" :visible.sync="showDrawer" 
-           direction="rtl" 
-           :before-close="handleClose"
-           @@opened="handleOpened"
-           size="40%">
-    <div class="hx-4 hx-flex hx-flex-column hx-h-100" >
-        <el-form :model="form" ref="ruleForm" :rules="isAdd?addRules:editRules" status-icon 
-                 label-width="80px" class="hx-flex-fill">
+﻿<el-drawer :title="isAdd?'添加用户':'编辑用户'" :visible.sync="showDrawer" direction="rtl" :before-close="handleClose"
+    @@opened="handleOpened" size="40%">
+    <div class="starshine-4 starshine-flex starshine-flex-column starshine-h-100">
+        <el-form :model="form" ref="ruleForm" :rules="isAdd?addRules:editRules" status-icon label-width="80px"
+            class="starshine-flex-fill">
             <el-form-item label="用户名" prop="userName">
                 <el-input v-model="form.userName" :disabled="!isAdd"></el-input>
             </el-form-item>
@@ -15,27 +12,28 @@
             <el-form-item label="邮箱" prop="email">
                 <el-input v-model="form.email" :disabled="!isAdd"></el-input>
             </el-form-item>
-            <el-form-item label="密码"  prop="password" v-if="isAdd">
-                <el-input  v-model="form.password" show-password></el-input>
+            <el-form-item label="密码" prop="password" v-if="isAdd">
+                <el-input v-model="form.password" show-password></el-input>
             </el-form-item>
             <el-form-item label="确认密码" prop="confirmPassword" v-if="isAdd">
-                <el-input  v-model="form.confirmPassword" show-password></el-input>
+                <el-input v-model="form.confirmPassword" show-password></el-input>
             </el-form-item>
             <el-form-item label="性别">
-                <el-select v-model="form.sex" placeholder="请选择性别" class="hx-w-100">
+                <el-select v-model="form.sex" placeholder="请选择性别" class="starshine-w-100">
                     <el-option label="未知" value="0"></el-option>
                     <el-option label="男" value="1"></el-option>
                     <el-option label="女" value="2"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="生日">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday" class="hx-w-100">
+                <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday" class="starshine-w-100">
                 </el-date-picker>
             </el-form-item>
         </el-form>
-        <div class="hx-flex">
-            <el-button class="hx-flex-fill" @@click="showDrawer = false">取 消</el-button>
-            <el-button class="hx-flex-fill" type="primary" @@click="handleSubmit('ruleForm')" :loading="loading">{{ loading ? '提交中 ...' : '提 交' }}</el-button>
+        <div class="starshine-flex">
+            <el-button class="starshine-flex-fill" @@click="showDrawer = false">取 消</el-button>
+            <el-button class="starshine-flex-fill" type="primary" @@click="handleSubmit('ruleForm')"
+                :loading="loading">{{ loading ? '提交中 ...' : '提 交' }}</el-button>
         </div>
     </div>
 </el-drawer>

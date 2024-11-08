@@ -1,0 +1,30 @@
+﻿@font-face {
+  font-family: "star-font";
+  src: url("fonts/star-font.eot?oreyti&v=1.0.1");
+  src: url("fonts/star-font.eot?oreyti#iefix&v=1.0.1")
+      format("embedded-opentype"),
+    url("fonts/star-font.ttf?oreyti&v=1.0.1") format("truetype"),
+    url("fonts/star-font.woff?oreyti&v=1.0.1") format("woff"),
+    url("fonts/star-font.svg?oreyti#icomoon&v=1.0.1") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="star-i-"],
+[class*=" star-i-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "star-font" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.star-i-back:before {
+  content: "\e900";
+}

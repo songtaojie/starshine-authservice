@@ -7,29 +7,31 @@
     var request_id = Model.Error?.RequestId;
 }
 @section styles {
-        <style type="text/css">
-            .row {
-                display: -ms-flexbox;
-                display: flex;
-                -ms-flex-wrap: wrap;
-                flex-wrap: wrap;
-                margin-right: -15px;
-                margin-left: -15px;
-            }
+    <style type="text/css">
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .col-sm-6 {
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        @@media (min-width: 576px) {
             .col-sm-6 {
-                position: relative;
-                width: 100%;
-                padding-right: 15px;
-                padding-left: 15px;
+                -ms-flex: 0 0 50%;
+                flex: 0 0 50%;
+                max-width: 50%;
             }
-            @@media (min-width: 576px) {
-                .col-sm-6 {
-                    -ms-flex: 0 0 50%;
-                    flex: 0 0 50%;
-                    max-width: 50%;
-                }
-            }
-        </style>
+        }
+    </style>
 }
 <div class="error-page">
     <div class="lead">
@@ -37,26 +39,26 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <div class="hx-alert hx-alert-danger">
+            <div class="starshine-alert starshine-alert-danger">
                 Sorry, there was an error
                 @if (error != null)
                 {
-                        <strong>
-                            <em>
-                                : @error
-                            </em>
-                        </strong>
+                    <strong>
+                        <em>
+                            : @error
+                        </em>
+                    </strong>
 
                     if (errorDescription != null)
                     {
-                                <div>@errorDescription</div>
+                        <div>@errorDescription</div>
                     }
                 }
             </div>
 
             @if (request_id != null)
             {
-                    <div class="request-id">Request Id: @request_id</div>
+                <div class="request-id">Request Id: @request_id</div>
             }
         </div>
     </div>

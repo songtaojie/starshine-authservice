@@ -53,8 +53,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\site\js\" />
-  </ItemGroup>
-
 </Project>

@@ -1,32 +1,31 @@
-﻿
-@{
+﻿@{
     string active = ViewBag.Active;
 }
-<aside class="d-flex flex-column hx-aside hx-aside-dark" >
-    <div class="hx-aside-menu flex-fill hx-bg-light hx-aside-text">
+<aside class="d-flex flex-column starshine-aside starshine-aside-dark">
+    <div class="starshine-aside-menu flex-fill starshine-bg-light starshine-aside-text">
         <ul class="navbar-nav flex-column pt-4">
-            <li class="hx-aside-menu-item @(string.IsNullOrEmpty(active) || active == "account"?"active":"")">
-                <a class="hx-aside-link" href="/account/list">
+            <li class="starshine-aside-menu-item @(string.IsNullOrEmpty(active) || active == "account"?"active":"")">
+                <a class="starshine-aside-link" href="/account/list">
                     <i class="fa fa-file-text"></i>
-                    <span class="hx-aside-link-text">用户管理</span>
+                    <span class="starshine-aside-link-text">用户管理</span>
                 </a>
             </li>
-            <li class="hx-aside-menu-item @(active == "client"?"active":"")">
-                <a class="hx-aside-link" href="/ClientsManager/index">
+            <li class="starshine-aside-menu-item @(active == "client"?"active":"")">
+                <a class="starshine-aside-link" href="/ClientsManager/index">
                     <i class="fa fa-recycle"></i>
-                    <span class="hx-aside-link-text">客户端管理</span>
+                    <span class="starshine-aside-link-text">客户端管理</span>
                 </a>
             </li>
-            <li class="hx-aside-menu-item @(active == "apiresource"?"active":"")">
-                <a class="hx-aside-link" href="/ApiResourcesManager/index">
+            <li class="starshine-aside-menu-item @(active == "apiresource"?"active":"")">
+                <a class="starshine-aside-link" href="/ApiResourcesManager/index">
                     <i class="fa fa-edge"></i>
-                    <span class="hx-aside-link-text">资源api</span>
+                    <span class="starshine-aside-link-text">资源api</span>
                 </a>
             </li>
-            <li class="hx-aside-menu-item @(active == "grants"?"active":"")">
-                <a class="hx-aside-link" href="/grants">
+            <li class="starshine-aside-menu-item @(active == "grants"?"active":"")">
+                <a class="starshine-aside-link" href="/grants">
                     <i class="fa fa-edge"></i>
-                    <span class="hx-aside-link-text">授权</span>
+                    <span class="starshine-aside-link-text">授权</span>
                 </a>
             </li>
         </ul>

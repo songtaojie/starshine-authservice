@@ -1,18 +1,20 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title - 海·星の博客</title>
     <style>
-        .hx-alert {
+        .starshine-alert {
             position: relative;
             padding: 0.75rem 1.25rem;
             margin-bottom: 1rem;
             border: 1px solid transparent;
             border-radius: 0.25rem;
         }
-        .hx-alert-danger {
+
+        .starshine-alert-danger {
             color: #721c24;
             background-color: #f8d7da;
             border-color: #f5c6cb;
@@ -20,8 +22,10 @@
     </style>
     @RenderSection("styles", required: false)
 </head>
+
 <body>
     @RenderBody()
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

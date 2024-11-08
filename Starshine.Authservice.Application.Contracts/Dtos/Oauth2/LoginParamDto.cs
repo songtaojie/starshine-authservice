@@ -31,5 +31,7 @@ namespace Starshine.Authservice.Application.Contracts.Dtos.Oauth2
         /// 登录后跳转url
         /// </summary>
         public string ReturnUrl { get; set; }
+
+        public bool IsSub {  get; set; }
     }
 }
