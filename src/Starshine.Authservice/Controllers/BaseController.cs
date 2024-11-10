@@ -7,7 +7,7 @@ namespace Starshine.Authservice.Controllers
 {
 
     [SecurityHeaders]
-    public class BaseController : Controller
+    public class BaseController : ControllerBase
     {
         /// <summary>
         /// 是否已授权
@@ -58,34 +58,6 @@ namespace Starshine.Authservice.Controllers
             {
                 return User.Identity?.Name;
             }
-        }
-
-        protected IActionResult Success(object data)
-        {
-            return Json(new AjaxResult<object>()
-            {
-                Succeeded = true,
-                Data = data
-            });
-        }
-
-        protected IActionResult Error(string message)
-        {
-            return Json(new AjaxResult<object>
-            {
-                Succeeded = false,
-                Message = message
-            });
-        }
-
-        protected IActionResult Error(string message, int code)
-        {
-            return Json(new AjaxResult<object>
-            {
-                StatusCode = code,
-                Succeeded = false,
-                Message = message
-            });
         }
     }
 }

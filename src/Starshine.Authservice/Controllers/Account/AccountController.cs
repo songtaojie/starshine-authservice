@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Starshine.Authservice.Application.Contracts.Services;
 using Starshine.Authservice.Application.Contracts.Dtos.Account;
 using Starshine.Authservice.Entity.Consts;
+using Starshine.Common;
+using System.Collections.Generic;
 
 namespace Starshine.Authservice.Controllers
 {
@@ -24,34 +26,34 @@ namespace Starshine.Authservice.Controllers
         }
 
         #region 用户相关的操作
-        [HttpGet]
-        [Authorize]
-        public ActionResult Index(string returnUrl = null)
-        {
-            ViewData["IsSuperAdmin"] = this.IsSuperAdmin;
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
+        //[HttpGet]
+        //[Authorize]
+        //public ActionResult Index(string returnUrl = null)
+        //{
+        //    ViewData["IsSuperAdmin"] = this.IsSuperAdmin;
+        //    ViewData["ReturnUrl"] = returnUrl;
+        //    return View();
+        //}
 
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> GetPage(AccountPageParamDto param)
+        [HttpGet]
+        //[Authorize]
+        public async Task<PagedListResult<AccountPageResultDto>> GetPage([FromQuery]AccountPageParamDto param)
         {
             var result = await _accountService.GetPage(param);
-            return Success(result);
+            return result;
         }
 
-        /// <summary>
-        /// 注册页面
-        /// </summary>
-        /// <param name="returnUrl"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public IActionResult Register(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
+        ///// <summary>
+        ///// 注册页面
+        ///// </summary>
+        ///// <param name="returnUrl"></param>
+        ///// <returns></returns>
+        //[HttpGet]
+        //public IActionResult Register(string returnUrl = null)
+        //{
+        //    ViewData["ReturnUrl"] = returnUrl;
+        //    return View();
+        //}
 
         /// <summary>
         /// 注册功能
@@ -60,11 +62,11 @@ namespace Starshine.Authservice.Controllers
         /// <param name="returnUrl"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Policy = ConstKey.SuperAdmin)]
-        public async Task<IActionResult> CreateOrUpdate([FromBody] AccountCreateParamDto param)
+        //[Authorize(Policy = ConstKey.SuperAdmin)]
+        public async Task<bool> CreateOrUpdate([FromBody] AccountCreateParamDto param)
         {
             var result = await _accountService.CreateOrUpdate(param);
-            return Success(result);
+            return result;
         }
 
         /// <summary>
@@ -72,11 +74,11 @@ namespace Starshine.Authservice.Controllers
         /// </summary>
         /// <param name="userId">用户id</param>
         /// <returns></returns>
-        [HttpGet("account/getrole/{userId}")]
-        public async Task<IActionResult> GetRole(string userId)
+        [HttpGet("{userId}")]
+        public async Task<IList<string>> GetRole(string userId)
         {
             var result = await _accountService.GetRolesAsync(userId);
-            return Success(result);
+            return result;
         }
 
         /// <summary>
@@ -85,11 +87,11 @@ namespace Starshine.Authservice.Controllers
         /// <param name="id">用户id</param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Policy = ConstKey.SuperAdmin)]
-        public async Task<IActionResult> AssignRole(AssignRoleParamDto param)
+        //[Authorize(Policy = ConstKey.SuperAdmin)]
+        public async Task<bool> AssignRole(AssignRoleParamDto param)
         {
             var result = await _accountService.AssignRole(param);
-            return Success(result);
+            return result;
         }
 
 
@@ -98,11 +100,11 @@ namespace Starshine.Authservice.Controllers
         /// </summary>
         /// <param name="id">用户id</param>
         /// <returns></returns>
-        [HttpGet("account/get/{id}")]
-        public async Task<IActionResult> Get(string id)
+        [HttpGet("{id}")]
+        public async Task<AccountDetailResultDto> Get(string id)
         {
             var result = await _accountService.GetById(id);
-            return Success(result);
+            return result;
         }
 
 
@@ -111,13 +113,13 @@ namespace Starshine.Authservice.Controllers
         /// </summary>
         /// <param name="id">要删除的用户的id</param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("account/delete/{id}")]
-        [Authorize(Policy = ConstKey.SuperAdmin)]
-        public async Task<IActionResult> Delete(string id)
+        [HttpDelete]
+        //[Route("account/delete/{id}")]
+        //[Authorize(Policy = ConstKey.SuperAdmin)]
+        public async Task<bool> Delete(string id)
         {
             var result = await _accountService.DeleteById(id);
-            return Success(result);
+            return result;
         }
         #endregion
 
@@ -127,11 +129,11 @@ namespace Starshine.Authservice.Controllers
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        [HttpPost, HttpGet]
-        public async Task<IActionResult> VerifyUserName(string userName)
+        [HttpGet]
+        public async Task<bool> VerifyUserName(string userName)
         {
             var result = await _accountService.VerifyUserName(userName);
-            return Success(result);
+            return result;
         }
 
         /// <summary>
@@ -139,34 +141,12 @@ namespace Starshine.Authservice.Controllers
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        [HttpPost, HttpGet]
-        public async Task<IActionResult> VerifyEmail(string email)
+        [HttpGet]
+        public async Task<bool> VerifyEmail(string email)
         {
             var result = await _accountService.VerifyEmail(email);
-            return Success(result);
+            return result;
         }
         #endregion 
-
-        #region 私有函数
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(AccountController.Index), "Account");
-            }
-        }
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-        }
-        #endregion
     }
 }
