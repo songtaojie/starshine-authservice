@@ -2,20 +2,20 @@
     string active = ViewBag.Active;
     active = string.IsNullOrEmpty(active) ? "/" : active;
 }
-<el-aside class="starshine-flex starshine-flex-column starshine-aside" :class="isCollapse?'starshine-aside-mini':''"
+<el-aside class="star-flex star-flex-column star-aside" :class="isCollapse?'star-aside-mini':''"
     :style="isCollapse ?'width: 3.75rem;':'width: 14rem;'">
-    <div class="starshine-flex starshine-aside-brand starshine-justify-content-center">
-        <div class="starshine-flex starshine-align-items-center starshine-brand-logo">
-            <a class="starshine-flex starshine-text-white" href="/">
+    <div class="star-flex star-aside-brand star-justify-content-center">
+        <div class="star-flex star-align-items-center star-brand-logo">
+            <a class="star-flex star-text-white" href="/">
                 海·星の博客
             </a>
         </div>
-        <button class="starshine-navbar-toggler thin-toggler" type="button" @@click="isCollapse=!isCollapse">
-            <span class="starshine-navbar-toggler-icon"></span>
+        <button class="star-navbar-toggler thin-toggler" type="button" @@click="isCollapse=!isCollapse">
+            <span class="star-navbar-toggler-icon"></span>
         </button>
     </div>
-    <el-scrollbar wrap-class="" class="starshine-aside-scrollbar">
-        <el-menu default-active="@active" class="starshine-aside-menu" unique-opened background-color="#3b3e47"
+    <el-scrollbar wrap-class="" class="star-aside-scrollbar">
+        <el-menu default-active="@active" class="star-aside-menu" unique-opened background-color="#3b3e47"
             text-color="#fff" active-text-color="#ffd04b" :collapse="isCollapse" @@select="onMenuSelect">
             <el-menu-item index="/">
                 <i class="el-icon-user"></i>

@@ -1,5 +1,5 @@
 ﻿@{
-    string appId = "starshine" + Guid.NewGuid().ToString();
+    string appId = "star" + Guid.NewGuid().ToString();
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@
             overflow: scroll;
         }
 
-        .starshine-alert {
+        .star-alert {
             position: relative;
             padding: 0.75rem 1.25rem;
             margin-bottom: 1rem;
@@ -30,7 +30,7 @@
             border-radius: 0.25rem;
         }
 
-        .starshine-alert-danger {
+        .star-alert-danger {
             color: #721c24;
             background-color: #f8d7da;
             border-color: #f5c6cb;
@@ -40,17 +40,17 @@
 </head>
 
 <body>
-    <div class="starshine-dark" id="app" data-id="@appId">
+    <div class="star-dark" id="app" data-id="@appId">
         <el-container>
             <partial name="~/Views/Layout/VAside.cshtml" view-data="ViewData" />
-            <el-container :class="isCollapse?'starshine-body starshine-aside-mini':'starshine-body'">
+            <el-container :class="isCollapse?'star-body star-aside-mini':'star-body'">
                 <partial name="~/Views/Layout/VHeader.cshtml" />
                 <el-main> @RenderBody()</el-main>
             </el-container>
         </el-container>
     </div>
     <partial name="_Scripts" />
-    <script src="~/vuejs/starshine.common.js"></script>
+    <script src="~/vuejs/star.common.js"></script>
     @RenderSection("scripts", required: false)
     <script src="~/vuejs/main.js"></script>
 </body>

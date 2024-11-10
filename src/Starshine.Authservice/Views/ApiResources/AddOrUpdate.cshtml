@@ -1,7 +1,7 @@
 ﻿<el-drawer :title="isAdd?'添加Api资源':'编辑Api资源'" :visible.sync="showDrawer" direction="rtl" :before-close="handleClose"
     @@opened="handleOpened" size="50%">
-    <div class="starshine-4 starshine-flex starshine-flex-column starshine-h-100">
-        <el-form :model="form" ref="ruleForm" :rules="rules" status-icon label-width="90px" class="starshine-flex-fill">
+    <div class="star-4 star-flex star-flex-column star-h-100">
+        <el-form :model="form" ref="ruleForm" :rules="rules" status-icon label-width="90px" class="star-flex-fill">
             <el-form-item label="资源名称" prop="name">
                 <el-input v-model="form.name" :disabled="!isAdd"></el-input>
             </el-form-item>
@@ -18,9 +18,9 @@
                 <el-switch v-model="form.enabled"></el-switch>
             </el-form-item>
         </el-form>
-        <div class="starshine-flex">
-            <el-button class="starshine-flex-fill" @@click="showDrawer = false">取 消</el-button>
-            <el-button class="starshine-flex-fill" type="primary" @@click="handleSubmit('ruleForm')"
+        <div class="star-flex">
+            <el-button class="star-flex-fill" @@click="showDrawer = false">取 消</el-button>
+            <el-button class="star-flex-fill" type="primary" @@click="handleSubmit('ruleForm')"
                 :loading="loading">{{ loading ? '提交中 ...' : '提 交' }}</el-button>
         </div>
     </div>

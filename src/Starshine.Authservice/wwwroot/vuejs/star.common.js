@@ -34,7 +34,7 @@
     )
     var enumerables = [//'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 
         'valueOf', 'toLocaleString', 'toString', 'constructor'];
-    var hxCommon = {
+    var common = {
         /**
        * 如果传递的值是JavaScript数组，则返回' true '，否则返回' false '.
        * @param {Object} target The target to test.
@@ -100,7 +100,7 @@
         apply(object, config, defaults) {
             if (object) {
                 if (defaults) {
-                    hxCommon.apply(object, defaults);
+                    common.apply(object, defaults);
                 }
 
                 if (config && typeof config === 'object') {
@@ -125,19 +125,19 @@
         },
     }
     function HxVue(options) {
-        if (hxCommon.isFunction(options.data)) {
+        if (common.isFunction(options.data)) {
             this.data = function () {
                 return options.data
             }
-        } else if (hxCommon.isObject(options.data)) {
+        } else if (common.isObject(options.data)) {
             this.data = function () {
-                return hxCommon.apply({}, options.data)
+                return common.apply({}, options.data)
             }
         }
-        if (hxCommon.isObject(options.methods)) {
-            this.methods = hxCommon.apply({}, options.methods, hxCommon)
+        if (common.isObject(options.methods)) {
+            this.methods = common.apply({}, options.methods, common)
         } else {
-            this.methods = hxCommon
+            this.methods = common
         }
         this.created = options.created
         return this

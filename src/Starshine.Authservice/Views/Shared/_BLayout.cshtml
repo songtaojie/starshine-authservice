@@ -10,14 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title - 海·星の博客</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/starshine/starshine.base.css" />
+    <link rel="stylesheet" href="~/site/css/star.base.css" />
     @if (!isLoginPage)
     {
         <link rel="stylesheet" href="~/lib/alertifyjs/css/alertify.min.css" />
-        <link rel="stylesheet" href="~/lib/alertifyjs/css/themes/starshine.alertify.css" />
+        <link rel="stylesheet" href="~/lib/alertifyjs/css/themes/star.alertify.css" />
         <link href="~/font/font-awesome.min.css" rel="stylesheet" />
-        <link href="~/css/starshinelayout/starshine.layout.css" rel="stylesheet" />
-        <link href="~/css/starshinelayout/starshine-layout-dark.css" rel="stylesheet" />
+        <link href="~/css/starshinelayout/star.layout.css" rel="stylesheet" />
+        <link href="~/css/starshinelayout/star-layout-dark.css" rel="stylesheet" />
     }
     @RenderSection("styles", required: false)
 </head>
@@ -29,9 +29,9 @@
     }
     else
     {
-        <div class="starshine-dark">
+        <div class="star-dark">
             <partial name="~/Views/Layout/Header.cshtml" />
-            <div class="d-flex starshine-body">
+            <div class="d-flex star-body">
                 <partial name="~/Views/Layout/Aside.cshtml" view-data="ViewData" />
                 <div class="flex-fill container-fluid">
                     @RenderBody()
@@ -45,10 +45,10 @@
         <script src="~/lib/jquery.slimscroll/jquery.slimscroll.js"></script>
         <script src="~/lib/popper/popper.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/starshine.core.js"></script>
+        <script src="~/site/js/star.core.js"></script>
         <script src="~/lib/alertifyjs/alertify.min.js"></script>
-        <script src="~/lib/alertifyjs/starshine.alertify.js"></script>
-        <script src="~/js/starshinelayout/starshine.layout.js"></script>
+        <script src="~/lib/alertifyjs/star.alertify.js"></script>
+        <script src="~/site/js/star.layout.js"></script>
     }
     @RenderSection("scripts", required: false)
 </body>
