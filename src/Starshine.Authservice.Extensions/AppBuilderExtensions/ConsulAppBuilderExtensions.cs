@@ -1,10 +1,9 @@
 ﻿using Consul;
-using Starshine.Authservice.Common;
-using Starshine.Authservice.Options;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Extensions.Options;
+using Starshine.Authservice.Entity.Options;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -18,7 +17,8 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns></returns>
         public static IApplicationBuilder UseConsulService(this IApplicationBuilder app, IHostApplicationLifetime lifetime)
         {
-            var consulSettings = AppSettings.GetConfig<ConsulSettings>("ConsulSettings");
+            var options = app.ApplicationServices.GetRequiredService<IOptions<ConsulSettingsOptions>>();
+            var consulSettings = options.Value;
             if (consulSettings == null || string.IsNullOrEmpty(consulSettings.Address)) throw new Exception("ConsulSettings configuration missing");
             var consulClient = new ConsulClient(c =>
             {

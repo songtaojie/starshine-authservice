@@ -1,11 +1,7 @@
-﻿<el-drawer title="编辑作用域/跨域" :visible.sync="showDrawer"
-           direction="rtl"
-           :before-close="handleClose"
-           @@opened="handleOpened"
-           size="50%">
-    <div class="hx-4 hx-flex hx-flex-column hx-h-100">
-        <el-form :model="form" ref="ruleForm" status-icon
-                 label-width="90px" class="hx-flex-fill">
+﻿<el-drawer title="编辑作用域/跨域" :visible.sync="showDrawer" direction="rtl" :before-close="handleClose"
+    @@opened="handleOpened" size="50%">
+    <div class="star-4 star-flex star-flex-column star-h-100">
+        <el-form :model="form" ref="ruleForm" status-icon label-width="90px" class="star-flex-fill">
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="客户端" prop="clientId">
@@ -22,13 +18,14 @@
                 <el-input v-model="form.redirectUris" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
             </el-form-item>
             <el-form-item label="退出回调" prop="postLogoutRedirectUris">
-                <el-input v-model="form.postLogoutRedirectUris" type="textarea" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
+                <el-input v-model="form.postLogoutRedirectUris" type="textarea"
+                    :autosize="{ minRows: 2, maxRows: 4}"></el-input>
             </el-form-item>
         </el-form>
-        <div class="hx-flex">
-            <el-button class="hx-flex-fill" @@click="showDrawer = false">取 消</el-button>
-            <el-button class="hx-flex-fill" type="primary" @@click="handleSubmit('ruleForm')" :loading="loading">{{ loading ? '提交中 ...' : '提 交' }}</el-button>
+        <div class="star-flex">
+            <el-button class="star-flex-fill" @@click="showDrawer = false">取 消</el-button>
+            <el-button class="star-flex-fill" type="primary" @@click="handleSubmit('ruleForm')"
+                :loading="loading">{{ loading ? '提交中 ...' : '提 交' }}</el-button>
         </div>
     </div>
 </el-drawer>
-

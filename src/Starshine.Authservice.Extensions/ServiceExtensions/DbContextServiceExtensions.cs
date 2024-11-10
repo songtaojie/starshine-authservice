@@ -1,13 +1,13 @@
-﻿using Starshine.Authservice.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Starshine.Authservice.EntityFrameworkCore.DbContexts;
 using System;
-
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class DbContextServiceExtensions
     {
-        private static readonly string migrationsAssembly = "Starshine.Authservice.Model";
+        private static readonly string migrationsAssembly = "Starshine.Authservice.EntityFrameworkCore";
         /// <summary>
         /// 添加ApplicationDbContext
         /// </summary>
@@ -15,10 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configuration"></param>
         public static IServiceCollection AddApplicationDb(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("MySqlConnectionString");
-            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentException("缺少数据库连接字符串配置");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(connectionString,
-                        sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly)));
+            services.AddDbContext<ApplicationDbContext, ApplicationDbContext>(options => ConfigDbContextOptions(options,configuration));
             return services;
         }
 
@@ -29,22 +26,42 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configuration"></param>
         public static IIdentityServerBuilder AddConfigAndOperateStore(this IIdentityServerBuilder builder, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("MySqlConnectionString");
-            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentException("缺少数据库连接字符串配置");
             builder.AddConfigurationStore(options =>
              {
-                 options.ConfigureDbContext = b => b.UseMySQL(connectionString, sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly));
+                 options.ConfigureDbContext = b => ConfigDbContextOptions(b,configuration);
              })
             // this adds the operational data from DB (codes, tokens, consents)
             .AddOperationalStore(options =>
             {
-                options.ConfigureDbContext = b => b.UseMySQL(connectionString, sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly));
+                options.ConfigureDbContext = b => ConfigDbContextOptions(b, configuration);
                 // this enables automatic token cleanup. this is optional.
                 options.EnableTokenCleanup = true;
                 // options.TokenCleanupInterval = 15; // frequency in seconds to cleanup stale grants. 15 is useful during debugging
             });
 
             return builder;
+        }
+
+        private static void ConfigDbContextOptions(DbContextOptionsBuilder optionsBuilder,IConfiguration configuration)
+        {
+            var dbType = configuration.GetConnectionString("DbType");
+            var connectionString = configuration.GetConnectionString("DefaultConnectionString");
+            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentException("缺少数据库连接字符串配置");
+            switch (dbType.ToLower())
+            {
+                case "mysql":
+                    optionsBuilder.UseMySql(ServerVersion.AutoDetect(connectionString),
+                        sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly));
+                    break;
+                case "sqlserver":
+                    optionsBuilder.UseSqlServer(connectionString, 
+                        sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly));
+                    break;
+                default:
+                    optionsBuilder.UseSqlite(connectionString,
+                        sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly));
+                    break;
+            }
         }
     }
 

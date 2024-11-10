@@ -24,18 +24,13 @@
         </template>
     </el-table-column>
 </el-table>
-<div class="hx-float-right">
-    <el-pagination @@current-change="handleCurrentChange"
-                   :current-page.sync="queryParam.pageIndex"
-                   :page-size="queryParam.pageSize"
-                   background
-                   layout="total, prev, pager, next"
-                   :total="totalCount">
+<div class="star-float-right">
+    <el-pagination @@current-change="handleCurrentChange" :current-page.sync="queryParam.pageIndex"
+        :page-size="queryParam.pageSize" background layout="total, prev, pager, next" :total="totalCount">
     </el-pagination>
 </div>
 <partial name="~/Views/ClientsManager/ScEdit.cshtml" />
 
-@section scripts{
+@section scripts {
     <script src="~/vuejs/client.sc.js"></script>
 }
-

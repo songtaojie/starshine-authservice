@@ -8,7 +8,7 @@
 }
 @if (isSuperAdmin)
 {
-    <el-button class="hx-mb-2" type="primary" @@click="onAdd">添加Api资源</el-button>
+    <el-button class="star-mb-2" type="primary" @@click="onAdd">添加Api资源</el-button>
 }
 <el-table :data="tableData" border style="width: 100%" :header-cell-style="{background:'#eef1f6',color:'#606266'}">
     <el-table-column prop="name" label="资源名称" width="120" header-align="center">
@@ -36,19 +36,14 @@
         </template>
     </el-table-column>
 </el-table>
-<div class="hx-float-right">
-    <el-pagination @@current-change="handleCurrentChange"
-                   :current-page.sync="queryParam.pageIndex"
-                   :page-size="queryParam.pageSize"
-                   background
-                   layout="total, prev, pager, next"
-                   :total="totalCount">
+<div class="star-float-right">
+    <el-pagination @@current-change="handleCurrentChange" :current-page.sync="queryParam.pageIndex"
+        :page-size="queryParam.pageSize" background layout="total, prev, pager, next" :total="totalCount">
     </el-pagination>
 </div>
 
 <partial name="~/Views/ApiResources/AddOrUpdate.cshtml" />
 
-@section scripts{
+@section scripts {
     <script src="~/vuejs/apiresources.js"></script>
 }
-

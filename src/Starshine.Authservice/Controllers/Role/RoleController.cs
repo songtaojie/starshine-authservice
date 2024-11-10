@@ -1,18 +1,12 @@
-﻿using Hx.IdentityServer.Common;
-using Hx.IdentityServer.Entity;
-using Hx.IdentityServer.Model.Role;
-using Hx.Sdk.Extensions;
-using IdentityServer4.EntityFramework.DbContexts;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Starshine.Authservice.Application.Contracts.Dtos.Role;
+using Starshine.Authservice.Application.Contracts.Services;
+using Starshine.Authservice.Entity.Consts;
 
-namespace Hx.IdentityServer.Controllers.Role
+namespace Starshine.Authservice.Controllers.Role
 {
     /// <summary>
     /// 角色管理
@@ -22,11 +16,11 @@ namespace Hx.IdentityServer.Controllers.Role
     [Authorize]
     public class RoleController : BaseController
     {
-        private readonly RoleManager<AspNetRoles> _roleManager;
+        private readonly IRoleService _roleService;
 
-        public RoleController(RoleManager<AspNetRoles> roleManager)
+        public RoleController(IRoleService roleService)
         {
-            _roleManager = roleManager;
+            _roleService = roleService;
         }
 
         /// <summary>
@@ -48,19 +42,8 @@ namespace Hx.IdentityServer.Controllers.Role
         [HttpPost]
         public async Task<IActionResult> GetList()
         {
-            var list = await _roleManager.Roles.Where(r => r.Deleted == ConstKey.No)
-                .OrderByDescending(r => r.CreateTime)
-                .OrderBy(r => r.OrderSort)
-                .Select(r => new RolePageModel
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    Description = r.Description,
-                    Creater = r.Creater,
-                    CreateTime = r.CreateTime,
-                    Enabled = r.Enabled
-                }).ToListAsync();
-            return Success(list);
+            var result = await _roleService.GetList();
+            return Success(result);
         }
 
         /// <summary>
@@ -69,22 +52,11 @@ namespace Hx.IdentityServer.Controllers.Role
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> GetPage([FromBody] RolePageParam param)
+        public async Task<IActionResult> GetPage(RolePageParamDto param)
         {
             //没有过滤的记录数
-            var query = await _roleManager.Roles.Where(r => r.Deleted == ConstKey.No)
-                .OrderByDescending(r => r.CreateTime)
-                .OrderBy(r => r.OrderSort)
-                .Select(r => new RolePageModel
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    Description = r.Description,
-                    Creater = r.Creater,
-                    CreateTime = r.CreateTime,
-                    Enabled = r.Enabled 
-                }).ToOrderAndPageListAsync(param);
-            return Success(query);
+            var result = await _roleService.GetPage(param);
+            return Success(result);
         }
         /// <summary>
         /// 获取用户名明细信息
@@ -94,17 +66,8 @@ namespace Hx.IdentityServer.Controllers.Role
         [HttpGet("{roleId}")]
         public async Task<IActionResult> Get(string roleId)
         {
-            var detail = await _roleManager.Roles.Where(r => r.Id == roleId)
-                .Select(r => new RoleDetailModel
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    Description = r.Description,
-                    Enabled = r.Enabled,
-                    OrderSort = r.OrderSort
-                }).FirstOrDefaultAsync();
-            if (detail == null) return Error("未找到当前角色信息");
-            return Success(detail);
+            var result = await _roleService.GeById(roleId);
+            return Success(result);
         }
 
         /// <summary>
@@ -113,22 +76,11 @@ namespace Hx.IdentityServer.Controllers.Role
         /// <returns></returns>
         [HttpPost]
         [Authorize(Policy = ConstKey.SuperAdmin)]
-        public async Task<IActionResult> Create(RoleCreateModel request)
+        public async Task<IActionResult> Create(RoleCreateParamDto request)
         {
             if (request == null) return Error("请求参数不正确");
-            var role = new AspNetRoles
-            {
-                Name = request.Name,
-                Description = request.Description,
-                Enabled = request.Enabled,
-                OrderSort = request.OrderSort
-            };
-            role.SetCreater(UserId, UserName);
-
-
-            var result = await _roleManager.CreateAsync(role);
-            if(!result.Succeeded) return Error(result.Errors.FirstOrDefault().Description);
-            return Success("添加成功");
+            var result = await _roleService.Create(request);
+            return Success(result);
         }
 
         /// <summary>
@@ -137,19 +89,11 @@ namespace Hx.IdentityServer.Controllers.Role
         /// <returns></returns>
         [HttpPost]
         [Authorize(Policy = ConstKey.SuperAdmin)]
-        public async Task<IActionResult> Update(RoleCreateModel request)
+        public async Task<IActionResult> Update(RoleCreateParamDto request)
         {
             if (request == null) return Error("请求参数不正确");
-            var role = await _roleManager.FindByIdAsync(request.Id);
-            if (role == null) return Error("未找到角色信息");
-            role.Name = request.Name;
-            role.Description = request.Description;
-            role.Enabled = request.Enabled;
-            role.OrderSort = request.OrderSort;
-            role.SetModifier(UserId, UserName);
-            var result = await _roleManager.UpdateAsync(role);
-            if (!result.Succeeded) return Error(result.Errors.FirstOrDefault().Description);
-            return Success("更新成功");
+            var result = await _roleService.Update(request);
+            return Success(result);
         }
 
         /// <summary>
@@ -162,13 +106,8 @@ namespace Hx.IdentityServer.Controllers.Role
         {
             try
             {
-                var role = new AspNetRoles()
-                {
-                    Id = id
-                };
-                var result = await _roleManager.UpdateAsync(role);
-                if (!result.Succeeded) return Error(result.Errors.FirstOrDefault().Description);
-                return Success("删除成功");
+                var result = await _roleService.DeleteById(id);
+                return Success(result);
             }
             catch (Exception e)
             {

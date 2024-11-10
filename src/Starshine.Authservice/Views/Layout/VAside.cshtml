@@ -1,24 +1,22 @@
-﻿@{ 
+﻿@{
     string active = ViewBag.Active;
     active = string.IsNullOrEmpty(active) ? "/" : active;
 }
-<el-aside class="hx-flex hx-flex-column hx-aside" 
-          :class="isCollapse?'hx-aside-mini':''" 
-          :style="isCollapse ?'width: 3.75rem;':'width: 14rem;'">
-    <div class="hx-flex hx-aside-brand hx-justify-content-center">
-        <div class="hx-flex hx-align-items-center hx-brand-logo">
-            <a class="hx-flex hx-text-white" href="/">
+<el-aside class="star-flex star-flex-column star-aside" :class="isCollapse?'star-aside-mini':''"
+    :style="isCollapse ?'width: 3.75rem;':'width: 14rem;'">
+    <div class="star-flex star-aside-brand star-justify-content-center">
+        <div class="star-flex star-align-items-center star-brand-logo">
+            <a class="star-flex star-text-white" href="/">
                 海·星の博客
             </a>
         </div>
-        <button class="hx-navbar-toggler thin-toggler" type="button" @@click="isCollapse=!isCollapse">
-            <span class="hx-navbar-toggler-icon"></span>
+        <button class="star-navbar-toggler thin-toggler" type="button" @@click="isCollapse=!isCollapse">
+            <span class="star-navbar-toggler-icon"></span>
         </button>
     </div>
-    <el-scrollbar wrap-class="" class="hx-aside-scrollbar">
-        <el-menu default-active="@active" class="hx-aside-menu" unique-opened
-                 background-color="#3b3e47" text-color="#fff" active-text-color="#ffd04b"
-                 :collapse="isCollapse" @@select="onMenuSelect">
+    <el-scrollbar wrap-class="" class="star-aside-scrollbar">
+        <el-menu default-active="@active" class="star-aside-menu" unique-opened background-color="#3b3e47"
+            text-color="#fff" active-text-color="#ffd04b" :collapse="isCollapse" @@select="onMenuSelect">
             <el-menu-item index="/">
                 <i class="el-icon-user"></i>
                 <span slot="title">用户管理</span>
@@ -37,8 +35,8 @@
                 <el-menu-item index="/client/ru">配置回调地址</el-menu-item>
             </el-submenu>
             @*<el-menu-item index="/client">
-                <i class="el-icon-menu"></i>
-                <span slot="title">客户端管理</span>
+            <i class="el-icon-menu"></i>
+            <span slot="title">客户端管理</span>
             </el-menu-item>*@
             <el-menu-item index="/apiresource">
                 <i class="el-icon-document"></i>
@@ -52,4 +50,3 @@
     </el-scrollbar>
 
 </el-aside>
-

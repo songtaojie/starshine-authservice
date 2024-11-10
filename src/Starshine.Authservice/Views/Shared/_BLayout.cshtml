@@ -4,22 +4,24 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title - 海·星の博客</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/hx/hx.base.css" />
+    <link rel="stylesheet" href="~/site/css/star.base.css" />
     @if (!isLoginPage)
     {
         <link rel="stylesheet" href="~/lib/alertifyjs/css/alertify.min.css" />
-        <link rel="stylesheet" href="~/lib/alertifyjs/css/themes/hx.alertify.css" />
+        <link rel="stylesheet" href="~/lib/alertifyjs/css/themes/star.alertify.css" />
         <link href="~/font/font-awesome.min.css" rel="stylesheet" />
-        <link href="~/css/hxlayout/hx.layout.css" rel="stylesheet" />
-        <link href="~/css/hxlayout/hx-layout-dark.css" rel="stylesheet" />
+        <link href="~/css/starshinelayout/star.layout.css" rel="stylesheet" />
+        <link href="~/css/starshinelayout/star-layout-dark.css" rel="stylesheet" />
     }
     @RenderSection("styles", required: false)
 </head>
+
 <body>
     @if (isLoginPage)
     {
@@ -27,9 +29,9 @@
     }
     else
     {
-        <div class="hx-dark">
+        <div class="star-dark">
             <partial name="~/Views/Layout/Header.cshtml" />
-            <div class="d-flex hx-body">
+            <div class="d-flex star-body">
                 <partial name="~/Views/Layout/Aside.cshtml" view-data="ViewData" />
                 <div class="flex-fill container-fluid">
                     @RenderBody()
@@ -43,11 +45,12 @@
         <script src="~/lib/jquery.slimscroll/jquery.slimscroll.js"></script>
         <script src="~/lib/popper/popper.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/hx.core.js"></script>
+        <script src="~/site/js/star.core.js"></script>
         <script src="~/lib/alertifyjs/alertify.min.js"></script>
-        <script src="~/lib/alertifyjs/hx.alertify.js"></script>
-        <script src="~/js/hxlayout/hx.layout.js"></script>
+        <script src="~/lib/alertifyjs/star.alertify.js"></script>
+        <script src="~/site/js/star.layout.js"></script>
     }
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

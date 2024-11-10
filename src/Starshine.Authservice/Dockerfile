@@ -6,20 +6,20 @@ EXPOSE 80
 
 FROM registry.cn-hangzhou.aliyuncs.com/songtaojie_centos/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["src/Hx.IdentityServer/Hx.IdentityServer.csproj", "/src/Hx.IdentityServer/"]
-COPY ["src/Hx.IdentityServer.Extensions/Hx.IdentityServer.Extensions.csproj", "/src/Hx.IdentityServer.Extensions/"]
-COPY ["src/Hx.IdentityServer.Model/Hx.IdentityServer.Model.csproj", "/src/Hx.IdentityServer.Model/"]
-COPY ["src/Hx.IdentityServer.Common/Hx.IdentityServer.Common.csproj", "/src/Hx.IdentityServer.Common/"]
+COPY ["src/Starshine.Authservice/Starshine.Authservice.csproj", "/src/Starshine.Authservice/"]
+COPY ["src/Starshine.Authservice.Extensions/Starshine.Authservice.Extensions.csproj", "/src/Starshine.Authservice.Extensions/"]
+COPY ["src/Starshine.Authservice.Model/Starshine.Authservice.Model.csproj", "/src/Starshine.Authservice.Model/"]
+COPY ["src/Starshine.Authservice.Common/Starshine.Authservice.Common.csproj", "/src/Starshine.Authservice.Common/"]
 
-RUN dotnet restore "/src/Hx.IdentityServer/Hx.IdentityServer.csproj"
+RUN dotnet restore "/src/Starshine.Authservice/Starshine.Authservice.csproj"
 COPY . .
-WORKDIR "/src/src/Hx.IdentityServer"
-RUN dotnet build "Hx.IdentityServer.csproj" -c Release -o /app/build
+WORKDIR "/src/src/Starshine.Authservice"
+RUN dotnet build "Starshine.Authservice.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Hx.IdentityServer.csproj" -c Release -o /app/publish
+RUN dotnet publish "Starshine.Authservice.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Hx.IdentityServer.dll"]
+ENTRYPOINT ["dotnet", "Starshine.Authservice.dll"]

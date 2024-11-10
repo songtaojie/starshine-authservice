@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Hx.IdentityServer.Model.Consent;
-using Hx.IdentityServer.Model.Device;
 using IdentityServer4.Configuration;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -18,8 +16,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Starshine.Authservice.Application.Contracts.Dtos.Consent;
+using Starshine.Authservice.Application.Contracts.Dtos.Device;
 
-namespace Hx.IdentityServer.Controllers
+namespace Starshine.Authservice.Controllers
 {
     [Authorize]
     //[SecurityHeaders]
@@ -68,7 +68,7 @@ namespace Hx.IdentityServer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Callback(DeviceAuthorizationCreateModel model)
+        public async Task<IActionResult> Callback(DeviceAuthorizationCreateParamDto model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
 
@@ -78,9 +78,9 @@ namespace Hx.IdentityServer.Controllers
             return View("Success");
         }
 
-        private async Task<ProcessConsentResult> ProcessConsent(DeviceAuthorizationCreateModel model)
+        private async Task<ProcessConsentResultDto> ProcessConsent(DeviceAuthorizationCreateParamDto model)
         {
-            var result = new ProcessConsentResult();
+            var result = new ProcessConsentResultDto();
 
             var request = await _interaction.GetAuthorizationContextAsync(model.UserCode);
             if (request == null) return result;
@@ -145,7 +145,7 @@ namespace Hx.IdentityServer.Controllers
             return result;
         }
 
-        private async Task<DeviceAuthorizationViewModel> BuildViewModelAsync(string userCode, DeviceAuthorizationCreateModel model = null)
+        private async Task<DeviceAuthorizationViewModel> BuildViewModelAsync(string userCode, DeviceAuthorizationCreateParamDto model = null)
         {
             var request = await _interaction.GetAuthorizationContextAsync(userCode);
             if (request != null)
@@ -156,7 +156,7 @@ namespace Hx.IdentityServer.Controllers
             return null;
         }
 
-        private DeviceAuthorizationViewModel CreateConsentViewModel(string userCode, DeviceAuthorizationCreateModel model, DeviceFlowAuthorizationRequest request)
+        private DeviceAuthorizationViewModel CreateConsentViewModel(string userCode, DeviceAuthorizationCreateParamDto model, DeviceFlowAuthorizationRequest request)
         {
             var vm = new DeviceAuthorizationViewModel
             {

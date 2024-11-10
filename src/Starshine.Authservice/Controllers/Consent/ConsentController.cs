@@ -14,9 +14,9 @@ using System.Threading.Tasks;
 using IdentityServer4.Validation;
 using System.Collections.Generic;
 using System;
-using Hx.IdentityServer.Model.Consent;
+using Starshine.Authservice.Application.Contracts.Dtos.Consent;
 
-namespace Hx.IdentityServer.Controllers
+namespace Starshine.Authservice.Controllers
 {
     /// <summary>
     /// This controller processes the consent UI
@@ -61,7 +61,7 @@ namespace Hx.IdentityServer.Controllers
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(ConsentCreateModel model)
+        public async Task<IActionResult> Index(ConsentCreateParamDto model)
         {
             var result = await ProcessConsent(model);
 
@@ -94,9 +94,9 @@ namespace Hx.IdentityServer.Controllers
         /*****************************************/
         /* helper APIs for the ConsentController */
         /*****************************************/
-        private async Task<ProcessConsentResult> ProcessConsent(ConsentCreateModel model)
+        private async Task<ProcessConsentResultDto> ProcessConsent(ConsentCreateParamDto model)
         {
-            var result = new ProcessConsentResult();
+            var result = new ProcessConsentResultDto();
 
             // validate return url is still valid
             var request = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
@@ -162,7 +162,7 @@ namespace Hx.IdentityServer.Controllers
             return result;
         }
 
-        private async Task<ConsentViewModel> BuildViewModelAsync(string returnUrl, ConsentCreateModel model = null)
+        private async Task<ConsentViewModel> BuildViewModelAsync(string returnUrl, ConsentCreateParamDto model = null)
         {
             var request = await _interaction.GetAuthorizationContextAsync(returnUrl);
             if (request != null)
@@ -178,7 +178,7 @@ namespace Hx.IdentityServer.Controllers
         }
 
         private ConsentViewModel CreateConsentViewModel(
-            ConsentCreateModel model, string returnUrl,
+            ConsentCreateParamDto model, string returnUrl,
             AuthorizationRequest request)
         {
             var vm = new ConsentViewModel
@@ -198,7 +198,7 @@ namespace Hx.IdentityServer.Controllers
             vm.IdentityScopes = request.ValidatedResources.Resources.IdentityResources.Select(x => CreateScopeViewModel(x, vm.ScopesConsented.Contains(x.Name) || model == null)).ToArray();
 
             var apiScopes = new List<ScopeViewModel>();
-            foreach(var parsedScope in request.ValidatedResources.ParsedScopes)
+            foreach (var parsedScope in request.ValidatedResources.ParsedScopes)
             {
                 var apiScope = request.ValidatedResources.Resources.FindApiScope(parsedScope.ParsedName);
                 if (apiScope != null)

@@ -1,14 +1,14 @@
 using System;
-using Hx.IdentityServer.Model.Account;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Mvc;
+using Starshine.Authservice.Application.Contracts.Dtos.Account;
 
-namespace Hx.IdentityServer.Controllers
+namespace Starshine.Authservice.Controllers
 {
     public static class Extensions
     {
         /// <summary>
-        ///¼ì²éÖØ¶¨ÏòURIÊÇ·ñÓÃÓÚ±¾»ú¿Í»§¶Ë¡£
+        ///ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½URIï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ë¡ï¿½
         /// </summary>
         /// <returns></returns>
         public static bool IsNativeClient(this AuthorizationRequest context)
@@ -21,7 +21,7 @@ namespace Hx.IdentityServer.Controllers
         {
             controller.HttpContext.Response.StatusCode = 200;
             controller.HttpContext.Response.Headers["Location"] = "";
-            
+
             return controller.View(viewName, new RedirectViewModel { RedirectUrl = redirectUri });
         }
     }

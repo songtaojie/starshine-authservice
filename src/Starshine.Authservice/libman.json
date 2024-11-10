@@ -1,63 +1,21 @@
 {
   "version": "1.0",
-  "defaultProvider": "unpkg",
+  "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "bootstrap@4.6.0",
-      "destination": "wwwroot/lib/bootstrap/"
+      "provider": "cdnjs",
+      "library": "vue@3.5.12",
+      "destination": "wwwroot/lib/vue/"
     },
     {
-      "library": "jquery@3.6.0",
-      "destination": "wwwroot/lib/jquery/",
-      "files": [
-        "dist/jquery.js",
-        "dist/jquery.min.js",
-        "dist/jquery.min.map",
-        "dist/jquery.slim.js",
-        "dist/jquery.slim.min.js",
-        "dist/jquery.slim.min.map"
-      ]
+      "provider": "cdnjs",
+      "library": "element-plus@2.8.6",
+      "destination": "wwwroot/lib/element-plus/"
     },
     {
-      "library": "axios@0.21.1",
-      "destination": "wwwroot/lib/axios/",
-      "files": [
-        "dist/axios.js",
-        "dist/axios.map",
-        "dist/axios.min.js",
-        "dist/axios.min.map"
-      ]
-    },
-    {
-      "library": "element-ui@2.15.1",
-      "destination": "wwwroot/lib/element-ui/",
-      "files": [
-        "lib/theme-chalk/index.css",
-        "lib/theme-chalk/fonts/element-icons.ttf",
-        "lib/theme-chalk/fonts/element-icons.woff",
-        "lib/index.js"
-      ]
-    },
-    {
-      "library": "vue@2.6.12",
-      "destination": "wwwroot/lib/vue/",
-      "files": [
-        "dist/README.md",
-        "dist/vue.common.dev.js",
-        "dist/vue.common.js",
-        "dist/vue.common.prod.js",
-        "dist/vue.esm.browser.js",
-        "dist/vue.esm.browser.min.js",
-        "dist/vue.esm.js",
-        "dist/vue.js",
-        "dist/vue.min.js",
-        "dist/vue.runtime.common.dev.js",
-        "dist/vue.runtime.common.js",
-        "dist/vue.runtime.common.prod.js",
-        "dist/vue.runtime.esm.js",
-        "dist/vue.runtime.js",
-        "dist/vue.runtime.min.js"
-      ]
+      "provider": "cdnjs",
+      "library": "axios@1.7.7",
+      "destination": "wwwroot/lib/axios/"
     }
   ]
 }

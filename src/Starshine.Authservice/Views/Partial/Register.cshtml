@@ -1,13 +1,13 @@
-﻿@model Starshine.Authservice.Model.Account.AccountCreateModel
+﻿@model Starshine.Authservice.Application.Contracts.Dtos.Account.AccountCreateParamDto
 @{
     var sexList = new List<SelectListItem>
 {
-        new SelectListItem("未知","0"),
-        new SelectListItem("男","1"),
-        new SelectListItem("女","2"),
-    };
+new SelectListItem("未知","0"),
+new SelectListItem("男","1"),
+new SelectListItem("女","2"),
+};
 }
-<div class="hx-register">
+<div class="star-register">
     @*ajax提交*@
     @*<form asp-route-returnUrl="@ViewData["ReturnUrl"]" data-ajax-method="POST" data-ajax="true">*@
     <form asp-route-returnUrl="@ViewData["ReturnUrl"]">

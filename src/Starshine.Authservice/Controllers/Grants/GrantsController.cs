@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
-using Hx.IdentityServer.Model.Grants;
+using Starshine.Authservice.Application.Contracts.Dtos.Grants;
 
-namespace Hx.IdentityServer.Controllers
+namespace Starshine.Authservice.Controllers
 {
     /// <summary>
     /// This sample controller allows a user to revoke grants given to clients
@@ -65,7 +65,7 @@ namespace Hx.IdentityServer.Controllers
             var grants = await _interaction.GetAllUserGrantsAsync();
 
             var list = new List<GrantViewModel>();
-            foreach(var grant in grants)
+            foreach (var grant in grants)
             {
                 var client = await _clients.FindClientByIdAsync(grant.ClientId);
                 if (client != null)

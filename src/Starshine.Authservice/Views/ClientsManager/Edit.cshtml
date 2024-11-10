@@ -1,11 +1,7 @@
-﻿<el-drawer :title="isAdd?'添加客户端管理':'编辑客户端管理'" :visible.sync="showDrawer"
-           direction="rtl"
-           :before-close="handleClose"
-           @@opened="handleOpened"
-           size="50%">
-    <div class="hx-4 hx-flex hx-flex-column hx-h-100">
-        <el-form :model="form" ref="ruleForm" :rules="rules" status-icon
-                 label-width="90px" class="hx-flex-fill">
+﻿<el-drawer :title="isAdd?'添加客户端管理':'编辑客户端管理'" :visible.sync="showDrawer" direction="rtl" :before-close="handleClose"
+    @@opened="handleOpened" size="50%">
+    <div class="star-4 star-flex star-flex-column star-h-100">
+        <el-form :model="form" ref="ruleForm" :rules="rules" status-icon label-width="90px" class="star-flex-fill">
             <el-form-item label="客户端id" prop="clientId">
                 <el-input v-model="form.clientId" :disabled="!isAdd"></el-input>
             </el-form-item>
@@ -14,14 +10,15 @@
             </el-form-item>
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-form-item label="IdentityToken时长(秒)" prop="identityTokenLifetime" class="hx-label-nowrap">
+                    <el-form-item label="IdentityToken时长(秒)" prop="identityTokenLifetime"
+                        class="star-label-nowrap">
                         <el-input v-model.number="form.identityTokenLifetime" type="number">
                             <template slot="append">秒</template>
                         </el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="AccessToken时长(秒)" prop="accessTokenLifetime" class="hx-label-nowrap">
+                    <el-form-item label="AccessToken时长(秒)" prop="accessTokenLifetime" class="star-label-nowrap">
                         <el-input v-model.number="form.accessTokenLifetime" type="number">
                             <template slot="append">
                                 秒
@@ -32,7 +29,8 @@
             </el-row>
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-form-item label="RefreshTokenUsage" prop="refreshTokenUsage" label-width="90px" class="hx-label-nowrap">
+                    <el-form-item label="RefreshTokenUsage" prop="refreshTokenUsage" label-width="90px"
+                        class="star-label-nowrap">
                         <el-select v-model="form.refreshTokenUsage" placeholder="--请选择--" style="width:100%;">
                             <el-option :value="0" label="ReUse"></el-option>
                             <el-option :value="1" label="OneTime"></el-option>
@@ -40,7 +38,8 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="RefreshTokenExpiration" prop="refreshTokenExpiration" label-width="90px" class="hx-label-nowrap">
+                    <el-form-item label="RefreshTokenExpiration" prop="refreshTokenExpiration" label-width="90px"
+                        class="star-label-nowrap">
                         <el-select v-model="form.refreshTokenExpiration" placeholder="--请选择--" style="width:100%;">
                             <el-option :value="0" label="Sliding"></el-option>
                             <el-option :value="1" label="Absolute"></el-option>
@@ -50,9 +49,10 @@
             </el-row>
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-form-item label="AbsoluteRefreshTokenLifetime" prop="absoluteRefreshTokenLifetime" class="hx-label-nowrap">
+                    <el-form-item label="AbsoluteRefreshTokenLifetime" prop="absoluteRefreshTokenLifetime"
+                        class="star-label-nowrap">
                         <el-input v-model.number="form.absoluteRefreshTokenLifetime" type="number"
-                                  :disabled="form.refreshTokenExpiration !== 1">
+                            :disabled="form.refreshTokenExpiration !== 1">
                             <template slot="append">
                                 秒
                             </template>
@@ -60,9 +60,10 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="SlidingRefreshTokenLifetime" prop="slidingRefreshTokenLifetime" class="hx-label-nowrap">
+                    <el-form-item label="SlidingRefreshTokenLifetime" prop="slidingRefreshTokenLifetime"
+                        class="star-label-nowrap">
                         <el-input v-model.number="form.slidingRefreshTokenLifetime" type="number"
-                                  :disabled="form.refreshTokenExpiration !== 0">
+                            :disabled="form.refreshTokenExpiration !== 0">
                             <template slot="append">
                                 秒
                             </template>
@@ -78,7 +79,8 @@
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="记住同意" prop="allowRememberConsent">
-                        <el-switch v-model="form.allowRememberConsent" :disabled="form.requireConsent !== true"></el-switch>
+                        <el-switch v-model="form.allowRememberConsent"
+                            :disabled="form.requireConsent !== true"></el-switch>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -90,10 +92,7 @@
             </el-form-item>
             <el-form-item label="授权类型" prop="allowedGrantTypes">
                 <el-select v-model="form.allowedGrantTypes" multiple clearable placeholder="--请选择--" style="width:100%">
-                    <el-option v-for="item in grantOptions"
-                               :key="item.value"
-                               :label="item.label"
-                               :value="item.value">
+                    <el-option v-for="item in grantOptions" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
                 </el-select>
             </el-form-item>
@@ -101,10 +100,10 @@
                 <el-switch v-model="form.enabled"></el-switch>
             </el-form-item>
         </el-form>
-        <div class="hx-flex">
-            <el-button class="hx-flex-fill" @@click="showDrawer = false">取 消</el-button>
-            <el-button class="hx-flex-fill" type="primary" @@click="handleSubmit('ruleForm')" :loading="loading">{{ loading ? '提交中 ...' : '提 交' }}</el-button>
+        <div class="star-flex">
+            <el-button class="star-flex-fill" @@click="showDrawer = false">取 消</el-button>
+            <el-button class="star-flex-fill" type="primary" @@click="handleSubmit('ruleForm')"
+                :loading="loading">{{ loading ? '提交中 ...' : '提 交' }}</el-button>
         </div>
     </div>
 </el-drawer>
-

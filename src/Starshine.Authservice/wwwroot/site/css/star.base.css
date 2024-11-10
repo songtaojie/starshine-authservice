@@ -1,0 +1,134 @@
+﻿body {
+  margin: unset;
+  padding: unset;
+}
+/*公共样式*/
+html {
+  height: 100%;
+}
+body {
+  margin: unset;
+  padding: unset;
+  height: inherit;
+}
+a {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+}
+a:focus,
+a:hover,
+button:focus {
+  outline: none;
+}
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
+button:not(:disabled) {
+  cursor: pointer;
+}
+.star-flex {
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+.star-flex-column {
+  -ms-flex-direction: column !important;
+  flex-direction: column !important;
+}
+.star-flex-fill {
+  -ms-flex: 1 1 auto !important;
+  flex: 1 1 auto !important;
+}
+.star-justify-content-center {
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
+.star-justify-content-end {
+  -ms-flex-pack: end !important;
+  justify-content: flex-end !important;
+}
+.star-align-items-center {
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+.star-hidden {
+  display: none !important;
+}
+.star-float-right {
+  float: right !important;
+}
+/*Common*/
+.star-border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.star-border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+.star-box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+/*margin*/
+.star-mb-1,
+.star-my-1 {
+  margin-bottom: 0.25rem !important;
+}
+.star-mt-1,
+.star-my-1 {
+  margin-top: 0.25rem !important;
+}
+.star-mb-2,
+.star-my-2 {
+  margin-bottom: 0.5rem !important;
+}
+.star-mt-2,
+.star-my-2 {
+  margin-top: 0.5rem !important;
+}
+
+/*padding*/
+.star-pb-1,
+.star-py-1 {
+  padding-bottom: 0.25rem !important;
+}
+
+.star-pt-1,
+.star-py-1 {
+  padding-top: 0.25rem !important;
+}
+.star-pb-2,
+.star-py-2 {
+  padding-bottom: 0.5rem !important;
+}
+
+.star-pt-2,
+.star-py-2 {
+  padding-top: 0.5rem !important;
+}
+.star-pl-4,
+.star-px-4,
+.star-4 {
+  padding-left: 1rem !important;
+}
+.star-pr-4,
+.star-px-4,
+.star-4 {
+  padding-right: 1rem !important;
+}
+.star-pt-4,
+.star-py-4,
+.star-4 {
+  padding-top: 1rem !important;
+}
+.star-pb-4,
+.star-py-4,
+.star-4 {
+  padding-bottom: 1rem !important;
+}
+/*height*/
+.star-h-100 {
+  height: 100% !important;
+}
+/*width*/
+.star-w-100 {
+  width: 100% !important;
+}

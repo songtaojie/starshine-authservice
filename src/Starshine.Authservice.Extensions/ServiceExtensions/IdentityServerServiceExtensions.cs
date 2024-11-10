@@ -1,15 +1,11 @@
 ﻿using Starshine.Authservice.Authorization;
-using Starshine.Authservice.Common;
-using Starshine.Authservice.Data;
 using Starshine.Authservice.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Starshine.Authservice.EntityFrameworkCore.DbContexts;
+using Starshine.Authservice.Entity.Consts;
+using IdentityModel;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -68,7 +64,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(ConstKey.SuperAdmin, policy => policy.RequireClaim(MyJwtClaimTypes.RoleName, ConstKey.SuperAdmin));
+                options.AddPolicy(ConstKey.SuperAdmin, policy => policy.RequireClaim(JwtClaimTypes.Role, ConstKey.SuperAdmin));
             });
             services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
             return builder;

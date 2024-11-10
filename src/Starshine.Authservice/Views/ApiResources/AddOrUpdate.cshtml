@@ -1,11 +1,7 @@
-﻿<el-drawer :title="isAdd?'添加Api资源':'编辑Api资源'" :visible.sync="showDrawer"
-           direction="rtl"
-           :before-close="handleClose"
-           @@opened="handleOpened"
-           size="50%">
-    <div class="hx-4 hx-flex hx-flex-column hx-h-100">
-        <el-form :model="form" ref="ruleForm" :rules="rules" status-icon
-                 label-width="90px" class="hx-flex-fill">
+﻿<el-drawer :title="isAdd?'添加Api资源':'编辑Api资源'" :visible.sync="showDrawer" direction="rtl" :before-close="handleClose"
+    @@opened="handleOpened" size="50%">
+    <div class="star-4 star-flex star-flex-column star-h-100">
+        <el-form :model="form" ref="ruleForm" :rules="rules" status-icon label-width="90px" class="star-flex-fill">
             <el-form-item label="资源名称" prop="name">
                 <el-input v-model="form.name" :disabled="!isAdd"></el-input>
             </el-form-item>
@@ -22,10 +18,10 @@
                 <el-switch v-model="form.enabled"></el-switch>
             </el-form-item>
         </el-form>
-        <div class="hx-flex">
-            <el-button class="hx-flex-fill" @@click="showDrawer = false">取 消</el-button>
-            <el-button class="hx-flex-fill" type="primary" @@click="handleSubmit('ruleForm')" :loading="loading">{{ loading ? '提交中 ...' : '提 交' }}</el-button>
+        <div class="star-flex">
+            <el-button class="star-flex-fill" @@click="showDrawer = false">取 消</el-button>
+            <el-button class="star-flex-fill" type="primary" @@click="handleSubmit('ruleForm')"
+                :loading="loading">{{ loading ? '提交中 ...' : '提 交' }}</el-button>
         </div>
     </div>
 </el-drawer>
-
