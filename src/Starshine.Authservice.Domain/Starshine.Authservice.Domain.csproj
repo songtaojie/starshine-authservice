@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+	  <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cnblogs.IdentityServer4.AspNetIdentity" Version="4.2.1" />
+    <PackageReference Include="Cnblogs.IdentityServer4.Storage" Version="4.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.35" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="8.3.4" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="8.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Starshine.Authservice.Domain.Shared\Starshine.Authservice.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

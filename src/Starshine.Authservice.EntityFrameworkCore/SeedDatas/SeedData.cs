@@ -4,11 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
 using IdentityModel;
-using Starshine.Authservice.Entity;
 using IdentityServer4.EntityFramework.Mappers;
-using Starshine.Common;
 using Starshine.Authservice.EntityFrameworkCore.DbContexts;
-using Starshine.Authservice.Entity.Consts;
 
 namespace Starshine.Authservice.EntityFrameworkCore.SeedDatas
 {
@@ -27,6 +24,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.SeedDatas
             // dotnet ef -s src/Starshine.Authservice -p src/Starshine.Authservice.Model migrations add InitConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
             // dotnet ef -s src/Starshine.Authservice -p src/Starshine.Authservice.Model migrations remove -c ConfigurationDbContext
             ConsoleHelper.WriteInfoLine("Seeding database...");
+            ConfigurationDbContext
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
 

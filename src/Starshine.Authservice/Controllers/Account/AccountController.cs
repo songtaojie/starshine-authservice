@@ -2,13 +2,10 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Starshine.Authservice.Application.Contracts.Services;
 using Starshine.Authservice.Application.Contracts.Dtos.Account;
-using Starshine.Authservice.Entity.Consts;
 using Starshine.Common;
 using System.Collections.Generic;
 
