@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Starshine.Abp.Application.Dtos;
 using Starshine.Authservice.Application.Contracts.Dtos.Account;
-using Starshine.Common;
+using Volo.Abp.Application.Services;
 
 namespace Starshine.Authservice.Application.Contracts.Services
 {
+
+    public interface IAccountService : ICrudAppService<BookDto, Guid, PagedAndSortedRequestDto, CreateAccountDto>
+    {
+    }
+
     public interface IAccountService
     {
         /// <summary>
@@ -18,7 +23,7 @@ namespace Starshine.Authservice.Application.Contracts.Services
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<bool> CreateOrUpdate(AccountCreateParamDto param);
+        Task<bool> CreateOrUpdate(CreateAccountDto param);
 
         /// <summary>
         /// 根据用户id获取角色

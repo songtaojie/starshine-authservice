@@ -7,7 +7,7 @@ namespace Starshine.Authservice.Application.Contracts.Dtos.Account
     /// <summary>
     /// 账号添加或者修改的model
     /// </summary>
-    public class AccountCreateParamDto
+    public class CreateAccountDto
     {
         /// <summary>
         /// 用户id

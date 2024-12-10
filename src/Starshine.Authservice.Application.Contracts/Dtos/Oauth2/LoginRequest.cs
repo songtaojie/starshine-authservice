@@ -9,7 +9,7 @@ namespace Starshine.Authservice.Application.Contracts.Dtos.Oauth2
     /// <summary>
     /// 登录输入信息
     /// </summary>
-    public class LoginParamDto
+    public class LoginRequest
     {
         /// <summary>
         /// 登录用户名

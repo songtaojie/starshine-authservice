@@ -9,7 +9,7 @@ using Starshine.Authservice.Application.Contracts.Dtos.Oauth2;
 
 namespace Starshine.Authservice.Application.Contracts.Dtos.Account
 {
-    public class LoginViewModel : LoginParamDto
+    public class LoginViewModel : LoginRequest
     {
         /// <summary>
         /// 允许记住登录

@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Starshine.Authservice.Entity\Starshine.Authservice.Entity.csproj" />
+    <ProjectReference Include="..\..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Application.Contracts\Starshine.Abp.Ddd.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Starshine.Authservice.Domain.Shared\Starshine.Authservice.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

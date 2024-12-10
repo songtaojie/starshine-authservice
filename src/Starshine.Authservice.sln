@@ -37,7 +37,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Core", "..\..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Swashbuckle", "..\..\starshine-abp\framework\src\Starshine.Abp.Swashbuckle\Starshine.Abp.Swashbuckle.csproj", "{43D18408-B81A-465E-9444-40A0043E88FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Authservice.Domain.Shared", "Starshine.Authservice.Domain.Shared\Starshine.Authservice.Domain.Shared.csproj", "{5BAE2C02-BA30-43EB-9C78-066E47877043}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.Domain.Shared", "Starshine.Authservice.Domain.Shared\Starshine.Authservice.Domain.Shared.csproj", "{5BAE2C02-BA30-43EB-9C78-066E47877043}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Ddd.Application.Contracts", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Application.Contracts\Starshine.Abp.Ddd.Application.Contracts.csproj", "{512E221E-2DE7-4BF1-BEF6-7DF8AE010805}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Ddd.Application", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Application\Starshine.Abp.Ddd.Application.csproj", "{2490DB1C-209E-4230-8CAB-ACFC84507380}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +93,14 @@ Global
 		{5BAE2C02-BA30-43EB-9C78-066E47877043}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BAE2C02-BA30-43EB-9C78-066E47877043}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BAE2C02-BA30-43EB-9C78-066E47877043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +117,8 @@ Global
 		{D1EBA04F-11FA-437D-9FDB-0F93F3B734C1} = {6971AA6D-DF93-4AA5-99A0-AF3E199B1D47}
 		{43D18408-B81A-465E-9444-40A0043E88FD} = {6971AA6D-DF93-4AA5-99A0-AF3E199B1D47}
 		{5BAE2C02-BA30-43EB-9C78-066E47877043} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
+		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805} = {6971AA6D-DF93-4AA5-99A0-AF3E199B1D47}
+		{2490DB1C-209E-4230-8CAB-ACFC84507380} = {6971AA6D-DF93-4AA5-99A0-AF3E199B1D47}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {908410DD-9E1E-4818-8CC5-B2F91948B075}
