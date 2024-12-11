@@ -30,18 +30,18 @@ namespace Starshine.Authservice.Domain
 {
 
     [DependsOn(
-        typeof(StarshineAuthserviceDomainSharedModule),
+        typeof(AuthserviceDomainSharedModule),
         typeof(AbpIdentityDomainModule),
-        typeof(AbpDddDomainModule),
+        typeof(AbpIdentityser),
         typeof(AbpCachingModule)
         )]
-    public class StarshineAuthserviceDomainModule : StarshineAbpModule
+    public class AuthserviceDomainModule : StarshineAbpModule
     {
         private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddAutoMapperObjectMapper<StarshineAuthserviceDomainModule>();
+            context.Services.AddAutoMapperObjectMapper<AuthserviceDomainModule>();
 
             Configure<AbpAutoMapperOptions>(options =>
             {
@@ -50,10 +50,10 @@ namespace Starshine.Authservice.Domain
 
             Configure<AbpDistributedEntityEventOptions>(options =>
             {
-                options.EtoMappings.Add<ApiResource, ApiResourceEto>(typeof(StarshineAuthserviceDomainModule));
-                options.EtoMappings.Add<Client, ClientEto>(typeof(StarshineAuthserviceDomainModule));
-                options.EtoMappings.Add<DeviceFlowCodes, DeviceFlowCodesEto>(typeof(StarshineAuthserviceDomainModule));
-                options.EtoMappings.Add<IdentityResource, IdentityResourceEto>(typeof(StarshineAuthserviceDomainModule));
+                options.EtoMappings.Add<ApiResource, ApiResourceEto>(typeof(AuthserviceDomainModule));
+                options.EtoMappings.Add<Client, ClientEto>(typeof(AuthserviceDomainModule));
+                options.EtoMappings.Add<DeviceFlowCodes, DeviceFlowCodesEto>(typeof(AuthserviceDomainModule));
+                options.EtoMappings.Add<IdentityResource, IdentityResourceEto>(typeof(AuthserviceDomainModule));
             });
 
             Configure<AbpClaimsServiceOptions>(options =>

@@ -15,7 +15,7 @@ using Volo.Abp.Modularity;
 namespace Starshine.Authservice.EntityFrameworkCore
 {
     [DependsOn(
-    typeof(StarshineAuthserviceDomainModule),
+    typeof(AuthserviceDomainModule),
     typeof(AbpEntityFrameworkCoreModule)
     )]
     public class StarshineAuthserviceEntityFrameworkCoreModule : AbpModule

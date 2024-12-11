@@ -1,14 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="8.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Starshine.Authservice.Application.Contracts\Starshine.Authservice.Application.Contracts.csproj" />
-    <ProjectReference Include="..\Starshine.Authservice.EntityFrameworkCore\Starshine.Authservice.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Starshine.Authservice.Domain\Starshine.Authservice.Domain.csproj" />
   </ItemGroup>
 
 </Project>

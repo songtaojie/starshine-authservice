@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Volo.Abp.Identity.Application.Contracts" Version="8.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Application.Contracts\Starshine.Abp.Ddd.Application.Contracts.csproj" />
     <ProjectReference Include="..\Starshine.Authservice.Domain.Shared\Starshine.Authservice.Domain.Shared.csproj" />
   </ItemGroup>

@@ -12,8 +12,4 @@
 	    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.35" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Starshine.Authservice.Application\Starshine.Authservice.Application.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -18,7 +18,7 @@ public class ClientStore : IClientStore
 
     public ClientStore(
         IClientRepository clientRepository,
-        IObjectMapper<StarshineAuthserviceDomainModule> objectMapper,
+        IObjectMapper<AuthserviceDomainModule> objectMapper,
         IDistributedCache<IdentityServer4.Models.Client> cache,
         IOptions<IdentityServerOptions> options)
     {
