@@ -1,0 +1,34 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+#Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
+#For more information, please see https://aka.ms/containercompat
+#����ģʽ��ֱ���ڹ���������ڲ����뷢��dotnet��Ŀ��
+#ע��������������˿���8081
+#����������ֶ�dotnet build�ɿ�ִ�еĶ������ļ���Ȼ���ٹ��������뿴.Api���µ�dockerfile��
+# FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
+FROM registry.cn-hangzhou.aliyuncs.com/songtaojie/aspnet:3.1 AS base
+WORKDIR /app
+EXPOSE 5002
+ENV LANG zh_CN.UTF-8  
+ENV LANGUAGE zh_CN.UTF-8 
+ENV LC_ALL zh_CN.UTF-8  
+
+#FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
+FROM registry.cn-hangzhou.aliyuncs.com/songtaojie/dotnet_sdk:3.1 AS build
+WORKDIR /src
+COPY ["Starshine.Authservice.Web/Starshine.Authservice.Web.csproj", "Starshine.Authservice.Web/"]
+COPY ["Starshine.Authservice.Web.Extensions/Starshine.Authservice.Web.Extensions.csproj", "Starshine.Authservice.Web.Extensions/"]
+COPY ["Starshine.Authservice.Web.Model/Starshine.Authservice.Web.Model.csproj", "Starshine.Authservice.Web.Model/"]
+COPY ["Starshine.Authservice.Web.Common/Starshine.Authservice.Web.Common.csproj", "Starshine.Authservice.Web.Common/"]
+RUN dotnet restore "Starshine.Authservice.Web/Starshine.Authservice.Web.csproj"
+COPY . .
+WORKDIR "/src/Starshine.Authservice.Web"
+RUN dotnet build "Starshine.Authservice.Web.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Starshine.Authservice.Web.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Starshine.Authservice.Web.dll"]

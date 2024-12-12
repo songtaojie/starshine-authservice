@@ -25,6 +25,7 @@ using Volo.Abp.Threading;
 using Starshine.Authservice.Domain.Clients;
 using Starshine.Authservice.Domain.IdentityResources;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Starshine.Authservice.Domain.ApiResources;
 
 namespace Starshine.Authservice.Domain
 {
@@ -32,7 +33,6 @@ namespace Starshine.Authservice.Domain
     [DependsOn(
         typeof(AuthserviceDomainSharedModule),
         typeof(AbpIdentityDomainModule),
-        typeof(AbpIdentityser),
         typeof(AbpCachingModule)
         )]
     public class AuthserviceDomainModule : StarshineAbpModule

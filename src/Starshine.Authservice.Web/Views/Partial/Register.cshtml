@@ -1,0 +1,76 @@
+﻿@model Starshine.Authservice.Application.Contracts.Dtos.Oauth2.CreateAccountDto
+@{
+    var sexList = new List<SelectListItem>
+{
+new SelectListItem("未知","0"),
+new SelectListItem("男","1"),
+new SelectListItem("女","2"),
+};
+}
+<div class="star-register">
+    @*ajax提交*@
+    @*<form asp-route-returnUrl="@ViewData["ReturnUrl"]" data-ajax-method="POST" data-ajax="true">*@
+    <form asp-route-returnUrl="@ViewData["ReturnUrl"]">
+        <input type="hidden" name="ReturnUrl" value="@ViewData["ReturnUrl"]" />
+        <div class="form-row">
+            <label class="col-sm-2 col-form-label"></label>
+            <h3 class="col-sm-10 mb-4 text-center">创建用户</h3>
+        </div>
+        <div class="form-row mb-sm-3">
+            <label asp-for="RealName" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="RealName" class="form-control" />
+                <span asp-validation-for="RealName" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="form-row mb-sm-3">
+            <label asp-for="UserName" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="form-row mb-sm-3">
+            <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="form-row mb-sm-3">
+            <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="form-row mb-sm-3">
+            <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="form-row mb-sm-3">
+            <label asp-for="ConfirmPassword" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <select asp-for="Sex" asp-items="sexList" class="form-control"></select>
+                <span asp-validation-for="Sex" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="form-row mb-sm-3">
+            <label asp-for="Birthday" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Birthday" type="date" asp-format="yyyy-MM-dd" class="form-control" />
+                <span asp-validation-for="Birthday" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="form-row mb-4">
+            <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary w-100">注册</button>
+                @*<input type="submit" class="btn btn-outline-secondary w-100" value="注册" />*@
+            </div>
+        </div>
+    </form>
+</div>

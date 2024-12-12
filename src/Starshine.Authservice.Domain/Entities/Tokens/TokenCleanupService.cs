@@ -5,6 +5,7 @@ using Volo.Abp.DependencyInjection;
 using Starshine.Authservice.Domain.Devices;
 using Starshine.Authservice.Domain.Grants;
 using Volo.Abp.Uow;
+using Starshine.Authservice.Domain.Repositories;
 
 namespace Starshine.Authservice.Domain.Tokens;
 

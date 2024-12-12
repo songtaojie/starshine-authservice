@@ -1,0 +1,27 @@
+﻿@model Starshine.Authservice.Application.Contracts.Dtos.Oauth2.LoginViewModel
+<partial name="_ValidationSummary" />
+@if (Model.EnableLocalLogin)
+{
+    <form asp-route="authorize" asp-route-returnUrl="@Model.ReturnUrl" class="form star-login-form">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <input class="star-login-name" value="alice" placeholder="Username" asp-for="Username">
+        <input class="star-login-pass" type="password" value="Pass123$" placeholder="Password" asp-for="Password"
+            autocomplete="off">
+
+        @if (Model.AllowRememberLogin)
+        {
+            <div class="form-group star-login-remember">
+                <label asp-for="RememberLogin">
+                    <input asp-for="RememberLogin">
+                    <strong>记住我</strong>
+                </label>
+            </div>
+        }
+        <button type="submit" class="star-login" name="button" value="login">登录</button>
+        <button name="button" value="cancel">取消</button>
+        <p class="star-to-register">
+            <a href="/account/register" class="register">没有账号? 去注册</a>
+            <a href="/account/forgot-password" class="reset">忘记密码？重置</a>
+        </p>
+    </form>
+}

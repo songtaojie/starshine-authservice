@@ -1,34 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Starshine.Authservice.Application.Contracts.Dtos.ClientManager;
-using Starshine.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using Microsoft.AspNetCore.Mvc;
+//using Starshine.Authservice.Application.Contracts.Dtos.ClientManager;
+//using Starshine.Abp.Application.Dtos;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace Starshine.Authservice.Application.Contracts.Services
-{
-    public interface IClientsManagerService
-    {
-        Task<PagedListResult<ClientPageResultDto>> GetPage(ClientPageParamDto param);
+//namespace Starshine.Authservice.Application.Contracts.Services
+//{
+//    public interface IClientsManagerService
+//    {
+//        Task<PagedListResult<ClientPageResultDto>> GetPage(ClientPageParamDto param);
 
-        Task<ClientDetailResultDto> GetById(string id);
+//        Task<ClientDetailResultDto> GetById(string id);
 
-        Task<bool> AddOrUpdate(ClientCreateParamDto param);
+//        Task<bool> AddOrUpdate(ClientCreateParamDto param);
 
-        Task<bool> DeleteById(string id);
+//        Task<bool> DeleteById(string id);
 
-        Task<PagedListResult<ClientScPageResultDto>>  GetScPage(ClientPageParamDto param);
+//        Task<PagedListResult<ClientScPageResultDto>>  GetScPage(ClientPageParamDto param);
 
-        Task<ClientScDetailResultDto> GetScById(string id);
+//        Task<ClientScDetailResultDto> GetScById(string id);
 
-        Task<bool> UpdateSc(ClientScCreateParamDto param);
+//        Task<bool> UpdateSc(ClientScCreateParamDto param);
 
-        Task<PagedListResult<ClientRuPageResultDto>> GetRuPage(ClientPageParamDto param);
+//        Task<PagedListResult<ClientRuPageResultDto>> GetRuPage(ClientPageParamDto param);
 
-        Task<ClientRuDetailResultDto> GetRuById(string id);
+//        Task<ClientRuDetailResultDto> GetRuById(string id);
 
-        Task<bool> UpdateRu(ClientRuCreateParamDto param);
-    }
-}
+//        Task<bool> UpdateRu(ClientRuCreateParamDto param);
+//    }
+//}

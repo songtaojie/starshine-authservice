@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice", "Starshine.Authservice\Starshine.Authservice.csproj", "{F250ED18-37AE-4989-A2A2-A94FD875226D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.Web", "Starshine.Authservice.Web\Starshine.Authservice.Web.csproj", "{F250ED18-37AE-4989-A2A2-A94FD875226D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.Extensions", "Starshine.Authservice.Extensions\Starshine.Authservice.Extensions.csproj", "{8CD8CD18-4C5B-4B3A-8EC7-D95A0C5EB525}"
 EndProject

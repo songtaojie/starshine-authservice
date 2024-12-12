@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Starshine.Authservice.Domain.Devices;
+using Starshine.Authservice.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

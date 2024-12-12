@@ -13,10 +13,10 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class AbpIdentityServerServiceCollectionExtensions
     {
-        public static void AddAbpStrictRedirectUriValidator(this IServiceCollection services)
-        {
-            services.Replace(ServiceDescriptor.Transient<IRedirectUriValidator, AbpStrictRedirectUriValidator>());
-        }
+        //public static void AddAbpStrictRedirectUriValidator(this IServiceCollection services)
+        //{
+        //    services.Replace(ServiceDescriptor.Transient<IRedirectUriValidator, AbpStrictRedirectUriValidator>());
+        //}
 
 
         public static void AddAbpWildcardSubdomainCorsPolicyService(this IServiceCollection services)
