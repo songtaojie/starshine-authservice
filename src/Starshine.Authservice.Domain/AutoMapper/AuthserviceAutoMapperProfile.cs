@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
 using Starshine.Authservice.Domain.ApiResources;
+using Starshine.Authservice.Domain.ApiScopes;
 using Starshine.Authservice.Domain.Clients;
 using Starshine.Authservice.Domain.Devices;
-using Starshine.Authservice.Domain.Entities.ApiScopes;
 using Starshine.Authservice.Domain.Grants;
 using Starshine.Authservice.Domain.IdentityResources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.IdentityServer.ApiResources;
 using Volo.Abp.IdentityServer.Clients;
 using Volo.Abp.IdentityServer.Devices;

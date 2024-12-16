@@ -24,11 +24,17 @@ namespace Starshine.Authservice.Domain.Shared.Consts
         /// <summary>
         /// 连接字符串
         /// </summary>
-        public const string ConnectionStringName = "IdentityServer";
+        public const string ConnectionStringName = "DefaultConnectionString";
 
         /// <summary>
         /// 数据库前缀
         /// </summary>
         public static string DbTablePrefix { get; set; } = "Auth";
+
+        /* Enable/disable multi-tenancy easily in a single point.
+     * If you will never need to multi-tenancy, you can remove
+     * related modules and code parts, including this file.
+     */
+        public const bool IsEnabledMultiTenancy = true;
     }
 }

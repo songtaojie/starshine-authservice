@@ -2,7 +2,7 @@
 using Starshine.Authservice.Domain;
 using Starshine.Authservice.Domain.ApiResources;
 using Starshine.Authservice.Domain.Clients;
-using Starshine.Authservice.Domain.Entities.ApiScopes;
+using Starshine.Authservice.Domain.ApiScopes;
 using Starshine.Authservice.Domain.IdentityResources;
 using System;
 using System.Collections.Generic;

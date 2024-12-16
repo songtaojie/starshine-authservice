@@ -6,23 +6,32 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Starshine.Abp.Core;
 using Starshine.Authservice.Application;
+using Starshine.Authservice.Domain.Shared.Consts;
 using Starshine.Authservice.EntityFrameworkCore;
 using System.IO;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Auditing;
+using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.Identity.AspNetCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
+using Volo.Abp.Swashbuckle;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Starshine.Authservice.Web
 {
     [DependsOn(
-    typeof(AuthserviceApplicationModule),
-    typeof(AbpAspNetCoreSerilogModule),
-    typeof(AuthserviceEntityFrameworkCoreModule)
+        typeof(AbpAspNetCoreSerilogModule),
+        typeof(AbpIdentityAspNetCoreModule),
+        typeof(StarshineAuthserviceApplicationModule),
+        typeof(StarshineAuthserviceEntityFrameworkCoreModule),
+        typeof(AbpSwashbuckleModule),
+        typeof(AbpAspNetCoreMultiTenancyModule),
+        typeof(AbpAutofacModule)
      )]
     public class StarshineAuthserviceWebModule: StarshineAbpModule
     {
@@ -36,48 +45,48 @@ namespace Starshine.Authservice.Web
             var hostingEnvironment = context.Services.GetHostingEnvironment();
             var configuration = context.Services.GetConfiguration();
 
-            ConfigureAuthentication(context);
+            //ConfigureAuthentication(context);
             ConfigureAutoMapper();
-            ConfigureVirtualFileSystem(hostingEnvironment);
+            //ConfigureVirtualFileSystem(hostingEnvironment);
             ConfigureLocalizationServices();
-            ConfigureNavigationServices();
+            //ConfigureNavigationServices();
             ConfigureAutoApiControllers();
             ConfigureSwaggerServices(context.Services);
         }
 
-        private void ConfigureAuthentication(ServiceConfigurationContext context)
-        {
-            context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
-        }
+        //private void ConfigureAuthentication(ServiceConfigurationContext context)
+        //{
+        //    context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
+        //}
 
         private void ConfigureAutoMapper()
         {
             Configure<AbpAutoMapperOptions>(options =>
             {
-                options.AddMaps<BookStoreWebModule>();
+                options.AddMaps<StarshineAuthserviceWebModule>();
             });
         }
 
-        private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
-        {
-            if (hostingEnvironment.IsDevelopment())
-            {
-                Configure<AbpVirtualFileSystemOptions>(options =>
-                {
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain.Shared"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application.Contracts"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreWebModule>(hostingEnvironment.ContentRootPath);
-                });
-            }
-        }
+        //private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
+        //{
+        //    if (hostingEnvironment.IsDevelopment())
+        //    {
+        //        Configure<AbpVirtualFileSystemOptions>(options =>
+        //        {
+        //            options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain.Shared"));
+        //            options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Domain"));
+        //            options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application.Contracts"));
+        //            options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application"));
+        //            options.FileSets.ReplaceEmbeddedByPhysical<BookStoreWebModule>(hostingEnvironment.ContentRootPath);
+        //        });
+        //    }
+        //}
 
         private void ConfigureAutoApiControllers()
         {
             Configure<AbpAspNetCoreMvcOptions>(options =>
             {
-                options.ConventionalControllers.Create(typeof(AuthserviceApplicationModule).Assembly);
+                options.ConventionalControllers.Create(typeof(StarshineAuthserviceApplicationModule).Assembly);
             });
         }
 
@@ -133,15 +142,15 @@ namespace Starshine.Authservice.Web
 
             app.UseAbpRequestLocalization();
 
-            app.UseCorrelationId();
+            //app.UseCorrelationId();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
 
-            //if (MultiTenancyConsts.IsEnabled)
-            //{
-            //    app.UseMultiTenancy();
-            //}
+            if (ConmmonConst.IsEnabledMultiTenancy)
+            {
+                app.UseMultiTenancy();
+            }
 
             app.UseUnitOfWork();
             app.UseAuthorization();
@@ -150,7 +159,7 @@ namespace Starshine.Authservice.Web
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore API");
             });
-            app.UseAuditing();
+            //app.UseAuditing();
             app.UseAbpSerilogEnrichers();
             app.UseConfiguredEndpoints();
         }

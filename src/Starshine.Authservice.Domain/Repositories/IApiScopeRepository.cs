@@ -1,9 +1,4 @@
-﻿using Starshine.Authservice.Domain.Entities.ApiScopes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Starshine.Authservice.Domain.ApiScopes;
 using Volo.Abp.Domain.Repositories;
 
 namespace Starshine.Authservice.Domain.Repositories

@@ -8,16 +8,18 @@ using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.PermissionManagement;
+using Volo.Abp.TenantManagement;
 
 namespace Starshine.Authservice.Application.Contracts
 {
     [DependsOn(
-        typeof(AuthserviceDomainSharedModule),
+        typeof(StarshineAuthserviceDomainSharedModule),
         typeof(AbpIdentityApplicationContractsModule),
         typeof(AbpPermissionManagementApplicationContractsModule),
-        typeof(AbpObjectExtendingModule)
+        typeof(AbpTenantManagementApplicationContractsModule)
+        //typeof(AbpObjectExtendingModule)
     )]
-    public class AuthserviceApplicationContractsModule : AbpModule
+    public class StarshineAuthserviceApplicationContractsModule : AbpModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {

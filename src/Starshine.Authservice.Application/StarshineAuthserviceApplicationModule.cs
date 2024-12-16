@@ -9,6 +9,7 @@ using Volo.Abp.AutoMapper;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
+using Volo.Abp.TenantManagement;
 
 namespace Starshine.Authservice.Application
 {
@@ -19,16 +20,17 @@ namespace Starshine.Authservice.Application
     [DependsOn(
         typeof(AbpIdentityApplicationModule),
         typeof(AbpPermissionManagementApplicationModule),
-        typeof(AuthserviceApplicationContractsModule),
-        typeof(AuthserviceDomainModule)
-        )]
-    public class AuthserviceApplicationModule : AbpModule
+        typeof(StarshineAuthserviceApplicationContractsModule),
+        typeof(StarshineAuthserviceDomainModule),
+        typeof(AbpTenantManagementApplicationModule)
+    )]
+    public class StarshineAuthserviceApplicationModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<AbpAutoMapperOptions>(options =>
             {
-                options.AddMaps<AuthserviceApplicationModule>();
+                options.AddMaps<StarshineAuthserviceApplicationModule>();
             });
         }
     }

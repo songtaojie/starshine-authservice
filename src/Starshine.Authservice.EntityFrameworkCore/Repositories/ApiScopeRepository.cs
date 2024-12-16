@@ -1,4 +1,4 @@
-﻿using Starshine.Authservice.Domain.Entities.ApiScopes;
+﻿using Starshine.Authservice.Domain.ApiScopes;
 using Starshine.Authservice.Domain.Repositories;
 using Starshine.Authservice.Domain;
 using System;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Starshine.Authservice.Domain.Clients;
 using Starshine.Authservice.Domain.Devices;
-using Starshine.Authservice.Domain.Entities.ApiScopes;
+using Starshine.Authservice.Domain.ApiScopes;
 using Starshine.Authservice.Domain.IdentityResources;
 using Starshine.Authservice.Domain;
 using System;
@@ -15,12 +15,25 @@ using Volo.Abp.MultiTenancy;
 using Starshine.Authservice.Domain.Shared.Consts;
 using Starshine.Authservice.Domain.ApiResources;
 using Starshine.Authservice.Domain.Grants;
+using Volo.Abp.Identity.EntityFrameworkCore;
+using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Volo.Abp.Identity;
+using Volo.Abp.TenantManagement;
+using Volo.Abp.DependencyInjection;
+using Volo.Abp.PermissionManagement.EntityFrameworkCore;
+using Volo.Abp.PermissionManagement;
 
 namespace Starshine.Authservice.EntityFrameworkCore
 {
-    [IgnoreMultiTenancy]
+    [ReplaceDbContext(typeof(IIdentityDbContext))]
+    [ReplaceDbContext(typeof(ITenantManagementDbContext))]
+    [ReplaceDbContext(typeof(IPermissionManagementDbContext))]
     [ConnectionStringName(ConmmonConst.ConnectionStringName)]
-    public class AuthserviceDbContext : AbpDbContext<AuthserviceDbContext>, IAuthserviceDbContext
+    public class AuthserviceDbContext : AbpDbContext<AuthserviceDbContext>, 
+        IAuthserviceDbContext,
+        IIdentityDbContext,
+        ITenantManagementDbContext,
+        IPermissionManagementDbContext
     {
         #region ApiResource
 
@@ -80,9 +93,42 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
         #endregion
 
+
+       
         public DbSet<PersistedGrant> PersistedGrants { get; set; }
 
         public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
+
+
+        #region IIdentityDbContext
+        public DbSet<IdentityUser> Users { get; set; }
+        public DbSet<IdentityRole> Roles { get; set; }
+        public DbSet<IdentityClaimType> ClaimTypes { get; set; }
+        public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
+        public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
+        public DbSet<IdentityLinkUser> LinkUsers { get; set; }
+
+        public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
+
+        public DbSet<IdentitySession> Sessions { get; set; }
+
+
+        #endregion
+
+        #region  ITenantManagementDbContext
+        public DbSet<Tenant> Tenants { get; set; }
+
+        public DbSet<TenantConnectionString> TenantConnectionStrings{get;set; }
+
+
+        #endregion
+
+        #region  ITenantManagementDbContext
+        public DbSet<PermissionGroupDefinitionRecord> PermissionGroups { get; set; }
+        public DbSet<PermissionDefinitionRecord> Permissions { get; set; }
+        public DbSet<PermissionGrant> PermissionGrants { get; set; }
+        #endregion
+
 
         public AuthserviceDbContext(DbContextOptions<AuthserviceDbContext> options)
             : base(options)
@@ -93,6 +139,9 @@ namespace Starshine.Authservice.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.ConfigurePermissionManagement();
+            builder.ConfigureIdentity();
+            builder.ConfigureTenantManagement();
 
             builder.ConfigureIdentityServer();
         }

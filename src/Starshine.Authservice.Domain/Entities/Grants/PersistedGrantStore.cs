@@ -12,11 +12,11 @@ namespace Starshine.Authservice.Domain.Grants;
 public class PersistedGrantStore : IPersistedGrantStore
 {
     protected IPersistentGrantRepository PersistentGrantRepository { get; }
-    protected IObjectMapper<AuthserviceDomainModule> ObjectMapper { get; }
+    protected IObjectMapper<StarshineAuthserviceDomainModule> ObjectMapper { get; }
     protected IGuidGenerator GuidGenerator { get; }
 
     public PersistedGrantStore(IPersistentGrantRepository persistentGrantRepository,
-        IObjectMapper<AuthserviceDomainModule> objectMapper, IGuidGenerator guidGenerator)
+        IObjectMapper<StarshineAuthserviceDomainModule> objectMapper, IGuidGenerator guidGenerator)
     {
         PersistentGrantRepository = persistentGrantRepository;
         ObjectMapper = objectMapper;

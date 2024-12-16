@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp;
 using JetBrains.Annotations;
 
-namespace Starshine.Authservice.Domain.Entities.ApiScopes
+namespace Starshine.Authservice.Domain.ApiScopes
 {
     public class ApiScope : FullAuditedAggregateRoot<Guid>
     {

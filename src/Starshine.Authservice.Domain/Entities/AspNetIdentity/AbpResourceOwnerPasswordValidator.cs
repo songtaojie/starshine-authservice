@@ -40,8 +40,6 @@ public class AbpResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     protected AbpIdentityOptions AbpIdentityOptions { get; }
     protected IOptions<IdentityOptions> IdentityOptions { get; }
 
-    protected ISettingProvider SettingProvider { get; }
-
     public AbpResourceOwnerPasswordValidator(
         IdentityUserManager userManager,
         SignInManager<IdentityUser> signInManager,
@@ -50,8 +48,7 @@ public class AbpResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
         IStringLocalizer<AbpIdentityServerResource> localizer,
         IOptions<AbpIdentityOptions> abpIdentityOptions,
         IServiceScopeFactory serviceScopeFactory,
-        IOptions<IdentityOptions> identityOptions,
-        ISettingProvider settingProvider)
+        IOptions<IdentityOptions> identityOptions)
     {
         UserManager = userManager;
         SignInManager = signInManager;
@@ -61,7 +58,6 @@ public class AbpResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
         ServiceScopeFactory = serviceScopeFactory;
         AbpIdentityOptions = abpIdentityOptions.Value;
         IdentityOptions = identityOptions;
-        SettingProvider = settingProvider;
     }
 
     /// <summary>

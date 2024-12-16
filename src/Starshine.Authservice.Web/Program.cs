@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 using Starshine.Authservice.Web;
 Log.Logger = new LoggerConfiguration()
         .MinimumLevel.Debug()
@@ -27,7 +28,8 @@ try
     Log.Information("Starting web application");
     var builder = WebApplication.CreateBuilder();
     builder.Host.AddAppSettingsSecretsJson()
-              .UseSerilog();
+            .UseAutofac()
+            .UseSerilog();
     await builder.AddApplicationAsync<StarshineAuthserviceWebModule>();
     var app = builder.Build();
     await app.InitializeApplicationAsync();

@@ -26,34 +26,55 @@ using Starshine.Authservice.Domain.Clients;
 using Starshine.Authservice.Domain.IdentityResources;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Starshine.Authservice.Domain.ApiResources;
+using Volo.Abp.PermissionManagement.Identity;
+using Microsoft.AspNetCore.Identity;
+using Starshine.Authservice.Domain.Entities.AspNetIdentity;
+using Volo.Abp.TenantManagement;
+using Volo.Abp.MultiTenancy;
+using Starshine.Authservice.Domain.Shared.Consts;
 
 namespace Starshine.Authservice.Domain
 {
 
     [DependsOn(
-        typeof(AuthserviceDomainSharedModule),
+        typeof(StarshineAuthserviceDomainSharedModule),
         typeof(AbpIdentityDomainModule),
-        typeof(AbpCachingModule)
-        )]
-    public class AuthserviceDomainModule : StarshineAbpModule
+        typeof(AbpPermissionManagementDomainIdentityModule),
+        typeof(AbpCachingModule),
+        typeof(AbpTenantManagementDomainModule)
+    )]
+    public class StarshineAuthserviceDomainModule : StarshineAbpModule
     {
         private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
-
+        //public override void PreConfigureServices(ServiceConfigurationContext context)
+        //{
+        //    PreConfigure<IdentityBuilder>(builder =>
+        //    {
+        //        builder
+        //            .AddDefaultTokenProviders()
+        //            //.AddTokenProvider<LinkUserTokenProvider>(LinkUserTokenProviderConsts.LinkUserTokenProviderName)
+        //            .AddSignInManager<AbpSignInManager>()
+        //            .AddUserValidator<AbpIdentityUserValidator>();
+        //    });
+        //}
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddAutoMapperObjectMapper<AuthserviceDomainModule>();
+            context.Services.AddAutoMapperObjectMapper<StarshineAuthserviceDomainModule>();
 
             Configure<AbpAutoMapperOptions>(options =>
             {
                 options.AddProfile<AuthserviceAutoMapperProfile>(validate: true);
             });
-
+            Configure<AbpMultiTenancyOptions>(options =>
+            {
+                options.IsEnabled = ConmmonConst.IsEnabledMultiTenancy;
+            });
             Configure<AbpDistributedEntityEventOptions>(options =>
             {
-                options.EtoMappings.Add<ApiResource, ApiResourceEto>(typeof(AuthserviceDomainModule));
-                options.EtoMappings.Add<Client, ClientEto>(typeof(AuthserviceDomainModule));
-                options.EtoMappings.Add<DeviceFlowCodes, DeviceFlowCodesEto>(typeof(AuthserviceDomainModule));
-                options.EtoMappings.Add<IdentityResource, IdentityResourceEto>(typeof(AuthserviceDomainModule));
+                options.EtoMappings.Add<ApiResource, ApiResourceEto>(typeof(StarshineAuthserviceDomainModule));
+                options.EtoMappings.Add<Client, ClientEto>(typeof(StarshineAuthserviceDomainModule));
+                options.EtoMappings.Add<DeviceFlowCodes, DeviceFlowCodesEto>(typeof(StarshineAuthserviceDomainModule));
+                options.EtoMappings.Add<IdentityResource, IdentityResourceEto>(typeof(StarshineAuthserviceDomainModule));
             });
 
             Configure<AbpClaimsServiceOptions>(options =>
@@ -161,23 +182,21 @@ namespace Starshine.Authservice.Domain
             });
         }
 
-        public async override Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
-        {
-            var options = context.ServiceProvider.GetRequiredService<IOptions<TokenCleanupOptions>>().Value;
-            if (options.IsCleanupEnabled)
-            {
-                await context.ServiceProvider
-                    .GetRequiredService<IBackgroundWorkerManager>()
-                    .AddAsync(
-                        context.ServiceProvider
-                            .GetRequiredService<TokenCleanupBackgroundWorker>()
-                    );
-            }
-        }
+        //public async override Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
+        //{
+        //    var options = context.ServiceProvider.GetRequiredService<IOptions<TokenCleanupOptions>>().Value;
+        //    if (options.IsCleanupEnabled)
+        //    {
+        //        IBackgroundWorker backgroundWorker = context.ServiceProvider.GetRequiredService<TokenCleanupBackgroundWorker>();
+        //        IBackgroundWorkerManager backgroundWorkerManager = context.ServiceProvider
+        //            .GetRequiredService<IBackgroundWorkerManager>();
+        //       await backgroundWorkerManager.AddAsync(backgroundWorker);
+        //    }
+        //}
 
-        public override void OnApplicationInitialization(ApplicationInitializationContext context)
-        {
-            AsyncHelper.RunSync(() => OnApplicationInitializationAsync(context));
-        }
+        //public override void OnApplicationInitialization(ApplicationInitializationContext context)
+        //{
+        //    AsyncHelper.RunSync(() => OnApplicationInitializationAsync(context));
+        //}
     }
 }

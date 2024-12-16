@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Starshine.Authservice.Domain.Clients;
 using Starshine.Authservice.Domain.Devices;
-using Starshine.Authservice.Domain.Entities.ApiScopes;
 using Starshine.Authservice.Domain.IdentityResources;
-using Starshine.Authservice.Domain;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp;
 using Starshine.Authservice.Domain.Shared.Consts;
@@ -17,6 +15,7 @@ using Volo.Abp.IdentityServer.Grants;
 using Volo.Abp.IdentityServer.Devices;
 using Starshine.Authservice.Domain.ApiResources;
 using Starshine.Authservice.Domain.Grants;
+using Starshine.Authservice.Domain.ApiScopes;
 
 namespace Starshine.Authservice.EntityFrameworkCore
 {

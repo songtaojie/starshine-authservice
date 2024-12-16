@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities;
 using Volo.Abp;
 using JetBrains.Annotations;
 
-namespace Starshine.Authservice.Domain
+namespace Starshine.Authservice.Domain.ApiScopes
 {
     public class ApiScopeProperty : Entity
     {

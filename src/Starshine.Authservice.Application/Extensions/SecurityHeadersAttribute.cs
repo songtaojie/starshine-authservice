@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Starshine.Authservice.Controllers
+namespace Microsoft.AspNetCore.Mvc.Filters
 {
+    /// <summary>
+    /// 安全请求头
+    /// </summary>
     public class SecurityHeadersAttribute : ActionFilterAttribute
     {
         public override void OnResultExecuting(ResultExecutingContext context)
@@ -18,13 +21,13 @@ namespace Starshine.Authservice.Controllers
                 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
                 if (!context.HttpContext.Response.Headers.ContainsKey("X-Content-Type-Options"))
                 {
-                    context.HttpContext.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+                    context.HttpContext.Response.Headers.Append("X-Content-Type-Options", "nosniff");
                 }
 
                 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
                 if (!context.HttpContext.Response.Headers.ContainsKey("X-Frame-Options"))
                 {
-                    context.HttpContext.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+                    context.HttpContext.Response.Headers.Append("X-Frame-Options", "SAMEORIGIN");
                 }
 
                 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
