@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Ddd.Applicati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Ddd.Application", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Application\Starshine.Abp.Ddd.Application.csproj", "{2490DB1C-209E-4230-8CAB-ACFC84507380}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Authservice.DbMigrator", "Starshine.Authservice.DbMigrator\Starshine.Authservice.DbMigrator.csproj", "{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,10 @@ Global
 		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{5BAE2C02-BA30-43EB-9C78-066E47877043} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
 		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805} = {6971AA6D-DF93-4AA5-99A0-AF3E199B1D47}
 		{2490DB1C-209E-4230-8CAB-ACFC84507380} = {6971AA6D-DF93-4AA5-99A0-AF3E199B1D47}
+		{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {908410DD-9E1E-4818-8CC5-B2F91948B075}

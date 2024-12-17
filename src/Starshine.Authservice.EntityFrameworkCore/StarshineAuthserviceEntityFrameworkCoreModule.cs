@@ -50,7 +50,8 @@ namespace Starshine.Authservice.EntityFrameworkCore
             {
                 /* The main point to change your DBMS.
                  * See also BookStoreMigrationsDbContextFactory for EF Core tooling. */
-                options.UseMySQL();
+                //options.UseMySQL();
+                options.UseSqlite();
             });
         }
     }
