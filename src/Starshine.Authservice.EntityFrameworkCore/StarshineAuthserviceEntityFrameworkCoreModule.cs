@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Starshine.Authservice.Domain;
 using Starshine.Authservice.Domain.ApiResources;
 using Starshine.Authservice.Domain.ApiScopes;
@@ -8,6 +9,7 @@ using Starshine.Authservice.Domain.Grants;
 using Starshine.Authservice.Domain.IdentityResources;
 using Starshine.Authservice.EntityFrameworkCore.Repositories;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.DependencyInjection;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
@@ -51,6 +53,10 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 /* The main point to change your DBMS.
                  * See also BookStoreMigrationsDbContextFactory for EF Core tooling. */
                 //options.UseMySQL();
+                options.Configure<AuthserviceDbContext>(op =>
+                {
+                    op.DbContextOptions.UseSnakeCaseNamingConvention();
+                });
                 options.UseSqlite();
             });
         }
