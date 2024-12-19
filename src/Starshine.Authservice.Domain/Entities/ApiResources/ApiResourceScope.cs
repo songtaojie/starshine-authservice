@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 
 namespace Starshine.Authservice.Domain.ApiResources
 {
-    public class ApiResourceScope : Entity
+    public class ApiResourceScope : Entity<Guid>
     {
         public virtual Guid ApiResourceId { get; protected set; }
 

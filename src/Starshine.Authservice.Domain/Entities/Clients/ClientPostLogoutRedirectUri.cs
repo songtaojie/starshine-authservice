@@ -4,7 +4,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace Starshine.Authservice.Domain.Clients;
 
-public class ClientPostLogoutRedirectUri : Entity
+public class ClientPostLogoutRedirectUri : Entity<Guid>
 {
     public virtual Guid ClientId { get; protected set; }
 

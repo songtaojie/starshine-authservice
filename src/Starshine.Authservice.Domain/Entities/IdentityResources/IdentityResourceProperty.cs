@@ -4,7 +4,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace Starshine.Authservice.Domain.IdentityResources;
 
-public class IdentityResourceProperty : Entity
+public class IdentityResourceProperty : Entity<Guid>
 {
     public virtual Guid IdentityResourceId { get; set; }
 

@@ -4,7 +4,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace Starshine.Authservice.Domain.Clients;
 
-public class ClientProperty : Entity
+public class ClientProperty : Entity<Guid>
 {
     public virtual Guid ClientId { get; set; }
 

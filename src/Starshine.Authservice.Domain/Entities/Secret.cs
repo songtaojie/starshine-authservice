@@ -13,7 +13,7 @@ namespace Starshine.Authservice.Domain
     /// <summary>
     /// 秘密
     /// </summary>
-    public abstract class Secret : Entity
+    public abstract class Secret : Entity<Guid>
     {
         public virtual string Type { get; protected set; }
 

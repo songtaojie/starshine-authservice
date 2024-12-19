@@ -139,11 +139,11 @@ namespace Starshine.Authservice.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.ConfigurePermissionManagement();
+            //builder.ConfigurePermissionManagement();
             builder.ConfigureIdentity();
             builder.ConfigureTenantManagement();
 
-            builder.ConfigureIdentityServer();
+            //builder.ConfigureIdentityServer();
         }
     }
 }

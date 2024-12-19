@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 
 namespace Starshine.Authservice.Domain.ApiScopes
 {
-    public class ApiScopeProperty : Entity
+    public class ApiScopeProperty : Entity<Guid>
     {
         public virtual Guid ApiScopeId { get; set; }
 

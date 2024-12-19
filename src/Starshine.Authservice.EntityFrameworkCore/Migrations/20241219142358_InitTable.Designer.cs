@@ -12,7 +12,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(AuthserviceDbContext))]
-    [Migration("20241218135631_InitTable")]
+    [Migration("20241219142358_InitTable")]
     partial class InitTable
     {
         /// <inheritdoc />
@@ -31,7 +31,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("AllowedAccessTokenSigningAlgorithms")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT")
                         .HasColumnName("allowed_access_token_signing_algorithms");
 
@@ -60,13 +59,11 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
                         .HasColumnType("TEXT")
                         .HasColumnName("description");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("display_name");
 
@@ -95,7 +92,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("name");
 
@@ -104,86 +100,100 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("show_in_discovery_document");
 
                     b.HasKey("Id")
-                        .HasName("pk_auth_api_resources");
+                        .HasName("pk_api_resources");
 
-                    b.ToTable("AuthApiResources", (string)null);
+                    b.ToTable("api_resources", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiResources.ApiResourceClaim", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ApiResourceId")
                         .HasColumnType("TEXT")
                         .HasColumnName("api_resource_id");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(200)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("type");
 
-                    b.HasKey("ApiResourceId", "Type")
-                        .HasName("pk_auth_api_resource_claims");
+                    b.HasKey("Id")
+                        .HasName("pk_api_resource_claims");
 
-                    b.ToTable("AuthApiResourceClaims", (string)null);
+                    b.HasIndex("ApiResourceId")
+                        .HasDatabaseName("ix_api_resource_claims_api_resource_id");
+
+                    b.ToTable("api_resource_claims", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiResources.ApiResourceProperty", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ApiResourceId")
                         .HasColumnType("TEXT")
                         .HasColumnName("api_resource_id");
 
                     b.Property<string>("Key")
-                        .HasMaxLength(250)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("key");
 
                     b.Property<string>("Value")
-                        .HasMaxLength(2000)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("value");
 
-                    b.HasKey("ApiResourceId", "Key", "Value")
-                        .HasName("pk_auth_api_resource_properties");
+                    b.HasKey("Id")
+                        .HasName("pk_api_resource_properties");
 
-                    b.ToTable("AuthApiResourceProperties", (string)null);
+                    b.HasIndex("ApiResourceId")
+                        .HasDatabaseName("ix_api_resource_properties_api_resource_id");
+
+                    b.ToTable("api_resource_properties", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiResources.ApiResourceScope", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ApiResourceId")
                         .HasColumnType("TEXT")
                         .HasColumnName("api_resource_id");
 
                     b.Property<string>("Scope")
-                        .HasMaxLength(200)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("scope");
 
-                    b.HasKey("ApiResourceId", "Scope")
-                        .HasName("pk_auth_api_resource_scopes");
+                    b.HasKey("Id")
+                        .HasName("pk_api_resource_scopes");
 
-                    b.ToTable("AuthApiResourceScopes", (string)null);
+                    b.HasIndex("ApiResourceId")
+                        .HasDatabaseName("ix_api_resource_scopes_api_resource_id");
+
+                    b.ToTable("api_resource_scopes", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiResources.ApiResourceSecret", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ApiResourceId")
                         .HasColumnType("TEXT")
                         .HasColumnName("api_resource_id");
 
-                    b.Property<string>("Type")
-                        .HasMaxLength(250)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("type");
-
-                    b.Property<string>("Value")
-                        .HasMaxLength(4000)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("value");
-
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
                         .HasColumnType("TEXT")
                         .HasColumnName("description");
 
@@ -191,10 +201,23 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("expiration");
 
-                    b.HasKey("ApiResourceId", "Type", "Value")
-                        .HasName("pk_auth_api_resource_secrets");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("type");
 
-                    b.ToTable("AuthApiResourceSecrets", (string)null);
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("value");
+
+                    b.HasKey("Id")
+                        .HasName("pk_api_resource_secrets");
+
+                    b.HasIndex("ApiResourceId")
+                        .HasDatabaseName("ix_api_resource_secrets_api_resource_id");
+
+                    b.ToTable("api_resource_secrets", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiScopes.ApiScope", b =>
@@ -228,13 +251,11 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
                         .HasColumnType("TEXT")
                         .HasColumnName("description");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("display_name");
 
@@ -267,7 +288,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("name");
 
@@ -280,48 +300,62 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("show_in_discovery_document");
 
                     b.HasKey("Id")
-                        .HasName("pk_auth_api_scopes");
+                        .HasName("pk_api_scopes");
 
-                    b.ToTable("AuthApiScopes", (string)null);
+                    b.ToTable("api_scopes", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiScopes.ApiScopeClaim", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ApiScopeId")
                         .HasColumnType("TEXT")
                         .HasColumnName("api_scope_id");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(200)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("type");
 
-                    b.HasKey("ApiScopeId", "Type")
-                        .HasName("pk_auth_api_scope_claims");
+                    b.HasKey("Id")
+                        .HasName("pk_api_scope_claims");
 
-                    b.ToTable("AuthApiScopeClaims", (string)null);
+                    b.HasIndex("ApiScopeId")
+                        .HasDatabaseName("ix_api_scope_claims_api_scope_id");
+
+                    b.ToTable("api_scope_claims", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiScopes.ApiScopeProperty", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ApiScopeId")
                         .HasColumnType("TEXT")
                         .HasColumnName("api_scope_id");
 
                     b.Property<string>("Key")
-                        .HasMaxLength(250)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("key");
 
                     b.Property<string>("Value")
-                        .HasMaxLength(2000)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("value");
 
-                    b.HasKey("ApiScopeId", "Key", "Value")
-                        .HasName("pk_auth_api_scope_properties");
+                    b.HasKey("Id")
+                        .HasName("pk_api_scope_properties");
 
-                    b.ToTable("AuthApiScopeProperties", (string)null);
+                    b.HasIndex("ApiScopeId")
+                        .HasDatabaseName("ix_api_scope_properties_api_scope_id");
+
+                    b.ToTable("api_scope_properties", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.Client", b =>
@@ -360,7 +394,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("AllowedIdentityTokenSigningAlgorithms")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT")
                         .HasColumnName("allowed_identity_token_signing_algorithms");
 
@@ -382,31 +415,26 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("BackChannelLogoutUri")
                         .IsRequired()
-                        .HasMaxLength(2000)
                         .HasColumnType("TEXT")
                         .HasColumnName("back_channel_logout_uri");
 
                     b.Property<string>("ClientClaimsPrefix")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("client_claims_prefix");
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
                     b.Property<string>("ClientName")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("client_name");
 
                     b.Property<string>("ClientUri")
                         .IsRequired()
-                        .HasMaxLength(2000)
                         .HasColumnType("TEXT")
                         .HasColumnName("client_uri");
 
@@ -439,7 +467,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
                         .HasColumnType("TEXT")
                         .HasColumnName("description");
 
@@ -466,7 +493,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("FrontChannelLogoutUri")
                         .IsRequired()
-                        .HasMaxLength(2000)
                         .HasColumnType("TEXT")
                         .HasColumnName("front_channel_logout_uri");
 
@@ -494,19 +520,16 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("LogoUri")
                         .IsRequired()
-                        .HasMaxLength(2000)
                         .HasColumnType("TEXT")
                         .HasColumnName("logo_uri");
 
                     b.Property<string>("PairWiseSubjectSalt")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("pair_wise_subject_salt");
 
                     b.Property<string>("ProtocolType")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("protocol_type");
 
@@ -544,7 +567,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("UserCodeType")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT")
                         .HasColumnName("user_code_type");
 
@@ -553,179 +575,225 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("user_sso_lifetime");
 
                     b.HasKey("Id")
-                        .HasName("pk_auth_clients");
+                        .HasName("pk_clients");
 
-                    b.HasIndex("ClientId")
-                        .HasDatabaseName("ix_auth_clients_client_id");
-
-                    b.ToTable("AuthClients", (string)null);
+                    b.ToTable("clients", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientClaim", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ClientId")
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(250)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("type");
 
                     b.Property<string>("Value")
-                        .HasMaxLength(250)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("value");
 
-                    b.HasKey("ClientId", "Type", "Value")
-                        .HasName("pk_auth_client_claims");
+                    b.HasKey("Id")
+                        .HasName("pk_client_claims");
 
-                    b.ToTable("AuthClientClaims", (string)null);
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_client_claims_client_id");
+
+                    b.ToTable("client_claims", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientCorsOrigin", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ClientId")
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
                     b.Property<string>("Origin")
-                        .HasMaxLength(150)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("origin");
 
-                    b.HasKey("ClientId", "Origin")
-                        .HasName("pk_auth_client_cors_origins");
+                    b.HasKey("Id")
+                        .HasName("pk_client_cors_origins");
 
-                    b.ToTable("AuthClientCorsOrigins", (string)null);
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_client_cors_origins_client_id");
+
+                    b.ToTable("client_cors_origins", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientGrantType", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ClientId")
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
                     b.Property<string>("GrantType")
-                        .HasMaxLength(250)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("grant_type");
 
-                    b.HasKey("ClientId", "GrantType")
-                        .HasName("pk_auth_client_grant_types");
+                    b.HasKey("Id")
+                        .HasName("pk_client_grant_types");
 
-                    b.ToTable("AuthClientGrantTypes", (string)null);
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_client_grant_types_client_id");
+
+                    b.ToTable("client_grant_types", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientIdPRestriction", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ClientId")
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
                     b.Property<string>("Provider")
-                        .HasMaxLength(200)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("provider");
 
-                    b.HasKey("ClientId", "Provider")
-                        .HasName("pk_auth_client_id_p_restrictions");
+                    b.HasKey("Id")
+                        .HasName("pk_client_id_p_restrictions");
 
-                    b.ToTable("AuthClientIdPRestrictions", (string)null);
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_client_id_p_restrictions_client_id");
+
+                    b.ToTable("client_id_p_restrictions", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientPostLogoutRedirectUri", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ClientId")
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
                     b.Property<string>("PostLogoutRedirectUri")
-                        .HasMaxLength(2000)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("post_logout_redirect_uri");
 
-                    b.HasKey("ClientId", "PostLogoutRedirectUri")
-                        .HasName("pk_auth_client_post_logout_redirect_uris");
+                    b.HasKey("Id")
+                        .HasName("pk_client_post_logout_redirect_uris");
 
-                    b.ToTable("AuthClientPostLogoutRedirectUris", (string)null);
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_client_post_logout_redirect_uris_client_id");
+
+                    b.ToTable("client_post_logout_redirect_uris", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientProperty", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ClientId")
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
                     b.Property<string>("Key")
-                        .HasMaxLength(250)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("key");
 
                     b.Property<string>("Value")
-                        .HasMaxLength(2000)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("value");
 
-                    b.HasKey("ClientId", "Key", "Value")
-                        .HasName("pk_auth_client_properties");
+                    b.HasKey("Id")
+                        .HasName("pk_client_properties");
 
-                    b.ToTable("AuthClientProperties", (string)null);
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_client_properties_client_id");
+
+                    b.ToTable("client_properties", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientRedirectUri", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ClientId")
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
                     b.Property<string>("RedirectUri")
-                        .HasMaxLength(2000)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("redirect_uri");
 
-                    b.HasKey("ClientId", "RedirectUri")
-                        .HasName("pk_auth_client_redirect_uris");
+                    b.HasKey("Id")
+                        .HasName("pk_client_redirect_uris");
 
-                    b.ToTable("AuthClientRedirectUris", (string)null);
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_client_redirect_uris_client_id");
+
+                    b.ToTable("client_redirect_uris", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientScope", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ClientId")
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
                     b.Property<string>("Scope")
-                        .HasMaxLength(200)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("scope");
 
-                    b.HasKey("ClientId", "Scope")
-                        .HasName("pk_auth_client_scopes");
+                    b.HasKey("Id")
+                        .HasName("pk_client_scopes");
 
-                    b.ToTable("AuthClientScopes", (string)null);
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_client_scopes_client_id");
+
+                    b.ToTable("client_scopes", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientSecret", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("ClientId")
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
-                    b.Property<string>("Type")
-                        .HasMaxLength(250)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("type");
-
-                    b.Property<string>("Value")
-                        .HasMaxLength(4000)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("value");
-
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(2000)
                         .HasColumnType("TEXT")
                         .HasColumnName("description");
 
@@ -733,10 +801,23 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("expiration");
 
-                    b.HasKey("ClientId", "Type", "Value")
-                        .HasName("pk_auth_client_secrets");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("type");
 
-                    b.ToTable("AuthClientSecrets", (string)null);
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("value");
+
+                    b.HasKey("Id")
+                        .HasName("pk_client_secrets");
+
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_client_secrets_client_id");
+
+                    b.ToTable("client_secrets", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Devices.DeviceFlowCodes", b =>
@@ -747,7 +828,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
@@ -768,24 +848,20 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasMaxLength(50000)
                         .HasColumnType("TEXT")
                         .HasColumnName("data");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("description");
 
                     b.Property<string>("DeviceCode")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("device_code");
 
                     b.Property<DateTime?>("Expiration")
-                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("expiration");
 
@@ -796,48 +872,33 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("SessionId")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT")
                         .HasColumnName("session_id");
 
                     b.Property<string>("SubjectId")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("subject_id");
 
                     b.Property<string>("UserCode")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("user_code");
 
                     b.HasKey("Id")
-                        .HasName("pk_auth_device_flow_codes");
+                        .HasName("pk_device_flow_codes");
 
-                    b.HasIndex("DeviceCode")
-                        .IsUnique()
-                        .HasDatabaseName("ix_auth_device_flow_codes_device_code");
-
-                    b.HasIndex("Expiration")
-                        .HasDatabaseName("ix_auth_device_flow_codes_expiration");
-
-                    b.HasIndex("UserCode")
-                        .HasDatabaseName("ix_auth_device_flow_codes_user_code");
-
-                    b.ToTable("AuthDeviceFlowCodes", (string)null);
+                    b.ToTable("device_flow_codes", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Grants.PersistedGrant", b =>
                 {
-                    b.Property<string>("Key")
-                        .HasMaxLength(200)
+                    b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
-                        .HasColumnName("key");
+                        .HasColumnName("id");
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("client_id");
 
@@ -858,13 +919,11 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasMaxLength(50000)
                         .HasColumnType("TEXT")
                         .HasColumnName("data");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("description");
 
@@ -877,41 +936,30 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Key")
+                        .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasColumnName("id");
+                        .HasColumnName("key");
 
                     b.Property<string>("SessionId")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT")
                         .HasColumnName("session_id");
 
                     b.Property<string>("SubjectId")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("subject_id");
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("TEXT")
                         .HasColumnName("type");
 
-                    b.HasKey("Key")
-                        .HasName("pk_auth_persisted_grants");
+                    b.HasKey("Id")
+                        .HasName("pk_persisted_grants");
 
-                    b.HasIndex("Expiration")
-                        .HasDatabaseName("ix_auth_persisted_grants_expiration");
-
-                    b.HasIndex("SubjectId", "ClientId", "Type")
-                        .HasDatabaseName("ix_auth_persisted_grants_subject_id_client_id_type");
-
-                    b.HasIndex("SubjectId", "SessionId", "Type")
-                        .HasDatabaseName("ix_auth_persisted_grants_subject_id_session_id_type");
-
-                    b.ToTable("AuthPersistedGrants", (string)null);
+                    b.ToTable("persisted_grants", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.IdentityResources.IdentityResource", b =>
@@ -945,13 +993,11 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
                         .HasColumnType("TEXT")
                         .HasColumnName("description");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("display_name");
 
@@ -984,7 +1030,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT")
                         .HasColumnName("name");
 
@@ -997,48 +1042,62 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("show_in_discovery_document");
 
                     b.HasKey("Id")
-                        .HasName("pk_auth_identity_resources");
+                        .HasName("pk_identity_resources");
 
-                    b.ToTable("AuthIdentityResources", (string)null);
+                    b.ToTable("identity_resources", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.IdentityResources.IdentityResourceClaim", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("IdentityResourceId")
                         .HasColumnType("TEXT")
                         .HasColumnName("identity_resource_id");
 
                     b.Property<string>("Type")
-                        .HasMaxLength(200)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("type");
 
-                    b.HasKey("IdentityResourceId", "Type")
-                        .HasName("pk_auth_identity_resource_claims");
+                    b.HasKey("Id")
+                        .HasName("pk_identity_claims");
 
-                    b.ToTable("AuthIdentityResourceClaims", (string)null);
+                    b.HasIndex("IdentityResourceId")
+                        .HasDatabaseName("ix_identity_claims_identity_resource_id");
+
+                    b.ToTable("identity_claims", (string)null);
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.IdentityResources.IdentityResourceProperty", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("IdentityResourceId")
                         .HasColumnType("TEXT")
                         .HasColumnName("identity_resource_id");
 
                     b.Property<string>("Key")
-                        .HasMaxLength(250)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("key");
 
                     b.Property<string>("Value")
-                        .HasMaxLength(2000)
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("value");
 
-                    b.HasKey("IdentityResourceId", "Key", "Value")
-                        .HasName("pk_auth_identity_resource_properties");
+                    b.HasKey("Id")
+                        .HasName("pk_identity_resource_properties");
 
-                    b.ToTable("AuthIdentityResourceProperties", (string)null);
+                    b.HasIndex("IdentityResourceId")
+                        .HasDatabaseName("ix_identity_resource_properties_identity_resource_id");
+
+                    b.ToTable("identity_resource_properties", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.Identity.IdentityClaimType", b =>
@@ -1863,8 +1922,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("DisplayName")
-                        .IsRequired()
-                        .HasMaxLength(256)
                         .HasColumnType("TEXT")
                         .HasColumnName("display_name");
 
@@ -1873,8 +1930,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("ExtraProperties");
 
                     b.Property<string>("GroupName")
-                        .IsRequired()
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT")
                         .HasColumnName("group_name");
 
@@ -1887,37 +1942,25 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("multi_tenancy_side");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT")
                         .HasColumnName("name");
 
                     b.Property<string>("ParentName")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT")
                         .HasColumnName("parent_name");
 
                     b.Property<string>("Providers")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT")
                         .HasColumnName("providers");
 
                     b.Property<string>("StateCheckers")
-                        .HasMaxLength(256)
                         .HasColumnType("TEXT")
                         .HasColumnName("state_checkers");
 
                     b.HasKey("Id")
-                        .HasName("pk_abp_permissions");
+                        .HasName("pk_permissions");
 
-                    b.HasIndex("GroupName")
-                        .HasDatabaseName("ix_abp_permissions_group_name");
-
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("ix_abp_permissions_name");
-
-                    b.ToTable("AbpPermissions", (string)null);
+                    b.ToTable("permissions", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.PermissionManagement.PermissionGrant", b =>
@@ -1927,20 +1970,14 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT")
                         .HasColumnName("name");
 
                     b.Property<string>("ProviderKey")
-                        .IsRequired()
-                        .HasMaxLength(64)
                         .HasColumnType("TEXT")
                         .HasColumnName("provider_key");
 
                     b.Property<string>("ProviderName")
-                        .IsRequired()
-                        .HasMaxLength(64)
                         .HasColumnType("TEXT")
                         .HasColumnName("provider_name");
 
@@ -1949,13 +1986,9 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("TenantId");
 
                     b.HasKey("Id")
-                        .HasName("pk_abp_permission_grants");
+                        .HasName("pk_permission_grants");
 
-                    b.HasIndex("TenantId", "Name", "ProviderName", "ProviderKey")
-                        .IsUnique()
-                        .HasDatabaseName("ix_abp_permission_grants_tenant_id_name_provider_name_provider_key");
-
-                    b.ToTable("AbpPermissionGrants", (string)null);
+                    b.ToTable("permission_grants", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.PermissionManagement.PermissionGroupDefinitionRecord", b =>
@@ -1965,8 +1998,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("DisplayName")
-                        .IsRequired()
-                        .HasMaxLength(256)
                         .HasColumnType("TEXT")
                         .HasColumnName("display_name");
 
@@ -1975,19 +2006,13 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasColumnName("ExtraProperties");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT")
                         .HasColumnName("name");
 
                     b.HasKey("Id")
-                        .HasName("pk_abp_permission_groups");
+                        .HasName("pk_permission_groups");
 
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("ix_abp_permission_groups_name");
-
-                    b.ToTable("AbpPermissionGroups", (string)null);
+                    b.ToTable("permission_groups", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.TenantManagement.Tenant", b =>
@@ -2096,7 +2121,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_api_resource_claims_auth_api_resources_api_resource_id");
+                        .HasConstraintName("fk_api_resource_claims_api_resources_api_resource_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiResources.ApiResourceProperty", b =>
@@ -2106,7 +2131,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_api_resource_properties_auth_api_resources_api_resource_id");
+                        .HasConstraintName("fk_api_resource_properties_api_resources_api_resource_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiResources.ApiResourceScope", b =>
@@ -2116,7 +2141,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_api_resource_scopes_auth_api_resources_api_resource_id");
+                        .HasConstraintName("fk_api_resource_scopes_api_resources_api_resource_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiResources.ApiResourceSecret", b =>
@@ -2126,7 +2151,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_api_resource_secrets_auth_api_resources_api_resource_id");
+                        .HasConstraintName("fk_api_resource_secrets_api_resources_api_resource_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiScopes.ApiScopeClaim", b =>
@@ -2136,7 +2161,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ApiScopeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_api_scope_claims_auth_api_scopes_api_scope_id");
+                        .HasConstraintName("fk_api_scope_claims_api_scopes_api_scope_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.ApiScopes.ApiScopeProperty", b =>
@@ -2146,7 +2171,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ApiScopeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_api_scope_properties_auth_api_scopes_api_scope_id");
+                        .HasConstraintName("fk_api_scope_properties_api_scopes_api_scope_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientClaim", b =>
@@ -2156,7 +2181,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_client_claims_auth_clients_client_id");
+                        .HasConstraintName("fk_client_claims_clients_client_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientCorsOrigin", b =>
@@ -2166,7 +2191,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_client_cors_origins_auth_clients_client_id");
+                        .HasConstraintName("fk_client_cors_origins_clients_client_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientGrantType", b =>
@@ -2176,7 +2201,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_client_grant_types_auth_clients_client_id");
+                        .HasConstraintName("fk_client_grant_types_clients_client_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientIdPRestriction", b =>
@@ -2186,7 +2211,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_client_id_p_restrictions_auth_clients_client_id");
+                        .HasConstraintName("fk_client_id_p_restrictions_clients_client_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientPostLogoutRedirectUri", b =>
@@ -2196,7 +2221,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_client_post_logout_redirect_uris_auth_clients_client_id");
+                        .HasConstraintName("fk_client_post_logout_redirect_uris_clients_client_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientProperty", b =>
@@ -2206,7 +2231,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_client_properties_auth_clients_client_id");
+                        .HasConstraintName("fk_client_properties_clients_client_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientRedirectUri", b =>
@@ -2216,7 +2241,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_client_redirect_uris_auth_clients_client_id");
+                        .HasConstraintName("fk_client_redirect_uris_clients_client_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientScope", b =>
@@ -2226,7 +2251,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_client_scopes_auth_clients_client_id");
+                        .HasConstraintName("fk_client_scopes_clients_client_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.Clients.ClientSecret", b =>
@@ -2236,7 +2261,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_client_secrets_auth_clients_client_id");
+                        .HasConstraintName("fk_client_secrets_clients_client_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.IdentityResources.IdentityResourceClaim", b =>
@@ -2246,7 +2271,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_identity_resource_claims_auth_identity_resources_identity_resource_id");
+                        .HasConstraintName("fk_identity_claims_identity_resources_identity_resource_id");
                 });
 
             modelBuilder.Entity("Starshine.Authservice.Domain.IdentityResources.IdentityResourceProperty", b =>
@@ -2256,7 +2281,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_auth_identity_resource_properties_auth_identity_resources_identity_resource_id");
+                        .HasConstraintName("fk_identity_resource_properties_identity_resources_identity_resource_id");
                 });
 
             modelBuilder.Entity("Volo.Abp.Identity.IdentityRoleClaim", b =>

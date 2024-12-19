@@ -77,55 +77,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AbpPermissionGrants",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    provider_name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
-                    provider_key = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_abp_permission_grants", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AbpPermissionGroups",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    display_name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_abp_permission_groups", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AbpPermissions",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    group_name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    parent_name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
-                    display_name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    is_enabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    multi_tenancy_side = table.Column<byte>(type: "INTEGER", nullable: false),
-                    providers = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
-                    state_checkers = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_abp_permissions", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AbpRoles",
                 columns: table => new
                 {
@@ -271,15 +222,15 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthApiResources",
+                name: "api_resources",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    display_name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
+                    name = table.Column<string>(type: "TEXT", nullable: false),
+                    display_name = table.Column<string>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
                     enabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    allowed_access_token_signing_algorithms = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    allowed_access_token_signing_algorithms = table.Column<string>(type: "TEXT", nullable: false),
                     show_in_discovery_document = table.Column<bool>(type: "INTEGER", nullable: false),
                     ExtraProperties = table.Column<string>(type: "TEXT", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false),
@@ -293,18 +244,18 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_api_resources", x => x.id);
+                    table.PrimaryKey("pk_api_resources", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthApiScopes",
+                name: "api_scopes",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
                     enabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    display_name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
+                    name = table.Column<string>(type: "TEXT", nullable: false),
+                    display_name = table.Column<string>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
                     required = table.Column<bool>(type: "INTEGER", nullable: false),
                     emphasize = table.Column<bool>(type: "INTEGER", nullable: false),
                     show_in_discovery_document = table.Column<bool>(type: "INTEGER", nullable: false),
@@ -320,21 +271,21 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_api_scopes", x => x.id);
+                    table.PrimaryKey("pk_api_scopes", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthClients",
+                name: "clients",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    client_id = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    client_name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    client_uri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false),
-                    logo_uri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false),
+                    client_id = table.Column<string>(type: "TEXT", nullable: false),
+                    client_name = table.Column<string>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
+                    client_uri = table.Column<string>(type: "TEXT", nullable: false),
+                    logo_uri = table.Column<string>(type: "TEXT", nullable: false),
                     enabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    protocol_type = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    protocol_type = table.Column<string>(type: "TEXT", nullable: false),
                     require_client_secret = table.Column<bool>(type: "INTEGER", nullable: false),
                     require_consent = table.Column<bool>(type: "INTEGER", nullable: false),
                     allow_remember_consent = table.Column<bool>(type: "INTEGER", nullable: false),
@@ -343,13 +294,13 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     allow_plain_text_pkce = table.Column<bool>(type: "INTEGER", nullable: false),
                     require_request_object = table.Column<bool>(type: "INTEGER", nullable: false),
                     allow_access_tokens_via_browser = table.Column<bool>(type: "INTEGER", nullable: false),
-                    front_channel_logout_uri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false),
+                    front_channel_logout_uri = table.Column<string>(type: "TEXT", nullable: false),
                     front_channel_logout_session_required = table.Column<bool>(type: "INTEGER", nullable: false),
-                    back_channel_logout_uri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false),
+                    back_channel_logout_uri = table.Column<string>(type: "TEXT", nullable: false),
                     back_channel_logout_session_required = table.Column<bool>(type: "INTEGER", nullable: false),
                     allow_offline_access = table.Column<bool>(type: "INTEGER", nullable: false),
                     identity_token_lifetime = table.Column<int>(type: "INTEGER", nullable: false),
-                    allowed_identity_token_signing_algorithms = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    allowed_identity_token_signing_algorithms = table.Column<string>(type: "TEXT", nullable: false),
                     access_token_lifetime = table.Column<int>(type: "INTEGER", nullable: false),
                     authorization_code_lifetime = table.Column<int>(type: "INTEGER", nullable: false),
                     consent_lifetime = table.Column<int>(type: "INTEGER", nullable: true),
@@ -362,10 +313,10 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     enable_local_login = table.Column<bool>(type: "INTEGER", nullable: false),
                     include_jwt_id = table.Column<bool>(type: "INTEGER", nullable: false),
                     always_send_client_claims = table.Column<bool>(type: "INTEGER", nullable: false),
-                    client_claims_prefix = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    pair_wise_subject_salt = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    client_claims_prefix = table.Column<string>(type: "TEXT", nullable: false),
+                    pair_wise_subject_salt = table.Column<string>(type: "TEXT", nullable: false),
                     user_sso_lifetime = table.Column<int>(type: "INTEGER", nullable: true),
-                    user_code_type = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    user_code_type = table.Column<string>(type: "TEXT", nullable: false),
                     device_code_lifetime = table.Column<int>(type: "INTEGER", nullable: false),
                     ExtraProperties = table.Column<string>(type: "TEXT", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false),
@@ -379,22 +330,22 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_clients", x => x.id);
+                    table.PrimaryKey("pk_clients", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthDeviceFlowCodes",
+                name: "device_flow_codes",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    device_code = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    user_code = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    subject_id = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    session_id = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    client_id = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    description = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    expiration = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    data = table.Column<string>(type: "TEXT", maxLength: 50000, nullable: false),
+                    device_code = table.Column<string>(type: "TEXT", nullable: false),
+                    user_code = table.Column<string>(type: "TEXT", nullable: false),
+                    subject_id = table.Column<string>(type: "TEXT", nullable: false),
+                    session_id = table.Column<string>(type: "TEXT", nullable: false),
+                    client_id = table.Column<string>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
+                    expiration = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    data = table.Column<string>(type: "TEXT", nullable: false),
                     ExtraProperties = table.Column<string>(type: "TEXT", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false),
                     CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -402,17 +353,17 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_device_flow_codes", x => x.id);
+                    table.PrimaryKey("pk_device_flow_codes", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthIdentityResources",
+                name: "identity_resources",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    display_name = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
+                    name = table.Column<string>(type: "TEXT", nullable: false),
+                    display_name = table.Column<string>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
                     enabled = table.Column<bool>(type: "INTEGER", nullable: false),
                     required = table.Column<bool>(type: "INTEGER", nullable: false),
                     emphasize = table.Column<bool>(type: "INTEGER", nullable: false),
@@ -429,30 +380,79 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_identity_resources", x => x.id);
+                    table.PrimaryKey("pk_identity_resources", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthPersistedGrants",
+                name: "permission_grants",
                 columns: table => new
                 {
-                    key = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    type = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    subject_id = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    session_id = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    client_id = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    description = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    name = table.Column<string>(type: "TEXT", nullable: true),
+                    provider_name = table.Column<string>(type: "TEXT", nullable: true),
+                    provider_key = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_permission_grants", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "permission_groups",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    name = table.Column<string>(type: "TEXT", nullable: true),
+                    display_name = table.Column<string>(type: "TEXT", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_permission_groups", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "permissions",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    group_name = table.Column<string>(type: "TEXT", nullable: true),
+                    name = table.Column<string>(type: "TEXT", nullable: true),
+                    parent_name = table.Column<string>(type: "TEXT", nullable: true),
+                    display_name = table.Column<string>(type: "TEXT", nullable: true),
+                    is_enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    multi_tenancy_side = table.Column<byte>(type: "INTEGER", nullable: false),
+                    providers = table.Column<string>(type: "TEXT", nullable: true),
+                    state_checkers = table.Column<string>(type: "TEXT", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_permissions", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "persisted_grants",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    key = table.Column<string>(type: "TEXT", nullable: false),
+                    type = table.Column<string>(type: "TEXT", nullable: false),
+                    subject_id = table.Column<string>(type: "TEXT", nullable: false),
+                    session_id = table.Column<string>(type: "TEXT", nullable: false),
+                    client_id = table.Column<string>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
                     creation_time = table.Column<DateTime>(type: "TEXT", nullable: false),
                     expiration = table.Column<DateTime>(type: "TEXT", nullable: true),
                     consumed_time = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    data = table.Column<string>(type: "TEXT", maxLength: 50000, nullable: false),
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    data = table.Column<string>(type: "TEXT", nullable: false),
                     ExtraProperties = table.Column<string>(type: "TEXT", nullable: false),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_persisted_grants", x => x.key);
+                    table.PrimaryKey("pk_persisted_grants", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -638,318 +638,335 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthApiResourceClaims",
+                name: "api_resource_claims",
                 columns: table => new
                 {
-                    type = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    api_resource_id = table.Column<Guid>(type: "TEXT", nullable: false)
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    api_resource_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    type = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_api_resource_claims", x => new { x.api_resource_id, x.type });
+                    table.PrimaryKey("pk_api_resource_claims", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_api_resource_claims_auth_api_resources_api_resource_id",
+                        name: "fk_api_resource_claims_api_resources_api_resource_id",
                         column: x => x.api_resource_id,
-                        principalTable: "AuthApiResources",
+                        principalTable: "api_resources",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthApiResourceProperties",
+                name: "api_resource_properties",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     api_resource_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    key = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
-                    value = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
+                    key = table.Column<string>(type: "TEXT", nullable: false),
+                    value = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_api_resource_properties", x => new { x.api_resource_id, x.key, x.value });
+                    table.PrimaryKey("pk_api_resource_properties", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_api_resource_properties_auth_api_resources_api_resource_id",
+                        name: "fk_api_resource_properties_api_resources_api_resource_id",
                         column: x => x.api_resource_id,
-                        principalTable: "AuthApiResources",
+                        principalTable: "api_resources",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthApiResourceScopes",
+                name: "api_resource_scopes",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     api_resource_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    scope = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false)
+                    scope = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_api_resource_scopes", x => new { x.api_resource_id, x.scope });
+                    table.PrimaryKey("pk_api_resource_scopes", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_api_resource_scopes_auth_api_resources_api_resource_id",
+                        name: "fk_api_resource_scopes_api_resources_api_resource_id",
                         column: x => x.api_resource_id,
-                        principalTable: "AuthApiResources",
+                        principalTable: "api_resources",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthApiResourceSecrets",
+                name: "api_resource_secrets",
                 columns: table => new
                 {
-                    type = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
-                    value = table.Column<string>(type: "TEXT", maxLength: 4000, nullable: false),
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     api_resource_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
+                    type = table.Column<string>(type: "TEXT", nullable: false),
+                    value = table.Column<string>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
                     expiration = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_api_resource_secrets", x => new { x.api_resource_id, x.type, x.value });
+                    table.PrimaryKey("pk_api_resource_secrets", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_api_resource_secrets_auth_api_resources_api_resource_id",
+                        name: "fk_api_resource_secrets_api_resources_api_resource_id",
                         column: x => x.api_resource_id,
-                        principalTable: "AuthApiResources",
+                        principalTable: "api_resources",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthApiScopeClaims",
+                name: "api_scope_claims",
                 columns: table => new
                 {
-                    type = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    api_scope_id = table.Column<Guid>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_auth_api_scope_claims", x => new { x.api_scope_id, x.type });
-                    table.ForeignKey(
-                        name: "fk_auth_api_scope_claims_auth_api_scopes_api_scope_id",
-                        column: x => x.api_scope_id,
-                        principalTable: "AuthApiScopes",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AuthApiScopeProperties",
-                columns: table => new
-                {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     api_scope_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    key = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
-                    value = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
+                    type = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_api_scope_properties", x => new { x.api_scope_id, x.key, x.value });
+                    table.PrimaryKey("pk_api_scope_claims", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_api_scope_properties_auth_api_scopes_api_scope_id",
+                        name: "fk_api_scope_claims_api_scopes_api_scope_id",
                         column: x => x.api_scope_id,
-                        principalTable: "AuthApiScopes",
+                        principalTable: "api_scopes",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthClientClaims",
+                name: "api_scope_properties",
                 columns: table => new
                 {
-                    client_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    type = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
-                    value = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false)
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    api_scope_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    key = table.Column<string>(type: "TEXT", nullable: false),
+                    value = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_client_claims", x => new { x.client_id, x.type, x.value });
+                    table.PrimaryKey("pk_api_scope_properties", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_client_claims_auth_clients_client_id",
-                        column: x => x.client_id,
-                        principalTable: "AuthClients",
+                        name: "fk_api_scope_properties_api_scopes_api_scope_id",
+                        column: x => x.api_scope_id,
+                        principalTable: "api_scopes",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthClientCorsOrigins",
+                name: "client_claims",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     client_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    origin = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false)
+                    type = table.Column<string>(type: "TEXT", nullable: false),
+                    value = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_client_cors_origins", x => new { x.client_id, x.origin });
+                    table.PrimaryKey("pk_client_claims", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_client_cors_origins_auth_clients_client_id",
+                        name: "fk_client_claims_clients_client_id",
                         column: x => x.client_id,
-                        principalTable: "AuthClients",
+                        principalTable: "clients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthClientGrantTypes",
+                name: "client_cors_origins",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     client_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    grant_type = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false)
+                    origin = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_client_grant_types", x => new { x.client_id, x.grant_type });
+                    table.PrimaryKey("pk_client_cors_origins", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_client_grant_types_auth_clients_client_id",
+                        name: "fk_client_cors_origins_clients_client_id",
                         column: x => x.client_id,
-                        principalTable: "AuthClients",
+                        principalTable: "clients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthClientIdPRestrictions",
+                name: "client_grant_types",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     client_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    provider = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false)
+                    grant_type = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_client_id_p_restrictions", x => new { x.client_id, x.provider });
+                    table.PrimaryKey("pk_client_grant_types", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_client_id_p_restrictions_auth_clients_client_id",
+                        name: "fk_client_grant_types_clients_client_id",
                         column: x => x.client_id,
-                        principalTable: "AuthClients",
+                        principalTable: "clients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthClientPostLogoutRedirectUris",
+                name: "client_id_p_restrictions",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     client_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    post_logout_redirect_uri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
+                    provider = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_client_post_logout_redirect_uris", x => new { x.client_id, x.post_logout_redirect_uri });
+                    table.PrimaryKey("pk_client_id_p_restrictions", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_client_post_logout_redirect_uris_auth_clients_client_id",
+                        name: "fk_client_id_p_restrictions_clients_client_id",
                         column: x => x.client_id,
-                        principalTable: "AuthClients",
+                        principalTable: "clients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthClientProperties",
+                name: "client_post_logout_redirect_uris",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     client_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    key = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
-                    value = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
+                    post_logout_redirect_uri = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_client_properties", x => new { x.client_id, x.key, x.value });
+                    table.PrimaryKey("pk_client_post_logout_redirect_uris", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_client_properties_auth_clients_client_id",
+                        name: "fk_client_post_logout_redirect_uris_clients_client_id",
                         column: x => x.client_id,
-                        principalTable: "AuthClients",
+                        principalTable: "clients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthClientRedirectUris",
+                name: "client_properties",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     client_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    redirect_uri = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
+                    key = table.Column<string>(type: "TEXT", nullable: false),
+                    value = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_client_redirect_uris", x => new { x.client_id, x.redirect_uri });
+                    table.PrimaryKey("pk_client_properties", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_client_redirect_uris_auth_clients_client_id",
+                        name: "fk_client_properties_clients_client_id",
                         column: x => x.client_id,
-                        principalTable: "AuthClients",
+                        principalTable: "clients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthClientScopes",
+                name: "client_redirect_uris",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     client_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    scope = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false)
+                    redirect_uri = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_client_scopes", x => new { x.client_id, x.scope });
+                    table.PrimaryKey("pk_client_redirect_uris", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_client_scopes_auth_clients_client_id",
+                        name: "fk_client_redirect_uris_clients_client_id",
                         column: x => x.client_id,
-                        principalTable: "AuthClients",
+                        principalTable: "clients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthClientSecrets",
+                name: "client_scopes",
                 columns: table => new
                 {
-                    type = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
-                    value = table.Column<string>(type: "TEXT", maxLength: 4000, nullable: false),
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     client_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    description = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false),
+                    scope = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_client_scopes", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_client_scopes_clients_client_id",
+                        column: x => x.client_id,
+                        principalTable: "clients",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "client_secrets",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    client_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    type = table.Column<string>(type: "TEXT", nullable: false),
+                    value = table.Column<string>(type: "TEXT", nullable: false),
+                    description = table.Column<string>(type: "TEXT", nullable: false),
                     expiration = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_client_secrets", x => new { x.client_id, x.type, x.value });
+                    table.PrimaryKey("pk_client_secrets", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_client_secrets_auth_clients_client_id",
+                        name: "fk_client_secrets_clients_client_id",
                         column: x => x.client_id,
-                        principalTable: "AuthClients",
+                        principalTable: "clients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AuthIdentityResourceClaims",
+                name: "identity_claims",
                 columns: table => new
                 {
-                    type = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    identity_resource_id = table.Column<Guid>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_auth_identity_resource_claims", x => new { x.identity_resource_id, x.type });
-                    table.ForeignKey(
-                        name: "fk_auth_identity_resource_claims_auth_identity_resources_identity_resource_id",
-                        column: x => x.identity_resource_id,
-                        principalTable: "AuthIdentityResources",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AuthIdentityResourceProperties",
-                columns: table => new
-                {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
                     identity_resource_id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    key = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false),
-                    value = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
+                    type = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_auth_identity_resource_properties", x => new { x.identity_resource_id, x.key, x.value });
+                    table.PrimaryKey("pk_identity_claims", x => x.id);
                     table.ForeignKey(
-                        name: "fk_auth_identity_resource_properties_auth_identity_resources_identity_resource_id",
+                        name: "fk_identity_claims_identity_resources_identity_resource_id",
                         column: x => x.identity_resource_id,
-                        principalTable: "AuthIdentityResources",
+                        principalTable: "identity_resources",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "identity_resource_properties",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    identity_resource_id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    key = table.Column<string>(type: "TEXT", nullable: false),
+                    value = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_identity_resource_properties", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_identity_resource_properties_identity_resources_identity_resource_id",
+                        column: x => x.identity_resource_id,
+                        principalTable: "identity_resources",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -974,29 +991,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 name: "ix_abp_organization_units_parent_id",
                 table: "AbpOrganizationUnits",
                 column: "parent_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_abp_permission_grants_tenant_id_name_provider_name_provider_key",
-                table: "AbpPermissionGrants",
-                columns: new[] { "TenantId", "name", "provider_name", "provider_key" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "ix_abp_permission_groups_name",
-                table: "AbpPermissionGroups",
-                column: "name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "ix_abp_permissions_group_name",
-                table: "AbpPermissions",
-                column: "group_name");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_abp_permissions_name",
-                table: "AbpPermissions",
-                column: "name",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_abp_role_claims_role_id",
@@ -1094,40 +1088,89 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 column: "UserName");
 
             migrationBuilder.CreateIndex(
-                name: "ix_auth_clients_client_id",
-                table: "AuthClients",
+                name: "ix_api_resource_claims_api_resource_id",
+                table: "api_resource_claims",
+                column: "api_resource_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_api_resource_properties_api_resource_id",
+                table: "api_resource_properties",
+                column: "api_resource_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_api_resource_scopes_api_resource_id",
+                table: "api_resource_scopes",
+                column: "api_resource_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_api_resource_secrets_api_resource_id",
+                table: "api_resource_secrets",
+                column: "api_resource_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_api_scope_claims_api_scope_id",
+                table: "api_scope_claims",
+                column: "api_scope_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_api_scope_properties_api_scope_id",
+                table: "api_scope_properties",
+                column: "api_scope_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_client_claims_client_id",
+                table: "client_claims",
                 column: "client_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_auth_device_flow_codes_device_code",
-                table: "AuthDeviceFlowCodes",
-                column: "device_code",
-                unique: true);
+                name: "ix_client_cors_origins_client_id",
+                table: "client_cors_origins",
+                column: "client_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_auth_device_flow_codes_expiration",
-                table: "AuthDeviceFlowCodes",
-                column: "expiration");
+                name: "ix_client_grant_types_client_id",
+                table: "client_grant_types",
+                column: "client_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_auth_device_flow_codes_user_code",
-                table: "AuthDeviceFlowCodes",
-                column: "user_code");
+                name: "ix_client_id_p_restrictions_client_id",
+                table: "client_id_p_restrictions",
+                column: "client_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_auth_persisted_grants_expiration",
-                table: "AuthPersistedGrants",
-                column: "expiration");
+                name: "ix_client_post_logout_redirect_uris_client_id",
+                table: "client_post_logout_redirect_uris",
+                column: "client_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_auth_persisted_grants_subject_id_client_id_type",
-                table: "AuthPersistedGrants",
-                columns: new[] { "subject_id", "client_id", "type" });
+                name: "ix_client_properties_client_id",
+                table: "client_properties",
+                column: "client_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_auth_persisted_grants_subject_id_session_id_type",
-                table: "AuthPersistedGrants",
-                columns: new[] { "subject_id", "session_id", "type" });
+                name: "ix_client_redirect_uris_client_id",
+                table: "client_redirect_uris",
+                column: "client_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_client_scopes_client_id",
+                table: "client_scopes",
+                column: "client_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_client_secrets_client_id",
+                table: "client_secrets",
+                column: "client_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_identity_claims_identity_resource_id",
+                table: "identity_claims",
+                column: "identity_resource_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_identity_resource_properties_identity_resource_id",
+                table: "identity_resource_properties",
+                column: "identity_resource_id");
         }
 
         /// <inheritdoc />
@@ -1141,15 +1184,6 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "AbpOrganizationUnitRoles");
-
-            migrationBuilder.DropTable(
-                name: "AbpPermissionGrants");
-
-            migrationBuilder.DropTable(
-                name: "AbpPermissionGroups");
-
-            migrationBuilder.DropTable(
-                name: "AbpPermissions");
 
             migrationBuilder.DropTable(
                 name: "AbpRoleClaims");
@@ -1182,61 +1216,70 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 name: "AbpUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AuthApiResourceClaims");
+                name: "api_resource_claims");
 
             migrationBuilder.DropTable(
-                name: "AuthApiResourceProperties");
+                name: "api_resource_properties");
 
             migrationBuilder.DropTable(
-                name: "AuthApiResourceScopes");
+                name: "api_resource_scopes");
 
             migrationBuilder.DropTable(
-                name: "AuthApiResourceSecrets");
+                name: "api_resource_secrets");
 
             migrationBuilder.DropTable(
-                name: "AuthApiScopeClaims");
+                name: "api_scope_claims");
 
             migrationBuilder.DropTable(
-                name: "AuthApiScopeProperties");
+                name: "api_scope_properties");
 
             migrationBuilder.DropTable(
-                name: "AuthClientClaims");
+                name: "client_claims");
 
             migrationBuilder.DropTable(
-                name: "AuthClientCorsOrigins");
+                name: "client_cors_origins");
 
             migrationBuilder.DropTable(
-                name: "AuthClientGrantTypes");
+                name: "client_grant_types");
 
             migrationBuilder.DropTable(
-                name: "AuthClientIdPRestrictions");
+                name: "client_id_p_restrictions");
 
             migrationBuilder.DropTable(
-                name: "AuthClientPostLogoutRedirectUris");
+                name: "client_post_logout_redirect_uris");
 
             migrationBuilder.DropTable(
-                name: "AuthClientProperties");
+                name: "client_properties");
 
             migrationBuilder.DropTable(
-                name: "AuthClientRedirectUris");
+                name: "client_redirect_uris");
 
             migrationBuilder.DropTable(
-                name: "AuthClientScopes");
+                name: "client_scopes");
 
             migrationBuilder.DropTable(
-                name: "AuthClientSecrets");
+                name: "client_secrets");
 
             migrationBuilder.DropTable(
-                name: "AuthDeviceFlowCodes");
+                name: "device_flow_codes");
 
             migrationBuilder.DropTable(
-                name: "AuthIdentityResourceClaims");
+                name: "identity_claims");
 
             migrationBuilder.DropTable(
-                name: "AuthIdentityResourceProperties");
+                name: "identity_resource_properties");
 
             migrationBuilder.DropTable(
-                name: "AuthPersistedGrants");
+                name: "permission_grants");
+
+            migrationBuilder.DropTable(
+                name: "permission_groups");
+
+            migrationBuilder.DropTable(
+                name: "permissions");
+
+            migrationBuilder.DropTable(
+                name: "persisted_grants");
 
             migrationBuilder.DropTable(
                 name: "AbpTenants");
@@ -1251,16 +1294,16 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                 name: "AbpUsers");
 
             migrationBuilder.DropTable(
-                name: "AuthApiResources");
+                name: "api_resources");
 
             migrationBuilder.DropTable(
-                name: "AuthApiScopes");
+                name: "api_scopes");
 
             migrationBuilder.DropTable(
-                name: "AuthClients");
+                name: "clients");
 
             migrationBuilder.DropTable(
-                name: "AuthIdentityResources");
+                name: "identity_resources");
         }
     }
 }

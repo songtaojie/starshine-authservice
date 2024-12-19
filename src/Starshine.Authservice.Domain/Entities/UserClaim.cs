@@ -12,8 +12,9 @@ namespace Starshine.Authservice.Domain
     /// <summary>
     /// 用户声明
     /// </summary>
-    public abstract class UserClaim : Entity
+    public abstract class UserClaim : Entity<Guid>
     {
+        
         /// <summary>
         /// 类型
         /// </summary>
