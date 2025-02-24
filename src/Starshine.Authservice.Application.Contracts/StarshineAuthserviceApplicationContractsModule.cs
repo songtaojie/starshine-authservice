@@ -1,23 +1,17 @@
 ﻿using Starshine.Authservice.Domain.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Identity;
+using Starshine.Abp.Identity;
 using Volo.Abp.Modularity;
-using Volo.Abp.ObjectExtending;
-using Volo.Abp.PermissionManagement;
-using Volo.Abp.TenantManagement;
+using Starshine.Abp.TenantManagement;
+using Starshine.Abp.PermissionManagement;
 
 namespace Starshine.Authservice.Application.Contracts
 {
     [DependsOn(
         typeof(StarshineAuthserviceDomainSharedModule),
-        typeof(AbpIdentityApplicationContractsModule),
-        typeof(AbpPermissionManagementApplicationContractsModule),
-        typeof(AbpTenantManagementApplicationContractsModule)
-        //typeof(AbpObjectExtendingModule)
+        typeof(StarshineIdentityApplicationContractsModule),
+        typeof(StarshinePermissionManagementApplicationContractsModule),
+        typeof(StarshineTenantManagementApplicationContractsModule)
+    //typeof(AbpObjectExtendingModule)
     )]
     public class StarshineAuthserviceApplicationContractsModule : AbpModule
     {

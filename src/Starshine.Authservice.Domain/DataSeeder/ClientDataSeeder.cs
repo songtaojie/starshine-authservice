@@ -2,7 +2,7 @@
 using Starshine.Authservice.Domain.Repositories;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
-using Volo.Abp.Identity;
+using Starshine.Abp.Identity;
 using Volo.Abp.ObjectMapping;
 
 namespace Starshine.Authservice.Domain.DataSeeder
@@ -30,13 +30,13 @@ namespace Starshine.Authservice.Domain.DataSeeder
             }
         }
 
-        protected virtual async Task AddClientIfNotExistsAsync(IdentityServer4.Models.Client client)
+        protected virtual async Task AddClientIfNotExistsAsync(Starshine.IdentityServer.Models.Client client)
         {
             if (await _clientRepository.CheckClientIdExistAsync(client.ClientId))
             {
                 return;
             }
-            var dbClient = _objectMapper.Map<IdentityServer4.Models.Client, Client>(client);
+            var dbClient = _objectMapper.Map<Starshine.IdentityServer.Models.Client, Client>(client);
             dbClient.SetId(_guidGenerator.Create());
             await _clientRepository.InsertAsync(dbClient);
         }

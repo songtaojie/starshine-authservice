@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Security.Claims;
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
+using IdentityUser = Starshine.Abp.Identity.IdentityUser;
 
 namespace Starshine.Authservice.Domain.AspNetIdentity;
 

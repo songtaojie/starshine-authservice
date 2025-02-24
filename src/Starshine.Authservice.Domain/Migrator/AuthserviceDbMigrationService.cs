@@ -1,17 +1,9 @@
-﻿using Microsoft.Extensions.Logging.Abstractions;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Logging;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
-using Volo.Abp.TenantManagement;
+using Starshine.Abp.TenantManagement;
+using Starshine.Abp.Identity;
 
 namespace Starshine.Authservice.Domain.Migrator
 {

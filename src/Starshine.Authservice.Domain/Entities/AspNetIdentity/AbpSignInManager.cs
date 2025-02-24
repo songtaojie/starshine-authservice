@@ -4,15 +4,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Volo.Abp.Identity;
+using Starshine.Abp.Identity;
 using Volo.Abp.Settings;
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
+using IdentityUser = Starshine.Abp.Identity.IdentityUser;
 
 namespace Starshine.Authservice.Domain.Entities.AspNetIdentity
 {
     public class AbpSignInManager : SignInManager<IdentityUser>
     {
-        protected AbpIdentityOptions AbpOptions { get; }
+        protected StarshineIdentityOptions AbpOptions { get; }
 
         private readonly IdentityUserManager _identityUserManager;
 
@@ -24,7 +24,7 @@ namespace Starshine.Authservice.Domain.Entities.AspNetIdentity
             ILogger<SignInManager<IdentityUser>> logger,
             IAuthenticationSchemeProvider schemes,
             IUserConfirmation<IdentityUser> confirmation,
-            IOptions<AbpIdentityOptions> options) : base(
+            IOptions<StarshineIdentityOptions> options) : base(
             userManager,
             contextAccessor,
             claimsFactory,

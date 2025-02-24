@@ -1,6 +1,5 @@
+using Starshine.IdentityServer.Models;
 using System;
-using IdentityServer4.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Starshine.Authservice.Controllers
 {

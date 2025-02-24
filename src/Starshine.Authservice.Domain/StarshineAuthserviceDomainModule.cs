@@ -1,22 +1,17 @@
-﻿using IdentityServer4.Configuration;
-using IdentityServer4.Services;
-using IdentityServer4.Stores;
+﻿using Starshine.IdentityServer.Configuration;
+using Starshine.IdentityServer.Services;
+using Starshine.IdentityServer.Stores;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Starshine.Abp.Core;
-using Starshine.Authservice.Domain.Devices;
 using Starshine.Authservice.Domain.Shared;
-using Starshine.Authservice.Domain.Tokens;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.BackgroundWorkers;
 using Volo.Abp.Caching;
-using Volo.Abp.Domain;
 using Volo.Abp.Domain.Entities.Events.Distributed;
-using Volo.Abp.Identity;
-using Volo.Abp.IdentityServer.ApiResources;
-using Volo.Abp.IdentityServer.Clients;
-using Volo.Abp.IdentityServer.Devices;
-using Volo.Abp.IdentityServer.IdentityResources;
+using Starshine.Abp.Identity;
+using Starshine.Abp.IdentityServer.ApiResources;
+using Starshine.Abp.IdentityServer.Clients;
+using Starshine.Abp.IdentityServer.Devices;
+using Starshine.Abp.IdentityServer.IdentityResources;
 using Volo.Abp.Modularity;
 using Volo.Abp.ObjectExtending.Modularity;
 using Volo.Abp.ObjectExtending;
@@ -27,21 +22,19 @@ using Starshine.Authservice.Domain.IdentityResources;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Starshine.Authservice.Domain.ApiResources;
 using Volo.Abp.PermissionManagement.Identity;
-using Microsoft.AspNetCore.Identity;
-using Starshine.Authservice.Domain.Entities.AspNetIdentity;
-using Volo.Abp.TenantManagement;
 using Volo.Abp.MultiTenancy;
 using Starshine.Authservice.Domain.Shared.Consts;
+using Starshine.Abp.TenantManagement;
 
 namespace Starshine.Authservice.Domain
 {
 
     [DependsOn(
         typeof(StarshineAuthserviceDomainSharedModule),
-        typeof(AbpIdentityDomainModule),
-        typeof(AbpPermissionManagementDomainIdentityModule),
+        typeof(StarshineIdentityDomainModule),
+        typeof(StarshinePermissionManagementDomainIdentityModule),
         typeof(AbpCachingModule),
-        typeof(AbpTenantManagementDomainModule)
+        typeof(StarshineTenantManagementDomainModule)
     )]
     public class StarshineAuthserviceDomainModule : StarshineAbpModule
     {
@@ -71,10 +64,10 @@ namespace Starshine.Authservice.Domain
             });
             Configure<AbpDistributedEntityEventOptions>(options =>
             {
-                options.EtoMappings.Add<ApiResource, ApiResourceEto>(typeof(StarshineAuthserviceDomainModule));
-                options.EtoMappings.Add<Client, ClientEto>(typeof(StarshineAuthserviceDomainModule));
-                options.EtoMappings.Add<DeviceFlowCodes, DeviceFlowCodesEto>(typeof(StarshineAuthserviceDomainModule));
-                options.EtoMappings.Add<IdentityResource, IdentityResourceEto>(typeof(StarshineAuthserviceDomainModule));
+                options.EtoMappings.Add<ApiResources.ApiResource, Starshine.Abp.IdentityServer.ApiResources.ApiResourceEto>(typeof(StarshineAuthserviceDomainModule));
+                options.EtoMappings.Add<Clients.Client, ClientEto>(typeof(StarshineAuthserviceDomainModule));
+                options.EtoMappings.Add<Devices.DeviceFlowCodes, DeviceFlowCodesEto>(typeof(StarshineAuthserviceDomainModule));
+                options.EtoMappings.Add<IdentityResources.IdentityResource, IdentityResourceEto>(typeof(StarshineAuthserviceDomainModule));
             });
 
             Configure<AbpClaimsServiceOptions>(options =>
@@ -165,19 +158,19 @@ namespace Starshine.Authservice.Domain
                 ModuleExtensionConfigurationHelper.ApplyEntityConfigurationToEntity(
                     IdentityServerModuleExtensionConsts.ModuleName,
                     IdentityServerModuleExtensionConsts.EntityNames.Client,
-                    typeof(Client)
+                    typeof(Clients.Client)
                 );
 
                 ModuleExtensionConfigurationHelper.ApplyEntityConfigurationToEntity(
                     IdentityServerModuleExtensionConsts.ModuleName,
                     IdentityServerModuleExtensionConsts.EntityNames.IdentityResource,
-                    typeof(IdentityResource)
+                    typeof(IdentityResources.IdentityResource)
                 );
 
                 ModuleExtensionConfigurationHelper.ApplyEntityConfigurationToEntity(
                     IdentityServerModuleExtensionConsts.ModuleName,
                     IdentityServerModuleExtensionConsts.EntityNames.ApiResource,
-                    typeof(ApiResource)
+                    typeof(ApiResources.ApiResource)
                 );
             });
         }

@@ -4,7 +4,7 @@ using Starshine.Authservice.Domain.Repositories;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
-using Volo.Abp.Identity;
+using Starshine.Abp.Identity;
 
 namespace Starshine.Authservice.Domain.DataSeeder;
 
@@ -28,13 +28,13 @@ public class IdentityResourceDataSeeder : IIdentityResourceDataSeeder, ITransien
     {
         var resources = new[]
         {
-                new IdentityServer4.Models.IdentityResources.OpenId(),
-                new IdentityServer4.Models.IdentityResources.Profile(),
-                new IdentityServer4.Models.IdentityResources.Email(),
-                new IdentityServer4.Models.IdentityResources.Address(),
-                new IdentityServer4.Models.IdentityResources.Phone(),
-                new IdentityServer4.Models.IdentityResource("roles", "用户角色",  new[]{ JwtClaimTypes.Role }),
-                new IdentityServer4.Models.IdentityResource("rolename", "角色名", new List<string> { "rolename" }),
+                new Starshine.IdentityServer.Models.IdentityResources.OpenId(),
+                new Starshine.IdentityServer.Models.IdentityResources.Profile(),
+                new Starshine.IdentityServer.Models.IdentityResources.Email(),
+                new Starshine.IdentityServer.Models.IdentityResources.Address(),
+                new Starshine.IdentityServer.Models.IdentityResources.Phone(),
+                new Starshine.IdentityServer.Models.IdentityResource("roles", "用户角色",  new[]{ JwtClaimTypes.Role }),
+                new Starshine.IdentityServer.Models.IdentityResource("rolename", "角色名", new List<string> { "rolename" }),
             };
 
         foreach (var resource in resources)
@@ -48,7 +48,7 @@ public class IdentityResourceDataSeeder : IIdentityResourceDataSeeder, ITransien
         }
     }
 
-    protected virtual async Task AddIdentityResourceIfNotExistsAsync(IdentityServer4.Models.IdentityResource resource)
+    protected virtual async Task AddIdentityResourceIfNotExistsAsync(Starshine.IdentityServer.Models.IdentityResource resource)
     {
         if (await IdentityResourceRepository.CheckNameExistAsync(resource.Name))
         {

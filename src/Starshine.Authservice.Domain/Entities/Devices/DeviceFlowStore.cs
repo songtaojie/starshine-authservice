@@ -1,7 +1,7 @@
 using IdentityModel;
-using IdentityServer4.Models;
-using IdentityServer4.Stores;
-using IdentityServer4.Stores.Serialization;
+using Starshine.IdentityServer.Models;
+using Starshine.IdentityServer.Stores;
+using Starshine.IdentityServer.Stores.Serialization;
 using JetBrains.Annotations;
 using Starshine.Authservice.Domain.Repositories;
 using Volo.Abp.Guids;
@@ -38,8 +38,8 @@ public class DeviceFlowStore : IDeviceFlowStore
                     UserCode = userCode,
                     ClientId = data.ClientId,
                     SubjectId = data.Subject?.FindFirst(JwtClaimTypes.Subject)?.Value,
-                    CreationTime = data.CreationTime,
-                    Expiration = data.CreationTime.AddSeconds(data.Lifetime),
+                    CreationTime = data.CreationTime.DateTime,
+                    Expiration = data.CreationTime.AddSeconds(data.Lifetime).DateTime,
                     Data = Serialize(data)
                 }
             );

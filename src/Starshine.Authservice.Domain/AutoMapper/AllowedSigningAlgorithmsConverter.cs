@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Starshine.Authservice.Domain
 {
@@ -11,6 +6,7 @@ namespace Starshine.Authservice.Domain
     public class AllowedSigningAlgorithmsConverter :IValueConverter<ICollection<string>, string>,IValueConverter<string, ICollection<string>>
     {
         public static AllowedSigningAlgorithmsConverter Converter = new AllowedSigningAlgorithmsConverter();
+        private static readonly char[] separator = [','];
 
         public string Convert(ICollection<string> sourceMember, ResolutionContext context)
         {
@@ -27,7 +23,7 @@ namespace Starshine.Authservice.Domain
             if (!String.IsNullOrWhiteSpace(sourceMember))
             {
                 sourceMember = sourceMember.Trim();
-                foreach (var item in sourceMember.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Distinct())
+                foreach (var item in sourceMember.Split(separator, StringSplitOptions.RemoveEmptyEntries).Distinct())
                 {
                     list.Add(item);
                 }

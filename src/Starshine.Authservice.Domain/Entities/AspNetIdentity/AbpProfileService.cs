@@ -1,11 +1,11 @@
 ﻿using System.Security.Principal;
-using IdentityServer4.AspNetIdentity;
-using IdentityServer4.Models;
+using Starshine.IdentityServer.AspNetIdentity;
+using Starshine.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
-using Volo.Abp.Identity;
+using Starshine.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Uow;
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
+using IdentityUser = Starshine.Abp.Identity.IdentityUser;
 
 namespace Starshine.Authservice.Domain.AspNetIdentity;
 
@@ -40,9 +40,9 @@ public class AbpProfileService : ProfileService<IdentityUser>
         }
     }
 
-    [UnitOfWork]
-    public override Task<bool> IsUserActiveAsync(IdentityUser user)
-    {
-        return Task.FromResult(user.IsActive);
-    }
+    //[UnitOfWork]
+    //public override Task<bool> IsUserActiveAsync(IdentityUser user)
+    //{
+    //    return Task.FromResult(user.IsActive);
+    //}
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IdentityServer4.Stores;
+using Starshine.IdentityServer.Stores;
 using Starshine.Authservice.Domain.Repositories;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Guids;
@@ -23,12 +23,12 @@ public class PersistedGrantStore : IPersistedGrantStore
         GuidGenerator = guidGenerator;
     }
 
-    public virtual async Task StoreAsync(IdentityServer4.Models.PersistedGrant grant)
+    public virtual async Task StoreAsync(Starshine.IdentityServer.Models.PersistedGrant grant)
     {
         var entity = await PersistentGrantRepository.FindByKeyAsync(grant.Key);
         if (entity == null)
         {
-            entity = ObjectMapper.Map<IdentityServer4.Models.PersistedGrant, PersistedGrant>(grant);
+            entity = ObjectMapper.Map<Starshine.IdentityServer.Models.PersistedGrant, PersistedGrant>(grant);
             EntityHelper.TrySetId(entity, () => GuidGenerator.Create());
             await PersistentGrantRepository.InsertAsync(entity);
         }
@@ -39,16 +39,16 @@ public class PersistedGrantStore : IPersistedGrantStore
         }
     }
 
-    public virtual async Task<IdentityServer4.Models.PersistedGrant> GetAsync(string key)
+    public virtual async Task<Starshine.IdentityServer.Models.PersistedGrant> GetAsync(string key)
     {
         var persistedGrant = await PersistentGrantRepository.FindByKeyAsync(key);
-        return ObjectMapper.Map<PersistedGrant, IdentityServer4.Models.PersistedGrant>(persistedGrant);
+        return ObjectMapper.Map<PersistedGrant, Starshine.IdentityServer.Models.PersistedGrant>(persistedGrant);
     }
 
-    public virtual async Task<IEnumerable<IdentityServer4.Models.PersistedGrant>> GetAllAsync(PersistedGrantFilter filter)
+    public virtual async Task<IEnumerable<Starshine.IdentityServer.Models.PersistedGrant>> GetAllAsync(PersistedGrantFilter filter)
     {
         var persistedGrants = await PersistentGrantRepository.GetListAsync(filter.SubjectId, filter.SessionId, filter.ClientId, filter.Type);
-        return ObjectMapper.Map<List<PersistedGrant>, List<IdentityServer4.Models.PersistedGrant>>(persistedGrants);
+        return ObjectMapper.Map<List<PersistedGrant>, List<Starshine.IdentityServer.Models.PersistedGrant>>(persistedGrants);
     }
 
     public virtual async Task RemoveAsync(string key)

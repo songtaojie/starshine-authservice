@@ -9,19 +9,18 @@ using Starshine.Authservice.Domain.Grants;
 using Starshine.Authservice.Domain.IdentityResources;
 using Starshine.Authservice.EntityFrameworkCore.Repositories;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.DependencyInjection;
-using Volo.Abp.Identity.EntityFrameworkCore;
+using Starshine.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
-using Volo.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Starshine.Abp.TenantManagement.EntityFrameworkCore;
+using Starshine.Abp.PermissionManagement.EntityFrameworkCore;
 
 namespace Starshine.Authservice.EntityFrameworkCore
 {
     [DependsOn(
         typeof(StarshineAuthserviceDomainModule),
-        typeof(AbpIdentityEntityFrameworkCoreModule),
-        typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-        typeof(AbpTenantManagementEntityFrameworkCoreModule)
+        typeof(StarshineIdentityEntityFrameworkCoreModule),
+        typeof(StarshinePermissionManagementEntityFrameworkCoreModule),
+        typeof(StarshineTenantManagementEntityFrameworkCoreModule)
     )]
     public class StarshineAuthserviceEntityFrameworkCoreModule : AbpModule
     {

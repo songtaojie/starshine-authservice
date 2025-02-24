@@ -6,11 +6,6 @@ using Starshine.Authservice.Domain.Devices;
 using Starshine.Authservice.Domain.Grants;
 using Starshine.Authservice.Domain.IdentityResources;
 using System.Security.Claims;
-using Volo.Abp.IdentityServer.ApiResources;
-using Volo.Abp.IdentityServer.Clients;
-using Volo.Abp.IdentityServer.Devices;
-using Volo.Abp.IdentityServer.Grants;
-using Volo.Abp.IdentityServer.IdentityResources;
 
 namespace Starshine.Authservice.Domain
 {
@@ -44,7 +39,7 @@ namespace Starshine.Authservice.Domain
             CreateMap<ClientProperty, KeyValuePair<string, string>>()
              .ReverseMap();
 
-            CreateMap<Client, IdentityServer4.Models.Client>()
+            CreateMap<Client, IdentityServer.Models.Client>()
                 .ForMember(dest => dest.ProtocolType, opt => opt.Condition(srs => srs != null))
                 .ForMember(x => x.AllowedIdentityTokenSigningAlgorithms, opts => opts.ConvertUsing(AllowedSigningAlgorithmsConverter.Converter, x => x.AllowedIdentityTokenSigningAlgorithms))
                 .ReverseMap()
@@ -64,8 +59,8 @@ namespace Starshine.Authservice.Domain
                 .ConstructUsing(src => new Claim(src.Type, src.Value))
                 .ReverseMap();
 
-            CreateMap<ClientClaim, IdentityServer4.Models.ClientClaim>(MemberList.None)
-                .ConstructUsing(src => new IdentityServer4.Models.ClientClaim(src.Type, src.Value, ClaimValueTypes.String))
+            CreateMap<ClientClaim, IdentityServer.Models.ClientClaim>(MemberList.None)
+                .ConstructUsing(src => new IdentityServer.Models.ClientClaim(src.Type, src.Value, ClaimValueTypes.String))
                 .ReverseMap();
 
             CreateMap<ClientScope, string>()
@@ -88,20 +83,20 @@ namespace Starshine.Authservice.Domain
                 .ReverseMap()
                 .ForMember(dest => dest.GrantType, opt => opt.MapFrom(src => src));
 
-            CreateMap<ClientSecret, IdentityServer4.Models.Secret>(MemberList.Destination)
+            CreateMap<ClientSecret, IdentityServer.Models.Secret>(MemberList.Destination)
                 .ForMember(dest => dest.Type, opt => opt.Condition(srs => srs != null))
                 .ReverseMap();
 
-            CreateMap<Client, ClientEto>();
+            CreateMap<Client, Abp.IdentityServer.Clients.ClientEto>();
         }
 
         private void CreateApiResourceMap()
         {
-            CreateMap<ApiResource, IdentityServer4.Models.ApiResource>()
+            CreateMap<ApiResource, IdentityServer.Models.ApiResource>()
                 .ForMember(dest => dest.ApiSecrets, opt => opt.MapFrom(src => src.Secrets))
                 .ForMember(x => x.AllowedAccessTokenSigningAlgorithms, opts => opts.ConvertUsing(AllowedSigningAlgorithmsConverter.Converter, x => x.AllowedAccessTokenSigningAlgorithms));
 
-            CreateMap<ApiResourceSecret, IdentityServer4.Models.Secret>();
+            CreateMap<ApiResourceSecret, IdentityServer.Models.Secret>();
 
             CreateMap<ApiResourceScope, string>()
                 .ConstructUsing(x => x.Scope)
@@ -111,7 +106,7 @@ namespace Starshine.Authservice.Domain
             CreateMap<ApiResourceProperty, KeyValuePair<string, string>>()
                 .ReverseMap();
 
-            CreateMap<ApiResource, ApiResourceEto>();
+            CreateMap<ApiResource, Abp.IdentityServer.ApiResources.ApiResourceEto>();
         }
 
         private void CreateApiScopeMap()
@@ -124,15 +119,15 @@ namespace Starshine.Authservice.Domain
                 .ReverseMap()
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src));
 
-            CreateMap<ApiScope, IdentityServer4.Models.ApiScope>(MemberList.Destination)
-                .ConstructUsing(src => new IdentityServer4.Models.ApiScope())
+            CreateMap<ApiScope, IdentityServer.Models.ApiScope>(MemberList.Destination)
+                .ConstructUsing(src => new IdentityServer.Models.ApiScope())
                 .ReverseMap();
         }
 
         private void CreateIdentityResourceMap()
         {
-            CreateMap<IdentityResource, IdentityServer4.Models.IdentityResource>()
-                .ConstructUsing(src => new IdentityServer4.Models.IdentityResource());
+            CreateMap<IdentityResource, IdentityServer.Models.IdentityResource>()
+                .ConstructUsing(src => new IdentityServer.Models.IdentityResource());
 
             CreateMap<IdentityResourceClaim, string>()
                 .ConstructUsing(x => x.Type)
@@ -142,19 +137,19 @@ namespace Starshine.Authservice.Domain
             CreateMap<IdentityResourceProperty, KeyValuePair<string, string>>()
                 .ReverseMap();
 
-            CreateMap<IdentityResource, IdentityResourceEto>();
+            CreateMap<IdentityResource, Abp.IdentityServer.IdentityResources.IdentityResourceEto>();
         }
 
         private void CreatePersistedGrantMap()
         {
             //TODO: Why PersistedGrant mapping is in this profile?
-            CreateMap<PersistedGrant, IdentityServer4.Models.PersistedGrant>().ReverseMap();
-            CreateMap<PersistedGrant, PersistedGrantEto>();
+            CreateMap<PersistedGrant, IdentityServer.Models.PersistedGrant>().ReverseMap();
+            CreateMap<PersistedGrant, Abp.IdentityServer.Grants.PersistedGrantEto>();
         }
 
         private void CreateDeviceFlowCodesMap()
         {
-            CreateMap<DeviceFlowCodes, DeviceFlowCodesEto>();
+            CreateMap<DeviceFlowCodes, Abp.IdentityServer.Devices.DeviceFlowCodesEto>();
         }
     }
 }

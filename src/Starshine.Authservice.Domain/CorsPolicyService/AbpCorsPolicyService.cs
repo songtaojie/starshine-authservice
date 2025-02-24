@@ -1,5 +1,4 @@
-﻿using IdentityServer4.Configuration;
-using IdentityServer4.Services;
+﻿using Starshine.IdentityServer.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging;
@@ -12,6 +11,7 @@ using System.Threading.Tasks;
 using Volo.Abp.Caching;
 using Microsoft.Extensions.Caching.Distributed;
 using Starshine.Authservice.Domain.Repositories;
+using Starshine.IdentityServer.Services;
 
 namespace Starshine.Authservice.Domain
 {

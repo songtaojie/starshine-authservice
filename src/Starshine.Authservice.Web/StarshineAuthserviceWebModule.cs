@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
@@ -8,32 +7,29 @@ using Starshine.Abp.Core;
 using Starshine.Authservice.Application;
 using Starshine.Authservice.Domain.Shared.Consts;
 using Starshine.Authservice.EntityFrameworkCore;
-using System.IO;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Serilog;
-using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.Identity.AspNetCore;
+using Starshine.Abp.Identity.AspNetCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
-using Volo.Abp.VirtualFileSystem;
 
 namespace Starshine.Authservice.Web
 {
     [DependsOn(
         typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpIdentityAspNetCoreModule),
+        typeof(StarshineIdentityAspNetCoreModule),
         typeof(StarshineAuthserviceApplicationModule),
         typeof(StarshineAuthserviceEntityFrameworkCoreModule),
         typeof(AbpSwashbuckleModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(AbpAutofacModule)
      )]
-    public class StarshineAuthserviceWebModule: StarshineAbpModule
+    public class StarshineAuthserviceWebModule : StarshineAbpModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {

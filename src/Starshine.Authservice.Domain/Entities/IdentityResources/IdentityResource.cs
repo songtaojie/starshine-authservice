@@ -56,7 +56,7 @@ public class IdentityResource : FullAuditedAggregateRoot<Guid>
         Properties = new List<IdentityResourceProperty>();
     }
 
-    public IdentityResource(Guid id, IdentityServer4.Models.IdentityResource resource)
+    public IdentityResource(Guid id, Starshine.IdentityServer.Models.IdentityResource resource)
         : base(id)
     {
         Name = resource.Name;

@@ -1,23 +1,22 @@
 ﻿using Starshine.Abp.Core;
+using Starshine.Abp.Identity;
+using Starshine.Abp.PermissionManagement;
+using Starshine.Abp.TenantManagement;
 using Volo.Abp.Domain;
-using Volo.Abp.Identity;
-using Volo.Abp.IdentityServer;
 using Volo.Abp.Modularity;
-using Volo.Abp.PermissionManagement;
-using Volo.Abp.TenantManagement;
 
 namespace Starshine.Authservice.Domain.Shared
 {
 
     [DependsOn(typeof(AbpDddDomainSharedModule),
-        typeof(AbpPermissionManagementDomainSharedModule),
-        typeof(AbpIdentityDomainSharedModule),
-        typeof(AbpTenantManagementDomainSharedModule))]
+        typeof(StarshinePermissionManagementDomainSharedModule),
+        typeof(StarshineIdentityDomainSharedModule),
+        typeof(StarshineTenantManagementDomainSharedModule))]
     public class StarshineAuthserviceDomainSharedModule : StarshineAbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            
+
         }
     }
 }

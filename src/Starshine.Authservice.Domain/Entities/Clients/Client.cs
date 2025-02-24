@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using IdentityServer4;
-using IdentityServer4.Models;
+using Starshine.IdentityServer;
+using Starshine.IdentityServer.Models;
 using JetBrains.Annotations;
 using Volo.Abp.Domain.Entities.Auditing;
 
@@ -134,7 +134,7 @@ public class Client : FullAuditedAggregateRoot<Guid>
         SlidingRefreshTokenLifetime = 1296000;
         RefreshTokenUsage = (int)TokenUsage.OneTimeOnly;
         RefreshTokenExpiration = (int)TokenExpiration.Absolute;
-        AccessTokenType = (int)IdentityServer4.Models.AccessTokenType.Jwt;
+        AccessTokenType = (int)Starshine.IdentityServer.Models.AccessTokenType.Jwt;
         EnableLocalLogin = true;
         ClientClaimsPrefix = "client_";
 

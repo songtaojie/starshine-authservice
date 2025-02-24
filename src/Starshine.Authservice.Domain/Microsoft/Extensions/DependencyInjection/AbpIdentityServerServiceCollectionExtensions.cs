@@ -1,5 +1,5 @@
-﻿using IdentityServer4.Services;
-using IdentityServer4.Validation;
+﻿using Starshine.IdentityServer.Services;
+using Starshine.IdentityServer.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Starshine.Authservice.Domain;

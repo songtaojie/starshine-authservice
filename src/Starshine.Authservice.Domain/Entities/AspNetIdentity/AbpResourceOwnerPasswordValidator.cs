@@ -5,27 +5,27 @@ using System.Resources;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityModel;
-using IdentityServer4.AspNetIdentity;
-using IdentityServer4.Events;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
-using IdentityServer4.Validation;
+using Starshine.IdentityServer.AspNetIdentity;
+using Starshine.IdentityServer.Events;
+using Starshine.IdentityServer.Models;
+using Starshine.IdentityServer.Services;
+using Starshine.IdentityServer.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
-using Volo.Abp.Identity.Settings;
-using Volo.Abp.IdentityServer;
-using Volo.Abp.IdentityServer.Localization;
+using Starshine.Abp.Identity;
+using Starshine.Abp.Identity.Settings;
+using Starshine.Abp.IdentityServer;
+using Starshine.Abp.IdentityServer.Localization;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Settings;
 using Volo.Abp.Timing;
 using Volo.Abp.Uow;
 using Volo.Abp.Validation;
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
+using IdentityUser = Starshine.Abp.Identity.IdentityUser;
 
 namespace Starshine.Authservice.Domain.AspNetIdentity;
 
@@ -35,9 +35,9 @@ public class AbpResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     protected IdentityUserManager UserManager { get; }
     protected IdentitySecurityLogManager IdentitySecurityLogManager { get; }
     protected ILogger<ResourceOwnerPasswordValidator<IdentityUser>> Logger { get; }
-    protected IStringLocalizer<AbpIdentityServerResource> Localizer { get; }
+    protected IStringLocalizer<StarshineIdentityServerResource> Localizer { get; }
     protected IServiceScopeFactory ServiceScopeFactory { get; }
-    protected AbpIdentityOptions AbpIdentityOptions { get; }
+    protected StarshineIdentityOptions AbpIdentityOptions { get; }
     protected IOptions<IdentityOptions> IdentityOptions { get; }
 
     public AbpResourceOwnerPasswordValidator(
@@ -45,8 +45,8 @@ public class AbpResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
         SignInManager<IdentityUser> signInManager,
         IdentitySecurityLogManager identitySecurityLogManager,
         ILogger<ResourceOwnerPasswordValidator<IdentityUser>> logger,
-        IStringLocalizer<AbpIdentityServerResource> localizer,
-        IOptions<AbpIdentityOptions> abpIdentityOptions,
+        IStringLocalizer<StarshineIdentityServerResource> localizer,
+        IOptions<StarshineIdentityOptions> abpIdentityOptions,
         IServiceScopeFactory serviceScopeFactory,
         IOptions<IdentityOptions> identityOptions)
     {
@@ -61,7 +61,7 @@ public class AbpResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     }
 
     /// <summary>
-    /// https://github.com/IdentityServer/IdentityServer4/blob/master/src/AspNetIdentity/src/ResourceOwnerPasswordValidator.cs#L53
+    /// https://github.com/IdentityServer/Starshine.IdentityServer/blob/master/src/AspNetIdentity/src/ResourceOwnerPasswordValidator.cs#L53
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>

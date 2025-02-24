@@ -1,9 +1,9 @@
 ﻿using IdentityModel;
-using IdentityServer4.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Starshine.Authservice.Domain.Shared;
+using Starshine.IdentityServer.Services;
 using System.Security.Claims;
 using Volo.Abp.Security.Claims;
 

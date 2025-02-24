@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="8.3.4" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="8.3.4" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\starshine-abp\modules\identity\src\Starshine.Abp.Identity.Application\Starshine.Abp.Identity.Application.csproj" />
+    <ProjectReference Include="..\..\..\starshine-abp\modules\tenant-management\src\Starshine.Abp.TenantManagement.Application\Starshine.Abp.TenantManagement.Application.csproj" />
     <ProjectReference Include="..\Starshine.Authservice.Application.Contracts\Starshine.Authservice.Application.Contracts.csproj" />
     <ProjectReference Include="..\Starshine.Authservice.Domain\Starshine.Authservice.Domain.csproj" />
   </ItemGroup>

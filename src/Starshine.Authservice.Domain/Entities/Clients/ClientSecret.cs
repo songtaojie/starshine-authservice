@@ -1,5 +1,5 @@
 ﻿using System;
-using IdentityServer4;
+using Starshine.IdentityServer;
 using JetBrains.Annotations;
 
 namespace Starshine.Authservice.Domain.Clients;

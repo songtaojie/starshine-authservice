@@ -1,30 +1,30 @@
-﻿using IdentityServer4.Models;
-using IdentityServer4;
+﻿using Starshine.IdentityServer.Models;
+using Starshine.IdentityServer;
 
 namespace Starshine.Authservice.Domain.DataSeeder
 {
     public static class ClientDataSeedConfig
     {
 
-        public static IEnumerable<IdentityServer4.Models.Client> Clients =>
-           new List<IdentityServer4.Models.Client>
+        public static IEnumerable<Starshine.IdentityServer.Models.Client> Clients =>
+           new List<Starshine.IdentityServer.Models.Client>
            {
                 // machine to machine client
-                new IdentityServer4.Models.Client
+                new Starshine.IdentityServer.Models.Client
                 {
                     ClientId = "client",
-                    ClientSecrets = { new IdentityServer4.Models.Secret("secret".Sha256()) },
+                    ClientSecrets = { new Starshine.IdentityServer.Models.Secret("secret".Sha256()) },
 
-                    AllowedGrantTypes = IdentityServer4.Models.GrantTypes.ClientCredentials,
+                    AllowedGrantTypes = Starshine.IdentityServer.Models.GrantTypes.ClientCredentials,
                     // scopes that client has access to
                     AllowedScopes = { "api1" }
                 },
                 
                 // interactive ASP.NET Core MVC client
-                new IdentityServer4.Models.Client
+                new Starshine.IdentityServer.Models.Client
                 {
                     ClientId = "mvc",
-                    ClientSecrets = { new IdentityServer4.Models.Secret("secret".Sha256()) },
+                    ClientSecrets = { new Starshine.IdentityServer.Models.Secret("secret".Sha256()) },
 
                     AllowedGrantTypes = GrantTypes.Code,
                     
@@ -118,7 +118,7 @@ namespace Starshine.Authservice.Domain.DataSeeder
                 new Client
                 {
                     ClientId = "chrisdddmvc",
-                    ClientSecrets = { new IdentityServer4.Models.Secret("secret".Sha256()) },
+                    ClientSecrets = { new Starshine.IdentityServer.Models.Secret("secret".Sha256()) },
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequireConsent = false,
@@ -144,7 +144,7 @@ namespace Starshine.Authservice.Domain.DataSeeder
                 new Client
                 {
                     ClientId = "Console",
-                    ClientSecrets = { new IdentityServer4.Models.Secret("secret".Sha256()) },
+                    ClientSecrets = { new Starshine.IdentityServer.Models.Secret("secret".Sha256()) },
 
                     AllowedGrantTypes = new List<string>()
                     {
@@ -164,7 +164,7 @@ namespace Starshine.Authservice.Domain.DataSeeder
                 new Client
                 {
                     ClientId = "blazorserver",
-                    ClientSecrets = { new IdentityServer4.Models.Secret("secret".Sha256()) },
+                    ClientSecrets = { new Starshine.IdentityServer.Models.Secret("secret".Sha256()) },
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequireConsent = false,
@@ -196,7 +196,7 @@ namespace Starshine.Authservice.Domain.DataSeeder
                 {
                     ClientId = "hybridclent",
                     ClientName="Demo MVC Client",
-                    ClientSecrets = { new IdentityServer4.Models.Secret("secret".Sha256()) },
+                    ClientSecrets = { new Starshine.IdentityServer.Models.Secret("secret".Sha256()) },
 
                     AllowedGrantTypes = GrantTypes.Hybrid,
 

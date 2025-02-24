@@ -1,4 +1,4 @@
-﻿using IdentityServer4.Stores;
+﻿using Starshine.IdentityServer.Stores;
 using Microsoft.Extensions.DependencyInjection;
 using Starshine.Authservice.Domain;
 using Starshine.Authservice.Domain.Clients;

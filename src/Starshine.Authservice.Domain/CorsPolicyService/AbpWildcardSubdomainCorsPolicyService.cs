@@ -1,4 +1,4 @@
-﻿using IdentityServer4.Configuration;
+﻿using Starshine.IdentityServer.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;

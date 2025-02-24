@@ -1,21 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Starshine.Authservice.Domain.Clients;
-using Starshine.Authservice.Domain.Devices;
+﻿
+
+using Microsoft.EntityFrameworkCore;
+using Starshine.Abp.IdentityServer;
+using Starshine.Abp.IdentityServer.ApiResources;
+using Starshine.Abp.IdentityServer.ApiScopes;
+using Starshine.Abp.IdentityServer.Clients;
+using Starshine.Abp.IdentityServer.Devices;
+using Starshine.Abp.IdentityServer.Grants;
+using Starshine.Abp.IdentityServer.IdentityResources;
 using Starshine.Authservice.Domain.IdentityResources;
-using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp;
 using Starshine.Authservice.Domain.Shared.Consts;
+using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
-using Volo.Abp.IdentityServer.Clients;
-using Volo.Abp.IdentityServer.IdentityResources;
-using Volo.Abp.IdentityServer;
-using Volo.Abp.IdentityServer.ApiResources;
-using Volo.Abp.IdentityServer.ApiScopes;
-using Volo.Abp.IdentityServer.Grants;
-using Volo.Abp.IdentityServer.Devices;
-using Starshine.Authservice.Domain.ApiResources;
-using Starshine.Authservice.Domain.Grants;
-using Starshine.Authservice.Domain.ApiScopes;
 
 namespace Starshine.Authservice.EntityFrameworkCore
 {
@@ -33,7 +30,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             #region Client
 
-            builder.Entity<Client>(b =>
+            builder.Entity<Domain.Clients.Client>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "Clients");
                 b.ConfigureByConvention();
@@ -62,7 +59,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<ClientGrantType>(b =>
+            builder.Entity<Domain.Clients.ClientGrantType>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ClientGrantTypes");
                 b.ConfigureByConvention();
@@ -71,7 +68,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<ClientRedirectUri>(b =>
+            builder.Entity<Domain.Clients.ClientRedirectUri>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ClientRedirectUris");
                 b.ConfigureByConvention();
@@ -84,7 +81,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<ClientPostLogoutRedirectUri>(b =>
+            builder.Entity<Domain.Clients.ClientPostLogoutRedirectUri>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ClientPostLogoutRedirectUris");
 
@@ -104,7 +101,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<ClientScope>(b =>
+            builder.Entity<Domain.Clients.ClientScope>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ClientScopes");
 
@@ -117,7 +114,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<ClientSecret>(b =>
+            builder.Entity<Domain.Clients.ClientSecret>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ClientSecrets");
 
@@ -136,7 +133,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<ClientClaim>(b =>
+            builder.Entity<Domain.Clients.ClientClaim>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ClientClaims");
 
@@ -150,7 +147,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<ClientIdPRestriction>(b =>
+            builder.Entity<Domain.Clients.ClientIdPRestriction>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ClientIdPRestrictions");
 
@@ -163,7 +160,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<ClientCorsOrigin>(b =>
+            builder.Entity<Domain.Clients.ClientCorsOrigin>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ClientCorsOrigins");
 
@@ -176,7 +173,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<ClientProperty>(b =>
+            builder.Entity<Domain.Clients.ClientProperty>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ClientProperties");
 
@@ -198,7 +195,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             #region IdentityResource
 
-            builder.Entity<IdentityResource>(b =>
+            builder.Entity<Domain.IdentityResources.IdentityResource>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "IdentityResources");
 
@@ -214,7 +211,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<IdentityResourceClaim>(b =>
+            builder.Entity<Domain.IdentityResources.IdentityResourceClaim>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "IdentityResourceClaims");
 
@@ -227,7 +224,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 b.ApplyObjectExtensionMappings();
             });
 
-            builder.Entity<IdentityResourceProperty>(b =>
+            builder.Entity<Domain.IdentityResources.IdentityResourceProperty>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "IdentityResourceProperties");
 
@@ -249,7 +246,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             #region ApiResource
 
-            builder.Entity<ApiResource>(b =>
+            builder.Entity<Domain.ApiResources.ApiResource>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ApiResources");
 
@@ -337,7 +334,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             #region ApiScope
 
-            builder.Entity<ApiScope>(b =>
+            builder.Entity<Domain.ApiScopes.ApiScope>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "ApiScopes");
 
@@ -388,7 +385,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             #region PersistedGrant
 
-            builder.Entity<PersistedGrant>(b =>
+            builder.Entity<Domain.Grants.PersistedGrant>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "PersistedGrants");
 
@@ -422,7 +419,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             #region DeviceFlowCodes
 
-            builder.Entity<DeviceFlowCodes>(b =>
+            builder.Entity<Domain.Devices.DeviceFlowCodes>(b =>
             {
                 b.ToTable(ConmmonConst.DbTablePrefix + "DeviceFlowCodes");
 

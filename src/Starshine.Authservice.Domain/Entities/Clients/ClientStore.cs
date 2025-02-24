@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using IdentityServer4.Configuration;
-using IdentityServer4.Stores;
+using Starshine.IdentityServer.Configuration;
+using Starshine.IdentityServer.Stores;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using Starshine.Authservice.Domain.Repositories;
@@ -13,13 +13,13 @@ public class ClientStore : IClientStore
 {
     protected IClientRepository ClientRepository { get; }
     protected IObjectMapper ObjectMapper { get; }
-    protected IDistributedCache<IdentityServer4.Models.Client> Cache { get; }
+    protected IDistributedCache<Starshine.IdentityServer.Models.Client> Cache { get; }
     protected IdentityServerOptions Options { get; }
 
     public ClientStore(
         IClientRepository clientRepository,
         IObjectMapper<StarshineAuthserviceDomainModule> objectMapper,
-        IDistributedCache<IdentityServer4.Models.Client> cache,
+        IDistributedCache<Starshine.IdentityServer.Models.Client> cache,
         IOptions<IdentityServerOptions> options)
     {
         ClientRepository = clientRepository;
@@ -28,18 +28,18 @@ public class ClientStore : IClientStore
         Options = options.Value;
     }
 
-    public virtual async Task<IdentityServer4.Models.Client?> FindClientByIdAsync(string clientId)
+    public virtual async Task<Starshine.IdentityServer.Models.Client?> FindClientByIdAsync(string clientId)
     {
         return await GetCacheItemAsync(clientId);
     }
 
-    protected virtual async Task<IdentityServer4.Models.Client?> GetCacheItemAsync(string clientId)
+    protected virtual async Task<Starshine.IdentityServer.Models.Client?> GetCacheItemAsync(string clientId)
     {
         return await Cache.GetOrAddAsync(clientId, async () =>
             {
                 var client = await ClientRepository.FindByClientIdAsync(clientId);
                 if (client == null) return null;
-                return ObjectMapper.Map<Client, IdentityServer4.Models.Client>(client);
+                return ObjectMapper.Map<Client, Starshine.IdentityServer.Models.Client>(client);
             },
             optionsFactory: () => new DistributedCacheEntryOptions()
             {

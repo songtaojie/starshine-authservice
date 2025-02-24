@@ -1,28 +1,22 @@
 ﻿using Starshine.Authservice.Application.Contracts;
 using Starshine.Authservice.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.Identity;
+using Starshine.Abp.Identity;
 using Volo.Abp.Modularity;
-using Volo.Abp.PermissionManagement;
-using Volo.Abp.TenantManagement;
+using Starshine.Abp.TenantManagement;
+using Starshine.Abp.PermissionManagement;
 
 namespace Starshine.Authservice.Application
 {
-
     /// <summary>
-    /// 
+    /// 认证服务应用层模块
     /// </summary>
     [DependsOn(
-        typeof(AbpIdentityApplicationModule),
-        typeof(AbpPermissionManagementApplicationModule),
+        typeof(StarshineIdentityApplicationModule),
+        typeof(StarshinePermissionManagementApplicationModule),
         typeof(StarshineAuthserviceApplicationContractsModule),
         typeof(StarshineAuthserviceDomainModule),
-        typeof(AbpTenantManagementApplicationModule)
+        typeof(StarshineTenantManagementApplicationModule)
     )]
     public class StarshineAuthserviceApplicationModule : AbpModule
     {

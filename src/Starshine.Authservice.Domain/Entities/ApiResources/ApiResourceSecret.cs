@@ -1,4 +1,4 @@
-﻿using IdentityServer4;
+﻿using Starshine.IdentityServer;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;

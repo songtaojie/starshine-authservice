@@ -1100,7 +1100,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("identity_resource_properties", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityClaimType", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityClaimType", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
@@ -1157,7 +1157,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpClaimTypes", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityLinkUser", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityLinkUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
@@ -1189,7 +1189,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpLinkUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
@@ -1248,7 +1248,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityRoleClaim", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityRoleClaim", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
@@ -1282,7 +1282,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentitySecurityLog", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentitySecurityLog", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
@@ -1375,7 +1375,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpSecurityLogs", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentitySession", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentitySession", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
@@ -1439,7 +1439,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpSessions", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUser", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
@@ -1615,7 +1615,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserClaim", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserClaim", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
@@ -1649,7 +1649,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserDelegation", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserDelegation", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
@@ -1681,7 +1681,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpUserDelegations", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserLogin", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserLogin", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT")
@@ -1716,7 +1716,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserOrganizationUnit", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserOrganizationUnit", b =>
                 {
                     b.Property<Guid>("OrganizationUnitId")
                         .HasColumnType("TEXT")
@@ -1747,7 +1747,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpUserOrganizationUnits", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserRole", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserRole", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT")
@@ -1770,7 +1770,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserToken", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserToken", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT")
@@ -1800,7 +1800,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.OrganizationUnit", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.OrganizationUnit", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT")
@@ -1884,7 +1884,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.ToTable("AbpOrganizationUnits", (string)null);
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.OrganizationUnitRole", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.OrganizationUnitRole", b =>
                 {
                     b.Property<Guid>("OrganizationUnitId")
                         .HasColumnType("TEXT")
@@ -2284,9 +2284,9 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasConstraintName("fk_identity_resource_properties_identity_resources_identity_resource_id");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityRoleClaim", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityRoleClaim", b =>
                 {
-                    b.HasOne("Volo.Abp.Identity.IdentityRole", null)
+                    b.HasOne("Starshine.Abp.Identity.IdentityRole", null)
                         .WithMany("Claims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2294,9 +2294,9 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasConstraintName("fk_abp_role_claims_abp_roles_role_id");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserClaim", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserClaim", b =>
                 {
-                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                    b.HasOne("Starshine.Abp.Identity.IdentityUser", null)
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2304,9 +2304,9 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasConstraintName("fk_abp_user_claims_abp_users_user_id");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserLogin", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserLogin", b =>
                 {
-                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                    b.HasOne("Starshine.Abp.Identity.IdentityUser", null)
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2314,16 +2314,16 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasConstraintName("fk_abp_user_logins_abp_users_user_id");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserOrganizationUnit", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserOrganizationUnit", b =>
                 {
-                    b.HasOne("Volo.Abp.Identity.OrganizationUnit", null)
+                    b.HasOne("Starshine.Abp.Identity.OrganizationUnit", null)
                         .WithMany()
                         .HasForeignKey("OrganizationUnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_abp_user_organization_units_abp_organization_units_organization_unit_id");
 
-                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                    b.HasOne("Starshine.Abp.Identity.IdentityUser", null)
                         .WithMany("OrganizationUnits")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2331,16 +2331,16 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasConstraintName("fk_abp_user_organization_units_abp_users_user_id");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserRole", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserRole", b =>
                 {
-                    b.HasOne("Volo.Abp.Identity.IdentityRole", null)
+                    b.HasOne("Starshine.Abp.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_abp_user_roles_roles_role_id");
 
-                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                    b.HasOne("Starshine.Abp.Identity.IdentityUser", null)
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2348,9 +2348,9 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasConstraintName("fk_abp_user_roles_abp_users_user_id");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserToken", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUserToken", b =>
                 {
-                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                    b.HasOne("Starshine.Abp.Identity.IdentityUser", null)
                         .WithMany("Tokens")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2358,24 +2358,24 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                         .HasConstraintName("fk_abp_user_tokens_abp_users_user_id");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.OrganizationUnit", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.OrganizationUnit", b =>
                 {
-                    b.HasOne("Volo.Abp.Identity.OrganizationUnit", null)
+                    b.HasOne("Starshine.Abp.Identity.OrganizationUnit", null)
                         .WithMany()
                         .HasForeignKey("ParentId")
                         .HasConstraintName("fk_abp_organization_units_abp_organization_units_parent_id");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.OrganizationUnitRole", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.OrganizationUnitRole", b =>
                 {
-                    b.HasOne("Volo.Abp.Identity.OrganizationUnit", null)
+                    b.HasOne("Starshine.Abp.Identity.OrganizationUnit", null)
                         .WithMany("Roles")
                         .HasForeignKey("OrganizationUnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_abp_organization_unit_roles_abp_organization_units_organization_unit_id");
 
-                    b.HasOne("Volo.Abp.Identity.IdentityRole", null)
+                    b.HasOne("Starshine.Abp.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2439,12 +2439,12 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.Navigation("UserClaims");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityRole", b =>
                 {
                     b.Navigation("Claims");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.IdentityUser", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.IdentityUser", b =>
                 {
                     b.Navigation("Claims");
 
@@ -2457,7 +2457,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.Migrations
                     b.Navigation("Tokens");
                 });
 
-            modelBuilder.Entity("Volo.Abp.Identity.OrganizationUnit", b =>
+            modelBuilder.Entity("Starshine.Abp.Identity.OrganizationUnit", b =>
                 {
                     b.Navigation("Roles");
                 });

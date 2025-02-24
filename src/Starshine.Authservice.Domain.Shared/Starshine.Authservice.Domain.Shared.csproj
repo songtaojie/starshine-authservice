@@ -8,14 +8,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.Ddd.Domain.Shared" Version="8.3.4" />
-		<PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="8.3.4" />
-		<PackageReference Include="Volo.Abp.IdentityServer.Domain.Shared" Version="8.3.4" />
-		<PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="8.3.4" />
-		<PackageReference Include="Volo.Abp.TenantManagement.Domain.Shared" Version="8.3.4" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\starshine-abp\framework\src\Starshine.Abp.Core\Starshine.Abp.Core.csproj" />
+	  <ProjectReference Include="..\..\..\starshine-abp\modules\identityserver\src\Starshine.Abp.IdentityServer.Domain.Shared\Starshine.Abp.IdentityServer.Domain.Shared.csproj" />
+	  <ProjectReference Include="..\..\..\starshine-abp\modules\identity\src\Starshine.Abp.Identity.Domain.Shared\Starshine.Abp.Identity.Domain.Shared.csproj" />
+	  <ProjectReference Include="..\..\..\starshine-abp\modules\permission-management\src\Starshine.Abp.PermissionManagement.Domain.Shared\Starshine.Abp.PermissionManagement.Domain.Shared.csproj" />
+	  <ProjectReference Include="..\..\..\starshine-abp\modules\tenant-management\src\Starshine.Abp.TenantManagement.Domain.Shared\Starshine.Abp.TenantManagement.Domain.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -3,25 +3,18 @@ using Starshine.Authservice.Domain.Clients;
 using Starshine.Authservice.Domain.Devices;
 using Starshine.Authservice.Domain.ApiScopes;
 using Starshine.Authservice.Domain.IdentityResources;
-using Starshine.Authservice.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.MultiTenancy;
 using Starshine.Authservice.Domain.Shared.Consts;
 using Starshine.Authservice.Domain.ApiResources;
 using Starshine.Authservice.Domain.Grants;
-using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using Volo.Abp.Identity;
-using Volo.Abp.TenantManagement;
+using Starshine.Abp.Identity.EntityFrameworkCore;
+using Starshine.Abp.Identity;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.PermissionManagement;
+using Starshine.Abp.TenantManagement;
+using Starshine.Abp.PermissionManagement;
+using Starshine.Abp.TenantManagement.EntityFrameworkCore;
+using Starshine.Abp.PermissionManagement.EntityFrameworkCore;
 
 namespace Starshine.Authservice.EntityFrameworkCore
 {
@@ -29,7 +22,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
     [ReplaceDbContext(typeof(ITenantManagementDbContext))]
     [ReplaceDbContext(typeof(IPermissionManagementDbContext))]
     [ConnectionStringName(ConmmonConst.ConnectionStringName)]
-    public class AuthserviceDbContext : AbpDbContext<AuthserviceDbContext>, 
+    public class AuthserviceDbContext : AbpDbContext<AuthserviceDbContext>,
         IAuthserviceDbContext,
         IIdentityDbContext,
         ITenantManagementDbContext,
@@ -94,7 +87,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
         #endregion
 
 
-       
+
         public DbSet<PersistedGrant> PersistedGrants { get; set; }
 
         public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
@@ -118,7 +111,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
         #region  ITenantManagementDbContext
         public DbSet<Tenant> Tenants { get; set; }
 
-        public DbSet<TenantConnectionString> TenantConnectionStrings{get;set; }
+        public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
 
         #endregion
