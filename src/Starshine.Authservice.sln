@@ -107,6 +107,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.IdentityServe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "framework", "framework", "{1BCE70FC-542C-4E4A-A401-8CC312CF3028}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "users", "users", "{225BE786-8C26-49E6-8629-673F4E25BC18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.Abstractions", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Abstractions\Starshine.Abp.Users.Abstractions.csproj", "{CB5A6664-92E5-4682-8083-681AE12D6C86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.Domain", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Domain\Starshine.Abp.Users.Domain.csproj", "{5C559185-6285-4278-98CF-8D303FD799BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.Domain.Shared", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Domain.Shared\Starshine.Abp.Users.Domain.Shared.csproj", "{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.EntityFrameworkCore", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.EntityFrameworkCore\Starshine.Abp.Users.EntityFrameworkCore.csproj", "{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -265,6 +275,22 @@ Global
 		{DE70A3FC-E892-4589-97F0-65AC1E94C0DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE70A3FC-E892-4589-97F0-65AC1E94C0DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE70A3FC-E892-4589-97F0-65AC1E94C0DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB5A6664-92E5-4682-8083-681AE12D6C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB5A6664-92E5-4682-8083-681AE12D6C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB5A6664-92E5-4682-8083-681AE12D6C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB5A6664-92E5-4682-8083-681AE12D6C86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C559185-6285-4278-98CF-8D303FD799BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C559185-6285-4278-98CF-8D303FD799BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C559185-6285-4278-98CF-8D303FD799BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C559185-6285-4278-98CF-8D303FD799BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -314,6 +340,11 @@ Global
 		{4D9AACF7-E971-40E9-A624-5910D1C7F67A} = {00DFCC7C-D237-4153-B088-02C207AA32C3}
 		{DE70A3FC-E892-4589-97F0-65AC1E94C0DD} = {00DFCC7C-D237-4153-B088-02C207AA32C3}
 		{1BCE70FC-542C-4E4A-A401-8CC312CF3028} = {6971AA6D-DF93-4AA5-99A0-AF3E199B1D47}
+		{225BE786-8C26-49E6-8629-673F4E25BC18} = {58B8C214-2B2E-4610-9633-A8C2D30E0D3F}
+		{CB5A6664-92E5-4682-8083-681AE12D6C86} = {225BE786-8C26-49E6-8629-673F4E25BC18}
+		{5C559185-6285-4278-98CF-8D303FD799BA} = {225BE786-8C26-49E6-8629-673F4E25BC18}
+		{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6} = {225BE786-8C26-49E6-8629-673F4E25BC18}
+		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0} = {225BE786-8C26-49E6-8629-673F4E25BC18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {908410DD-9E1E-4818-8CC5-B2F91948B075}
