@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\starshine-abp\framework\src\Starshine.Abp.AspNetCore\Starshine.Abp.AspNetCore.csproj" />
     <ProjectReference Include="..\..\..\starshine-abp\modules\identity\src\Starshine.Abp.Identity.AspNetCore\Starshine.Abp.Identity.AspNetCore.csproj" />
     <ProjectReference Include="..\Starshine.Authservice.Application\Starshine.Authservice.Application.csproj" />
     <ProjectReference Include="..\Starshine.Authservice.EntityFrameworkCore\Starshine.Authservice.EntityFrameworkCore.csproj" />
