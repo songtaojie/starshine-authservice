@@ -5,7 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+	<ItemGroup>
+		<PackageReference Include="MediatR" Version="12.4.1" />
+	</ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\starshine-abp\modules\identity\src\Starshine.Abp.Identity.Application\Starshine.Abp.Identity.Application.csproj" />
     <ProjectReference Include="..\..\..\starshine-abp\modules\tenant-management\src\Starshine.Abp.TenantManagement.Application\Starshine.Abp.TenantManagement.Application.csproj" />

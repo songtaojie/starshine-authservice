@@ -1,15 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Primitives;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.Primitives;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System.Threading.Tasks;
-using System;
 using Microsoft.AspNetCore.Mvc;
+using Starshine.Abp.AspNetCore;
 using MediatR;
+using Volo.Abp;
+using System.Text.Json;
 
 namespace Starshine.Authservice.Web.Endpoints
 {
@@ -29,7 +24,7 @@ namespace Starshine.Authservice.Web.Endpoints
         {
             var endpoint = builder.MapPost(endpointName, async ([FromBody] TRequest model, HttpContext context) =>
             {
-                return await context.EndpointHandle<TRequest, TResponse>(() => context.GetRawRequestBody(), () => model);
+                return await context.EndpointHandle<TRequest, TResponse>(() => string.Empty, () => model);
             })
             .Accepts<TRequest>("application/json")
             .ConfigureOpenApiMetadata<TRequest, TResponse>(endpointName, description, metadata, allowAnonymous);
@@ -52,7 +47,7 @@ namespace Starshine.Authservice.Web.Endpoints
             {
                 // 解析请求体
                 var model = await ParseRequest<TRequest, TResponse>(context);
-                return await context.EndpointHandle<TRequest, TResponse>(() => context.GetRawRequestBody(), () => model);
+                return await context.EndpointHandle<TRequest, TResponse>(() => string.Empty, () => model);
             })
             .Accepts<TRequest>("multipart/form-data")
             .ConfigureOpenApiMetadata<TRequest, TResponse>(endpointName, description, metadata, allowAnonymous);
@@ -72,11 +67,10 @@ namespace Starshine.Authservice.Web.Endpoints
         private static RouteHandlerBuilder ConfigureOpenApiMetadata<TRequest, TResponse>(this RouteHandlerBuilder endpoint, string endpointName, string? description = null, IEnumerable<Attribute>? metadata = null, bool allowAnonymous = false) where TRequest : IRequest<TResponse>
         {
             endpoint
-               .Produces<TmcResult<TResponse>>(StatusCodes.Status200OK, "application/json")
+               .Produces<RESTfulResult<TResponse>>(StatusCodes.Status200OK, "application/json")
                .WithName(typeof(TRequest).FullName ?? endpointName)
                .WithDescription(description ?? endpointName)
-               .WithSummary(description ?? endpointName)
-               .WithOpenApi();
+               .WithSummary(description ?? endpointName);
             if (allowAnonymous)
             {
                 endpoint.AllowAnonymous();
@@ -101,23 +95,24 @@ namespace Starshine.Authservice.Web.Endpoints
                 var form = await context.Request.ReadFormAsync();
                 var otherFields = form.Where(x => x.Value.Count > 0)
                                       .ToDictionary<KeyValuePair<string, StringValues>, string, object>(x => x.Key, x => x.Value.ToString());
-                var model = otherFields.ToJson().FromJson<TRequest>();
-                if (form.Files != null && model is IFormFileUploadRequest fileUploadRequest)
+                if (form.Files != null)
                 {
-                    fileUploadRequest.Files = form.Files.Select(file => new FormFileRequest
+                    var files = form.Files.Select(file => new
                     {
                         Stream = file.OpenReadStream(),
-                        FileName = file.FileName,
-                        ContentType = file.ContentType,
-                        Length = file.Length,
+                        file.FileName,
+                        file.ContentType,
+                        file.Length,
                     }).ToList();
+                    otherFields.Add(nameof(form.Files), files);
                 }
+                var model = JsonSerializer.Deserialize<TRequest>(JsonSerializer.Serialize(otherFields));
                 return model;
             }
             // 处理 JSON 请求
             using var reader = new StreamReader(context.Request.Body);
             var body = await reader.ReadToEndAsync();
-            return string.IsNullOrWhiteSpace(body) ? default : body.FromJson<TRequest>();
+            return string.IsNullOrWhiteSpace(body) ? default : JsonSerializer.Deserialize<TRequest>(body);
         }
 
         /// <summary>
@@ -133,43 +128,36 @@ namespace Starshine.Authservice.Web.Endpoints
         {
             var logger = context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("API");
             string? requestBody = requestBodyFunc();
-            TmcResult<TResponse> result = default!;
+            RESTfulResult<TResponse> result = default!;
             Stopwatch stopwatch = Stopwatch.StartNew();
             string? responseBody;
-            var ignoreLog = typeof(TRequest).GetCustomAttribute<IgnoreLogAttribute>() != null;
-            var ignoreResponse = typeof(TRequest).GetCustomAttribute<IgnoreResponseAttribute>() != null;
             try
             {
-                var sender = context.RequestServices.GetRequiredService<IRequestSender>();
+                var sender = context.RequestServices.GetRequiredService<ISender>();
                 var response = await sender.Send(requestFunc() ?? Activator.CreateInstance<TRequest>(), context.RequestAborted);
-                result = TmcResult.Successed(response);
+                result = RESTfulResult.Successed(response);
             }
             catch (Exception ex)
             {
-                if (ex is FriendlyException friendlyException)
+                if (ex is UserFriendlyException friendlyException)
                 {
-                    result = TmcResult.Failed<TResponse>(friendlyException.Code, friendlyException.Message);
+                    result = RESTfulResult.Failed<TResponse>(friendlyException.Code, friendlyException.Message);
                 }
                 else if (ex is ArgumentException argumentException)
                 {
-                    result = TmcResult.Failed<TResponse>("arg_errors", argumentException.Message);
+                    result = RESTfulResult.Failed<TResponse>("arg_errors", argumentException.Message);
                 }
                 else
                 {
                     logger.LogError(ex, "syserror");
-                    result = TmcResult.Failed<TResponse>("sys_errors", "系统异常".I18n());
+                    result = RESTfulResult.Failed<TResponse>("sys_errors", "系统异常");
                 }
             }
             finally
             {
                 stopwatch.Stop();
-                responseBody = result.ToJson();
-                context.SetRawResponseBody(responseBody);
-                if (!ignoreLog)
-                {
-                    var headers = context.Request.Headers.GetRawText();
-                    logger.LogInformation("{Method} {Url} {Cost}ms\r\n{Headers}\r\n{RequestBody}\r\n{ResponseBody}", context.Request.Method, context.Request.GetDisplayUrl(), stopwatch.ElapsedMilliseconds, headers, requestBody, ignoreResponse ? "ignore" : responseBody);
-                }
+                responseBody = JsonSerializer.Serialize(result);
+                logger.LogInformation("{Method} {Url} {Cost}ms\r\n{RequestBody}\r\n{ResponseBody}", context.Request.Method, stopwatch.ElapsedMilliseconds,requestBody, responseBody);
             }
             return Results.Json(result);
         }
