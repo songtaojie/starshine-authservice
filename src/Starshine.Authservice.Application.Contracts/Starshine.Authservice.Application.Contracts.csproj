@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Application.Contracts\Starshine.Abp.Ddd.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\..\starshine-abp\modules\identity\src\Starshine.Abp.Identity.Application.Contracts\Starshine.Abp.Identity.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\..\starshine-abp\modules\tenant-management\src\Starshine.Abp.TenantManagement.Application.Contracts\Starshine.Abp.TenantManagement.Application.Contracts.csproj" />

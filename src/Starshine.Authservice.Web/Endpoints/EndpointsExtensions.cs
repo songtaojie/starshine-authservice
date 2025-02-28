@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
 
 namespace Starshine.Authservice.Web.Endpoints
 {
