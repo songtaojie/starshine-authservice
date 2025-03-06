@@ -109,17 +109,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "framework", "framework", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "users", "users", "{225BE786-8C26-49E6-8629-673F4E25BC18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.Abstractions", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Abstractions\Starshine.Abp.Users.Abstractions.csproj", "{CB5A6664-92E5-4682-8083-681AE12D6C86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Users.Abstractions", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Abstractions\Starshine.Abp.Users.Abstractions.csproj", "{CB5A6664-92E5-4682-8083-681AE12D6C86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.Domain", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Domain\Starshine.Abp.Users.Domain.csproj", "{5C559185-6285-4278-98CF-8D303FD799BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Users.Domain", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Domain\Starshine.Abp.Users.Domain.csproj", "{5C559185-6285-4278-98CF-8D303FD799BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.Domain.Shared", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Domain.Shared\Starshine.Abp.Users.Domain.Shared.csproj", "{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Users.Domain.Shared", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Domain.Shared\Starshine.Abp.Users.Domain.Shared.csproj", "{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.EntityFrameworkCore", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.EntityFrameworkCore\Starshine.Abp.Users.EntityFrameworkCore.csproj", "{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Users.EntityFrameworkCore", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.EntityFrameworkCore\Starshine.Abp.Users.EntityFrameworkCore.csproj", "{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Ddd.Domain.Shared", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Domain.Shared\Starshine.Abp.Ddd.Domain.Shared.csproj", "{D87337D8-E4C9-6992-DB1C-00B3F76CFB07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Ddd.Domain.Shared", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Domain.Shared\Starshine.Abp.Ddd.Domain.Shared.csproj", "{D87337D8-E4C9-6992-DB1C-00B3F76CFB07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Ddd.Domain", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Domain\Starshine.Abp.Ddd.Domain.csproj", "{135D5096-5203-8E84-C45D-ED296D97720A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Ddd.Domain", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Domain\Starshine.Abp.Ddd.Domain.csproj", "{135D5096-5203-8E84-C45D-ED296D97720A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.EntityFrameworkCore", "..\..\starshine-abp\framework\src\Starshine.Abp.EntityFrameworkCore\Starshine.Abp.EntityFrameworkCore.csproj", "{E9BB9C88-23FC-4E57-8885-0CE7B04826CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -303,6 +305,10 @@ Global
 		{135D5096-5203-8E84-C45D-ED296D97720A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{135D5096-5203-8E84-C45D-ED296D97720A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{135D5096-5203-8E84-C45D-ED296D97720A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9BB9C88-23FC-4E57-8885-0CE7B04826CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9BB9C88-23FC-4E57-8885-0CE7B04826CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9BB9C88-23FC-4E57-8885-0CE7B04826CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9BB9C88-23FC-4E57-8885-0CE7B04826CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -359,6 +365,7 @@ Global
 		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0} = {225BE786-8C26-49E6-8629-673F4E25BC18}
 		{D87337D8-E4C9-6992-DB1C-00B3F76CFB07} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
 		{135D5096-5203-8E84-C45D-ED296D97720A} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
+		{E9BB9C88-23FC-4E57-8885-0CE7B04826CE} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {908410DD-9E1E-4818-8CC5-B2F91948B075}
