@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Starshine.Abp.Identity;
+using Starshine.Abp.Identity.Managers;
 using Volo.Abp.Settings;
 using IdentityUser = Starshine.Abp.Identity.IdentityUser;
 

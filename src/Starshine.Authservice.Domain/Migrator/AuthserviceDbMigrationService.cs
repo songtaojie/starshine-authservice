@@ -2,8 +2,9 @@
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.MultiTenancy;
-using Starshine.Abp.TenantManagement;
 using Starshine.Abp.Identity;
+using Starshine.Abp.TenantManagement.Repositories;
+using Starshine.Abp.TenantManagement.Entities;
 
 namespace Starshine.Authservice.Domain.Migrator
 {

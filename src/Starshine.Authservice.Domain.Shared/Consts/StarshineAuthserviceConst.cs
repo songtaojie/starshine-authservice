@@ -9,7 +9,7 @@ namespace Starshine.Authservice.Domain.Shared.Consts
     /// <summary>
     /// 通用常量
     /// </summary>
-    public static class ConmmonConst
+    public static class StarshineAuthserviceConst
     {
         /// <summary>
         /// 超级管理员权限

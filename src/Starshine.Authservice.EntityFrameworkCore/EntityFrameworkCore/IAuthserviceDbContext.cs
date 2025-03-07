@@ -14,7 +14,7 @@ using Volo.Abp.MultiTenancy;
 namespace Starshine.Authservice.EntityFrameworkCore
 {
     [IgnoreMultiTenancy]
-    [ConnectionStringName(ConmmonConst.ConnectionStringName)]
+    [ConnectionStringName(StarshineAuthserviceConst.ConnectionStringName)]
     public interface IAuthserviceDbContext : IEfCoreDbContext
     {
         #region ApiResource

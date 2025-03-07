@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Starshine.Abp.IdentityServer.Events;
 using Starshine.Authservice.Domain.ApiResources;
 using Starshine.Authservice.Domain.ApiScopes;
 using Starshine.Authservice.Domain.Clients;
@@ -87,7 +88,7 @@ namespace Starshine.Authservice.Domain
                 .ForMember(dest => dest.Type, opt => opt.Condition(srs => srs != null))
                 .ReverseMap();
 
-            CreateMap<Client, Abp.IdentityServer.Clients.ClientEto>();
+            CreateMap<Client, ClientEto>();
         }
 
         private void CreateApiResourceMap()
@@ -106,7 +107,7 @@ namespace Starshine.Authservice.Domain
             CreateMap<ApiResourceProperty, KeyValuePair<string, string>>()
                 .ReverseMap();
 
-            CreateMap<ApiResource, Abp.IdentityServer.ApiResources.ApiResourceEto>();
+            CreateMap<ApiResource, ApiResourceEto>();
         }
 
         private void CreateApiScopeMap()
@@ -137,19 +138,19 @@ namespace Starshine.Authservice.Domain
             CreateMap<IdentityResourceProperty, KeyValuePair<string, string>>()
                 .ReverseMap();
 
-            CreateMap<IdentityResource, Abp.IdentityServer.IdentityResources.IdentityResourceEto>();
+            CreateMap<IdentityResource, IdentityResourceEto>();
         }
 
         private void CreatePersistedGrantMap()
         {
             //TODO: Why PersistedGrant mapping is in this profile?
             CreateMap<PersistedGrant, IdentityServer.Models.PersistedGrant>().ReverseMap();
-            CreateMap<PersistedGrant, Abp.IdentityServer.Grants.PersistedGrantEto>();
+            CreateMap<PersistedGrant, PersistedGrantEto>();
         }
 
         private void CreateDeviceFlowCodesMap()
         {
-            CreateMap<DeviceFlowCodes, Abp.IdentityServer.Devices.DeviceFlowCodesEto>();
+            CreateMap<DeviceFlowCodes, DeviceFlowCodesEto>();
         }
     }
 }

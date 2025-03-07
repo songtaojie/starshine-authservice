@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Starshine.Abp.IdentityServer;
+using Starshine.Abp.IdentityServer.Consts;
 
 namespace Starshine.Authservice.Domain.AspNetIdentity;
 

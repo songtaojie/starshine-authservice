@@ -39,10 +39,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Swashbuckle",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.Domain.Shared", "Starshine.Authservice.Domain.Shared\Starshine.Authservice.Domain.Shared.csproj", "{5BAE2C02-BA30-43EB-9C78-066E47877043}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Ddd.Application.Contracts", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Application.Contracts\Starshine.Abp.Ddd.Application.Contracts.csproj", "{512E221E-2DE7-4BF1-BEF6-7DF8AE010805}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Ddd.Application", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Application\Starshine.Abp.Ddd.Application.csproj", "{2490DB1C-209E-4230-8CAB-ACFC84507380}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Authservice.DbMigrator", "Starshine.Authservice.DbMigrator\Starshine.Authservice.DbMigrator.csproj", "{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.IdentityServer", "..\..\startshine-identityserver\framework\src\Starshine.IdentityServer\Starshine.IdentityServer.csproj", "{44BC0D31-604F-4239-BCBE-57FF747E51B6}"
@@ -109,19 +105,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "framework", "framework", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "users", "users", "{225BE786-8C26-49E6-8629-673F4E25BC18}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Users.Abstractions", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Abstractions\Starshine.Abp.Users.Abstractions.csproj", "{CB5A6664-92E5-4682-8083-681AE12D6C86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.Abstractions", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Abstractions\Starshine.Abp.Users.Abstractions.csproj", "{CB5A6664-92E5-4682-8083-681AE12D6C86}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Users.Domain", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Domain\Starshine.Abp.Users.Domain.csproj", "{5C559185-6285-4278-98CF-8D303FD799BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.Domain", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Domain\Starshine.Abp.Users.Domain.csproj", "{5C559185-6285-4278-98CF-8D303FD799BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Users.Domain.Shared", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Domain.Shared\Starshine.Abp.Users.Domain.Shared.csproj", "{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.Domain.Shared", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.Domain.Shared\Starshine.Abp.Users.Domain.Shared.csproj", "{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Users.EntityFrameworkCore", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.EntityFrameworkCore\Starshine.Abp.Users.EntityFrameworkCore.csproj", "{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Ddd.Domain.Shared", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Domain.Shared\Starshine.Abp.Ddd.Domain.Shared.csproj", "{D87337D8-E4C9-6992-DB1C-00B3F76CFB07}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Ddd.Domain", "..\..\starshine-abp\framework\src\Starshine.Abp.Ddd.Domain\Starshine.Abp.Ddd.Domain.csproj", "{135D5096-5203-8E84-C45D-ED296D97720A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.EntityFrameworkCore", "..\..\starshine-abp\framework\src\Starshine.Abp.EntityFrameworkCore\Starshine.Abp.EntityFrameworkCore.csproj", "{E9BB9C88-23FC-4E57-8885-0CE7B04826CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starshine.Abp.Users.EntityFrameworkCore", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.EntityFrameworkCore\Starshine.Abp.Users.EntityFrameworkCore.csproj", "{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -173,14 +163,6 @@ Global
 		{5BAE2C02-BA30-43EB-9C78-066E47877043}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BAE2C02-BA30-43EB-9C78-066E47877043}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BAE2C02-BA30-43EB-9C78-066E47877043}.Release|Any CPU.Build.0 = Release|Any CPU
-		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2490DB1C-209E-4230-8CAB-ACFC84507380}.Release|Any CPU.Build.0 = Release|Any CPU
 		{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -297,18 +279,6 @@ Global
 		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D87337D8-E4C9-6992-DB1C-00B3F76CFB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D87337D8-E4C9-6992-DB1C-00B3F76CFB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D87337D8-E4C9-6992-DB1C-00B3F76CFB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D87337D8-E4C9-6992-DB1C-00B3F76CFB07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{135D5096-5203-8E84-C45D-ED296D97720A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{135D5096-5203-8E84-C45D-ED296D97720A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{135D5096-5203-8E84-C45D-ED296D97720A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{135D5096-5203-8E84-C45D-ED296D97720A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9BB9C88-23FC-4E57-8885-0CE7B04826CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9BB9C88-23FC-4E57-8885-0CE7B04826CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9BB9C88-23FC-4E57-8885-0CE7B04826CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9BB9C88-23FC-4E57-8885-0CE7B04826CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -325,8 +295,6 @@ Global
 		{D1EBA04F-11FA-437D-9FDB-0F93F3B734C1} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
 		{43D18408-B81A-465E-9444-40A0043E88FD} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
 		{5BAE2C02-BA30-43EB-9C78-066E47877043} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
-		{512E221E-2DE7-4BF1-BEF6-7DF8AE010805} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
-		{2490DB1C-209E-4230-8CAB-ACFC84507380} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
 		{29A5BFE5-B296-4B5B-B4B0-9885D0984CC3} = {7CA2049A-2FF2-4229-88F9-F0E8ED1868C2}
 		{44BC0D31-604F-4239-BCBE-57FF747E51B6} = {190C72CF-EDBE-466A-B8F2-17809022A11D}
 		{CA1B590D-62BD-4225-9F45-0E028E9A1911} = {190C72CF-EDBE-466A-B8F2-17809022A11D}
@@ -363,9 +331,6 @@ Global
 		{5C559185-6285-4278-98CF-8D303FD799BA} = {225BE786-8C26-49E6-8629-673F4E25BC18}
 		{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6} = {225BE786-8C26-49E6-8629-673F4E25BC18}
 		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0} = {225BE786-8C26-49E6-8629-673F4E25BC18}
-		{D87337D8-E4C9-6992-DB1C-00B3F76CFB07} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
-		{135D5096-5203-8E84-C45D-ED296D97720A} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
-		{E9BB9C88-23FC-4E57-8885-0CE7B04826CE} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {908410DD-9E1E-4818-8CC5-B2F91948B075}

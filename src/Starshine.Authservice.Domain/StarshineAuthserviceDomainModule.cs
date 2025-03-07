@@ -8,13 +8,8 @@ using Volo.Abp.AutoMapper;
 using Volo.Abp.Caching;
 using Volo.Abp.Domain.Entities.Events.Distributed;
 using Starshine.Abp.Identity;
-using Starshine.Abp.IdentityServer.ApiResources;
-using Starshine.Abp.IdentityServer.Clients;
-using Starshine.Abp.IdentityServer.Devices;
-using Starshine.Abp.IdentityServer.IdentityResources;
 using Volo.Abp.Modularity;
 using Volo.Abp.ObjectExtending.Modularity;
-using Volo.Abp.ObjectExtending;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Threading;
 using Starshine.Authservice.Domain.Clients;
@@ -25,6 +20,9 @@ using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.MultiTenancy;
 using Starshine.Authservice.Domain.Shared.Consts;
 using Starshine.Abp.TenantManagement;
+using Starshine.Authservice.Domain.Shared.Options;
+using Starshine.Abp.IdentityServer.Events;
+using Starshine.Abp.IdentityServer.Consts;
 
 namespace Starshine.Authservice.Domain
 {
@@ -60,11 +58,11 @@ namespace Starshine.Authservice.Domain
             });
             Configure<AbpMultiTenancyOptions>(options =>
             {
-                options.IsEnabled = ConmmonConst.IsEnabledMultiTenancy;
+                options.IsEnabled = StarshineAuthserviceConst.IsEnabledMultiTenancy;
             });
             Configure<AbpDistributedEntityEventOptions>(options =>
             {
-                options.EtoMappings.Add<ApiResources.ApiResource, Starshine.Abp.IdentityServer.ApiResources.ApiResourceEto>(typeof(StarshineAuthserviceDomainModule));
+                options.EtoMappings.Add<ApiResources.ApiResource, ApiResourceEto>(typeof(StarshineAuthserviceDomainModule));
                 options.EtoMappings.Add<Clients.Client, ClientEto>(typeof(StarshineAuthserviceDomainModule));
                 options.EtoMappings.Add<Devices.DeviceFlowCodes, DeviceFlowCodesEto>(typeof(StarshineAuthserviceDomainModule));
                 options.EtoMappings.Add<IdentityResources.IdentityResource, IdentityResourceEto>(typeof(StarshineAuthserviceDomainModule));

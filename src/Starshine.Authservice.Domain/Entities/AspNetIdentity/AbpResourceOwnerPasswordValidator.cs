@@ -18,7 +18,6 @@ using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
 using Starshine.Abp.Identity;
 using Starshine.Abp.Identity.Settings;
-using Starshine.Abp.IdentityServer;
 using Starshine.Abp.IdentityServer.Localization;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Settings;
@@ -26,6 +25,8 @@ using Volo.Abp.Timing;
 using Volo.Abp.Uow;
 using Volo.Abp.Validation;
 using IdentityUser = Starshine.Abp.Identity.IdentityUser;
+using Starshine.Abp.Identity.Managers;
+using Starshine.Abp.IdentityServer.Consts;
 
 namespace Starshine.Authservice.Domain.AspNetIdentity;
 

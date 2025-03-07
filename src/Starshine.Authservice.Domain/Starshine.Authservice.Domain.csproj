@@ -12,8 +12,4 @@
     <ProjectReference Include="..\..\..\starshine-abp\modules\tenant-management\src\Starshine.Abp.TenantManagement.Domain\Starshine.Abp.TenantManagement.Domain.csproj" />
     <ProjectReference Include="..\Starshine.Authservice.Domain.Shared\Starshine.Authservice.Domain.Shared.csproj" />
   </ItemGroup>
-	
-	<ItemGroup>
-		<PackageReference Include="Volo.Abp.AutoMapper" Version="8.3.4" />
-	</ItemGroup>
 </Project>

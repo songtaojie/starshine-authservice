@@ -11,17 +11,17 @@ using Starshine.Authservice.Domain.Grants;
 using Starshine.Abp.Identity.EntityFrameworkCore;
 using Starshine.Abp.Identity;
 using Volo.Abp.DependencyInjection;
-using Starshine.Abp.TenantManagement;
 using Starshine.Abp.PermissionManagement;
 using Starshine.Abp.TenantManagement.EntityFrameworkCore;
 using Starshine.Abp.PermissionManagement.EntityFrameworkCore;
+using Starshine.Abp.TenantManagement.Entities;
 
 namespace Starshine.Authservice.EntityFrameworkCore
 {
     [ReplaceDbContext(typeof(IIdentityDbContext))]
     [ReplaceDbContext(typeof(ITenantManagementDbContext))]
     [ReplaceDbContext(typeof(IPermissionManagementDbContext))]
-    [ConnectionStringName(ConmmonConst.ConnectionStringName)]
+    [ConnectionStringName(StarshineAuthserviceConst.ConnectionStringName)]
     public class AuthserviceDbContext : AbpDbContext<AuthserviceDbContext>,
         IAuthserviceDbContext,
         IIdentityDbContext,

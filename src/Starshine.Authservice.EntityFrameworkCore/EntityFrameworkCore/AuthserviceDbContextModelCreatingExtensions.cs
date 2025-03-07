@@ -1,13 +1,9 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
-using Starshine.Abp.IdentityServer;
-using Starshine.Abp.IdentityServer.ApiResources;
 using Starshine.Abp.IdentityServer.ApiScopes;
-using Starshine.Abp.IdentityServer.Clients;
-using Starshine.Abp.IdentityServer.Devices;
-using Starshine.Abp.IdentityServer.Grants;
-using Starshine.Abp.IdentityServer.IdentityResources;
+using Starshine.Abp.IdentityServer.Consts;
+using Starshine.Abp.IdentityServer.Entities;
 using Starshine.Authservice.Domain.IdentityResources;
 using Starshine.Authservice.Domain.Shared.Consts;
 using Volo.Abp;
@@ -32,7 +28,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Clients.Client>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "Clients");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "Clients");
                 b.ConfigureByConvention();
                 b.Property(x => x.ClientId).HasMaxLength(ClientConsts.ClientIdMaxLength).IsRequired();
                 b.Property(x => x.ProtocolType).HasMaxLength(ClientConsts.ProtocolTypeMaxLength).IsRequired();
@@ -61,7 +57,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Clients.ClientGrantType>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ClientGrantTypes");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ClientGrantTypes");
                 b.ConfigureByConvention();
                 b.HasKey(x => new { x.ClientId, x.GrantType });
                 b.Property(x => x.GrantType).HasMaxLength(ClientGrantTypeConsts.GrantTypeMaxLength).IsRequired();
@@ -70,7 +66,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Clients.ClientRedirectUri>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ClientRedirectUris");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ClientRedirectUris");
                 b.ConfigureByConvention();
                 b.HasKey(x => new { x.ClientId, x.RedirectUri });
                 if (IsDatabaseProvider(builder, EfCoreDatabaseProvider.MySql))
@@ -83,7 +79,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Clients.ClientPostLogoutRedirectUri>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ClientPostLogoutRedirectUris");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ClientPostLogoutRedirectUris");
 
                 b.ConfigureByConvention();
 
@@ -103,7 +99,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Clients.ClientScope>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ClientScopes");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ClientScopes");
 
                 b.ConfigureByConvention();
 
@@ -116,7 +112,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Clients.ClientSecret>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ClientSecrets");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ClientSecrets");
 
                 b.ConfigureByConvention();
 
@@ -135,7 +131,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Clients.ClientClaim>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ClientClaims");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ClientClaims");
 
                 b.ConfigureByConvention();
 
@@ -149,7 +145,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Clients.ClientIdPRestriction>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ClientIdPRestrictions");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ClientIdPRestrictions");
 
                 b.ConfigureByConvention();
 
@@ -162,7 +158,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Clients.ClientCorsOrigin>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ClientCorsOrigins");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ClientCorsOrigins");
 
                 b.ConfigureByConvention();
 
@@ -175,7 +171,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Clients.ClientProperty>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ClientProperties");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ClientProperties");
 
                 b.ConfigureByConvention();
 
@@ -197,7 +193,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.IdentityResources.IdentityResource>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "IdentityResources");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "IdentityResources");
 
                 b.ConfigureByConvention();
 
@@ -213,7 +209,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.IdentityResources.IdentityResourceClaim>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "IdentityResourceClaims");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "IdentityResourceClaims");
 
                 b.ConfigureByConvention();
 
@@ -226,7 +222,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.IdentityResources.IdentityResourceProperty>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "IdentityResourceProperties");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "IdentityResourceProperties");
 
                 b.ConfigureByConvention();
 
@@ -248,7 +244,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.ApiResources.ApiResource>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ApiResources");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ApiResources");
 
                 b.ConfigureByConvention();
 
@@ -267,7 +263,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<ApiResourceSecret>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ApiResourceSecrets");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ApiResourceSecrets");
 
                 b.ConfigureByConvention();
 
@@ -288,7 +284,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<ApiResourceClaim>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ApiResourceClaims");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ApiResourceClaims");
 
                 b.ConfigureByConvention();
 
@@ -301,7 +297,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<ApiResourceScope>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ApiResourceScopes");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ApiResourceScopes");
 
                 b.ConfigureByConvention();
 
@@ -314,7 +310,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<ApiResourceProperty>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ApiResourceProperties");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ApiResourceProperties");
 
                 b.ConfigureByConvention();
 
@@ -336,7 +332,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.ApiScopes.ApiScope>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ApiScopes");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ApiScopes");
 
                 b.ConfigureByConvention();
 
@@ -352,7 +348,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<ApiScopeClaim>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ApiScopeClaims");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ApiScopeClaims");
 
                 b.ConfigureByConvention();
 
@@ -365,7 +361,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<ApiScopeProperty>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "ApiScopeProperties");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "ApiScopeProperties");
 
                 b.ConfigureByConvention();
 
@@ -387,7 +383,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Grants.PersistedGrant>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "PersistedGrants");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "PersistedGrants");
 
                 b.ConfigureByConvention();
 
@@ -421,7 +417,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
             builder.Entity<Domain.Devices.DeviceFlowCodes>(b =>
             {
-                b.ToTable(ConmmonConst.DbTablePrefix + "DeviceFlowCodes");
+                b.ToTable(StarshineAuthserviceConst.DbTablePrefix + "DeviceFlowCodes");
 
                 b.ConfigureByConvention();
 

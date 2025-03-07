@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Starshine.Authservice.Domain.Shared
+namespace Starshine.Authservice.Domain.Shared.Options
 {
     public class AbpClaimsServiceOptions
     {

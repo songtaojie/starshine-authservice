@@ -29,7 +29,7 @@ namespace Starshine.Authservice.Controllers
             {
                 if (User.Identity?.IsAuthenticated == true)
                 {
-                    return User.Claims.Any(c => c.Type == IdentityModel.JwtClaimTypes.Role && c.Value == ConmmonConst.SuperAdmin);
+                    return User.Claims.Any(c => c.Type == IdentityModel.JwtClaimTypes.Role && c.Value == StarshineAuthserviceConst.SuperAdmin);
                 }
                 return false;
             }

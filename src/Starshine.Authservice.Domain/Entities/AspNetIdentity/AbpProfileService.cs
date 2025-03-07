@@ -2,10 +2,10 @@
 using Starshine.IdentityServer.AspNetIdentity;
 using Starshine.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
-using Starshine.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Uow;
 using IdentityUser = Starshine.Abp.Identity.IdentityUser;
+using Starshine.Abp.Identity.Managers;
 
 namespace Starshine.Authservice.Domain.AspNetIdentity;
 

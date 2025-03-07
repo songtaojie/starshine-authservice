@@ -143,7 +143,7 @@ namespace Starshine.Authservice.Web
             app.UseRouting();
             app.UseAuthentication();
 
-            if (ConmmonConst.IsEnabledMultiTenancy)
+            if (StarshineAuthserviceConst.IsEnabledMultiTenancy)
             {
                 app.UseMultiTenancy();
             }
