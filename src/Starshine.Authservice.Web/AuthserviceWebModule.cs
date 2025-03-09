@@ -39,7 +39,7 @@ namespace Starshine.Authservice.Web
             //ConfigureVirtualFileSystem(hostingEnvironment);
             ConfigureLocalizationServices();
             //ConfigureNavigationServices();
-            ConfigureAutoApiControllers();
+            //ConfigureAutoApiControllers();
             ConfigureSwaggerServices(context.Services);
         }
 

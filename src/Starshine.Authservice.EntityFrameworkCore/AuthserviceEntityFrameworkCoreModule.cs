@@ -6,6 +6,15 @@ using Starshine.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Starshine.Abp.TenantManagement.EntityFrameworkCore;
 using Starshine.Abp.PermissionManagement.EntityFrameworkCore;
+using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.MySQL;
+using Starshine.Abp.IdentityServer.EntityFrameworkCore;
+using Volo.Abp.AuditLogging.EntityFrameworkCore;
+using Volo.Abp.BackgroundWorkers;
+using Volo.Abp;
+using Microsoft.Extensions.Options;
+using Volo.Abp.BackgroundJobs;
+using Volo.Abp.Threading;
 
 namespace Starshine.Authservice.EntityFrameworkCore
 {
@@ -13,7 +22,11 @@ namespace Starshine.Authservice.EntityFrameworkCore
         typeof(AuthserviceDomainModule),
         typeof(StarshineIdentityEntityFrameworkCoreModule),
         typeof(StarshinePermissionManagementEntityFrameworkCoreModule),
-        typeof(StarshineTenantManagementEntityFrameworkCoreModule)
+        typeof(StarshineTenantManagementEntityFrameworkCoreModule),
+        typeof(StarshineIdentityServerEntityFrameworkCoreModule),
+        typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
+        typeof(AbpEntityFrameworkCoreMySQLModule),
+        typeof(AbpAuditLoggingEntityFrameworkCoreModule)
     )]
     public class AuthserviceEntityFrameworkCoreModule : AbpModule
     {
@@ -41,3 +54,4 @@ namespace Starshine.Authservice.EntityFrameworkCore
     }
 
 }
+
