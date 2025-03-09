@@ -5,7 +5,7 @@ using System.Threading;
 using Volo.Abp;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Starshine.Authservice.Domain.Migrator;
+using Starshine.Authservice.Domain.Data;
 
 namespace Starshine.Authservice.DbMigrator
 {
@@ -22,10 +22,9 @@ namespace Starshine.Authservice.DbMigrator
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            using (var application = await AbpApplicationFactory.CreateAsync<StarshineAuthserviceDbMigratorModule>(options =>
+            using (var application = await AbpApplicationFactory.CreateAsync<AuthserviceDbMigratorModule>(options =>
             {
                 options.Services.ReplaceConfiguration(_configuration);
-                options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
             }))
             {

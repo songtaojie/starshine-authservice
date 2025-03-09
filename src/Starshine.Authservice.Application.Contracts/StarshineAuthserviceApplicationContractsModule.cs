@@ -7,11 +7,10 @@ using Starshine.Abp.PermissionManagement;
 namespace Starshine.Authservice.Application.Contracts
 {
     [DependsOn(
-        typeof(StarshineAuthserviceDomainSharedModule),
+        typeof(AuthserviceDomainSharedModule),
         typeof(StarshineIdentityApplicationContractsModule),
         typeof(StarshinePermissionManagementApplicationContractsModule),
         typeof(StarshineTenantManagementApplicationContractsModule)
-    //typeof(AbpObjectExtendingModule)
     )]
     public class StarshineAuthserviceApplicationContractsModule : AbpModule
     {

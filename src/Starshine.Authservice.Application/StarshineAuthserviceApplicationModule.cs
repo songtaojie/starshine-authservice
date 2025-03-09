@@ -15,17 +15,14 @@ namespace Starshine.Authservice.Application
         typeof(StarshineIdentityApplicationModule),
         typeof(StarshinePermissionManagementApplicationModule),
         typeof(StarshineAuthserviceApplicationContractsModule),
-        typeof(StarshineAuthserviceDomainModule),
+        typeof(AuthserviceDomainModule),
         typeof(StarshineTenantManagementApplicationModule)
     )]
     public class StarshineAuthserviceApplicationModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            Configure<AbpAutoMapperOptions>(options =>
-            {
-                options.AddMaps<StarshineAuthserviceApplicationModule>();
-            });
+           
         }
     }
 }

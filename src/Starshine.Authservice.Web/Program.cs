@@ -28,9 +28,8 @@ try
     Log.Information("Starting web application");
     var builder = WebApplication.CreateBuilder();
     builder.Host.AddAppSettingsSecretsJson()
-            .UseAutofac()
             .UseSerilog();
-    await builder.AddApplicationAsync<StarshineAuthserviceWebModule>();
+    await builder.AddApplicationAsync<AuthserviceWebModule>();
     var app = builder.Build();
     await app.InitializeApplicationAsync();
     await app.RunAsync();

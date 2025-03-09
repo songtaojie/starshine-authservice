@@ -1,13 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Starshine.Authservice.Domain.Clients;
-using Starshine.Authservice.Domain.Devices;
-using Starshine.Authservice.Domain.ApiScopes;
-using Starshine.Authservice.Domain.IdentityResources;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Starshine.Authservice.Domain.Shared.Consts;
-using Starshine.Authservice.Domain.ApiResources;
-using Starshine.Authservice.Domain.Grants;
 using Starshine.Abp.Identity.EntityFrameworkCore;
 using Starshine.Abp.Identity;
 using Volo.Abp.DependencyInjection;
@@ -15,16 +9,19 @@ using Starshine.Abp.PermissionManagement;
 using Starshine.Abp.TenantManagement.EntityFrameworkCore;
 using Starshine.Abp.PermissionManagement.EntityFrameworkCore;
 using Starshine.Abp.TenantManagement.Entities;
+using Starshine.Abp.IdentityServer.Entities;
+using Starshine.Abp.IdentityServer.EntityFrameworkCore;
 
 namespace Starshine.Authservice.EntityFrameworkCore
 {
     [ReplaceDbContext(typeof(IIdentityDbContext))]
     [ReplaceDbContext(typeof(ITenantManagementDbContext))]
     [ReplaceDbContext(typeof(IPermissionManagementDbContext))]
-    [ConnectionStringName(StarshineAuthserviceConst.ConnectionStringName)]
+    [ReplaceDbContext(typeof(IIdentityServerDbContext))]
+    [ConnectionStringName(AuthserviceConst.ConnectionStringName)]
     public class AuthserviceDbContext : AbpDbContext<AuthserviceDbContext>,
-        IAuthserviceDbContext,
         IIdentityDbContext,
+        IIdentityServerDbContext,
         ITenantManagementDbContext,
         IPermissionManagementDbContext
     {
@@ -86,8 +83,6 @@ namespace Starshine.Authservice.EntityFrameworkCore
 
         #endregion
 
-
-
         public DbSet<PersistedGrant> PersistedGrants { get; set; }
 
         public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
@@ -104,7 +99,6 @@ namespace Starshine.Authservice.EntityFrameworkCore
         public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
 
         public DbSet<IdentitySession> Sessions { get; set; }
-
 
         #endregion
 
@@ -132,11 +126,10 @@ namespace Starshine.Authservice.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            //builder.ConfigurePermissionManagement();
+            builder.ConfigurePermissionManagement();
             builder.ConfigureIdentity();
             builder.ConfigureTenantManagement();
-
-            //builder.ConfigureIdentityServer();
+            builder.ConfigureIdentityServer();
         }
     }
 }
