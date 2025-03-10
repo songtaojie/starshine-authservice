@@ -117,10 +117,10 @@ namespace Starshine.Authservice.EntityFrameworkCore
         #endregion
 
 
-        public AuthserviceDbContext(DbContextOptions<AuthserviceDbContext> options)
+        public AuthserviceDbContext(DbContextOptions<AuthserviceDbContext> options,IAbpLazyServiceProvider abpLazyServiceProvider)
             : base(options)
         {
-
+            LazyServiceProvider = abpLazyServiceProvider;
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

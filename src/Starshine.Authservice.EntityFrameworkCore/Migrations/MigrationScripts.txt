@@ -1,0 +1,14 @@
+//在src文件夹目录下执行
+//1. 添加新的迁移：dotnet ef migrations add <name>
+dotnet ef migrations add InitialDb 
+--project ./Starshine.Authservice.EntityFrameworkCore/Starshine.Authservice.EntityFrameworkCore.csproj 
+--startup-project ./Starshine.Authservice.Web/Starshine.Authservice.Web.csproj --context AuthserviceDbContext
+
+//2. 根据迁移生成SQL脚本：dotnet ef migrations script <from> <to>
+dotnet ef migrations script 0 InitialDb --output ./Starshine.Authservice.EntityFrameworkCore/Migrations/Scripts/InitialDb.sql 
+--project ./Starshine.Authservice.EntityFrameworkCore/Starshine.Authservice.EntityFrameworkCore.csproj 
+--startup-project ./Starshine.Authservice.Web/Starshine.Authservice.Web.csproj --context AuthserviceDbContext
+//3. 列出可用的迁移：dotnet ef migrations list
+//4. 删除上一次迁移：
+dotnet ef migrations remove --project ./Tmc.TravelControl.Infrastructure/Tmc.TravelControl.Infrastructure.csproj --startup-project ./Tmc.Obt.Api/Tmc.Obt.Api.csproj --context TravelControlDbContext
+//5. 检查自上次迁移以来是否对模型进行了任何更改：dotnet ef migrations has-pending-model-changes

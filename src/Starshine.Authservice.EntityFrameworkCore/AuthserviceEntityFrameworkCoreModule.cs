@@ -10,11 +10,8 @@ using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.MySQL;
 using Starshine.Abp.IdentityServer.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
-using Volo.Abp.BackgroundWorkers;
-using Volo.Abp;
-using Microsoft.Extensions.Options;
-using Volo.Abp.BackgroundJobs;
-using Volo.Abp.Threading;
+using Microsoft.Extensions.Configuration;
+using Volo.Abp.Data;
 
 namespace Starshine.Authservice.EntityFrameworkCore
 {
@@ -39,19 +36,16 @@ namespace Starshine.Authservice.EntityFrameworkCore
         {
             context.Services.AddAbpDbContext<AuthserviceDbContext>(options =>
             {
-                /* Remove "includeAllEntities: true" to create
-                 * default repositories only for aggregate roots */
                 options.AddDefaultRepositories(includeAllEntities: true);
             });
+            var configuration = context.Services.GetConfiguration();
+            Configure<AbpDbContextOptions>(options => ConfigDbContextOptions(options, configuration));
+        }
 
-            Configure<AbpDbContextOptions>(options =>
-            {
-                /* The main point to change your DBMS.
-                 * See also BookStoreMigrationsDbContextFactory for EF Core tooling. */
-                options.UseMySQL();
-            });
+        private static void ConfigDbContextOptions(AbpDbContextOptions optionsBuilder, IConfiguration configuration)
+        {
+            optionsBuilder.UseSqlite();
         }
     }
-
 }
 

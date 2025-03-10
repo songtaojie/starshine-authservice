@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace Starshine.Authservice.DbMigrator
 {
@@ -35,6 +36,14 @@ namespace Starshine.Authservice.DbMigrator
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .AddAppSettingsSecretsJson()
+                .ConfigureAppConfiguration((_, builder) =>
+                {
+                    builder.AddJsonFile(
+                        path: "appsettings.json",
+                        optional: true,
+                        reloadOnChange: true
+                    );
+                })
                 .ConfigureLogging((context, logging) => logging.ClearProviders())
                 .ConfigureServices((hostContext, services) =>
                 {

@@ -122,9 +122,7 @@ namespace Starshine.Authservice.Domain.Data
                 throw new Exception("Solution folder not found!");
             }
 
-            var srcDirectoryPath = Path.Combine(slnDirectoryPath, "src");
-
-            return Directory.GetDirectories(srcDirectoryPath)
+            return Directory.GetDirectories(slnDirectoryPath)
                 .FirstOrDefault(d => d.EndsWith(".EntityFrameworkCore"));
         }
 

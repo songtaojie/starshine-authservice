@@ -22,23 +22,21 @@ namespace Starshine.Authservice.DbMigrator
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            using (var application = await AbpApplicationFactory.CreateAsync<AuthserviceDbMigratorModule>(options =>
+            using var application = await AbpApplicationFactory.CreateAsync<AuthserviceDbMigratorModule>(options =>
             {
                 options.Services.ReplaceConfiguration(_configuration);
                 options.Services.AddLogging(c => c.AddSerilog());
-            }))
-            {
-                await application.InitializeAsync();
+            });
+            await application.InitializeAsync();
 
-                await application
-                    .ServiceProvider
-                    .GetRequiredService<AuthserviceDbMigrationService>()
-                    .MigrateAsync();
+            await application
+                .ServiceProvider
+                .GetRequiredService<AuthserviceDbMigrationService>()
+                .MigrateAsync();
 
-                await application.ShutdownAsync();
+            await application.ShutdownAsync();
 
-                _hostApplicationLifetime.StopApplication();
-            }
+            _hostApplicationLifetime.StopApplication();
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
