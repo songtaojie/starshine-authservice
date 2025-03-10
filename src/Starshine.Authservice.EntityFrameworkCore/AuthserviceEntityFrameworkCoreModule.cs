@@ -39,12 +39,7 @@ namespace Starshine.Authservice.EntityFrameworkCore
                 options.AddDefaultRepositories(includeAllEntities: true);
             });
             var configuration = context.Services.GetConfiguration();
-            Configure<AbpDbContextOptions>(options => ConfigDbContextOptions(options, configuration));
-        }
-
-        private static void ConfigDbContextOptions(AbpDbContextOptions optionsBuilder, IConfiguration configuration)
-        {
-            optionsBuilder.UseSqlite();
+            Configure<AbpDbContextOptions>(options => options.UseDynamicSql(configuration));
         }
     }
 }

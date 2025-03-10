@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
+using Volo.Abp.Data;
 
 namespace Starshine.Authservice.EntityFrameworkCore.EntityFrameworkCore
 {
@@ -20,7 +22,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.EntityFrameworkCore
             var configuration = BuildConfiguration();
 
             var builder = new DbContextOptionsBuilder<AuthserviceDbContext>()
-                .UseSqlite(configuration.GetConnectionString("Default"))
+                .UseDynamicSql(configuration)
                 .UseSnakeCaseNamingConvention();
 
             return new AuthserviceDbContext(builder.Options, null!);
@@ -34,5 +36,7 @@ namespace Starshine.Authservice.EntityFrameworkCore.EntityFrameworkCore
 
             return builder.Build();
         }
+
+        
     }
 }

@@ -10,6 +10,7 @@ using Starshine.Abp.TenantManagement;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Starshine.Abp.IdentityServer;
+using Starshine.Abp.PermissionManagement;
 
 namespace Starshine.Authservice.Domain
 {
@@ -43,7 +44,8 @@ namespace Starshine.Authservice.Domain
             {
                 options.IsEnabled = AuthserviceConst.IsEnabledMultiTenancy;
             });
-           
+            Configure<PermissionManagementOptions>(options => options.SaveStaticPermissionsToDatabase = false);
+
         }
     }
 }

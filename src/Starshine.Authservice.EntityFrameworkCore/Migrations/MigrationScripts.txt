@@ -12,3 +12,6 @@ dotnet ef migrations script 0 InitialDb --output ./Starshine.Authservice.EntityF
 //4. 删除上一次迁移：
 dotnet ef migrations remove --project ./Tmc.TravelControl.Infrastructure/Tmc.TravelControl.Infrastructure.csproj --startup-project ./Tmc.Obt.Api/Tmc.Obt.Api.csproj --context TravelControlDbContext
 //5. 检查自上次迁移以来是否对模型进行了任何更改：dotnet ef migrations has-pending-model-changes
+
+dotnet ef database update --project ./Starshine.Authservice.EntityFrameworkCore/Starshine.Authservice.EntityFrameworkCore.csproj
+--startup-project ./Starshine.Authservice.Web/Starshine.Authservice.Web.csproj --context AuthserviceDbContext
