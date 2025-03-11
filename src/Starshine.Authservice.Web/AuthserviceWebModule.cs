@@ -7,7 +7,6 @@ using Volo.Abp;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Serilog;
-using Volo.Abp.AutoMapper;
 using Starshine.Abp.Identity.AspNetCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;

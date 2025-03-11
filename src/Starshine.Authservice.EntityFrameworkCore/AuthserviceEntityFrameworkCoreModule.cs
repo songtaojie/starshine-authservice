@@ -1,17 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Starshine.Authservice.Domain;
 using Volo.Abp.EntityFrameworkCore;
 using Starshine.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Starshine.Abp.TenantManagement.EntityFrameworkCore;
 using Starshine.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.MySQL;
 using Starshine.Abp.IdentityServer.EntityFrameworkCore;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Volo.Abp.Data;
 
 namespace Starshine.Authservice.EntityFrameworkCore
 {
@@ -21,9 +16,8 @@ namespace Starshine.Authservice.EntityFrameworkCore
         typeof(StarshinePermissionManagementEntityFrameworkCoreModule),
         typeof(StarshineTenantManagementEntityFrameworkCoreModule),
         typeof(StarshineIdentityServerEntityFrameworkCoreModule),
-        typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
-        typeof(AbpEntityFrameworkCoreMySQLModule),
-        typeof(AbpAuditLoggingEntityFrameworkCoreModule)
+        //typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
+        typeof(AbpEntityFrameworkCoreMySQLModule)
     )]
     public class AuthserviceEntityFrameworkCoreModule : AbpModule
     {

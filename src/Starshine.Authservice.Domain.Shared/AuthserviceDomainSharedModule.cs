@@ -13,7 +13,6 @@ namespace Starshine.Authservice.Domain.Shared
 
     [DependsOn(typeof(AbpDddDomainSharedModule),
          typeof(AbpBackgroundJobsDomainSharedModule),
-        typeof(AbpAuditLoggingDomainSharedModule),
         typeof(StarshinePermissionManagementDomainSharedModule),
         typeof(StarshineIdentityDomainSharedModule),
         typeof(StarshineTenantManagementDomainSharedModule),

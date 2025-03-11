@@ -14,9 +14,7 @@ namespace Starshine.Authservice.DbMigrator
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
             Configure<PermissionManagementOptions>(options => options.SaveStaticPermissionsToDatabase = false);
-            
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Starshine.Authservice.Application.Contracts;
 using Starshine.Authservice.Domain;
-using Volo.Abp.AutoMapper;
 using Starshine.Abp.Identity;
 using Volo.Abp.Modularity;
 using Starshine.Abp.TenantManagement;

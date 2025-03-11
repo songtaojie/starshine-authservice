@@ -113,8 +113,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Users.Domain.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.Users.EntityFrameworkCore", "..\..\starshine-abp\modules\users\src\Starshine.Abp.Users.EntityFrameworkCore\Starshine.Abp.Users.EntityFrameworkCore.csproj", "{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starshine.Abp.EntityFrameworkCore", "..\..\starshine-abp\framework\src\Starshine.Abp.EntityFrameworkCore\Starshine.Abp.EntityFrameworkCore.csproj", "{46916436-4CB8-402A-AA89-6E381FC93172}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -281,10 +279,6 @@ Global
 		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46916436-4CB8-402A-AA89-6E381FC93172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46916436-4CB8-402A-AA89-6E381FC93172}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46916436-4CB8-402A-AA89-6E381FC93172}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46916436-4CB8-402A-AA89-6E381FC93172}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -337,7 +331,6 @@ Global
 		{5C559185-6285-4278-98CF-8D303FD799BA} = {225BE786-8C26-49E6-8629-673F4E25BC18}
 		{3896E52A-CB1C-4334-AA7C-FECCFF17C3D6} = {225BE786-8C26-49E6-8629-673F4E25BC18}
 		{ED8E335E-F02E-4199-B37E-7B07CAB10AE0} = {225BE786-8C26-49E6-8629-673F4E25BC18}
-		{46916436-4CB8-402A-AA89-6E381FC93172} = {1BCE70FC-542C-4E4A-A401-8CC312CF3028}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {908410DD-9E1E-4818-8CC5-B2F91948B075}

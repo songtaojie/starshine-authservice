@@ -11,19 +11,20 @@ using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Starshine.Abp.IdentityServer;
 using Starshine.Abp.PermissionManagement;
+using Volo.Abp.Localization;
+using Volo.Abp.Settings;
 
 namespace Starshine.Authservice.Domain
 {
 
     [DependsOn(
-        typeof(AbpAuditLoggingDomainModule),
-        typeof(AbpBackgroundJobsDomainModule),
+        //typeof(AbpBackgroundJobsDomainModule),
         typeof(AuthserviceDomainSharedModule),
         typeof(StarshineIdentityDomainModule),
          typeof(StarshineIdentityServerDomainModule),
         typeof(StarshinePermissionManagementDomainIdentityModule),
-        typeof(AbpCachingModule),
-        typeof(StarshineTenantManagementDomainModule)
+        typeof(StarshineTenantManagementDomainModule),
+        typeof(AbpCachingModule)
     )]
     public class AuthserviceDomainModule : StarshineAbpModule
     {
@@ -40,6 +41,10 @@ namespace Starshine.Authservice.Domain
         //}
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            Configure<AbpSettingOptions>(options =>
+            {
+                options.DefinitionProviders.Add<StarshineLocalizationSettingProvider>();
+            });
             Configure<AbpMultiTenancyOptions>(options =>
             {
                 options.IsEnabled = AuthserviceConst.IsEnabledMultiTenancy;
